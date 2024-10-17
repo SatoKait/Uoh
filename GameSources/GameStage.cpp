@@ -26,10 +26,15 @@ namespace basecross {
 		PtrMultiLight->SetDefaultLighting();
 	}
 
-
+	void GameStage::CreatePlayer()
+	{
+		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,0.0f,0.0f),Vec3(0.5f,0.5f,0.5f));
+		
+	}
 
 	void GameStage::OnCreate() {
 		try {
+			CreatePlayer();
 			//ビューとライトの作成
 			CreateViewLight();
 		}
