@@ -1,6 +1,6 @@
 /*!
 @file GameStage.h
-@brief ƒQ[ƒ€ƒXƒe[ƒW
+@brief ã‚²ãƒ¼ãƒ ã‚¹ãƒ†ãƒ¼ã‚¸
 */
 
 #pragma once
@@ -9,18 +9,27 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	//	ƒQ[ƒ€ƒXƒe[ƒWƒNƒ‰ƒX
+	//	ã‚²ãƒ¼ãƒ ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒ©ã‚¹
 	//--------------------------------------------------------------------------------------
 	class GameStage : public Stage {
-		//ƒrƒ…[‚Ìì¬
+		//ã‚¹ãƒ†ãƒ¼ã‚¸ã®å€ç‡
+		float m_StageRation;
+
+		//ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 		void CreateViewLight();
-		// ƒvƒŒƒCƒ„[‚Ìì¬
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½œæˆ
 		void CreatePlayer();
+
+		//ã‚¹ãƒ†ãƒ¼ã‚¸
+		void CreateGround();
+		//éšœå®³ç‰©
+		void CreateObstacle();
+
 	public:
-		//\’z‚Æ”jŠü
-		GameStage() :Stage() {}
+		//æ§‹ç¯‰ã¨ç ´æ£„
+		GameStage();
 		virtual ~GameStage() {}
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		virtual void OnCreate()override;
 		//virtual void OnUpdate()override;
 
