@@ -11,8 +11,8 @@
 #include "Scene.h"
 #include "GameStage.h"
 #include "Character.h"
+#include "MainCamera.h"
 #include "Player.h"
 #include "Ground.h"
 #include "Pole.h"
-
 

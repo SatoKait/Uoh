@@ -25,6 +25,8 @@ namespace basecross {
 		//障害物
 		void CreateObstacle();
 
+		shared_ptr<SingleView> m_View;//ビューの変数
+
 	public:
 		//構築と破棄
 		GameStage();
