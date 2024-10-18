@@ -15,11 +15,16 @@ namespace basecross{
 
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
+		weak_ptr<MainCamera> m_camera;			// カメラ
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector() const;		// コントローラから方向ベクトルを得る
 		void MovePlayer();				// プレイヤーの移動
+		
+		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
+		
+		float m_Speed;//スピード
 
 	public:
 		// 構築と破棄
@@ -30,13 +35,18 @@ namespace basecross{
 		) :
 			GameObject(StagePtr),
 			m_StartPos(Position),
-			m_StartScale(Scale)
+			m_StartScale(Scale),
+			m_Speed(6.0f)
+
 		{
 		}
 		Player::~Player() {}
 
 		virtual void OnCreate() override;
-		//virtual void OnUpdate() override;
+		virtual void OnUpdate() override;
+
+		//Aボタン
+		void OnPushA();
 
 	};
 }

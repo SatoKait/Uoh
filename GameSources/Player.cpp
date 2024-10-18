@@ -7,28 +7,7 @@
 #include "Project.h"
 
 namespace basecross{
-
-	void Player::OnCreate()
-	{
-		// トランスフォーム
-		m_ptrTrans = GetComponent<Transform>();
-		m_ptrTrans->SetPosition(m_StartPos);
-		m_ptrTrans->SetRotation(0, 0, 0);
-		m_ptrTrans->SetScale(m_StartScale);
-
-		// コリジョン
-		auto col = AddComponent<CollisionSphere>();
-		
-		// 重力
-		auto gra = AddComponent<Gravity>();
-
-		// プレイヤーの描画
-		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
-		ptrDraw->SetMeshResource(L"DEFAULT_SPHERE");
-		ptrDraw->SetFogEnabled(true);
-	}
-
-	Vec2 Player::GetInputState() const 
+	Vec2 Player::GetInputState() const
 	{
 		Vec2 ret;
 		ret.x = 0.0f;
@@ -39,8 +18,27 @@ namespace basecross{
 			ret.x = cntlVec[0].fThumbLX;
 			ret.y = cntlVec[0].fThumbLY;
 		}
+		//キーボードの取得(キーボード優先)
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		if (KeyState.m_bPushKeyTbl['W']) {
+			//前
+			ret.y = 1.0f;
+		}
+		else if (KeyState.m_bPushKeyTbl['A']) {
+			//左
+			ret.x = -1.0f;
+		}
+		else if (KeyState.m_bPushKeyTbl['S']) {
+			//後ろ
+			ret.y = -1.0f;
+		}
+		else if (KeyState.m_bPushKeyTbl['D']) {
+			//右
+			ret.x = 1.0f;
+		}
 		return ret;
 	}
+
 
 	Vec3 Player::GetMoveVector() const
 	{
@@ -75,6 +73,7 @@ namespace basecross{
 			//Y軸は変化させない
 			angle.y = 0;
 		}
+
 		return angle;
 
 	}
@@ -82,12 +81,61 @@ namespace basecross{
 	void Player::MovePlayer()
 	{
 		float elapsedTime = App::GetApp()->GetElapsedTime();
+		auto angle = GetMoveVector();
+		if (angle.length() > 0.0f) {
+			auto pos = GetComponent<Transform>()->GetPosition();
+			pos += angle * elapsedTime * m_Speed;
+			GetComponent<Transform>()->SetPosition(pos);
+		}
+		//回転の計算
+		if (angle.length() > 0.0f) {
+			auto utilPtr = GetBehavior<UtilBehavior>();
+			utilPtr->RotToHead(angle, 1.0f);
+		}
+
 		//auto angle = 
 	}
-	//void Player::OnUpdate()
-	//{
+	void Player::OnCreate()
+	{
+		// トランスフォーム
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetPosition(m_StartPos);
+		m_ptrTrans->SetRotation(0, 0, 0);
+		m_ptrTrans->SetScale(m_StartScale);
 
-	//}
+		// コリジョン
+		auto col = AddComponent<CollisionSphere>();
+
+		// 重力
+		//auto gra = AddComponent<Gravity>();
+
+		// プレイヤーの描画
+		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
+		ptrDraw->SetMeshResource(L"DEFAULT_SPHERE");
+		ptrDraw->SetFogEnabled(true);
+
+		//カメラオブジェクトを取得する
+		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+		if (ptrCamera) {
+			ptrCamera->SetTarget(GetThis<GameObject>());
+		}
+
+		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+	}
+	void Player::OnUpdate()
+	{
+		//コントローラチェックして入力があればコマンド呼び出し
+		m_InputHandler.PushHandle(GetThis<Player>());
+		MovePlayer();
+	}
+
+
+	//Aボタン
+	void Player::OnPushA() {
+		auto grav = GetComponent<Gravity>();
+		grav->StartJump(Vec3(0, 4.0f, 0));
+	}
+
 }
 //end basecross
 
