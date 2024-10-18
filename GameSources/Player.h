@@ -11,10 +11,16 @@ namespace basecross{
 	class Player : public GameObject
 	{
 		Vec3 m_StartPos;		// 初期位置
-		Vec3 m_StartScale;		// 初期位置
+		Vec3 m_StartScale;		// 初期スケール
 
-		shared_ptr<Transform> m_ptrTrans;	//トランスフォーム
-		shared_ptr<DrawComponent> m_ptrDraw;	// オブジェクト
+		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
+		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
+
+		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
+		Vec3 GetMoveVector() const;		// コントローラから方向ベクトルを得る
+		void MovePlayer();				// プレイヤーの移動
+
+
 	public:
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
@@ -28,10 +34,9 @@ namespace basecross{
 		{
 		}
 		Player::~Player() {}
-		
+
 		virtual void OnCreate() override;
 		//virtual void OnUpdate() override;
-
 
 	};
 }
