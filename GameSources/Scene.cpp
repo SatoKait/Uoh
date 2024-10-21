@@ -12,6 +12,21 @@ namespace basecross{
 	//--------------------------------------------------------------------------------------
 	///	ゲームシーン
 	//--------------------------------------------------------------------------------------
+	void Scene::CreateResourses() {
+		// mediaファイルのパス取得
+		auto path = App::GetApp()->GetDataDirWString();
+
+		// テクスチャのリソース
+		{
+			auto texPath = path + L"Textures/";
+
+			auto tex = texPath + L"Hane.png";
+			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
+
+		}
+	}
+
+
 	void Scene::OnCreate(){
 		try {
 			//クリアする色を設定

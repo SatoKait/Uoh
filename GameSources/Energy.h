@@ -1,33 +1,41 @@
 /*!
-@file Scene.h
-@brief シーン
+@file Character.h
+@brief キャラクターなど
 */
+
 #pragma once
-
 #include "stdafx.h"
-
-namespace basecross{
-
+namespace basecross {
 	//--------------------------------------------------------------------------------------
-	///	ゲームシーン
+	///	スクロールするスプライト
 	//--------------------------------------------------------------------------------------
-	class Scene : public SceneBase{
+	class ScrollSprite : public GameObject {
+		bool m_Trace;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_TextureKey;
+		float m_TotalTime;
+		//バックアップ頂点データ
+		vector<VertexPositionTexture> m_BackupVertices;
 	public:
-
-		void CreateResourses();
-
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief コンストラクタ
+		@param[in]	StagePtr	ステージ
+		@param[in]	TextureKey	テクスチャキー
+		@param[in]	Trace	透明処理するかどうか
+		@param[in]	StartScale	初期スケール
+		@param[in]	StartPos	初期位置
 		*/
 		//--------------------------------------------------------------------------------------
-		Scene() :SceneBase(){}
+		ScrollSprite(const shared_ptr<Stage>& StagePtr, const wstring& TextureKey, bool Trace,
+			const Vec2& StartScale, const Vec3& StartPos);
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief デストラクタ
 		*/
 		//--------------------------------------------------------------------------------------
-		virtual ~Scene();
+		virtual ~ScrollSprite();
 		//--------------------------------------------------------------------------------------
 		/*!
 		@brief 初期化
@@ -37,13 +45,11 @@ namespace basecross{
 		virtual void OnCreate() override;
 		//--------------------------------------------------------------------------------------
 		/*!
-		@brief イベント取得
+		@brief 更新
 		@return	なし
 		*/
 		//--------------------------------------------------------------------------------------
-		virtual void OnEvent(const shared_ptr<Event>& event) override;
+		virtual void OnUpdate()override;
 	};
-
 }
 
-//end basecross
