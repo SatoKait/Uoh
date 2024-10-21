@@ -50,6 +50,11 @@ namespace basecross {
 		auto ptrGround = AddGameObject<Pole>(startPos, startScale);
 	}
 
+	void GameStage::CreateTraceSprite() {
+		AddGameObject<ScrollSprite>(L"HANE_TX", true,
+			Vec2(240.0f, 60.0f), Vec3(400.0f, 0.0f, 0.0f));
+	}
+
 	void GameStage::OnCreate() {
 		try {
 
@@ -58,7 +63,7 @@ namespace basecross {
 			//ビューとライトの作成
 			CreateViewLight();	
 			CreatePlayer();
-
+			//CreateTraceSprite();
 		}
 		catch (...) {
 			throw;
