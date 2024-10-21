@@ -8,6 +8,7 @@
 
 #include "ProjectShader.h"
 #include "ProjectBehavior.h"
+#include "MyGameObject.h"
 #include "Scene.h"
 #include "GameStage.h"
 #include "Character.h"
@@ -15,4 +16,5 @@
 #include "Player.h"
 #include "Ground.h"
 #include "Pole.h"
+#include "Energy.h"
 
