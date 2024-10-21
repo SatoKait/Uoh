@@ -17,6 +17,7 @@ namespace basecross {
 
 		auto col = AddComponent<CollisionObb>();
 		col->SetDrawActive(true);
+		col->SetFixed(true);
 
 		Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
 		spanMat.affineTransformation(

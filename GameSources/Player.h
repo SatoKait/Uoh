@@ -24,8 +24,8 @@ namespace basecross{
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
 		
-		float m_Speed;//スピード
-
+		float m_Speed;		//スピード
+		bool m_grounded;	//接地しているかどうか
 	public:
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
