@@ -15,6 +15,9 @@ namespace basecross {
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
 
+		auto col = AddComponent<CollisionObb>();
+		col->SetDrawActive(true);
+
 		Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
 		spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 1.0f),//スケーリング
@@ -31,6 +34,7 @@ namespace basecross {
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
 		ptrDraw->SetMeshResource(L"DEFAULT_CUBE");
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
-
 	}
+
+
 };//end basecross
