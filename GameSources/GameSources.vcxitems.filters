@@ -7,34 +7,59 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{96692d2a-8790-41a9-bfac-6c5662d4ad61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{bfa25661-522b-47e4-b354-389ed208bce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Charactor">
+      <UniqueIdentifier>{f8761085-e0c9-4e18-9546-720ff61c246b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ground">
+      <UniqueIdentifier>{0eee2ab5-04a9-4105-b51b-c77120602eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStage">
+      <UniqueIdentifier>{419d5179-ca4a-4458-8074-7d0c427217e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pole">
+      <UniqueIdentifier>{24b73223-a2bf-44ca-a84c-ad8dcbcf4748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{70308a33-961d-468d-8b4b-ac4dc888bfe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainCamera">
+      <UniqueIdentifier>{de0e0904-f9d5-4e0a-9ba8-074413011525}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Character.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Player.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectShader.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Character.h">
+      <Filter>Charactor</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Ground.h">
-      <Filter>Headers</Filter>
+      <Filter>Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage.h">
+      <Filter>GameStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h">
-      <Filter>Headers</Filter>
+      <Filter>Pole</Filter>
+    </ClInclude>
+
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h">
+      <Filter>MainCamera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Energy.h">
@@ -45,19 +70,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp">
@@ -66,11 +79,26 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
+      <Filter>Charactor</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Ground.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage.cpp">
+      <Filter>GameStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Pole</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp">
+      <Filter>MainCamera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Energy.cpp">

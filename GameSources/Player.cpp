@@ -96,8 +96,10 @@ namespace basecross{
 
 		//auto angle = 
 	}
+
 	void Player::OnCreate()
 	{
+
 		// トランスフォーム
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetPosition(m_StartPos);
@@ -109,6 +111,9 @@ namespace basecross{
 
 		// 重力
 		auto gra = AddComponent<Gravity>();
+
+		// ジャンプの高さ
+		m_JumpHeight = 8.0f;
 
 		// プレイヤーの描画
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
@@ -123,14 +128,45 @@ namespace basecross{
 
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 	}
+
 	void Player::OnUpdate()
 	{
+		// デバッグ用ストリーム
+		wstringstream wss(L"");
+
+
+		auto gra = GetComponent<Gravity>();
+		auto pos = GetComponent<Transform>()->GetPosition();
+
 		//コントローラチェックして入力があればコマンド呼び出し
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
 		auto GV = GetComponent<Gravity>()->GetGravityVelocity().y;
 		if (GV == GROUNDED) m_grounded = true;
 		else m_grounded = false;
+
+		if (m_JumpHeight/2.1f <= pos.y)
+		{
+			gra->SetGravity(bsm::Vec3(0.0f, -1.0f, 0.0f));
+		}else if(m_grounded == true)
+		{
+			gra->SetGravity(bsm::Vec3(0.0f, -9.8f, 0.0f));
+		}
+
+		// 座標
+		wss << L"pos : (" <<
+			pos.x << L", " <<
+			pos.y << L", " <<
+			pos.z << L")" << 
+			L"\ngra : " << 
+			gra <<endl;
+
+
+		// デバッグ用文字列
+		auto scene = App::GetApp()->GetScene<Scene>();
+		auto dstr = scene->GetDebugString();
+		scene->SetDebugString(wss.str());
+
 	}
 
 
@@ -139,7 +175,7 @@ namespace basecross{
 		if (m_grounded == true)
 		{
 			auto grav = GetComponent<Gravity>();
-			grav->StartJump(Vec3(0, 8.0f, 0));
+			grav->StartJump(Vec3(0, m_JumpHeight, 0));
 		}
 	}
 
