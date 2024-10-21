@@ -107,7 +107,7 @@ namespace basecross{
 		auto col = AddComponent<CollisionSphere>();
 
 		// 重力
-		//auto gra = AddComponent<Gravity>();
+		auto gra = AddComponent<Gravity>();
 
 		// プレイヤーの描画
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
