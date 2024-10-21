@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 #include "Project.h"
+#define GROUNDED 0.0000000f
 
 namespace basecross{
 	Vec2 Player::GetInputState() const
@@ -107,7 +108,7 @@ namespace basecross{
 		auto col = AddComponent<CollisionSphere>();
 
 		// 重力
-		//auto gra = AddComponent<Gravity>();
+		auto gra = AddComponent<Gravity>();
 
 		// プレイヤーの描画
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
@@ -127,13 +128,19 @@ namespace basecross{
 		//コントローラチェックして入力があればコマンド呼び出し
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
+		auto GV = GetComponent<Gravity>()->GetGravityVelocity().y;
+		if (GV == GROUNDED) m_grounded = true;
+		else m_grounded = false;
 	}
 
 
 	//Aボタン
 	void Player::OnPushA() {
-		auto grav = GetComponent<Gravity>();
-		grav->StartJump(Vec3(0, 4.0f, 0));
+		if (m_grounded == true)
+		{
+			auto grav = GetComponent<Gravity>();
+			grav->StartJump(Vec3(0, 8.0f, 0));
+		}
 	}
 
 }
