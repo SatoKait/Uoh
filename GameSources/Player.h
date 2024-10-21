@@ -12,6 +12,7 @@ namespace basecross{
 	{
 		Vec3 m_StartPos;		// 初期位置
 		Vec3 m_StartScale;		// 初期スケール
+		Vec3 m_PlayerPos;		// プレイヤーの位置
 
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
@@ -26,6 +27,8 @@ namespace basecross{
 		
 		float m_Speed;		//スピード
 		bool m_grounded;	//接地しているかどうか
+		float m_JumpHeight;		//ジャンプの高さ
+
 	public:
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
