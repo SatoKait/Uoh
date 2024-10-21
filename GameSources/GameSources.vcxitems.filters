@@ -36,6 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
@@ -65,5 +66,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp" />
   </ItemGroup>
 </Project>
