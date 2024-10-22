@@ -13,8 +13,8 @@ namespace basecross {
 
 	MainCamera::MainCamera(float angleY) :
 		m_angleY(angleY),
-		m_distance(6.0f),//6.0
-		m_height(2.5f),  //2.5
+		m_distance(15.0f),//6.0
+		m_height(5.0f),  //2.5
 		m_camDis(5.0f),   //5.0
 		m_MoveFlag(true)
 	{

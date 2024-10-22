@@ -25,9 +25,10 @@ namespace basecross{
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
 		
-		float m_Speed;		//スピード
-		bool m_grounded;	//接地しているかどうか
+		float m_Speed;			//スピード
+		bool m_grounded;		//接地しているかどうか
 		float m_JumpHeight;		//ジャンプの高さ
+		float m_accel;			// 加速度
 
 	public:
 		// 構築と破棄
@@ -49,7 +50,7 @@ namespace basecross{
 		virtual void OnUpdate() override;
 
 		//Aボタン
-		void OnPushA();
+		//void OnPushA();
 	};
 }
 //end basecross

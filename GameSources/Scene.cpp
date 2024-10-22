@@ -23,6 +23,15 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
 
 		}
+		// モデルのリソース
+		{
+			auto modelPath = path + L"Models/";
+
+			// スタティックモデルのリソース
+			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"NewTobiuo.bmf");
+			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
+		}
+
 	}
 
 
