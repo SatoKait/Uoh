@@ -7,9 +7,8 @@
 #include "stdafx.h"
 
 namespace basecross {
-	class Pole : public GameObject {
+	class Pole : public MyGameObject {
 		// Transformコンポーネント
-		shared_ptr<Transform>m_ptrTrans;
 		Vec3 m_Position;
 		Vec3 m_Scale;
 
@@ -20,7 +19,7 @@ namespace basecross {
 			const Vec3& Scale
 
 		) :
-			GameObject(StagePtr),
+			MyGameObject(StagePtr),
 			m_Position(Position),
 			m_Scale(Scale)
 		{
