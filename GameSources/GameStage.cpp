@@ -35,7 +35,7 @@ namespace basecross {
 
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,3.0f,0.0f),Vec3(0.5f,0.5f,0.5f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,3.0f,30.0f),Vec3(0.5f,0.5f,0.5f));
     }
 
 	void GameStage::CreateGround() {

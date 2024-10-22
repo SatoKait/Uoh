@@ -134,32 +134,42 @@ namespace basecross{
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
 
-
+		//重力の取得
 		auto gra = GetComponent<Gravity>();
+		//ポジションの取得
 		auto pos = GetComponent<Transform>()->GetPosition();
+		//コントローラの取得
+		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 
 		//コントローラチェックして入力があればコマンド呼び出し
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
+
+		//地面についてるかの判定
 		auto GV = GetComponent<Gravity>()->GetGravityVelocity().y;
 		if (GV == GROUNDED) m_grounded = true;
 		else m_grounded = false;
 
-		if (m_JumpHeight/2.1f <= pos.y)
+		if (m_JumpHeight/2.0f - 0.1f <= pos.y)
 		{
 			gra->SetGravity(bsm::Vec3(0.0f, -1.0f, 0.0f));
-		}else if(m_grounded == true)
+		}
+		if(m_grounded == true)
 		{
 			gra->SetGravity(bsm::Vec3(0.0f, -9.8f, 0.0f));
 		}
-
+		if (cntlVec[0].wReleasedButtons & XINPUT_GAMEPAD_A)
+		{
+			gra->SetGravity(bsm::Vec3(0.0f, -18.0f, 0.0f));
+		}
 		// 座標
 		wss << L"pos : (" <<
 			pos.x << L", " <<
 			pos.y << L", " <<
-			pos.z << L")" << 
-			L"\ngra : " << 
-			gra <<endl;
+			pos.z << L")" //<< 
+			//L"\ngra : " << 
+			//gra 
+			<<endl;
 
 
 		// デバッグ用文字列
@@ -178,7 +188,6 @@ namespace basecross{
 			grav->StartJump(Vec3(0, m_JumpHeight, 0));
 		}
 	}
-
 }
 //end basecross
 
