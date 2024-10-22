@@ -50,7 +50,6 @@ namespace basecross{
 
 		//Aƒ{ƒ^ƒ“
 		void OnPushA();
-
 	};
 }
 //end basecross
