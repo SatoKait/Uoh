@@ -51,8 +51,16 @@ namespace basecross {
 	}
 
 	void GameStage::CreateTraceSprite() {
+		float a = -510.0f;
+		float b = 70.0f;
+
 		AddGameObject<ScrollSprite>(L"HANE_TX", true,
-			Vec2(240.0f, 60.0f), Vec3(400.0f, 0.0f, 0.0f));
+		    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
+		AddGameObject<ScrollSprite>(L"HANE_TX", true,
+			Vec2(100.0f, 60.0f), Vec3(a - b, 350.0f, 0.0f));
+		AddGameObject<ScrollSprite>(L"HANE_TX", true,
+			Vec2(100.0f, 60.0f), Vec3(a + b, 350.0f, 0.0f));
+
 	}
 
 	void GameStage::OnCreate() {
@@ -63,7 +71,7 @@ namespace basecross {
 			//ビューとライトの作成
 			CreateViewLight();	
 			CreatePlayer();
-			//CreateTraceSprite();
+			CreateTraceSprite();
 		}
 		catch (...) {
 			throw;

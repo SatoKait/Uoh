@@ -1,5 +1,5 @@
 /*!
-@file Character.h
+@file Energy.h
 @brief キャラクターなど
 */
 
@@ -15,40 +15,17 @@ namespace basecross {
 		Vec3 m_StartPos;
 		wstring m_TextureKey;
 		float m_TotalTime;
+		float m_Count;
+		float m_MovePos;
 		//バックアップ頂点データ
 		vector<VertexPositionTexture> m_BackupVertices;
+		shared_ptr<PTSpriteDraw>m_ptrDraw;
+
 	public:
-		//--------------------------------------------------------------------------------------
-		/*!
-		@brief コンストラクタ
-		@param[in]	StagePtr	ステージ
-		@param[in]	TextureKey	テクスチャキー
-		@param[in]	Trace	透明処理するかどうか
-		@param[in]	StartScale	初期スケール
-		@param[in]	StartPos	初期位置
-		*/
-		//--------------------------------------------------------------------------------------
 		ScrollSprite(const shared_ptr<Stage>& StagePtr, const wstring& TextureKey, bool Trace,
 			const Vec2& StartScale, const Vec3& StartPos);
-		//--------------------------------------------------------------------------------------
-		/*!
-		@brief デストラクタ
-		*/
-		//--------------------------------------------------------------------------------------
 		virtual ~ScrollSprite();
-		//--------------------------------------------------------------------------------------
-		/*!
-		@brief 初期化
-		@return	なし
-		*/
-		//--------------------------------------------------------------------------------------
 		virtual void OnCreate() override;
-		//--------------------------------------------------------------------------------------
-		/*!
-		@brief 更新
-		@return	なし
-		*/
-		//--------------------------------------------------------------------------------------
 		virtual void OnUpdate()override;
 	};
 }
