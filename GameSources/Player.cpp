@@ -115,10 +115,6 @@ namespace basecross{
 		// ジャンプの高さ
 		m_JumpHeight = 8.0f;
 
-		// プレイヤーの描画
-		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
-		ptrDraw->SetMeshResource(L"DEFAULT_SPHERE");
-		ptrDraw->SetFogEnabled(true);
 
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
@@ -127,6 +123,26 @@ namespace basecross{
 		}
 
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+		
+		// プレイヤーの描画
+		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
+		spanMat.affineTransformation(
+			Vec3(1.0f, 1.0f, 1.0f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, XM_PIDIV2, 0.0f),
+			Vec3(0.0f, 0.0f, 0.0f)
+		);
+
+		//影をつける（シャドウマップを描画する）
+		auto ptrShadow = AddComponent<Shadowmap>();
+		//影の形（メッシュ）を設定
+		ptrShadow->SetMultiMeshResource(L"TOBIUO_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
+		ptrDraw->SetMultiMeshResource(L"TOBIUO_MESH");
+		ptrDraw->SetMeshToTransformMatrix(spanMat);
+
 	}
 
 	void Player::OnUpdate()
@@ -139,7 +155,9 @@ namespace basecross{
 		//ポジションの取得
 		auto pos = GetComponent<Transform>()->GetPosition();
 		//コントローラの取得
-		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
+		// デルタタイムを取得する
+		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 
 		//コントローラチェックして入力があればコマンド呼び出し
 		m_InputHandler.PushHandle(GetThis<Player>());
@@ -150,18 +168,24 @@ namespace basecross{
 		if (GV == GROUNDED) m_grounded = true;
 		else m_grounded = false;
 
-		if (m_JumpHeight/2.0f - 0.1f <= pos.y)
+		//if (m_JumpHeight/2.0f - 0.1f <= pos.y)
+		//{
+		//	gra->SetGravity(bsm::Vec3(0.0f, -1.0f, 0.0f));
+		//}
+		//if(m_grounded == true)
+		//{
+		//	gra->SetGravity(bsm::Vec3(0.0f, -9.8f, 0.0f));
+		//}
+		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A)
 		{
-			gra->SetGravity(bsm::Vec3(0.0f, -1.0f, 0.0f));
+			m_accel = 1.0f;
+			if (m_grounded == false)
+			{
+				pos.y += m_accel * m_Speed * delta;
+			}
+
 		}
-		if(m_grounded == true)
-		{
-			gra->SetGravity(bsm::Vec3(0.0f, -9.8f, 0.0f));
-		}
-		if (cntlVec[0].wReleasedButtons & XINPUT_GAMEPAD_A)
-		{
-			gra->SetGravity(bsm::Vec3(0.0f, -18.0f, 0.0f));
-		}
+
 		// 座標
 		wss << L"pos : (" <<
 			pos.x << L", " <<
@@ -170,7 +194,6 @@ namespace basecross{
 			//L"\ngra : " << 
 			//gra 
 			<<endl;
-
 
 		// デバッグ用文字列
 		auto scene = App::GetApp()->GetScene<Scene>();
@@ -181,13 +204,15 @@ namespace basecross{
 
 
 	//Aボタン
-	void Player::OnPushA() {
-		if (m_grounded == true)
-		{
-			auto grav = GetComponent<Gravity>();
-			grav->StartJump(Vec3(0, m_JumpHeight, 0));
-		}
-	}
+	//void Player::OnPushA() {
+	//	if (m_grounded == true)
+	//	{
+	//		//auto grav = GetComponent<Gravity>();
+	//		//grav->StartJump(Vec3(0, m_JumpHeight, 0));
+
+	//		m_accel = 1.0f;
+	//	}
+	//}
 }
 //end basecross
 
