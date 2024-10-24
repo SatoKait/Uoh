@@ -109,13 +109,6 @@ namespace basecross{
 		// コリジョン
 		auto col = AddComponent<CollisionSphere>();
 
-		// 重力
-		auto gra = AddComponent<Gravity>();
-
-		// ジャンプの高さ
-		m_JumpHeight = 8.0f;
-
-
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
@@ -150,10 +143,10 @@ namespace basecross{
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
 
-		//重力の取得
-		auto gra = GetComponent<Gravity>();
 		//ポジションの取得
 		auto pos = GetComponent<Transform>()->GetPosition();
+		// 大きさの取得
+		auto scale = GetComponent<Transform>()->GetScale();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		// デルタタイムを取得する
@@ -163,36 +156,42 @@ namespace basecross{
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
 
-		//地面についてるかの判定
-		auto GV = GetComponent<Gravity>()->GetGravityVelocity().y;
-		if (GV == GROUNDED) m_grounded = true;
-		else m_grounded = false;
 
-		//if (m_JumpHeight/2.0f - 0.1f <= pos.y)
-		//{
-		//	gra->SetGravity(bsm::Vec3(0.0f, -1.0f, 0.0f));
-		//}
-		//if(m_grounded == true)
-		//{
-		//	gra->SetGravity(bsm::Vec3(0.0f, -9.8f, 0.0f));
-		//}
 		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A)
 		{
-			m_accel = 1.0f;
-			if (m_grounded == false)
-			{
-				pos.y += m_accel * m_Speed * delta;
-			}
 
+			if (m_grounded == true)
+			{
+				m_grounded = false;
+				m_Accel = 2.0f;
+			}
+		}
+		if (m_grounded == false)
+		{
+			pos.y += m_Speed * m_Accel * delta;
+
+			m_Accel -= 0.02f;
+
+		}
+		if (m_grounded == false && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A)
+		{
+			pos.y += m_Speed * m_Accel * delta;
+			m_Accel = -3.0f;
+		}
+		if (pos.y < scale.y * 1.5f)
+		{
+			m_grounded = true;
+			pos.y = scale.y * 0.5f;
+			m_Accel = 0.0f;
 		}
 
 		// 座標
-		wss << L"pos : (" <<
+		wss << L"\n\n\npos : (" <<
 			pos.x << L", " <<
 			pos.y << L", " <<
-			pos.z << L")" //<< 
-			//L"\ngra : " << 
-			//gra 
+			pos.z << L")" << 
+			L"\naccel : " << 
+			m_Accel 
 			<<endl;
 
 		// デバッグ用文字列
@@ -200,6 +199,7 @@ namespace basecross{
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
 
+		m_ptrTrans->SetPosition(pos);
 	}
 
 
@@ -210,7 +210,7 @@ namespace basecross{
 	//		//auto grav = GetComponent<Gravity>();
 	//		//grav->StartJump(Vec3(0, m_JumpHeight, 0));
 
-	//		m_accel = 1.0f;
+	//		m_Accel = 1.0f;
 	//	}
 	//}
 }
