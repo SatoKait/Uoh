@@ -54,7 +54,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h">
       <Filter>Pole</Filter>
     </ClInclude>
-
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -67,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Block.h">
+      <Filter>Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Block.cpp">
+      <Filter>Ground</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
