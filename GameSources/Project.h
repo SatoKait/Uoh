@@ -18,4 +18,5 @@
 #include "Pole.h"
 #include "Energy.h"
 #include "Block.h"
+#include "Map.h"
 

@@ -40,11 +40,12 @@ namespace basecross {
 
 	void GameStage::CreateGround() {
 
-		auto ptrBlock = AddGameObject<Block>();
+		//auto ptrBlock = AddGameObject<Block>();
+		auto ptrmap = AddGameObject<Map>();
 
-		//Vec3 startPos =   Vec3(0.0f, 0.0f,  30.0f);
-		//Vec3 startScale = Vec3(5.0f, 1.0f, 100.0f);
-		//auto ptrGround = AddGameObject<Ground>(startPos,startScale);
+		Vec3 startPos =   Vec3(0.0f, 0.0f,  30.0f);
+		Vec3 startScale = Vec3(5.0f, 1.0f, 100.0f);
+		auto ptrGround = AddGameObject<Ground>(startPos,startScale);
 	}
 
 	void GameStage::CreateObstacle() {
