@@ -70,6 +70,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Block.h">
       <Filter>Ground</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Map.h">
+      <Filter>Ground</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -110,6 +113,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Block.cpp">
+      <Filter>Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Map.cpp">
       <Filter>Ground</Filter>
     </ClCompile>
   </ItemGroup>
