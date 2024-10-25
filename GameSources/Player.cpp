@@ -5,7 +5,6 @@
 
 #include "stdafx.h"
 #include "Project.h"
-#define GROUNDED 0.0000000f
 
 namespace basecross{
 	Vec2 Player::GetInputState() const
@@ -23,19 +22,19 @@ namespace basecross{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		if (KeyState.m_bPushKeyTbl['W']) {
 			//前
-			ret.y = 1.0f;
+			ret.y = 1.0f * m_Speed;
 		}
 		else if (KeyState.m_bPushKeyTbl['A']) {
 			//左
-			ret.x = -1.0f;
+			ret.x = -1.0f * m_Speed;
 		}
 		else if (KeyState.m_bPushKeyTbl['S']) {
 			//後ろ
-			ret.y = -1.0f;
+			ret.y = -1.0f * m_Speed;
 		}
 		else if (KeyState.m_bPushKeyTbl['D']) {
 			//右
-			ret.x = 1.0f;
+			ret.x = 1.0f * m_Speed;
 		}
 		return ret;
 	}
@@ -88,11 +87,11 @@ namespace basecross{
 			pos += angle * elapsedTime * m_Speed;
 			GetComponent<Transform>()->SetPosition(pos);
 		}
-		//回転の計算
-		if (angle.length() > 0.0f) {
-			auto utilPtr = GetBehavior<UtilBehavior>();
-			utilPtr->RotToHead(angle, 1.0f);
-		}
+		////回転の計算
+		//if (angle.length() > 0.0f) {
+		//	auto utilPtr = GetBehavior<UtilBehavior>();
+		//	utilPtr->RotToHead(angle, 1.0f);
+		//}
 
 		//auto angle = 
 	}
@@ -122,7 +121,7 @@ namespace basecross{
 		spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 1.0f),
 			Vec3(0.0f, 0.0f, 0.0f),
-			Vec3(0.0f, XM_PIDIV2, 0.0f),
+			Vec3(0.0f, -XM_PIDIV2, 0.0f),
 			Vec3(0.0f, 0.0f, 0.0f)
 		);
 
@@ -151,10 +150,38 @@ namespace basecross{
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+		// ジャンプしてからの経過時間
+		m_JumpTime += delta;
 
+		Vec2 ret;
 		//コントローラチェックして入力があればコマンド呼び出し
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
+
+		if (cntl[0].bConnected)
+		{
+			if (m_MoveFlag)//フラグがたっていなければ操作ができない
+			{
+				ret.x = cntl[0].fThumbLX;
+				ret.y = cntl[0].fThumbLY;
+			}
+
+		}
+		if (ret.x == -1)
+		{
+			pos.x += m_Speed * delta;
+		}
+		else if(ret.x == 1)
+		{
+			pos.x -= m_Speed * delta;
+		}
+		//if (m_MoveFlag) {
+		//	ret.x += 1.0f;
+		//}
+		//if (ret.x >= 0.0f)
+		//{
+		//	ret.x -= 1.0f;
+		//}
 
 
 		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A)
@@ -163,19 +190,21 @@ namespace basecross{
 			if (m_grounded == true)
 			{
 				m_grounded = false;
+				m_JumpTime = 0;
 				m_Accel = 2.0f;
 			}
 		}
 		if (m_grounded == false)
 		{
-			pos.y += m_Speed * m_Accel * delta;
-
+			pos.y += m_JSpeed * m_Accel * delta;
+			
 			m_Accel -= 0.02f;
 
 		}
-		if (m_grounded == false && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A)
+		if (//m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A 
+			 m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A )
 		{
-			pos.y += m_Speed * m_Accel * delta;
+			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
 		}
 		if (pos.y < scale.y * 1.5f)
@@ -186,12 +215,20 @@ namespace basecross{
 		}
 
 		// 座標
-		wss << L"\n\n\npos : (" <<
-			pos.x << L", " <<
-			pos.y << L", " <<
-			pos.z << L")" << 
-			L"\naccel : " << 
-			m_Accel 
+			wss		<< L"\n\n\npos : (" <<
+			pos.x	<< L", "			<<
+			pos.y	<< L", "			<<
+			pos.z	<< L")"				<< 
+		// 加速度
+			L"\naccel : "				<< 
+			m_Accel						<<
+		// ジャンプからの経過時間
+			L"\nJumpTime : "			<<
+			m_JumpTime					<<
+	   // ジャンプからの経過時間
+			L"\nret.x: " <<
+			ret.x
+
 			<<endl;
 
 		// デバッグ用文字列
