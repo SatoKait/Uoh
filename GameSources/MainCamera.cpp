@@ -44,8 +44,8 @@ namespace basecross {
 		{
 			if (m_MoveFlag)//ƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚È‚¯‚ê‚Î‘€ì‚ª‚Å‚«‚È‚¢
 			{
-				ret.x = cntlVec[0].fThumbLX;
-				ret.y = cntlVec[0].fThumbLY;
+				//ret.x = cntlVec[0].fThumbRX;
+				//ret.y = cntlVec[0].fThumbRY;
 			}
 
 		}

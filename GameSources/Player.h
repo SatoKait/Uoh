@@ -26,10 +26,12 @@ namespace basecross{
 
 		
 		float m_Speed;			//スピード
+		float m_JSpeed;			//ジャンプするスピード
 		bool m_grounded;		//接地しているかどうか
-		//float m_JumpHeight;		//ジャンプの高さ
 		float m_Accel;			//加速度
-		//bool m_Jump;			//ジャンプの
+		float m_JumpTime;		//ジャンプしてからの経過時間
+		bool m_MoveFlag;		//動けるまでのフラグ
+
 	public:
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
@@ -40,8 +42,10 @@ namespace basecross{
 			GameObject(StagePtr),
 			m_StartPos(Position),
 			m_StartScale(Scale),
-			m_Speed(6.0f),
-			m_grounded(1)
+			m_Speed(10.0f),
+			m_JSpeed(6.0f),
+			m_grounded(true),
+			m_MoveFlag(true)
 		{
 		}
 		Player::~Player() {}
