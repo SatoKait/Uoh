@@ -19,14 +19,17 @@
     <Filter Include="GameStage">
       <UniqueIdentifier>{419d5179-ca4a-4458-8074-7d0c427217e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pole">
-      <UniqueIdentifier>{24b73223-a2bf-44ca-a84c-ad8dcbcf4748}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{70308a33-961d-468d-8b4b-ac4dc888bfe5}</UniqueIdentifier>
     </Filter>
     <Filter Include="MainCamera">
       <UniqueIdentifier>{de0e0904-f9d5-4e0a-9ba8-074413011525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{cd640f8b-fc23-49dd-bfee-8bcc25ca6c0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Pole">
+      <UniqueIdentifier>{24b73223-a2bf-44ca-a84c-ad8dcbcf4748}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,7 +55,7 @@
       <Filter>GameStage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h">
-      <Filter>Pole</Filter>
+      <Filter>GameObject\Pole</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
       <Filter>Scene</Filter>
@@ -97,7 +100,7 @@
       <Filter>GameStage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp">
-      <Filter>Pole</Filter>
+      <Filter>GameObject\Pole</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp">
       <Filter>Scene</Filter>
