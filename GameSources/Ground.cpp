@@ -11,7 +11,7 @@ namespace basecross {
 	// Groundキャラ
 	//--------------------------------------------------------------------------------------
 	void Ground::OnCreate(){
-		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans = GetComponent<Transform>();	
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
 
@@ -32,9 +32,49 @@ namespace basecross {
 		//ptrShadow->SetMeshResource(L"BED_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
-		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
-		ptrDraw->SetMeshResource(L"DEFAULT_CUBE");
-		ptrDraw->SetMeshToTransformMatrix(spanMat);
+		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
+		m_ptrDraw->SetMeshResource(L"DEFAULT_CUBE");
+		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
+	}
+
+	void Ground::OnUpdate()
+	{
+		// デバッグ用ストリーム
+		wstringstream wss(L"");
+		//ポジションの取得
+		auto pos = GetComponent<Transform>()->GetPosition();
+		// デルタタイムを取得する
+		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+		auto stage = GetStage();
+		auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
+		Vec3 ptrplayerPos = ptrplayer->m_PlayerPos;
+		bool Goal = true;
+
+		if(Goal)
+		{
+		   m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z + m_Distance));
+		   m_Distance += 10.0f * delta * m_Speed;
+		}
+
+		//if (ptrplayerPos <= m_Goal)
+		//{
+		//	m_Distance = 0;
+		//}
+
+
+		// 座標
+		    wss << L"\n\n\n\npos : (" <<
+			pos.x << L", " <<
+			pos.y << L", " <<
+			pos.z << L")"  
+
+			<< endl;
+
+		// デバッグ用文字列
+		auto scene = App::GetApp()->GetScene<Scene>();
+		auto dstr = scene->GetDebugString();
+		scene->SetDebugString(wss.str());	
+
 	}
 
 

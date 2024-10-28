@@ -55,14 +55,6 @@ namespace basecross {
 					//// インスタンス用の行列を作成する
 					Vec3 startPos(x, 0.0f, z); // 基準となるオフセット座標//移動座標
 					Vec3 startScl(1.0f);
-					//Vec3 pos(static_cast<float>(c), 0.5f, -static_cast<float>(r)); // ブロックの位置
-
-					/*float x = -5.0f + c;
-					float z = +25.0f + (-r) - 0.5f;*/
-
-					//Mat4x4 matrix;
-					//matrix.translation(Vec3(x, 1.0f, z));
-					//drawComp->AddMatrix(matrix); // ブロックを表示したい数だけ行列を追加します。この行列が示す位置・向き・大きさで指定したメッシュが描画されます
 
 					auto block = GetStage()->AddGameObject<Block>();
 					auto blockTransComp = block->GetComponent<Transform>();
@@ -70,7 +62,7 @@ namespace basecross {
 					blockTransComp->SetScale(startScl);
 					auto blockInstance = block->GetComponent<PNTStaticInstanceDraw>();
 					Mat4x4 matrix;
-					matrix.translation(Vec3(x, 1.0f, z));
+					matrix.translation(Vec3(x, 0.0f, z));
 					blockInstance->AddMatrix(matrix);
 					
 					break;
