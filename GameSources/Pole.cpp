@@ -8,29 +8,27 @@
 
 namespace basecross {
 	void Pole::OnCreate() {
+		auto& app = App::GetApp();//アプリケーションの参照
+		auto mediaPath = app->GetDataDirWString(); // 「media」パスを文字列として取得する
+		auto texturePath = mediaPath + L"Textures/"; // 「Textures/」フォルダのパスを連結する
+		app->RegisterTexture(L"block", texturePath + L"block.jpg");
+
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetScale(m_Scale);
-		m_ptrTrans->SetPosition(m_Position);
 
-		Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
-		spanMat.affineTransformation(
-			Vec3(1.0f, 1.0f, 1.0f),//スケーリング
-			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
-			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, 0.0f, 0.0f) //移動
-		);
-		//影をつける（シャドウマップを描画する）
-		auto ptrShadow = AddComponent<Shadowmap>();
-		//影の形（メッシュ）を設定
-		//ptrShadow->SetMeshResource(L"BED_MESH");
-		ptrShadow->SetMeshToTransformMatrix(spanMat);
+		auto col = AddComponent<CollisionObb>();
+		col->SetDrawActive(true);
+		col->SetFixed(true);
+		col->SetSleepActive(true);
 
-		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
-		ptrDraw->SetMeshResource(L"DEFAULT_CYLINDER");
-		ptrDraw->SetMeshToTransformMatrix(spanMat);
+		auto drawComp = AddComponent<PNTStaticInstanceDraw>(); //Instanceと付いたドローコンポーネントを生成します
+		drawComp->SetMeshResource(m_meshResName);
+		drawComp->SetTextureResource(m_Reskey);
+		drawComp->SetOwnShadowActive(true);
+
+		auto shadowComp = AddComponent<Shadowmap>();
+		shadowComp->SetMeshResource(m_meshResName);
 
 	}
-
-
 }
 //end basecross
