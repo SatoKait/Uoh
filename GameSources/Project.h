@@ -15,8 +15,9 @@
 #include "MainCamera.h"
 #include "Player.h"
 #include "Ground.h"
+#include "Goal.h"
 #include "Pole.h"
 #include "Energy.h"
 #include "Block.h"
 #include "Map.h"
-
+#include "Sprite.h"
