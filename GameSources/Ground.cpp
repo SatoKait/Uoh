@@ -48,9 +48,9 @@ namespace basecross {
 		auto pos = GetComponent<Transform>()->GetPosition();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
-		//プレイヤーの参照
-		auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
-		Vec3 ptrplayerPos = ptrplayer->m_PlayerPos;
+		////プレイヤーの参照
+		//auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
+		//Vec3 ptrplayerPos = ptrplayer->m_PlayerPos;
 
 		m_camera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		auto camerapos = m_camera->GetEye();
@@ -63,16 +63,6 @@ namespace basecross {
 		{
 			m_Position.z = -250.0f;
 		}
-
-
-
-		//if(Goal)
-		//{
-		//}
-		//if (ptrplayerPos <= m_Goal)
-		//{
-		//	m_Distance = 0;
-		//}
 	 
 		// 座標
 		    wss << L"\n\n\n\npos : (" <<
