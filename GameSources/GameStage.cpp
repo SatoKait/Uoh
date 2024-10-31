@@ -35,10 +35,9 @@ namespace basecross {
 
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,1.0f,30.0f),Vec3(0.5f,0.5f,0.5f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,1.0f,30.0f),Vec3(0.5f,0.5f,0.5f),Vec3(0.0f,0.0f,0.0f));
 		SetSharedGameObject(L"Player", ptrPlayer);
-
-    }
+  }
 
 	void GameStage::CreateGround() {
 
@@ -72,11 +71,19 @@ namespace basecross {
 
 	}
 
+	void GameStage::CreateGoal(){
+		AddGameObject<Goal>(
+			Vec3(5.0f, 0.5f, 30.0f),
+			Vec3(5.0f, 0.5f, 30.0f),
+			Vec3(0.0f,0.0f,0.0f));
+	}
+
 	void GameStage::OnCreate() {
 		try {
 
 			CreateGround();
 			CreateObstacle();
+			CreateGoal();
 			//ビューとライトの作成
 			CreateViewLight();	
 			CreatePlayer();
