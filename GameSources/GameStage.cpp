@@ -35,13 +35,13 @@ namespace basecross {
 
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,1.0f,30.0f),Vec3(0.5f,0.5f,0.5f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,1.0f,30.0f),Vec3(0.5f,0.5f,0.5f),Vec3(0.0f,0.0f,0.0f));
     }
 
 	void GameStage::CreateGround() {
 
 		//auto ptrBlock = AddGameObject<Block>();
-		auto ptrmap = AddGameObject<Map>();
+		//auto ptrmap = AddGameObject<Map>();
 
 		Vec3 startPos =   Vec3(0.0f, 0.0f,  30.0f);
 		Vec3 startScale = Vec3(5.0f, 1.0f, 100.0f);
@@ -67,11 +67,19 @@ namespace basecross {
 
 	}
 
+	void GameStage::CreateGoal(){
+		AddGameObject<Goal>(
+			Vec3(5.0f, 0.5f, 30.0f),
+			Vec3(5.0f, 0.5f, 30.0f),
+			Vec3(0.0f,0.0f,0.0f));
+	}
+
 	void GameStage::OnCreate() {
 		try {
 
 			CreateGround();
 			CreateObstacle();
+			CreateGoal();
 			//ビューとライトの作成
 			CreateViewLight();	
 			CreatePlayer();

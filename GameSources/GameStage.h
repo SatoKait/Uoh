@@ -26,7 +26,8 @@ namespace basecross {
 		void CreateObstacle();
 		//スプライト
 		void CreateTraceSprite();
-
+		//ゴール
+		void CreateGoal();
 		shared_ptr<SingleView> m_View;//ビューの変数
 
 	public:
