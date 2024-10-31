@@ -28,6 +28,12 @@
     <Filter Include="MainCamera">
       <UniqueIdentifier>{de0e0904-f9d5-4e0a-9ba8-074413011525}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Goal">
+      <UniqueIdentifier>{89812e7f-4c45-4bf7-b0b7-dc30ba7e6e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{22b289be-1c7e-4e38-b567-a189a43074e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
@@ -73,6 +79,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Map.h">
       <Filter>Ground</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Goal.h">
+      <Filter>Goal</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -117,6 +129,12 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Map.cpp">
       <Filter>Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Goal.cpp">
+      <Filter>Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sprite.cpp">
+      <Filter>Sprite</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,13 +14,15 @@ namespace basecross{
 	void Scene::CreateResourses() {
 		// mediaファイルのパス取得
 		auto path = App::GetApp()->GetDataDirWString();
-
 		// テクスチャのリソース
 		{
 			auto texPath = path + L"Textures/";
 
-			auto tex = texPath + L"Hane.png";
-			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
+			auto texHane = texPath + L"Hane.png";
+			App::GetApp()->RegisterTexture(L"HANE_TX", texHane);
+
+			auto texNumber = texPath + L"numbers.png";
+			App::GetApp()->RegisterTexture(L"NUMBER_TX",texNumber);
 
 		}
 		// モデルのリソース
@@ -31,7 +33,6 @@ namespace basecross{
 			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"NewTobiuo.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
 		}
-
 	}
 
 
