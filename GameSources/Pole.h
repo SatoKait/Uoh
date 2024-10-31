@@ -1,33 +1,30 @@
+#pragma once
 /*!
 @file Pole.h
-@brief 障害物など
+@brief ポールの定義
 */
 
 #pragma once
 #include "stdafx.h"
 
 namespace basecross {
-	class Pole : public MyGameObject {
-		// Transformコンポーネント
-		Vec3 m_Position;
+	class Pole : public GameObject
+	{
+		shared_ptr<Transform>m_ptrTrans;
+		wstring m_meshResName;
+		wstring m_Reskey;
 		Vec3 m_Scale;
 
 	public:
-		// 構築と破棄
-		Pole::Pole(const shared_ptr<Stage>& StagePtr,
-			const Vec3& Position,
-			const Vec3& Scale
-
-		) :
-			MyGameObject(StagePtr),
-			m_Position(Position),
-			m_Scale(Scale)
+		Pole(const std::shared_ptr<Stage>& stage) :
+			GameObject(stage),
+			m_meshResName(L"POLL_MESH"),
+			m_Scale(0.1f),
+			m_Reskey(L"RED_TX")
 		{
 		}
-		Pole::~Pole() {}
 
-		//初期化
-		virtual void OnCreate()override;
-		//virtual void OnUpdate()override;
-	};//end basecross
+		void OnCreate();
+	};
+
 }

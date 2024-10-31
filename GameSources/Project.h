@@ -19,4 +19,5 @@
 #include "Energy.h"
 #include "Block.h"
 #include "Map.h"
+#include "Deployment.h"
 

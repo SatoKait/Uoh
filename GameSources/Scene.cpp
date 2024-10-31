@@ -21,15 +21,26 @@ namespace basecross{
 
 			auto tex = texPath + L"Hane.png";
 			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
-
+			tex = texPath + L"sea2.png";
+			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
+			tex = texPath + L"Red.png";
+			App::GetApp()->RegisterTexture(L"RED_TX", tex);
 		}
 		// モデルのリソース
 		{
 			auto modelPath = path + L"Models/";
 
-			// スタティックモデルのリソース
+			// スタティックマルチモデルのリソース
 			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"NewTobiuo.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
+			
+			//スタティックモデルのリソース
+			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
+			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
+			App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
+
+
 		}
 
 	}
