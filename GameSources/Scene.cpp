@@ -18,11 +18,11 @@ namespace basecross{
 		{
 			auto texPath = path + L"Textures/";
 
-			auto texHane = texPath + L"Hane.png";
-			App::GetApp()->RegisterTexture(L"HANE_TX", texHane);
+			auto tex = texPath + L"Hane.png";
+			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
 
-			auto texNumber = texPath + L"numbers.png";
-			App::GetApp()->RegisterTexture(L"NUMBER_TX",texNumber);
+			tex = texPath + L"numbers.png";
+			App::GetApp()->RegisterTexture(L"NUMBER_TX",tex);
 
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
