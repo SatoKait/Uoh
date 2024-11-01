@@ -121,11 +121,11 @@ namespace basecross{
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();
 		//影の形（メッシュ）を設定
-		ptrShadow->SetMultiMeshResource(L"TOBIUO_MESH");
+		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
-		ptrDraw->SetMultiMeshResource(L"TOBIUO_MESH");
+		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
 
 	}
@@ -155,21 +155,21 @@ namespace basecross{
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
 
+
 		if (cntl[0].bConnected)
 		{
 			if (m_MoveFlag)//フラグがたっていなければ操作ができない
 			{
 				ret.x = cntl[0].fThumbLX;
 				ret.y = cntl[0].fThumbLY;
-
 			}
 
 		}
-		if (ret.x == -1)
+		if (ret.x <= -0.1)
 		{
 			pos.x += m_Speed * delta;
 		}
-		else if(ret.x == 1)
+		else if(ret.x >= 0.1)
 		{
 			pos.x -= m_Speed * delta;
 		}
@@ -200,7 +200,15 @@ namespace basecross{
 
 			if (ret.x >= 0.1)
 			{
-				rotate.x += 130.0f;
+				rotate.z += 4.0f * delta;
+			}
+			else if (ret.x <= -0.1)
+			{
+				rotate.z += -4.0f * delta;
+			}
+			else
+			{
+				rotate.z = 0;
 			}
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
@@ -214,6 +222,7 @@ namespace basecross{
 			m_grounded = true;
 			pos.y = scale.y * 0.5f;
 			m_Accel = 0.0f;
+			rotate.z = 0;
 		}
 
 		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
@@ -236,8 +245,8 @@ namespace basecross{
 			L"\nFPS : "					<<
 			fps							<<
 		// プレイヤーの傾き
-			L"\nrotateX : "				<<
-			rotate.x					<<
+			L"\nrotateZ : "				<<
+			rotate.z					<<
 			endl;
 
 		// ゴール判定
@@ -250,6 +259,7 @@ namespace basecross{
 		scene->SetDebugString(wss.str());
 
 		m_ptrTrans->SetPosition(pos);
+		m_ptrTrans->SetRotation(rotate);
 	}
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
@@ -259,17 +269,6 @@ namespace basecross{
 			m_Goal = true;
 		}
 	}
-
-	//Aボタン
-	//void Player::OnPushA() {
-	//	if (m_grounded == true)
-	//	{
-	//		//auto grav = GetComponent<Gravity>();
-	//		//grav->StartJump(Vec3(0, m_JumpHeight, 0));
-
-	//		m_Accel = 1.0f;
-	//	}
-	//}
 }
 //end basecross
 
