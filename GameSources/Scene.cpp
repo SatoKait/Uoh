@@ -34,8 +34,11 @@ namespace basecross{
 			auto modelPath = path + L"Models/";
 
 			// スタティックマルチモデルのリソース
-			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"NewTobiuo.bmf");
+			auto StaticMultiModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"FlyingFish.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
+			// テクスチャ
+			auto Modeltex = modelPath + L"FlyingFish.png";
+			App::GetApp()->RegisterTexture(L"TOBIUO_TX",Modeltex);
 			
 			//スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
