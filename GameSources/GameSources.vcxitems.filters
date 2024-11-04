@@ -79,6 +79,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Deployment.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MoveObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
@@ -125,6 +128,9 @@
       <Filter>Ground</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Deployment.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MoveObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>

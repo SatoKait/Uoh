@@ -20,4 +20,5 @@
 #include "Block.h"
 #include "Map.h"
 #include "Deployment.h"
+#include "MoveObject.h"
 

@@ -53,10 +53,13 @@ namespace basecross {
 	}
 
 	void GameStage::CreateObstacle() {
+		for (int i = 0; i < 7; i++) {
+			AddGameObject<MoveObject>(Vec3(0.0f, 1.0f, -50.0f * i), Vec3(0.1f, 0.1f, 0.1f),L"RED_TX");
+		}
 		//Vec3 startPos   =  Vec3(-2.0f,1.5f,0.0f);
 		//Vec3 startScale =  Vec3( 0.5f,3.0f,0.5f);
 		//auto ptrGround = AddGameObject<Pole>(startPos, startScale);
-		auto ptrobstacle = AddGameObject<Deployment>();
+		//auto ptrobstacle = AddGameObject<Deployment>();
 	}
 
 	void GameStage::CreateTraceSprite() {
