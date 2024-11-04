@@ -149,6 +149,11 @@ namespace basecross{
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 		// ジャンプしてからの経過時間
 		m_JumpTime += delta;
+		// 開始してからの経過時間
+		if (m_Goal == false)
+		{
+			m_GoalTime += delta;
+		}
 
 		Vec2 ret;
 		//コントローラチェックして入力があればコマンド呼び出し
@@ -247,6 +252,9 @@ namespace basecross{
 		// プレイヤーの傾き
 			L"\nrotateZ : "				<<
 			rotate.z					<<
+		// ゴールまでの時間
+			L"\nGoalTime : "			<<
+			m_GoalTime					<<
 			endl;
 
 		// ゴール判定
@@ -260,6 +268,23 @@ namespace basecross{
 
 		m_ptrTrans->SetPosition(pos);
 		m_ptrTrans->SetRotation(rotate);
+		
+		if (m_Goal)
+		{
+			Player::Goaltrue();
+		}
+
+	}
+
+	void Player::Goaltrue()
+	{
+		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_A || cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_BACK)
+		{
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage");
+		}
+
 	}
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
@@ -267,6 +292,7 @@ namespace basecross{
 		if (other->FindTag(L"Goal"))
 		{
 			m_Goal = true;
+			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 	}
 }
