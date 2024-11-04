@@ -33,7 +33,11 @@ namespace basecross{
 			// スタティックマルチモデルのリソース
 			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"NewTobiuo.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
-			
+			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole.bmf");
+			App::GetApp()->RegisterResource(L"POLE_MESH", StaticMultiModelMesh);
+			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole2.bmf");
+			App::GetApp()->RegisterResource(L"POLE2_MESH", StaticMultiModelMesh);
+
 			//スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
 			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
