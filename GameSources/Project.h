@@ -23,3 +23,5 @@
 #include "Sprite.h"
 #include "Deployment.h"
 #include "GoalScene.h"
+#include "MoveObject.h"
+
