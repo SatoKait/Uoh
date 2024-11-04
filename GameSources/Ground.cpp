@@ -40,8 +40,6 @@ namespace basecross {
 
 	void Ground::OnUpdate()
 	{
-		// デバッグ用ストリーム
-		wstringstream wss(L"");
 		//ステージの取得
 		auto stage = GetStage();
 		//ポジションの取得
@@ -63,20 +61,6 @@ namespace basecross {
 		{
 			m_Position.z = -250.0f;
 		}
-	 
-		// 座標
-		    wss << L"\n\n\n\npos : (" <<
-			pos.x << L", " <<
-			pos.y << L", " <<
-			pos.z << L")"  
-
-			<< endl;
-
-		// デバッグ用文字列
-		auto scene = App::GetApp()->GetScene<Scene>();
-		auto dstr = scene->GetDebugString();
-		scene->SetDebugString(wss.str());	
-
 	}
 
 	//void Ground::OnDestroy()
