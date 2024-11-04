@@ -87,13 +87,6 @@ namespace basecross{
 			pos += angle * elapsedTime * m_Speed;
 			GetComponent<Transform>()->SetPosition(pos);
 		}
-		////回転の計算
-		//if (angle.length() > 0.0f) {
-		//	auto utilPtr = GetBehavior<UtilBehavior>();
-		//	utilPtr->RotToHead(angle, 1.0f);
-		//}
-
-		//auto angle = 
 	}
 
 	void Player::OnCreate()
@@ -102,7 +95,7 @@ namespace basecross{
 		// トランスフォーム
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetPosition(m_StartPos);
-		m_ptrTrans->SetRotation(0, 0, 0);
+		m_ptrTrans->SetRotation(m_StartRot);
 		m_ptrTrans->SetScale(m_StartScale);
 
 		// コリジョン
@@ -128,11 +121,11 @@ namespace basecross{
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();
 		//影の形（メッシュ）を設定
-		ptrShadow->SetMultiMeshResource(L"TOBIUO_MESH");
+		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
-		ptrDraw->SetMultiMeshResource(L"TOBIUO_MESH");
+		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
 
 	}
@@ -142,10 +135,14 @@ namespace basecross{
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
 
+		//トランスフォームの取得
+		auto trans = GetComponent<Transform>();
 		//ポジションの取得
-		auto pos = GetComponent<Transform>()->GetPosition();
+		auto pos = trans->GetPosition();
 		// 大きさの取得
-		auto scale = GetComponent<Transform>()->GetScale();
+		auto scale = trans->GetScale();
+		// 傾きの取得
+		auto rotate = trans->GetRotation();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		// デルタタイムを取得する
@@ -158,6 +155,7 @@ namespace basecross{
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
 
+
 		if (cntl[0].bConnected)
 		{
 			if (m_MoveFlag)//フラグがたっていなければ操作ができない
@@ -167,11 +165,11 @@ namespace basecross{
 			}
 
 		}
-		if (ret.x == -1)
+		if (ret.x <= -0.1)
 		{
 			pos.x += m_Speed * delta;
 		}
-		else if(ret.x == 1)
+		else if(ret.x >= 0.1)
 		{
 			pos.x -= m_Speed * delta;
 		}
@@ -200,9 +198,21 @@ namespace basecross{
 			
 			m_Accel -= 0.02f;
 
+			if (ret.x >= 0.1)
+			{
+				rotate.z += 4.0f * delta;
+			}
+			else if (ret.x <= -0.1)
+			{
+				rotate.z += -4.0f * delta;
+			}
+			else
+			{
+				rotate.z = 0;
+			}
 		}
-		if (//m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A 
-			 m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A )
+		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
+			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A )
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
@@ -212,7 +222,10 @@ namespace basecross{
 			m_grounded = true;
 			pos.y = scale.y * 0.5f;
 			m_Accel = 0.0f;
+			rotate.z = 0;
 		}
+
+		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
 			wss		<< L"\n\n\npos : (" <<
@@ -225,11 +238,20 @@ namespace basecross{
 		// ジャンプからの経過時間
 			L"\nJumpTime : "			<<
 			m_JumpTime					<<
-	   // ジャンプからの経過時間
-			L"\nret.x: " <<
-			ret.x
+		// コントローラーの左スティックの入力
+			L"\nret.x : "				<<
+			ret.x						<<
+		// ゲーム画面fps
+			L"\nFPS : "					<<
+			fps							<<
+		// プレイヤーの傾き
+			L"\nrotateZ : "				<<
+			rotate.z					<<
+			endl;
 
-			<<endl;
+		// ゴール判定
+			if (m_Goal){ wss << "Goal : true" << endl; }
+			else       { wss << "Goal : false" << endl; }
 
 		// デバッグ用文字列
 		auto scene = App::GetApp()->GetScene<Scene>();
@@ -237,19 +259,16 @@ namespace basecross{
 		scene->SetDebugString(wss.str());
 
 		m_ptrTrans->SetPosition(pos);
+		m_ptrTrans->SetRotation(rotate);
 	}
 
-
-	//Aボタン
-	//void Player::OnPushA() {
-	//	if (m_grounded == true)
-	//	{
-	//		//auto grav = GetComponent<Gravity>();
-	//		//grav->StartJump(Vec3(0, m_JumpHeight, 0));
-
-	//		m_Accel = 1.0f;
-	//	}
-	//}
+	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
+	{
+		if (other->FindTag(L"Goal"))
+		{
+			m_Goal = true;
+		}
+	}
 }
 //end basecross
 

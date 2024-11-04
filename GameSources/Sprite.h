@@ -1,0 +1,36 @@
+/*!
+@file Sprite.h
+@brief スプライト
+*/
+
+#pragma once
+#include "stdafx.h"
+#include "Project.h"
+
+namespace basecross{
+	// タイムスプライト
+	class TimeSprite : public GameObject {
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_TextureKey;
+
+		//桁数
+		UINT m_NumberOfDigits;
+
+		float m_Time;
+
+	public:
+		TimeSprite(
+			shared_ptr<Stage>& StagePtr,	// ステージ
+			UINT NumberOfDigits,			// 桁数
+			const wstring& TextureKey,
+			const Vec2& StartScale,			// 大きさ
+			const Vec3& StartPos);			// 初期位置
+		~TimeSprite();
+
+		virtual void OnCreate() override;
+		virtual void OnUpdate() override;
+	};
+
+}
+//end basecross

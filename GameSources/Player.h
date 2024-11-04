@@ -12,6 +12,7 @@ namespace basecross{
 	{
 		Vec3 m_StartPos;		// 初期位置
 		Vec3 m_StartScale;		// 初期スケール
+		Vec3 m_StartRot;
 		Vec3 m_PlayerPos;		// プレイヤーの位置
 
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
@@ -31,27 +32,34 @@ namespace basecross{
 		float m_Accel;			//加速度
 		float m_JumpTime;		//ジャンプしてからの経過時間
 		bool m_MoveFlag;		//動けるまでのフラグ
+		bool m_Goal;			//ゴール判定
 
 	public:
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
-			const Vec3& Scale
+			const Vec3& Scale,
+			const Vec3& Rot
 
 		) :
 			GameObject(StagePtr),
 			m_StartPos(Position),
 			m_StartScale(Scale),
+			m_StartRot(Rot),
 			m_Speed(10.0f),
 			m_JSpeed(6.0f),
 			m_grounded(true),
-			m_MoveFlag(true)
+			m_MoveFlag(true),
+			m_Goal(false)
 		{
 		}
 		Player::~Player() {}
 
 		virtual void OnCreate() override;
 		virtual void OnUpdate() override;
+
+		//当たり判定(当たった瞬間)
+		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 
 		//Aボタン
 		//void OnPushA();

@@ -1,6 +1,6 @@
 /*!
 @file Scene.cpp
-@brief ƒV[ƒ“À‘Ì
+@brief ã‚·ãƒ¼ãƒ³å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -9,56 +9,60 @@
 namespace basecross{
 
 	//--------------------------------------------------------------------------------------
-	///	ƒQ[ƒ€ƒV[ƒ“
+	///	ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
 	//--------------------------------------------------------------------------------------
 	void Scene::CreateResourses() {
-		// mediaƒtƒ@ƒCƒ‹‚ÌƒpƒXæ“¾
+		// mediaãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹å–å¾—
 		auto path = App::GetApp()->GetDataDirWString();
-
-		// ƒeƒNƒXƒ`ƒƒ‚ÌƒŠƒ\[ƒX
+		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒªã‚½ãƒ¼ã‚¹
 		{
 			auto texPath = path + L"Textures/";
 
 			auto tex = texPath + L"Hane.png";
 			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
+
+			tex = texPath + L"numbers.png";
+			App::GetApp()->RegisterTexture(L"NUMBER_TX",tex);
+
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
 			App::GetApp()->RegisterTexture(L"RED_TX", tex);
 		}
-		// ƒ‚ƒfƒ‹‚ÌƒŠƒ\[ƒX
+		// ãƒ¢ãƒ‡ãƒ«ã®ãƒªã‚½ãƒ¼ã‚¹
 		{
 			auto modelPath = path + L"Models/";
 
-			// ƒXƒ^ƒeƒBƒbƒNƒ}ƒ‹ƒ`ƒ‚ƒfƒ‹‚ÌƒŠƒ\[ƒX
-			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"NewTobiuo.bmf");
+			// ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒãƒ«ãƒãƒ¢ãƒ‡ãƒ«ã®ãƒªã‚½ãƒ¼ã‚¹
+			auto StaticMultiModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"FlyingFish.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole.bmf");
 			App::GetApp()->RegisterResource(L"POLE_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole2.bmf");
 			App::GetApp()->RegisterResource(L"POLE2_MESH", StaticMultiModelMesh);
-
-			//ƒXƒ^ƒeƒBƒbƒNƒ‚ƒfƒ‹‚ÌƒŠƒ\[ƒX
+			
+      // ãƒ†ã‚¯ã‚¹ãƒãƒ£
+			auto Modeltex = modelPath + L"FlyingFish.png";
+			App::GetApp()->RegisterTexture(L"TOBIUO_TX",Modeltex);
+		
+			//ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¢ãƒ‡ãƒ«ã®ãƒªã‚½ãƒ¼ã‚¹
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
 			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
 			App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
-
-
 		}
-
 	}
 
 
 	void Scene::OnCreate(){
 		try {
 			CreateResourses();
-			//ƒNƒŠƒA‚·‚éF‚ğİ’è
+			//ã‚¯ãƒªã‚¢ã™ã‚‹è‰²ã‚’è¨­å®š
 			Col4 Col;
 			Col.set(31.0f / 255.0f, 30.0f / 255.0f, 71.0f / 255.0f, 255.0f / 255.0f);
 			SetClearColor(Col);
-			//©•ª©g‚ÉƒCƒxƒ“ƒg‚ğ‘—‚é
-			//‚±‚ê‚É‚æ‚èŠeƒXƒe[ƒW‚âƒIƒuƒWƒFƒNƒg‚ªCreate‚ÉƒV[ƒ“‚ÉƒAƒNƒZƒX‚Å‚«‚é
+			//è‡ªåˆ†è‡ªèº«ã«ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€ã‚‹
+			//ã“ã‚Œã«ã‚ˆã‚Šå„ã‚¹ãƒ†ãƒ¼ã‚¸ã‚„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒCreateæ™‚ã«ã‚·ãƒ¼ãƒ³ã«ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹
 			PostEvent(0.0f, GetThis<ObjectInterface>(), GetThis<Scene>(), L"ToGameStage");
 		}
 		catch (...) {
@@ -71,7 +75,7 @@ namespace basecross{
 
 	void Scene::OnEvent(const shared_ptr<Event>& event) {
 		if (event->m_MsgStr == L"ToGameStage") {
-			//Å‰‚ÌƒAƒNƒeƒBƒuƒXƒe[ƒW‚Ìİ’è
+			//æœ€åˆã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ãƒ†ãƒ¼ã‚¸ã®è¨­å®š
 			ResetActiveStage<GameStage>();
 		}
 	}
