@@ -23,6 +23,8 @@ namespace basecross{
 
 			tex = texPath + L"numbers.png";
 			App::GetApp()->RegisterTexture(L"NUMBER_TX",tex);
+			tex = texPath + L"Goal.png";
+			App::GetApp()->RegisterTexture(L"GOAL_TX",tex);
 
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
@@ -79,6 +81,11 @@ namespace basecross{
 			//最初のアクティブステージの設定
 			ResetActiveStage<GameStage>();
 		}
+		if (event->m_MsgStr == L"ToGoalScene") {
+			//ゴールシーンに移動
+		    ResetActiveStage<GoalScene>();
+		}
+
 	}
 
 }

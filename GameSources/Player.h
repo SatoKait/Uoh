@@ -29,10 +29,11 @@ namespace basecross{
 		float m_Speed;			//スピード
 		float m_JSpeed;			//ジャンプするスピード
 		bool m_grounded;		//接地しているかどうか
-		float m_Accel;			//加速度
+		float m_Accel;			//y軸加速度
 		float m_JumpTime;		//ジャンプしてからの経過時間
 		bool m_MoveFlag;		//動けるまでのフラグ
 		bool m_Goal;			//ゴール判定
+		float m_GoalTime;		//ゴールタイム
 
 	public:
 		// 構築と破棄
@@ -50,7 +51,8 @@ namespace basecross{
 			m_JSpeed(6.0f),
 			m_grounded(true),
 			m_MoveFlag(true),
-			m_Goal(false)
+			m_Goal(false),
+			m_GoalTime(0.0f)
 		{
 		}
 		Player::~Player() {}
@@ -60,6 +62,8 @@ namespace basecross{
 
 		//当たり判定(当たった瞬間)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
+
+		void Goaltrue();
 
 		//Aボタン
 		//void OnPushA();
