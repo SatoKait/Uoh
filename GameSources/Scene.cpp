@@ -34,22 +34,23 @@ namespace basecross{
 			auto modelPath = path + L"Models/";
 
 			// スタティックマルチモデルのリソース
-			auto StaticMultiModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"FlyingFish.bmf");
-			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticMultiModelMesh);
-			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole.bmf");
+			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole.bmf");
 			App::GetApp()->RegisterResource(L"POLE_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole2.bmf");
 			App::GetApp()->RegisterResource(L"POLE2_MESH", StaticMultiModelMesh);
 			
-      // テクスチャ
+            // テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
 			App::GetApp()->RegisterTexture(L"TOBIUO_TX",Modeltex);
 		
-			//スタティックモデルのリソース
+			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
 			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
 			App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"FlyingFish.bmf");
+			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
+
 		}
 	}
 
