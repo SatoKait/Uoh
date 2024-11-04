@@ -1,5 +1,5 @@
 /*!
-@file Ground.cpp
+@file MoveObject.cpp
 @brief ステージなど実体
 */
 
@@ -8,18 +8,18 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	// Groundキャラ
+	// MoveObjectキャラ
 	//--------------------------------------------------------------------------------------
-	void Ground::OnCreate(){
-		m_ptrTrans = GetComponent<Transform>();	
+	void MoveObject::OnCreate() {
+		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
 
 		auto col = AddComponent<CollisionObb>();
 		col->SetDrawActive(true);
-		col->SetFixed(true);
+		col->SetFixed(false);
 
-		Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
+		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
 		spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 1.0f),//スケーリング
 			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
@@ -33,12 +33,12 @@ namespace basecross {
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
-		m_ptrDraw->SetMeshResource(L"DEFAULT_CUBE");
+		m_ptrDraw->SetMultiMeshResource(L"POLE_MESH");
 		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
-	void Ground::OnUpdate()
+	void MoveObject::OnUpdate()
 	{
 		//ステージの取得
 		auto stage = GetStage();
@@ -46,14 +46,11 @@ namespace basecross {
 		auto pos = GetComponent<Transform>()->GetPosition();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
-		////プレイヤーの参照
-		//auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
-		//Vec3 ptrplayerPos = ptrplayer->m_PlayerPos;
 
 		m_camera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		auto camerapos = m_camera->GetEye();
 
-		
+
 		m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
 		m_Position.z += 10.0f * delta * m_Speed;
 
@@ -62,10 +59,4 @@ namespace basecross {
 			m_Position.z = -250.0f;
 		}
 	}
-
-	//void Ground::OnDestroy()
-	//{
-	//	delete this;
-	//}
-
 };//end basecross

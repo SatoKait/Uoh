@@ -13,13 +13,10 @@ namespace basecross {
 		auto texturePath = mediaPath + L"Textures/"; // 「Textures/」フォルダのパスを連結する
 		app->RegisterTexture(L"block", texturePath + L"block.jpg");
 
-		m_ptrTrans = GetComponent<Transform>();
-		m_ptrTrans->SetScale(m_Scale);
-
-		auto col = AddComponent<CollisionObb>();
-		col->SetDrawActive(true);
-		col->SetFixed(true);
-		col->SetSleepActive(true);
+		//auto col = AddComponent<CollisionObb>();
+		//col->SetDrawActive(true);
+		//col->SetFixed(true);
+		//col->SetSleepActive(true);
 
 		auto drawComp = AddComponent<PNTStaticInstanceDraw>(); //Instanceと付いたドローコンポーネントを生成します
 		drawComp->SetMeshResource(m_meshResName);

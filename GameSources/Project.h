@@ -22,3 +22,5 @@
 #include "Map.h"
 #include "Sprite.h"
 #include "Deployment.h"
+#include "MoveObject.h"
+
