@@ -18,7 +18,7 @@ namespace basecross {
 	public:
 		Buoy(const std::shared_ptr<Stage>& stage) :
 			GameObject(stage),
-			m_meshResName(L"POLL_MESH"),
+			m_meshResName(L"DEFAULT_SPHERE"),
 			m_Scale(0.1f),
 			m_Reskey(L"RED_TX")
 		{
