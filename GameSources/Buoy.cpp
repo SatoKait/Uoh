@@ -10,9 +10,8 @@ namespace basecross {
 	void Buoy::OnCreate() {
 		auto& app = App::GetApp();//アプリケーションの参照
 		auto mediaPath = app->GetDataDirWString(); // 「media」パスを文字列として取得する
-		auto texturePath = mediaPath + L"Textures/"; // 「Textures/」フォルダのパスを連結する
-		app->RegisterTexture(L"block", texturePath + L"block.jpg");
-
+		//auto texturePath = mediaPath + L"Textures/"; // 「Textures/」フォルダのパスを連結する
+		//app->RegisterTexture(L"block", texturePath + L"block.jpg");
 		//auto col = AddComponent<CollisionObb>();
 		//col->SetDrawActive(true);
 		//col->SetFixed(true);

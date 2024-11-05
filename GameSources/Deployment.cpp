@@ -52,15 +52,14 @@ namespace basecross {
 					float scl = 1.0f;
 					//// インスタンス用の行列を作成する
 				   Vec3 m_stratPos(m_Side, 0.0f, m_Warp); // 基準となるオフセット座標//移動座標
-				 //  m_Warp += 10.0f;
-
-					auto pole = GetStage()->AddGameObject<Pole>();
+					auto pole = GetStage()->AddGameObject<Buoy>();
 					auto poleTransComp = pole->GetComponent<Transform>();
 					poleTransComp->SetPosition(m_stratPos);
 					auto blockInstance = pole->GetComponent<PNTStaticInstanceDraw>();
 					Mat4x4 matrix,mtxScale;
 					//mtxScale.scale(Vec3(2.0f, 2.0f, 2.0f));
 					matrix.translation(Vec3(m_Side, 0.0f, m_Warp));
+
 					blockInstance->AddMatrix(matrix);
 
 					break;
@@ -69,34 +68,34 @@ namespace basecross {
 		}
 	}
 
-	void Deployment::OnUpdate()
-	{	
-		// デバッグ用ストリーム
-		wstringstream wss(L"");
+	//void Deployment::OnUpdate()
+	//{	
+	//	// デバッグ用ストリーム
+	//	wstringstream wss(L"");
 
-		// デルタタイムを取得する
-		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
-		auto pole = GetStage()->AddGameObject<Pole>();
-		auto poleTransComp = pole->GetComponent<Transform>();
-		m_Warp += 1.0f * delta * m_Speed;
-		m_Side += 1.0f * delta * m_Speed;
-	   // poleTransComp->SetPosition(m_Side,0.0f, m_Warp);
+	//	// デルタタイムを取得する
+	//	float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+	//	auto buyo = GetStage()->AddGameObject<Buoy>();
+	//	auto buyoTransComp = buyo->GetComponent<Transform>();
+	//	m_Warp += 1.0f * delta * m_Speed;
+	//	m_Side += 1.0f * delta * m_Speed;
+	//   // poleTransComp->SetPosition(m_Side,0.0f, m_Warp);
 
-		auto blockInstance = pole->GetComponent<PNTStaticInstanceDraw>();
-		Mat4x4 matrix;
-		matrix.translation(Vec3(m_Side, 0.0f, m_Warp));;
-		m_Warp += 1.0f * delta * m_Speed;
-		//blockInstance->AddMatrix(matrix);
+	//	auto blockInstance = buyo->GetComponent<PNTStaticInstanceDraw>();
+	//	Mat4x4 matrix;
+	//	matrix.translation(Vec3(m_Side, 0.0f, m_Warp));;
+	//	m_Warp += 1.0f * delta * m_Speed;
+	//	//blockInstance->AddMatrix(matrix);
 
-		wss << L"\n\n\nm_Warp : (" <<
-			m_Warp << L", " 
-			<< endl;
+	//	wss << L"\n\n\nm_Warp : (" <<
+	//		m_Warp << L", " 
+	//		<< endl;
 
-		// デバッグ用文字列
-		auto scene = App::GetApp()->GetScene<Scene>();
-		auto dstr = scene->GetDebugString();
-		scene->SetDebugString(wss.str());
+	//	// デバッグ用文字列
+	//	auto scene = App::GetApp()->GetScene<Scene>();
+	//	auto dstr = scene->GetDebugString();
+	//	scene->SetDebugString(wss.str());
 
 
-	}
+	//}
 }//end basecross

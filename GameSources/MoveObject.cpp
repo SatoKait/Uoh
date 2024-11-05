@@ -1,6 +1,6 @@
 /*!
 @file MoveObject.cpp
-@brief ƒXƒe[ƒW‚È‚ÇÀ‘Ì
+@brief ã‚¹ãƒ†ãƒ¼ã‚¸ãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -8,7 +8,7 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	// MoveObjectƒLƒƒƒ‰
+	// MoveObjectã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	void MoveObject::OnCreate() {
 		m_ptrTrans = GetComponent<Transform>();
@@ -19,16 +19,16 @@ namespace basecross {
 		col->SetDrawActive(true);
 		col->SetFixed(false);
 
-		Mat4x4 spanMat; // ƒ‚ƒfƒ‹‚Æƒgƒ‰ƒ“ƒXƒt ƒH[ƒ€ŠÔ‚Ì·•ªs—ñ
+		Mat4x4 spanMat; // ãƒ¢ãƒ‡ãƒ«ã¨ãƒˆãƒ©ãƒ³ã‚¹ãƒ• ã‚©ãƒ¼ãƒ é–“ã®å·®åˆ†è¡Œåˆ—
 		spanMat.affineTransformation(
-			Vec3(1.0f, 1.0f, 1.0f),//ƒXƒP[ƒŠƒ“ƒO
-			Vec3(0.0f, 0.0f, 0.0f),//‰ñ“]‚Ì’†S
-			Vec3(0.0f, 0.0f, 0.0f),//‰ñ“]‚ÌƒxƒNƒgƒ‹
-			Vec3(0.0f, 0.0f, 0.0f) //ˆÚ“®
+			Vec3(1.0f, 1.0f, 1.0f),//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°
+			Vec3(0.0f, 0.0f, 0.0f),//å›è»¢ã®ä¸­å¿ƒ
+			Vec3(0.0f, 0.0f, 0.0f),//å›è»¢ã®ãƒ™ã‚¯ãƒˆãƒ«
+			Vec3(0.0f, 0.0f, 0.0f) //ç§»å‹•
 		);
-		//‰e‚ğ‚Â‚¯‚éiƒVƒƒƒhƒEƒ}ƒbƒv‚ğ•`‰æ‚·‚éj
+		//å½±ã‚’ã¤ã‘ã‚‹ï¼ˆã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã‚’æç”»ã™ã‚‹ï¼‰
 		auto ptrShadow = AddComponent<Shadowmap>();
-		//‰e‚ÌŒ`iƒƒbƒVƒ…j‚ğİ’è
+		//å½±ã®å½¢ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ï¼‰ã‚’è¨­å®š
 		//ptrShadow->SetMeshResource(L"BED_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
@@ -40,13 +40,13 @@ namespace basecross {
 
 	void MoveObject::OnUpdate()
 	{
-		//ƒXƒe[ƒW‚Ìæ“¾
+		//ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
 		auto stage = GetStage();
-		//ƒ|ƒWƒVƒ‡ƒ“‚Ìæ“¾
+		//ãƒã‚¸ã‚·ãƒ§ãƒ³ã®å–å¾—
 		auto pos = GetComponent<Transform>()->GetPosition();
-		// ƒfƒ‹ƒ^ƒ^ƒCƒ€‚ğæ“¾‚·‚é
-		float delta = App::GetApp()->GetElapsedTime(); // ‘OƒtƒŒ[ƒ€‚©‚ç‚ÌuŒo‰ßŠÔv
-		////ƒvƒŒƒCƒ„[‚ÌQÆ
+		// ãƒ‡ãƒ«ã‚¿ã‚¿ã‚¤ãƒ ã‚’å–å¾—ã™ã‚‹
+		float delta = App::GetApp()->GetElapsedTime(); // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®ã€ŒçµŒéæ™‚é–“ã€
+		////ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‚ç…§
 		auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
 		auto ptrplayerFlag = ptrplayer->m_SpeedUp;
 
@@ -79,6 +79,7 @@ namespace basecross {
 		m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
 	    m_Position.z += 10.0f * delta * m_Speed;
 
+
 		if (ptrplayerFlag == true)
 		{
 			m_Speed = 2.5f;
@@ -90,5 +91,62 @@ namespace basecross {
 		}
 		//	m_Position.z = -250.0f;
 		//}
+		if (camerapos.z + 60.0f <= m_Position.z)
+		{
+			m_Position.z = -250.0f;
+		}
+
 	}
+
+	//--------------------------------------------------------------------------------------
+	// MoveBuoyã‚­ãƒ£ãƒ©
+	//--------------------------------------------------------------------------------------
+	void MoveBuoy::OnCreate() {
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetScale(m_Scale);
+		m_ptrTrans->SetPosition(m_Position);
+
+		auto col = AddComponent<CollisionObb>();
+		col->SetDrawActive(true);
+		col->SetFixed(false);
+
+		Mat4x4 spanMat; // ãƒ¢ãƒ‡ãƒ«ã¨ãƒˆãƒ©ãƒ³ã‚¹ãƒ• ã‚©ãƒ¼ãƒ é–“ã®å·®åˆ†è¡Œåˆ—
+		spanMat.affineTransformation(
+			Vec3(1.0f, 1.0f, 1.0f),//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°
+			Vec3(0.0f, 0.0f, 0.0f),//å›è»¢ã®ä¸­å¿ƒ
+			Vec3(0.0f, 0.0f, 0.0f),//å›è»¢ã®ãƒ™ã‚¯ãƒˆãƒ«
+			Vec3(0.0f, 0.0f, 0.0f) //ç§»å‹•
+		);
+		//å½±ã‚’ã¤ã‘ã‚‹ï¼ˆã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã‚’æç”»ã™ã‚‹ï¼‰
+		auto ptrShadow = AddComponent<Shadowmap>();
+		//å½±ã®å½¢ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ï¼‰ã‚’è¨­å®š
+		//ptrShadow->SetMeshResource(L"BED_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
+		m_ptrDraw->SetMeshResource(L"BUOY_MESH");
+		m_ptrDraw->SetTextureResource(m_ResKey);
+		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
+	}
+
+	void MoveBuoy::OnUpdate()
+	{
+		//ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
+		auto stage = GetStage();
+		//ãƒã‚¸ã‚·ãƒ§ãƒ³ã®å–å¾—
+		auto pos = GetComponent<Transform>()->GetPosition();
+		// ãƒ‡ãƒ«ã‚¿ã‚¿ã‚¤ãƒ ã‚’å–å¾—ã™ã‚‹
+		float delta = App::GetApp()->GetElapsedTime(); // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®ã€ŒçµŒéæ™‚é–“ã€
+		m_camera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+		auto camerapos = m_camera->GetEye();
+		m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
+		m_Position.x += 5.0f * delta * m_Speed;
+	}
+
+	//void MoveBuoy::OnDestroy()
+	//{
+
+	//}
+
+
 };//end basecross

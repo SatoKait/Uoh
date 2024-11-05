@@ -35,7 +35,7 @@ namespace basecross {
 
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(0.0f,1.0f,30.0f),Vec3(0.3f,0.3f,0.3f),Vec3(0.0f,0.0f,0.0f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,1.0f,30.0f),Vec3(0.3f,0.3f,0.3f),Vec3(0.0f,0.0f,0.0f));
 		SetSharedGameObject(L"Player", ptrPlayer);
   }
 
@@ -57,8 +57,12 @@ namespace basecross {
 
 	void GameStage::CreateObstacle() {
 		for (int i = 0; i < 7; i++) {
-			AddGameObject<MoveObject>(Vec3(0.0f, 1.0f, -50.0f * i), Vec3(0.1f, 0.1f, 0.1f),L"RED_TX");
+			AddGameObject<MoveObject>(Vec3(0.0f, 1.0f, -50.0f * i), Vec3(0.05f, 0.05f, 0.05f),L"RED_TX");
 		}
+		for (int i = 0; i < 1; i++) {
+			AddGameObject<MoveBuoy>(Vec3(-20.0f, 0.0f, -100.0f * i), Vec3(1.0f, 1.0f, 1.0f), L"RED_TX");
+		}
+
 		//Vec3 startPos   =  Vec3(-2.0f,1.5f,0.0f);
 		//Vec3 startScale =  Vec3( 0.5f,3.0f,0.5f);
 		//auto ptrGround = AddGameObject<Pole>(startPos, startScale);
