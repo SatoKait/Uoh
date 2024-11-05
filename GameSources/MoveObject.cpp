@@ -46,6 +46,9 @@ namespace basecross {
 		auto pos = GetComponent<Transform>()->GetPosition();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+		////プレイヤーの参照
+		auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
+		auto ptrplayerFlag = ptrplayer->m_SpeedUp;
 
 		m_camera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		auto camerapos = m_camera->GetEye();
@@ -76,8 +79,15 @@ namespace basecross {
 		m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
 	    m_Position.z += 10.0f * delta * m_Speed;
 
+		if (ptrplayerFlag == true)
+		{
+			m_Speed = 2.5f;
+		}
+		else{
+			m_Speed = 1.0f;
 		//if (camerapos.z + 60.0f <= m_Position.z)
 		//{
+		}
 		//	m_Position.z = -250.0f;
 		//}
 	}

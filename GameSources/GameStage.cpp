@@ -46,8 +46,12 @@ namespace basecross {
 
 		//Vec3 startPos =   Vec3(0.0f, 0.0f,  30.0f);
 	 //   Vec3 startScale = Vec3(5.0f, 1.0f, 100.0f);
+
+		
 		for (int i = 0; i < 7;i++) {
+			/*auto ptrGround = */
 			AddGameObject<Ground>(Vec3(0.0f, 0.0f, -50.0f * i), Vec3(100.0f, 1.0f, 50.0f), L"SEA_TX");
+			//SetSharedGameObject(L"Ground" + i, ptrGround);
 		}
 	}
 

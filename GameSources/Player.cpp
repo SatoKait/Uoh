@@ -106,8 +106,6 @@ namespace basecross{
 		if (ptrCamera) {
 			ptrCamera->SetTarget(GetThis<GameObject>());
 		}
-
-		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		
 		// プレイヤーの描画
 		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
@@ -147,6 +145,10 @@ namespace basecross{
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+
+		//auto stage = GetStage();
+		//auto ptrGround = stage->GetSharedGameObject<Ground>(L"Ground");
+		//auto ptrGroundflag = ptrGround->m_Speed = 5;
 		// ジャンプしてからの経過時間
 		m_JumpTime += delta;
 		// 開始してからの経過時間
@@ -195,6 +197,7 @@ namespace basecross{
 				m_grounded = false;
 				m_JumpTime = 0;
 				m_Accel = 2.0f;
+				m_SpeedUp = true;
 			}
 		}
 		if (m_grounded == false)
@@ -228,6 +231,7 @@ namespace basecross{
 			pos.y = scale.y * 0.5f;
 			m_Accel = 0.0f;
 			rotate.z = 0;
+			m_SpeedUp = false;
 		}
 
 		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();

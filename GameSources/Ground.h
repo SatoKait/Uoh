@@ -19,10 +19,10 @@ namespace basecross {
 		Vec3 m_Scale;
 		Vec3 m_Goal;
 		wstring m_ResKey;
-		float m_Speed;			 //スピード
 
 	public:
 		float m_Distance;       //距離
+		float m_Speed;			 //スピード
 
 		// 構築と破棄
 		Ground::Ground(const shared_ptr<Stage>& StagePtr,

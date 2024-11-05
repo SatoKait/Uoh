@@ -33,6 +33,23 @@ namespace basecross{
 
 		m_ptrTrans->SetPosition(Vec3(m_position.x, m_position.y, m_position.z));
 		m_position.z += 10.0f * delta * m_Speed;
+
+		//ステージの取得
+		auto stage = GetStage();
+
+		////プレイヤーの参照
+		auto ptrplayer = stage->GetSharedGameObject<Player>(L"Player");
+		auto ptrplayerFlag = ptrplayer->m_SpeedUp;
+
+		if (ptrplayerFlag == true)
+		{
+			m_Speed = 2.5f;
+		}
+		else {
+			m_Speed = 1.0f;
+		}
+
+
 	}
 }
 //end basecross

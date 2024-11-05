@@ -87,7 +87,7 @@ namespace basecross {
 	//{
 	//	auto stage = GetStage();
 	//	auto ptrplayer=  stage->GetSharedGameObject<Player>(L"Player");
-    // auto ptrplayerflag = ptrplayer->m_Goal;
+    //  auto ptrplayerflag = ptrplayer->m_Goal;
 	//	ptrplayerflag = true;
 
 	//	if (ptrplayerflag)
