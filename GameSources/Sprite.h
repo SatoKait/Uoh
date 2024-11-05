@@ -32,23 +32,26 @@ namespace basecross{
 		virtual void OnUpdate() override;
 	};
 
-	//class GoalSprite :public GameObject
-	//{
-	//	Vec2 m_startScale;
-	//	Vec3 m_startPos;
-	//	wstring m_textureKey;
+		class GoalSprite :public GameObject
+		{
+			Vec2 m_startScale;
+			Vec3 m_startPos;
+			wstring m_textureKey;
+			bool m_Trace;
+			shared_ptr<PCTSpriteDraw>m_ptrDraw;
 
-	//public:
-	//	GoalSprite(
-	//		shared_ptr<Stage>& StagePtr,
-	//		const wstring& TextureKey,
-	//		const Vec2& StartScale,
-	//		const Vec3& StartPos
-	//	);
-	//	~GoalSprite();
 
-	//	//virtual void OnCreate() override;
-	//	//virtual void OnUpdate() override;
-	//};
+		public:
+			GoalSprite(
+				shared_ptr<Stage>& StagePtr,
+				const wstring& TextureKey,
+				const Vec2& StartScale,
+				const Vec3& StartPos
+			);
+			~GoalSprite();
+
+			virtual void OnCreate() override;
+		    //virtual void OnUpdate() override;
+		};
 }
 //end basecross
