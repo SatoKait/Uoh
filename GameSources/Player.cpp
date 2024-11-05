@@ -232,34 +232,34 @@ namespace basecross{
 
 		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
-		// 座標
-			wss		<< L"\n\n\npos : (" <<
-			pos.x	<< L", "			<<
-			pos.y	<< L", "			<<
-			pos.z	<< L")"				<< 
-		// 加速度
-			L"\naccel : "				<< 
-			m_Accel						<<
-		// ジャンプからの経過時間
-			L"\nJumpTime : "			<<
-			m_JumpTime					<<
-		// コントローラーの左スティックの入力
-			L"\nret.x : "				<<
-			ret.x						<<
-		// ゲーム画面fps
-			L"\nFPS : "					<<
-			fps							<<
-		// プレイヤーの傾き
-			L"\nrotateZ : "				<<
-			rotate.z					<<
-		// ゴールまでの時間
-			L"\nGoalTime : "			<<
-			m_GoalTime					<<
-			endl;
+		//// 座標
+		//	wss		<< L"\n\n\npos : (" <<
+		//	pos.x	<< L", "			<<
+		//	pos.y	<< L", "			<<
+		//	pos.z	<< L")"				<< 
+		//// 加速度
+		//	L"\naccel : "				<< 
+		//	m_Accel						<<
+		//// ジャンプからの経過時間
+		//	L"\nJumpTime : "			<<
+		//	m_JumpTime					<<
+		//// コントローラーの左スティックの入力
+		//	L"\nret.x : "				<<
+		//	ret.x						<<
+		//// ゲーム画面fps
+		//	L"\nFPS : "					<<
+		//	fps							<<
+		//// プレイヤーの傾き
+		//	L"\nrotateZ : "				<<
+		//	rotate.z					<<
+		//// ゴールまでの時間
+		//	L"\nGoalTime : "			<<
+		//	m_GoalTime					<<
+		//	endl;
 
 		// ゴール判定
-			if (m_Goal){ wss << "Goal : true" << endl; }
-			else       { wss << "Goal : false" << endl; }
+			//if (m_Goal){ wss << "Goal : true" << endl; }
+			//else       { wss << "Goal : false" << endl; }
 
 		// デバッグ用文字列
 		auto scene = App::GetApp()->GetScene<Scene>();
@@ -291,7 +291,13 @@ namespace basecross{
 	{
 		if (other->FindTag(L"Goal"))
 		{
+			auto Stage = GetStage();
+
+			Stage->AddGameObject<GoalSprite>(L"GOAL_TX",
+		    Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
+
 			m_Goal = true;
+		     
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 	}

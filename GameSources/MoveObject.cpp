@@ -52,32 +52,29 @@ namespace basecross {
 
 		//m_ptrTrans->SetPosition(Vec3(m_Position.x + 30, m_Position.y, m_Position.z));
 
-		auto  r = rand() % 4;
-		if (camerapos.z + 60.0f <= m_Position.z)
-		{
-			switch (r) {
+		//auto  r = rand() % 4;
+		//if (camerapos.z + 60.0f <= m_Position.z)
+		//{
+		//	switch (r) {
 
-			case 0:
-				m_ptrTrans->SetPosition(Vec3(m_Position.x + 30, m_Position.y, m_Position.z));
-				m_Position.z += 10.0f * delta * m_Speed;
-				break;
-			case 1:
-				m_ptrTrans->SetPosition(Vec3(m_Position.x - 30, m_Position.y, m_Position.z));
-				m_Position.z += 10.0f * delta * m_Speed;
-				break;
-				//case 2:
-				//	m_ptrTrans->SetPosition(Vec3(m_Position.x + 20, m_Position.y, m_Position.z));
-				//	break;
-				//case 3:
-				//	m_ptrTrans->SetPosition(Vec3(m_Position.x - 20, m_Position.y, m_Position.z));
-				//	break;
+		//	case 0:
+		//	//	m_ptrTrans->SetPosition(Vec3(m_Position.x + 30, m_Position.y, m_Position.z));
+		//	//	break;
+		//	//case 1:
+		//	//	m_ptrTrans->SetPosition(Vec3(m_Position.x - 30, m_Position.y, m_Position.z));
+		//	//	m_Position.z += 10.0f * delta * m_Speed;
+		//	//	break;
+		//		//case 2:
+		//		//	m_ptrTrans->SetPosition(Vec3(m_Position.x + 20, m_Position.y, m_Position.z));
+		//		//	break;
+		//		//case 3:
+		//		//	m_ptrTrans->SetPosition(Vec3(m_Position.x - 20, m_Position.y, m_Position.z));
+		//		//	break;
+		//	}
+		//}
 
-			}
-		}
-
-
-		//m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
-
+		m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
+	    m_Position.z += 10.0f * delta * m_Speed;
 
 		//if (camerapos.z + 60.0f <= m_Position.z)
 		//{

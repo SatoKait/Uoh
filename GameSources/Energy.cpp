@@ -10,7 +10,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	///	スクロールするスプライト
 	//--------------------------------------------------------------------------------------
-	ScrollSprite::ScrollSprite(const shared_ptr<Stage>& StagePtr,
+	Energy::Energy(const shared_ptr<Stage>& StagePtr,
 		const wstring& TextureKey, bool Trace,
 		const Vec2& StartScale, const Vec3& StartPos) :
 		GameObject(StagePtr),
@@ -23,8 +23,8 @@ namespace basecross {
 		m_MovePos(0)
 	{}
 
-	ScrollSprite::~ScrollSprite() {}
-	void ScrollSprite::OnCreate() {
+	Energy::~Energy() {}
+	void Energy::OnCreate() {
 		float helfSize = 0.5f;//サイズ
 		float numberW = 1.0f;
 		float numberH = 1.0f;
@@ -50,7 +50,7 @@ namespace basecross {
 
 	}
 
-	void ScrollSprite::OnUpdate() { 
+	void Energy::OnUpdate() {
 		//float elapsedTime = App::GetApp()->GetElapsedTime();
 		//m_TotalTime -= elapsedTime;
 		//if (m_TotalTime > 1.0f) {

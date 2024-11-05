@@ -24,4 +24,5 @@
 #include "Deployment.h"
 #include "GoalScene.h"
 #include "MoveObject.h"
+#include "Buoy.h"
 

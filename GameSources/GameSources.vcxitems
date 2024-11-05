@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Block.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Buoy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Character.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Deployment.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Energy.h" />
@@ -36,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Block.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Buoy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Deployment.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Energy.cpp" />

@@ -16,7 +16,7 @@ namespace basecross {
 		m_ptrTrans->SetPosition(m_Position);
 
 		auto col = AddComponent<CollisionObb>();
-		col->SetDrawActive(true);
+		//col->SetDrawActive(true);
 		col->SetFixed(true);
 
 		Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
