@@ -65,22 +65,19 @@ namespace basecross {
 		float a = -510.0f;
 		float b = 70.0f;
 
-		AddGameObject<ScrollSprite>(L"HANE_TX", true,
+		AddGameObject<Energy>(L"HANE_TX", true,
 		    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
-		AddGameObject<ScrollSprite>(L"HANE_TX", true,
+		AddGameObject<Energy>(L"HANE_TX", true,
 			Vec2(100.0f, 60.0f), Vec3(a - b, 350.0f, 0.0f));
-		AddGameObject<ScrollSprite>(L"HANE_TX", true,
+		AddGameObject<Energy>(L"HANE_TX", true,
 			Vec2(100.0f, 60.0f), Vec3(a + b, 350.0f, 0.0f));
-
-		//AddGameObject<GoalSprite>(L"GOAL_TX", true,
-		//	Vec2(256.0f, 128.0f), Vec3(120.0f, 350.0f, 0.0f));
 
 	}
 
 	void GameStage::CreateGoal(){
 		AddGameObject<Goal>(
-			Vec3(0.0f, 0.5f, -20.0f),//pos z=-240
-			Vec3(100.0f, 5.0f, 1.0f),//scl
+			Vec3(0.0f, 25.0f, -240.0f),//pos z=-240
+			Vec3(100.0f, 50.0f, 1.0f),//scl
 			Vec3(0.0f,0.0f,0.0f));//rot
 	}
 
