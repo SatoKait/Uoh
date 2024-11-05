@@ -32,10 +32,11 @@ namespace basecross{
 		float m_Accel;			//y軸加速度
 		float m_JumpTime;		//ジャンプしてからの経過時間
 		bool m_MoveFlag;		//動けるまでのフラグ
-		bool m_Goal;			//ゴール判定
 		float m_GoalTime;		//ゴールタイム
 
 	public:
+		bool m_Goal;			//ゴール判定
+
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
