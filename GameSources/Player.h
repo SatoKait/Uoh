@@ -36,6 +36,7 @@ namespace basecross{
 
 	public:
 		bool m_Goal;			//ƒS[ƒ‹”»’è
+		bool m_SpeedUp;
 
 		// \’z‚Æ”jŠü
 		Player::Player(const shared_ptr<Stage>& StagePtr,
@@ -53,7 +54,8 @@ namespace basecross{
 			m_grounded(true),
 			m_MoveFlag(true),
 			m_Goal(false),
-			m_GoalTime(0.0f)
+			m_GoalTime(0.0f),
+			m_SpeedUp(false)
 		{
 		}
 		Player::~Player() {}
