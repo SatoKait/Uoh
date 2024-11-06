@@ -35,7 +35,7 @@ namespace basecross {
 
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,1.0f,30.0f),Vec3(0.3f,0.3f,0.3f),Vec3(0.0f,0.0f,0.0f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,0.4f,30.0f),Vec3(0.3f,0.3f,0.3f),Vec3(0.0f,0.0f,0.0f));
 		SetSharedGameObject(L"Player", ptrPlayer);
   }
 
@@ -50,7 +50,7 @@ namespace basecross {
 		
 		for (int i = 0; i < 7;i++) {
 			/*auto ptrGround = */
-			AddGameObject<Ground>(Vec3(0.0f, 0.0f, -50.0f * i), Vec3(100.0f, 1.0f, 50.0f), L"SEA_TX");
+			AddGameObject<Ground>(Vec3(0.0f, 0.0f, -50.0f * i), Vec3(100.0f, 0.5f, 50.0f), L"SEA_TX");
 			//SetSharedGameObject(L"Ground" + i, ptrGround);
 		}
 	}
