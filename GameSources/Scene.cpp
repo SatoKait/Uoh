@@ -40,7 +40,9 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLE_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole2.bmf");
 			App::GetApp()->RegisterResource(L"POLE2_MESH", StaticMultiModelMesh);
-			
+			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Poll2.bmf");
+			App::GetApp()->RegisterResource(L"POLL2_MESH", StaticMultiModelMesh);
+
             // テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
 			App::GetApp()->RegisterTexture(L"TOBIUO_TX",Modeltex);
