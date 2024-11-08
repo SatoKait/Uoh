@@ -104,7 +104,8 @@ namespace basecross{
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
-			ptrCamera->SetTarget(GetThis<GameObject>());
+			ptrCamera->SetTargetObject(GetThis<GameObject>());
+			ptrCamera->SetTargetToAt(Vec3(0, 0.25f, 0));
 		}
 		
 		// プレイヤーの描画

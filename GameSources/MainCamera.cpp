@@ -1,93 +1,311 @@
 /*!
 @file MainCamera.cpp
-@brief メインカメラ実体
+@brief カメラ実体
 */
 
 #include "stdafx.h"
 #include "Project.h"
 
 namespace basecross {
-	//--------------------------------------------------------------------------------------
-	//	class MainCamera : public Camera;
-	//--------------------------------------------------------------------------------------
 
-	MainCamera::MainCamera(float angleY) :
-		m_angleY(angleY),
-		m_distance(10.0f),//6.0
-		m_height(2.0f),  //2.5
-		m_camDis(5.0f),   //5.0
-		m_MoveFlag(true)
-	{
-	}
+
+	//--------------------------------------------------------------------------------------
+	//	MyCameraカメラ（コンポーネントではない）
+	//--------------------------------------------------------------------------------------
+	//構築と破棄
 	MainCamera::MainCamera() :
-		m_angleY(90.0f),
-		m_distance(6.0f),//6.0
-		m_height(2.5f),  //2.5
-		m_camDis(5.0f),   //5.0
-		m_MoveFlag(true)
+		Camera(),
+		m_ToTargetLerp(1.0f),
+		m_TargetToAt(0, 0, 0),
+		m_RadY(0.5f),
+		m_RadXZ(0),
+		m_CameraUpDownSpeed(0.5f),
+		m_CameraUnderRot(0.1f),
+		m_ArmLen(5.0f),
+		m_MaxArm(20.0f),
+		m_MinArm(2.0f),
+		m_RotSpeed(1.0f),
+		m_ZoomSpeed(0.1f),
+		m_LRBaseMode(true),
+		m_UDBaseMode(true)
+	{}
+
+	MainCamera::MainCamera(float ArmLen) :
+		Camera(),
+		m_ToTargetLerp(1.0f),
+		m_TargetToAt(0, 0, 0),
+		m_RadY(0.5f),
+		m_RadXZ(0),
+		m_CameraUpDownSpeed(0.5f),
+		m_CameraUnderRot(0.1f),
+		m_ArmLen(5.0f),
+		m_MaxArm(20.0f),
+		m_MinArm(2.0f),
+		m_RotSpeed(1.0f),
+		m_ZoomSpeed(0.1f),
+		m_LRBaseMode(true),
+		m_UDBaseMode(true)
 	{
+		m_ArmLen = ArmLen;
+		auto eye = GetEye();
+		eye.y = m_ArmLen;
+		SetEye(eye);
 	}
 
-	void MainCamera::OnCreate() {
+	MainCamera::~MainCamera() {}
+	//アクセサ
+
+	void MainCamera::SetEye(const bsm::Vec3& Eye) {
+		Camera::SetEye(Eye);
+		UpdateArmLengh();
 	}
+	void MainCamera::SetEye(float x, float y, float z) {
+		Camera::SetEye(x, y, z);
+		UpdateArmLengh();
+	}
+
+
+	shared_ptr<GameObject> MainCamera::GetTargetObject() const {
+		if (!m_TargetObject.expired()) {
+			return m_TargetObject.lock();
+		}
+		return nullptr;
+	}
+
+	void MainCamera::SetTargetObject(const shared_ptr<GameObject>& Obj) {
+		m_TargetObject = Obj;
+	}
+
+	float MainCamera::GetToTargetLerp() const {
+		return m_ToTargetLerp;
+	}
+	void MainCamera::SetToTargetLerp(float f) {
+		m_ToTargetLerp = f;
+	}
+
+	float MainCamera::GetArmLengh() const {
+		return m_ArmLen;
+	}
+
+	void MainCamera::UpdateArmLengh() {
+		auto vec = GetEye() - GetAt();
+		m_ArmLen = bsm::length(vec);
+		if (m_ArmLen >= m_MaxArm) {
+			//m_MaxArm以上離れないようにする
+			m_ArmLen = m_MaxArm;
+		}
+		if (m_ArmLen <= m_MinArm) {
+			//m_MinArm以下近づかないようにする
+			m_ArmLen = m_MinArm;
+		}
+	}
+
+	float MainCamera::GetMaxArm() const {
+		return m_MaxArm;
+
+	}
+	void MainCamera::SetMaxArm(float f) {
+		m_MaxArm = f;
+	}
+	float MainCamera::GetMinArm() const {
+		return m_MinArm;
+	}
+	void MainCamera::SetMinArm(float f) {
+		m_MinArm = f;
+	}
+
+	float MainCamera::GetRotSpeed() const {
+		return m_RotSpeed;
+
+	}
+	void MainCamera::SetRotSpeed(float f) {
+		m_RotSpeed = abs(f);
+	}
+
+	bsm::Vec3 MainCamera::GetTargetToAt() const {
+		return m_TargetToAt;
+
+	}
+	void MainCamera::SetTargetToAt(const bsm::Vec3& v) {
+		m_TargetToAt = v;
+	}
+
+	bool MainCamera::GetLRBaseMode() const {
+		return m_LRBaseMode;
+
+	}
+	bool MainCamera::IsLRBaseMode() const {
+		return m_LRBaseMode;
+
+	}
+	void MainCamera::SetLRBaseMode(bool b) {
+		m_LRBaseMode = b;
+	}
+	bool MainCamera::GetUDBaseMode() const {
+		return m_UDBaseMode;
+
+	}
+	bool MainCamera::IsUDBaseMode() const {
+		return m_UDBaseMode;
+	}
+	void MainCamera::SetUDBaseMode(bool b) {
+		m_UDBaseMode = b;
+
+	}
+
+
+	void MainCamera::SetAt(const bsm::Vec3& At) {
+		Camera::SetAt(At);
+		Vec3 armVec = GetEye() - GetAt();
+		armVec.normalize();
+		armVec *= m_ArmLen;
+		Vec3 newEye = GetAt() + armVec;
+		Camera::SetEye(newEye);
+	}
+	void MainCamera::SetAt(float x, float y, float z) {
+		Camera::SetAt(x, y, z);
+		Vec3 armVec = GetEye() - GetAt();
+		armVec.normalize();
+		armVec *= m_ArmLen;
+		Vec3 newEye = GetAt() + armVec;
+		Camera::SetEye(newEye);
+
+	}
+
 
 	void MainCamera::OnUpdate() {
-
-		auto delta = App::GetApp()->GetElapsedTime();
-
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		Vec2 ret;
-		auto speed = 50.0f;
+		auto keyData = App::GetApp()->GetInputDevice().GetKeyState();
+		//前回のターンからの時間
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		Vec3 newEye = GetEye();
+		Vec3 newAt = GetAt();
+		//計算に使うための腕角度（ベクトル）
+		bsm::Vec3 armVec = newEye - newAt;
+		//正規化しておく
+		armVec.normalize();
+		float fThumbRY = 0.0f;
+		float fThumbRX = 0.0f;
+		WORD wButtons = 0;
+		if (cntlVec[0].bConnected) {
+			fThumbRY = cntlVec[0].fThumbRY;
+			fThumbRX = cntlVec[0].fThumbRX;
+			wButtons = cntlVec[0].wButtons;
+		}
 
-
-		if (cntlVec[0].bConnected)
-		{
-			if (m_MoveFlag)//フラグがたっていなければ操作ができない
-			{
-				//ret.x = cntlVec[0].fThumbRX;
-				//ret.y = cntlVec[0].fThumbRY;
+		//上下角度の変更
+		if (fThumbRY >= 0.1f || keyData.m_bPushKeyTbl[VK_UP]) {
+			if (IsUDBaseMode()) {
+				m_RadY += m_CameraUpDownSpeed * elapsedTime;
 			}
-
+			else {
+				m_RadY -= m_CameraUpDownSpeed * elapsedTime;
+			}
 		}
-
-		if (abs(ret.x) > 0.5) {
-			m_angleY -= speed * delta * ret.x;
+		else if (fThumbRY <= -0.1f || keyData.m_bPushKeyTbl[VK_DOWN]) {
+			if (IsUDBaseMode()) {
+				m_RadY -= m_CameraUpDownSpeed * elapsedTime;
+			}
+			else {
+				m_RadY += m_CameraUpDownSpeed * elapsedTime;
+			}
 		}
+		if (m_RadY > XM_PI * 4 / 9.0f) {
+			m_RadY = XM_PI * 4 / 9.0f;
+		}
+		else if (m_RadY <= m_CameraUnderRot) {
+			//カメラが限界下に下がったらそれ以上下がらない
+			m_RadY = m_CameraUnderRot;
+		}
+		armVec.y = sin(m_RadY);
+		//ここでY軸回転を作成
+		if (fThumbRX != 0 || keyData.m_bPushKeyTbl[VK_LEFT] || keyData.m_bPushKeyTbl[VK_RIGHT]) {
+			//回転スピードを反映
+			if (fThumbRX != 0) {
+				if (IsLRBaseMode()) {
+					m_RadXZ += -fThumbRX * elapsedTime * m_RotSpeed;
+				}
+				else {
+					m_RadXZ += fThumbRX * elapsedTime * m_RotSpeed;
+				}
+			}
+			else if (keyData.m_bPushKeyTbl[VK_LEFT]) {
+				if (IsLRBaseMode()) {
+					m_RadXZ += elapsedTime * m_RotSpeed;
+				}
+				else {
+					m_RadXZ -= elapsedTime * m_RotSpeed;
+				}
+			}
+			else if (keyData.m_bPushKeyTbl[VK_RIGHT]) {
+				if (IsLRBaseMode()) {
+					m_RadXZ -= elapsedTime * m_RotSpeed;
+				}
+				else {
+					m_RadXZ += elapsedTime * m_RotSpeed;
+				}
 
+			}
+			if (abs(m_RadXZ) >= XM_2PI) {
+				//1週回ったら0回転にする
+				m_RadXZ = 0;
+			}
+		}
+		//クオータニオンでY回転（つまりXZベクトルの値）を計算
+		Quat qtXZ;
+		qtXZ.rotation(m_RadXZ, bsm::Vec3(0, 1.0f, 0));
+		qtXZ.normalize();
+		//移動先行の行列計算することで、XZの値を算出
+		Mat4x4 Mat;
+		Mat.strTransformation(
+			bsm::Vec3(1.0f, 1.0f, 1.0f),
+			bsm::Vec3(0.0f, 0.0f, -1.0f),
+			qtXZ
+		);
 
-		//ディグリー角からラジアン角に直す
-		auto rad = XMConvertToRadians(m_angleY);
-		Vec3 radVec(cos(rad), 0.0f, sin(rad));
+		Vec3 posXZ = Mat.transInMatrix();
+		//XZの値がわかったので腕角度に代入
+		armVec.x = posXZ.x;
+		armVec.z = posXZ.z;
+		//腕角度を正規化
+		armVec.normalize();
 
-		Vec3 frontVec(cos(XM_PI + rad), 0.0f, sin(XM_PI + rad));
+		auto ptrTarget = GetTargetObject();
+		if (ptrTarget) {
+			//目指したい場所
+			Vec3 toAt = ptrTarget->GetComponent<Transform>()->GetWorldMatrix().transInMatrix();
+			toAt += m_TargetToAt;
+			newAt = Lerp::CalculateLerp(GetAt(), toAt, 0, 1.0f, 1.0, Lerp::Linear);
+		}
+		//アームの変更
+		//Dパッド下
+		if (wButtons & XINPUT_GAMEPAD_DPAD_DOWN || keyData.m_bPushKeyTbl[VK_NEXT]) {
+			//カメラ位置を引く
+			m_ArmLen += m_ZoomSpeed;
+			if (m_ArmLen >= m_MaxArm) {
+				//m_MaxArm以上離れないようにする
+				m_ArmLen = m_MaxArm;
+			}
+		}
+		//Dパッド上
+		else if (wButtons & XINPUT_GAMEPAD_DPAD_UP || keyData.m_bPushKeyTbl[VK_PRIOR]) {
+			//カメラ位置を寄る
+			m_ArmLen -= m_ZoomSpeed;
+			if (m_ArmLen <= m_MinArm) {
+				//m_MinArm以下近づかないようにする
+				m_ArmLen = m_MinArm;
+			}
+		}
+		////目指したい場所にアームの値と腕ベクトルでEyeを調整
+		Vec3 toEye = newAt + armVec * m_ArmLen;
+		newEye = Lerp::CalculateLerp(GetEye(), toEye, 0, 1.0f, m_ToTargetLerp, Lerp::Linear);
 
-		//カメラの注視点の設定
-		auto targetTrans = m_targetTrans.lock();
-		auto at = targetTrans->GetPosition();
-
-		at += frontVec * m_camDis;
-		SetAt(at);
-
-		//カメラの座標点を設定
-		auto eye = at + radVec * m_distance;
-		eye.y = at.y + m_height;
-		SetEye(eye);
-
+		SetAt(newAt);
+		SetEye(newEye);
+		UpdateArmLengh();
+		Camera::OnUpdate();
 	}
 
-	void MainCamera::SetTarget(const shared_ptr <GameObject>& target)
-	{
-		m_targetTrans = target->GetComponent<Transform>();
-	}
-
-	void MainCamera::SetAngle() {
-
-	}
-
-	void MainCamera::SetMove(bool MoveOn)
-	{
-		m_MoveFlag = MoveOn;
-	}
 
 
 }
