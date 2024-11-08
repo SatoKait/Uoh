@@ -26,4 +26,5 @@
 #include "GoalScene.h"
 #include "MoveObject.h"
 #include "Buoy.h"
+#include "Wall.h"
 
