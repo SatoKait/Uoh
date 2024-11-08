@@ -78,14 +78,18 @@ namespace basecross{
 
 	}
 
-	void Player::MovePlayer()
-	{
-		float elapsedTime = App::GetApp()->GetElapsedTime();
+	void Player::MovePlayer() {
+		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
 		if (angle.length() > 0.0f) {
 			auto pos = GetComponent<Transform>()->GetPosition();
-			pos += angle * elapsedTime * m_Speed;
+			pos += angle * delta * m_Speed;
 			GetComponent<Transform>()->SetPosition(pos);
+		}
+		//‰ñ“]‚ÌŒvŽZ
+		if (angle.length() > 0.0f) {
+			auto utilPtr = GetBehavior<UtilBehavior>();
+			utilPtr->RotToHead(angle, 1.0f);
 		}
 	}
 
@@ -272,7 +276,7 @@ namespace basecross{
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
 
-		m_ptrTrans->SetPosition(pos);
+		//m_ptrTrans->SetPosition(pos);
 		m_ptrTrans->SetRotation(rotate);
 		
 		if (m_Goal)
