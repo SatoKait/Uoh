@@ -16,8 +16,8 @@ namespace basecross {
 		auto mediaPath = app->GetDataDirWString(); // 「media」パスを文字列として取得する
 
 		auto drawComp = AddComponent<PNTStaticInstanceDraw>(); // ←「Instance」と付いたドローコンポーネントを生成します
-		const int MAP_ROWS = 10;
-		const int MAP_COLS = 10;
+		const int MAP_ROWS = 100;
+		const int MAP_COLS = 100;
 		int stageMap[MAP_ROWS][MAP_COLS];//縦横
 
 		ifstream ifs(LevelsPath + L"Object.csv");//マップを読み取る
@@ -47,8 +47,8 @@ namespace basecross {
 				switch (stageMap[r][c])
 				{
 				case 1:
-					m_Side = -4.5f + c;//x
-					m_Warp = 20.0f + (-r) - 0.5f;//z
+					m_Side = -50.0 + c;//x
+					m_Warp = 50.0f + (-r);//z
 					float scl = 1.0f;
 					//// インスタンス用の行列を作成する
 				   Vec3 m_stratPos(m_Side, 0.0f, m_Warp); // 基準となるオフセット座標//移動座標
