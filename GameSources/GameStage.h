@@ -19,7 +19,8 @@ namespace basecross {
 		void CreateViewLight();
 		// プレイヤーの作成
 		void CreatePlayer();
-
+		//壁
+		void CreateWall();
 		//ステージ
 		void CreateGround();
 		//障害物
