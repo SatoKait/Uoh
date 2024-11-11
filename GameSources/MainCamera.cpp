@@ -21,8 +21,8 @@ namespace basecross {
 		m_RadXZ(0),
 		m_CameraUpDownSpeed(0.5f),
 		m_CameraUnderRot(0.1f),
-		m_ArmLen(5.0f),
-		m_MaxArm(20.0f),
+		m_ArmLen(500.0f),
+		m_MaxArm(10.0f),
 		m_MinArm(2.0f),
 		m_RotSpeed(1.0f),
 		m_ZoomSpeed(0.1f),
@@ -38,8 +38,8 @@ namespace basecross {
 		m_RadXZ(0),
 		m_CameraUpDownSpeed(0.5f),
 		m_CameraUnderRot(0.1f),
-		m_ArmLen(5.0f),
-		m_MaxArm(20.0f),
+		m_ArmLen(500.0f),
+		m_MaxArm(10.0f),
 		m_MinArm(2.0f),
 		m_RotSpeed(1.0f),
 		m_ZoomSpeed(0.1f),
@@ -90,14 +90,14 @@ namespace basecross {
 	void MainCamera::UpdateArmLengh() {
 		auto vec = GetEye() - GetAt();
 		m_ArmLen = bsm::length(vec);
-		if (m_ArmLen >= m_MaxArm) {
-			//m_MaxArm以上離れないようにする
-			m_ArmLen = m_MaxArm;
-		}
-		if (m_ArmLen <= m_MinArm) {
-			//m_MinArm以下近づかないようにする
-			m_ArmLen = m_MinArm;
-		}
+		//if (m_ArmLen >= m_MaxArm) {
+		//	//m_MaxArm以上離れないようにする
+		//	m_ArmLen = m_MaxArm;
+		//}
+		//if (m_ArmLen <= m_MinArm) {
+		//	//m_MinArm以下近づかないようにする
+		//	m_ArmLen = m_MinArm;
+		//}
 	}
 
 	float MainCamera::GetMaxArm() const {
@@ -277,26 +277,26 @@ namespace basecross {
 			toAt += m_TargetToAt;
 			newAt = Lerp::CalculateLerp(GetAt(), toAt, 0, 1.0f, 1.0, Lerp::Linear);
 		}
-		//アームの変更
-		//Dパッド下
-		if (wButtons & XINPUT_GAMEPAD_DPAD_DOWN || keyData.m_bPushKeyTbl[VK_NEXT]) {
-			//カメラ位置を引く
-			m_ArmLen += m_ZoomSpeed;
-			if (m_ArmLen >= m_MaxArm) {
-				//m_MaxArm以上離れないようにする
-				m_ArmLen = m_MaxArm;
-			}
-		}
-		//Dパッド上
-		else if (wButtons & XINPUT_GAMEPAD_DPAD_UP || keyData.m_bPushKeyTbl[VK_PRIOR]) {
-			//カメラ位置を寄る
-			m_ArmLen -= m_ZoomSpeed;
-			if (m_ArmLen <= m_MinArm) {
-				//m_MinArm以下近づかないようにする
-				m_ArmLen = m_MinArm;
-			}
-		}
-		////目指したい場所にアームの値と腕ベクトルでEyeを調整
+		////アームの変更
+		////Dパッド下
+		//if (wButtons & XINPUT_GAMEPAD_DPAD_DOWN || keyData.m_bPushKeyTbl[VK_NEXT]) {
+		//	//カメラ位置を引く
+		//	m_ArmLen += m_ZoomSpeed;
+		//	if (m_ArmLen >= m_MaxArm) {
+		//		//m_MaxArm以上離れないようにする
+		//		m_ArmLen = m_MaxArm;
+		//	}
+		//}
+		////Dパッド上
+		//else if (wButtons & XINPUT_GAMEPAD_DPAD_UP || keyData.m_bPushKeyTbl[VK_PRIOR]) {
+		//	//カメラ位置を寄る
+		//	m_ArmLen -= m_ZoomSpeed;
+		//	if (m_ArmLen <= m_MinArm) {
+		//		//m_MinArm以下近づかないようにする
+		//		m_ArmLen = m_MinArm;
+		//	}
+		//}
+		//目指したい場所にアームの値と腕ベクトルでEyeを調整
 		Vec3 toEye = newAt + armVec * m_ArmLen;
 		newEye = Lerp::CalculateLerp(GetEye(), toEye, 0, 1.0f, m_ToTargetLerp, Lerp::Linear);
 

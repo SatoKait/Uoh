@@ -109,7 +109,8 @@ namespace basecross{
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
 			ptrCamera->SetTargetObject(GetThis<GameObject>());
-			ptrCamera->SetTargetToAt(Vec3(0, 0.25f, 0));
+			ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
+			//ptrCamera->
 		}
 		
 		// プレイヤーの描画
@@ -117,7 +118,7 @@ namespace basecross{
 		spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 1.0f),
 			Vec3(0.0f, 0.0f, 0.0f),
-			Vec3(0.0f, -XM_PIDIV2, 0.0f),
+			Vec3(0.0f, XM_PIDIV2, 0.0f),
 			Vec3(0.0f, 0.0f, 0.0f)
 		);
 
@@ -213,11 +214,11 @@ namespace basecross{
 
 			if (ret.x >= 0.1)
 			{
-				rotate.z += 4.0f * delta;
+				rotate.z += -4.0f * delta;
 			}
 			else if (ret.x <= -0.1)
 			{
-				rotate.z += -4.0f * delta;
+				rotate.z += 4.0f * delta;
 			}
 			else
 			{
@@ -247,6 +248,9 @@ namespace basecross{
 			pos.x	<< L", "			<<
 			pos.y	<< L", "			<<
 			pos.z	<< L")"				<< 
+		// ゲーム画面fps
+			L"\nFPS : "					<<
+			fps							<<
 		// 加速度
 			L"\naccel : "				<< 
 			m_Accel						<<
@@ -256,9 +260,6 @@ namespace basecross{
 		// コントローラーの左スティックの入力
 			L"\nret.x : "				<<
 			ret.x						<<
-		// ゲーム画面fps
-			L"\nFPS : "					<<
-			fps							<<
 		// プレイヤーの傾き
 			L"\nrotateZ : "				<<
 			rotate.z					<<
