@@ -81,6 +81,29 @@ namespace basecross{
 	void Player::MovePlayer() {
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
+		//トランスフォームの取得
+		auto trans = GetComponent<Transform>();
+		//ポジションの取得
+		auto pos = trans->GetPosition();
+		// 大きさの取得
+		auto scale = trans->GetScale();
+		// 傾きの取得
+		auto rotate = trans->GetRotation();
+		//コントローラの取得
+		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
+
+		Vec2 ret;
+
+		if (cntl[0].bConnected)
+		{
+			if (m_MoveFlag)//フラグがたっていなければ操作ができない
+			{
+				ret.x = cntl[0].fThumbLX;
+				ret.y = cntl[0].fThumbLY;
+			}
+
+		}
+
 		if (angle.length() > 0.0f) {
 			auto pos = GetComponent<Transform>()->GetPosition();
 			pos += angle * delta * m_Speed;
@@ -91,6 +114,55 @@ namespace basecross{
 			auto utilPtr = GetBehavior<UtilBehavior>();
 			utilPtr->RotToHead(angle, 1.0f);
 		}
+		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A)
+		{
+
+			if (m_grounded == true)
+			{
+				m_grounded = false;
+				m_JumpTime = 0;
+				m_Accel = 2.0f;
+				m_SpeedUp = true;
+			}
+		}
+		if (m_grounded == false)
+		{
+			pos.y += m_JSpeed * m_Accel * delta;
+
+			m_Accel -= 0.02f;
+
+			if (ret.x >= 0.1)
+			{
+				rotate.z += -4.0f * delta;
+			}
+			else if (ret.x <= -0.1)
+			{
+				rotate.z += 4.0f * delta;
+			}
+			else
+			{
+				rotate.z = 0;
+			}
+		}
+		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
+			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A)
+		{
+			pos.y += m_JSpeed * m_Accel * delta;
+			m_Accel = -3.0f;
+		}
+		const float posYcnst = 1.25f;
+		if (pos.y < scale.y * posYcnst)
+		{
+			m_grounded = true;
+			pos.y = scale.y * posYcnst;
+			m_Accel = 0.0f;
+			rotate.z = 0;
+			m_SpeedUp = false;
+		}
+
+		// プレイヤーの移動
+		pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
+		m_ptrTrans->SetPosition(pos);
 	}
 
 	void Player::OnCreate()
@@ -149,6 +221,7 @@ namespace basecross{
 		auto rotate = trans->GetRotation();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
+
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 
@@ -177,68 +250,6 @@ namespace basecross{
 				ret.y = cntl[0].fThumbLY;
 			}
 
-		}
-		if (ret.x <= -0.1)
-		{
-			pos.x += m_Speed * delta;
-		}
-		else if(ret.x >= 0.1)
-		{
-			pos.x -= m_Speed * delta;
-		}
-		//if (m_MoveFlag) {
-		//	ret.x += 1.0f;
-		//}
-		//if (ret.x >= 0.0f)
-		//{
-		//	ret.x -= 1.0f;
-		//}
-
-
-		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A)
-		{
-
-			if (m_grounded == true)
-			{
-				m_grounded = false;
-				m_JumpTime = 0;
-				m_Accel = 2.0f;
-				m_SpeedUp = true;
-			}
-		}
-		if (m_grounded == false)
-		{
-			pos.y += m_JSpeed * m_Accel * delta;
-			
-			m_Accel -= 0.02f;
-
-			if (ret.x >= 0.1)
-			{
-				rotate.z += -4.0f * delta;
-			}
-			else if (ret.x <= -0.1)
-			{
-				rotate.z += 4.0f * delta;
-			}
-			else
-			{
-				rotate.z = 0;
-			}
-		}
-		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
-			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A )
-		{
-			pos.y += m_JSpeed * m_Accel * delta;
-			m_Accel = -3.0f;
-		} 
-		const float posYcnst = 1.25f;
-		if (pos.y < scale.y * posYcnst)
-		{
-			m_grounded = true;
-			pos.y = scale.y * posYcnst;
-			m_Accel = 0.0f;
-			rotate.z = 0;
-			m_SpeedUp = false;
 		}
 
 		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
@@ -277,8 +288,8 @@ namespace basecross{
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
 
-		//m_ptrTrans->SetPosition(pos);
-		m_ptrTrans->SetRotation(rotate);
+
+		//m_ptrTrans->SetRotation(rotate);
 		
 		if (m_Goal)
 		{
