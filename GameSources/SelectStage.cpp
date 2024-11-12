@@ -20,9 +20,18 @@ namespace basecross{
 		SetView(cameraView);
 	}
 
+	void SelectStage::CreateSprite()
+	{
+		AddGameObject<StageSprite>(L"STAGESELECT_TX", true,
+			Vec2(750.0f, 400.0f), Vec2(0.0f, 200.0f));
+	}
+
 	void SelectStage::OnCreate() {
+		App::GetApp()->GetScene<Scene>()->SetScore(0);
+
 		try {
 			CreateViewLight();
+			CreateSprite();
 		}
 		catch (...) {
 			throw;
