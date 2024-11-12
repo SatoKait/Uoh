@@ -10,6 +10,9 @@ namespace basecross{
 	class GoalScene : public Stage
 	{
 		void CreateViewLight();
+		void CreateScore();
+		void CreateSprite();
+
 		InputHandler<GoalScene> m_InputHandler;
 
 	public:
@@ -17,7 +20,7 @@ namespace basecross{
 		virtual ~GoalScene() {}
 
 		virtual void OnCreate() override;
-		//virtual void OnUpdate() override;
+	    virtual void OnUpdate() override;
 
 	};
 

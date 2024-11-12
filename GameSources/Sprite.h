@@ -7,7 +7,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-namespace basecross{
+namespace basecross {
 	// タイムスプライト
 	class TimeSprite : public GameObject {
 		Vec2 m_StartScale;
@@ -32,26 +32,49 @@ namespace basecross{
 		virtual void OnUpdate() override;
 	};
 
-		class GoalSprite :public GameObject
-		{
-			Vec2 m_startScale;
-			Vec3 m_startPos;
-			wstring m_textureKey;
-			bool m_Trace;
-			shared_ptr<PCTSpriteDraw>m_ptrDraw;
+	class GoalSprite :public GameObject
+	{
+		Vec2 m_startScale;
+		Vec3 m_startPos;
+		wstring m_textureKey;
+		bool m_Trace;
+		shared_ptr<PCTSpriteDraw>m_ptrDraw;
 
 
-		public:
-			GoalSprite(
-				shared_ptr<Stage>& StagePtr,
-				const wstring& TextureKey,
-				const Vec2& StartScale,
-				const Vec3& StartPos
-			);
-			~GoalSprite();
+	public:
+		GoalSprite(
+			shared_ptr<Stage>& StagePtr,
+			const wstring& TextureKey,
+			const Vec2& StartScale,
+			const Vec3& StartPos
+		);
+		~GoalSprite();
 
-			virtual void OnCreate() override;
-		    //virtual void OnUpdate() override;
-		};
+		virtual void OnCreate() override;
+		//virtual void OnUpdate() override;
+	};
 }
-//end basecross
+namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	///	                             Stageスプライト
+	//--------------------------------------------------------------------------------------
+	class StageSprite : public GameObject {
+		bool m_Trace;
+		Vec2 m_StartScale;
+		Vec2 m_StartPos;
+		wstring m_ClearKey;
+	public:
+
+		StageSprite(const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
+			const Vec2& StartScale, const Vec2& StartPos);
+		//破棄
+		virtual ~StageSprite();
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate()override {}
+	};
+
+
+}
