@@ -91,7 +91,6 @@ namespace basecross{
 
 	void Player::OnCreate()
 	{
-		App::GetApp()->GetScene<Scene>()->AddScore(100);
 
 		AddTag(L"Player");
 		// トランスフォーム
@@ -312,6 +311,8 @@ namespace basecross{
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
+		auto Stage = GetStage();
+
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
@@ -321,9 +322,11 @@ namespace basecross{
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 		auto  Time = 0;
 		auto  flag = false;
+
+
+
 		if (other->FindTag(L"Goal"))
 		{
-			auto Stage = GetStage();
 
 			Stage->AddGameObject<GoalSprite>(L"GOAL_TX",
 		    Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
@@ -337,10 +340,9 @@ namespace basecross{
 		}
 		if (other->FindTag(L"Poll") && !m_ChangeFlag)
 		{
-			int a = 100;
 			ptrPollCol->SetAfterCollision(AfterCollision::None);
 			m_ChangeFlag = true;
-			scene->AddScore(0);
+			App::GetApp()->GetScene<Scene>()->AddScore(100);
 		}
 		if(m_ChangeTime >= 2.0f)
 		{
