@@ -11,10 +11,6 @@ namespace basecross {
 	//‰Šú‰»
 	void Score::OnCreate()
 	{
-		//auto& app = App::GetApp();
-		//auto scene = app->GetScene<Scene>();
-		//m_nowScore = scene->GetScore();
-
 		const int numPlaces = 4;
 		m_numberSprites.reserve(numPlaces);
 		int place = 1000;
