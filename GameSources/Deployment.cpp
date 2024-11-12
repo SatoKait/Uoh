@@ -20,7 +20,7 @@ namespace basecross {
 		const int MAP_COLS = 100;
 		int stageMap[MAP_ROWS][MAP_COLS];//縦横
 
-		ifstream ifs(LevelsPath + L"Object.csv");//マップを読み取る
+		ifstream ifs(LevelsPath + L"Stage2.csv");//マップを読み取る
 		if (ifs)
 		{
 			int c = 0; // マップデータ参照用

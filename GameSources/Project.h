@@ -27,4 +27,7 @@
 #include "MoveObject.h"
 #include "Buoy.h"
 #include "Wall.h"
+#include "ScoreSprite.h"
+#include "Score.h"
+#include "Time.h"
 

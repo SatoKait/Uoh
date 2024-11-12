@@ -91,7 +91,9 @@ namespace basecross{
 
 	void Player::OnCreate()
 	{
+		App::GetApp()->GetScene<Scene>()->AddScore(100);
 
+		AddTag(L"Player");
 		// トランスフォーム
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetPosition(m_StartPos);
@@ -261,6 +263,14 @@ namespace basecross{
 		// ゴールまでの時間
 			L"\nGoalTime : "			<<
 			m_GoalTime					<<
+			L"\nm_ChangeTime : " <<
+			m_ChangeTime <<
+			L"\nm_ChangeFlag : " <<
+			m_ChangeFlag <<
+			//L"\nm_Score : " <<
+			//m_Score <<
+
+
 			endl;
 
 		 //ゴール判定
@@ -279,7 +289,14 @@ namespace basecross{
 		{
 			Player::Goaltrue();
 		}
-
+		if (m_ChangeFlag == true)
+		{
+			m_ChangeTime += delta;
+		}
+		else if (m_ChangeTime >= 2.0)
+		{
+			m_ChangeTime = 0.0f;
+		}
 	}
 
 	void Player::Goaltrue()
@@ -295,6 +312,15 @@ namespace basecross{
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
+		auto scene = App::GetApp()->GetScene<Scene>();
+		auto stage = GetStage();
+		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
+		auto ptrPollCol = ptrPoll->m_col;
+
+		// デルタタイムを取得する
+		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+		auto  Time = 0;
+		auto  flag = false;
 		if (other->FindTag(L"Goal"))
 		{
 			auto Stage = GetStage();
@@ -309,7 +335,21 @@ namespace basecross{
 		     
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
+		if (other->FindTag(L"Poll") && !m_ChangeFlag)
+		{
+			int a = 100;
+			ptrPollCol->SetAfterCollision(AfterCollision::None);
+			m_ChangeFlag = true;
+			scene->AddScore(0);
+		}
+		if(m_ChangeTime >= 2.0f)
+		{
+			ptrPollCol->SetAfterCollision(AfterCollision::Auto);
+			//m_ChangeFlag = false;
+		}
 	}
+
+
 }
 //end basecross
 
