@@ -33,10 +33,15 @@ namespace basecross{
 		float m_JumpTime;		//ジャンプしてからの経過時間
 		bool m_MoveFlag;		//動けるまでのフラグ
 		float m_GoalTime;		//ゴールタイム
+		float m_ChangeTime;
+		bool m_ChangeFlag;
+		//int m_Score;
+
+
 
 	public:
 		bool m_Goal;			//ゴール判定
-		bool m_SpeedUp;
+		bool m_SpeedUp;         //
 
 		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
@@ -55,7 +60,9 @@ namespace basecross{
 			m_MoveFlag(true),
 			m_Goal(false),
 			m_GoalTime(0.0f),
-			m_SpeedUp(false)
+			m_SpeedUp(false),
+			m_ChangeTime(0),
+			m_ChangeFlag(false)
 		{
 		}
 		Player::~Player() {}
@@ -65,9 +72,7 @@ namespace basecross{
 
 		//当たり判定(当たった瞬間)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
-
 		void Goaltrue();
-
 		//Aボタン
 		//void OnPushA();
 	};
