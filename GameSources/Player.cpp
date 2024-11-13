@@ -9,6 +9,7 @@
 namespace basecross{
 	Vec2 Player::GetInputState() const
 	{
+		float delta = App::GetApp()->GetElapsedTime();
 		Vec2 ret;
 		ret.x = 0.0f;
 		ret.y = 0.0f;
@@ -17,24 +18,28 @@ namespace basecross{
 		if (cntlVec[0].bConnected) {
 			ret.x = cntlVec[0].fThumbLX;
 			ret.y = cntlVec[0].fThumbLY;
+
+			//m_FrontRadian += (XM_PI / (m_Status.turnPaformanve / m_SpeedRate)) * m_ElapsedTime * (m_Slope.x / 20.0f);
+
 		}
 		//キーボードの取得(キーボード優先)
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		float BaseSpeed = 3.0f;
 		if (KeyState.m_bPushKeyTbl['W']) {
 			//前
-			ret.y = 1.0f * m_Speed;
+			ret.y = BaseSpeed * m_Speed * delta;
 		}
-		else if (KeyState.m_bPushKeyTbl['A']) {
+		if (KeyState.m_bPushKeyTbl['A']) {
 			//左
-			ret.x = -1.0f * m_Speed;
+			ret.x = -BaseSpeed * m_Speed * delta;
 		}
-		else if (KeyState.m_bPushKeyTbl['S']) {
+		if (KeyState.m_bPushKeyTbl['S']) {
 			//後ろ
-			ret.y = -1.0f * m_Speed;
+			ret.y = -BaseSpeed * m_Speed * delta;
 		}
-		else if (KeyState.m_bPushKeyTbl['D']) {
+		if (KeyState.m_bPushKeyTbl['D']) {
 			//右
-			ret.x = 1.0f * m_Speed;
+			ret.x = BaseSpeed * m_Speed * delta;
 		}
 		return ret;
 	}
@@ -79,6 +84,9 @@ namespace basecross{
 	}
 
 	void Player::MovePlayer() {
+		//キーボードの取得(キーボード優先)
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
 		//トランスフォームの取得
@@ -88,7 +96,7 @@ namespace basecross{
 		// 大きさの取得
 		auto scale = trans->GetScale();
 		// 傾きの取得
-		auto rotate = trans->GetRotation();
+		//auto rotate = trans->GetRotation();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 
@@ -101,7 +109,23 @@ namespace basecross{
 				ret.x = cntl[0].fThumbLX;
 				ret.y = cntl[0].fThumbLY;
 			}
+		}
+		else if (!cntl[0].bConnected)
+		{
+			if (m_MoveFlag)
+			{
+				if (KeyState.m_bPushKeyTbl['W'])
+					ret.y = 1;
 
+				if (KeyState.m_bPushKeyTbl['A'])
+					ret.x = -1;
+
+				if (KeyState.m_bPushKeyTbl['S'])
+					ret.y = -1;
+
+				if (KeyState.m_bPushKeyTbl['D'])
+					ret.x = 1;
+			}
 		}
 
 		if (angle.length() > 0.0f) {
@@ -114,7 +138,7 @@ namespace basecross{
 			auto utilPtr = GetBehavior<UtilBehavior>();
 			utilPtr->RotToHead(angle, 1.0f);
 		}
-		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A)
+		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
 		{
 
 			if (m_grounded == true)
@@ -129,20 +153,24 @@ namespace basecross{
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 
+			if(m_Rotate.z <= 1.5f && m_Rotate.z >= -1.5f) 
+				m_Rotate.z += ret.x * 0.015;
+			
+
 			m_Accel -= 0.02f;
 
-			if (ret.x >= 0.1)
-			{
-				rotate.z += -4.0f * delta;
-			}
-			else if (ret.x <= -0.1)
-			{
-				rotate.z += 4.0f * delta;
-			}
-			else
-			{
-				rotate.z = 0;
-			}
+			//if (ret.x >= 0.1)
+			//{
+			//	rotate.z += -4.0f * delta;
+			//}
+			//else if (ret.x <= -0.1)
+			//{
+			//	rotate.z += 4.0f * delta;
+			//}
+			//else
+			//{
+			//	rotate.z = 0;
+			//}
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
 			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A)
@@ -156,13 +184,15 @@ namespace basecross{
 			m_grounded = true;
 			pos.y = scale.y * posYcnst;
 			m_Accel = 0.0f;
-			rotate.z = 0;
+			m_Rotate.z = 0;
 			m_SpeedUp = false;
 		}
 
 		// プレイヤーの移動
 		pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
 		m_ptrTrans->SetPosition(pos);
+
+		m_ptrTrans->SetRotation(0, 0, -m_Rotate.z);
 	}
 
 	void Player::OnCreate()
@@ -208,6 +238,7 @@ namespace basecross{
 
 	void Player::OnUpdate()
 	{
+
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
 
@@ -252,6 +283,15 @@ namespace basecross{
 
 		}
 
+		//// プレイヤーの描画
+		//Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
+		//spanMat.affineTransformation(
+		//	Vec3(1.0f, 1.0f, 1.0f),
+		//	Vec3(0.0f, 0.0f, 0.0f),
+		//	Vec3(ret.x, 0.0f, 0.0f),
+		//	Vec3(0.0f, 0.0f, 0.0f)
+		//);
+
 		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
@@ -268,12 +308,9 @@ namespace basecross{
 		// ジャンプからの経過時間
 			L"\nJumpTime : "			<<
 			m_JumpTime					<<
-		// コントローラーの左スティックの入力
-			L"\nret.x : "				<<
-			ret.x						<<
 		// プレイヤーの傾き
 			L"\nrotateZ : "				<<
-			rotate.z					<<
+			m_Rotate.z					<<
 		// ゴールまでの時間
 			L"\nGoalTime : "			<<
 			m_GoalTime					<<
@@ -282,6 +319,10 @@ namespace basecross{
 		 //ゴール判定
 			if (m_Goal){ wss << "Goal : true" << endl; }
 			else       { wss << "Goal : false" << endl; }
+
+		//auto Draw = AddComponent<BcPNTStaticDraw>();
+
+		//Draw->SetMeshToTransformMatrix(spanMat);
 
 		// デバッグ用文字列
 		auto scene = App::GetApp()->GetScene<Scene>();

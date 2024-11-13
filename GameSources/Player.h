@@ -33,6 +33,7 @@ namespace basecross{
 		float m_JumpTime;		//ジャンプしてからの経過時間
 		bool m_MoveFlag;		//動けるまでのフラグ
 		float m_GoalTime;		//ゴールタイム
+		Vec3 m_Rotate;			//傾き
 
 	public:
 		bool m_Goal;			//ゴール判定
@@ -55,7 +56,8 @@ namespace basecross{
 			m_MoveFlag(true),
 			m_Goal(false),
 			m_GoalTime(0.0f),
-			m_SpeedUp(false)
+			m_SpeedUp(false),
+			m_Rotate(0.0f)
 		{
 		}
 		Player::~Player() {}
