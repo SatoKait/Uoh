@@ -86,6 +86,8 @@ namespace basecross{
 	void Player::MovePlayer() {
 		//キーボードの取得(キーボード優先)
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		//カメラオブジェクトを取得する
+		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
@@ -153,9 +155,12 @@ namespace basecross{
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 
-			if(m_Rotate.z <= 1.5f && m_Rotate.z >= -1.5f) 
+			if (m_Rotate.z <= 1.5f && m_Rotate.z >= -1.5f)
+			{
 				m_Rotate.z += ret.x * 0.015;
-			
+				ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
+			}
+
 
 			m_Accel -= 0.02f;
 
@@ -173,7 +178,9 @@ namespace basecross{
 			//}
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
-			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A)
+			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
+			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
+			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
@@ -186,6 +193,7 @@ namespace basecross{
 			m_Accel = 0.0f;
 			m_Rotate.z = 0;
 			m_SpeedUp = false;
+			ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
 		}
 
 		// プレイヤーの移動
