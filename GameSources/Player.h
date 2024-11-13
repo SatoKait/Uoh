@@ -1,6 +1,6 @@
 /*!
 @file Player.h
-@brief ƒvƒŒƒCƒ„[‚È‚Ç
+@brief ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãªã©
 */
 
 #pragma once
@@ -10,36 +10,39 @@ namespace basecross{
 
 	class Player : public GameObject
 	{
-		Vec3 m_StartPos;		// ‰ŠúˆÊ’u
-		Vec3 m_StartScale;		// ‰ŠúƒXƒP[ƒ‹
+		Vec3 m_StartPos;		// åˆæœŸä½ç½®
+		Vec3 m_StartScale;		// åˆæœŸã‚¹ã‚±ãƒ¼ãƒ«
 		Vec3 m_StartRot;
-		Vec3 m_PlayerPos;		// ƒvƒŒƒCƒ„[‚ÌˆÊ’u
+		Vec3 m_PlayerPos;		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®
 
-		shared_ptr<Transform> m_ptrTrans;		//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
-		shared_ptr<DrawComponent> m_ptrDraw;	// •`‰æ
-		weak_ptr<MainCamera> m_camera;			// ƒJƒƒ‰
+		shared_ptr<Transform> m_ptrTrans;		//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
+		shared_ptr<DrawComponent> m_ptrDraw;	// æç”»
+		weak_ptr<MainCamera> m_camera;			// ã‚«ãƒ¡ãƒ©
 
-		Vec2 GetInputState() const;		//ƒvƒŒƒCƒ„[‚ªg—p‚·‚éƒRƒ“ƒgƒ[ƒ‰‚ÆƒL[ƒ{[ƒh‚Ì“ü—Í
-		Vec3 GetMoveVector() const;		// ƒRƒ“ƒgƒ[ƒ‰‚©‚ç•ûŒüƒxƒNƒgƒ‹‚ğ“¾‚é
-		void MovePlayer();				// ƒvƒŒƒCƒ„[‚ÌˆÚ“®
+		Vec2 GetInputState() const;		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä½¿ç”¨ã™ã‚‹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã¨ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å…¥åŠ›
+		Vec3 GetMoveVector() const;		// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã‹ã‚‰æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¾—ã‚‹
+		void MovePlayer();				// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•
 		
-		InputHandler<Player> m_InputHandler;//“ü—Íƒnƒ“ƒhƒ‰[
+		InputHandler<Player> m_InputHandler;//å…¥åŠ›ãƒãƒ³ãƒ‰ãƒ©ãƒ¼
 
 		
-		float m_Speed;			//ƒXƒs[ƒh
-		float m_JSpeed;			//ƒWƒƒƒ“ƒv‚·‚éƒXƒs[ƒh
-		bool m_grounded;		//Ú’n‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
-		float m_Accel;			//y²‰Á‘¬“x
-		float m_JumpTime;		//ƒWƒƒƒ“ƒv‚µ‚Ä‚©‚ç‚ÌŒo‰ßŠÔ
-		bool m_MoveFlag;		//“®‚¯‚é‚Ü‚Å‚Ìƒtƒ‰ƒO
-		float m_GoalTime;		//ƒS[ƒ‹ƒ^ƒCƒ€
-		Vec3 m_Rotate;			//ŒX‚«
+		float m_Speed;			//ã‚¹ãƒ”ãƒ¼ãƒ‰
+		float m_JSpeed;			//ã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ã‚¹ãƒ”ãƒ¼ãƒ‰
+		bool m_grounded;		//æ¥åœ°ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
+		float m_Accel;			//yè»¸åŠ é€Ÿåº¦
+		float m_JumpTime;		//ã‚¸ãƒ£ãƒ³ãƒ—ã—ã¦ã‹ã‚‰ã®çµŒéæ™‚é–“
+		bool m_MoveFlag;		//å‹•ã‘ã‚‹ã¾ã§ã®ãƒ•ãƒ©ã‚°
+		float m_GoalTime;		//ã‚´ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
+		Vec3 m_Rotate;			//å‚¾ã
+		float m_ChangeTime;
+		bool m_ChangeFlag;
+		//int m_Score;
 
 	public:
-		bool m_Goal;			//ƒS[ƒ‹”»’è
-		bool m_SpeedUp;
+		bool m_Goal;			//ã‚´ãƒ¼ãƒ«åˆ¤å®š
+		bool m_SpeedUp;         //
 
-		// \’z‚Æ”jŠü
+		// æ§‹ç¯‰ã¨ç ´æ£„
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
@@ -57,7 +60,9 @@ namespace basecross{
 			m_Goal(false),
 			m_GoalTime(0.0f),
 			m_SpeedUp(false),
-			m_Rotate(0.0f)
+			m_Rotate(0.0f),
+			m_ChangeTime(0),
+			m_ChangeFlag(false)
 		{
 		}
 		Player::~Player() {}
@@ -65,12 +70,10 @@ namespace basecross{
 		virtual void OnCreate() override;
 		virtual void OnUpdate() override;
 
-		//“–‚½‚è”»’è(“–‚½‚Á‚½uŠÔ)
+		//å½“ãŸã‚Šåˆ¤å®š(å½“ãŸã£ãŸç¬é–“)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
-
 		void Goaltrue();
-
-		//Aƒ{ƒ^ƒ“
+		//Aãƒœã‚¿ãƒ³
 		//void OnPushA();
 	};
 }

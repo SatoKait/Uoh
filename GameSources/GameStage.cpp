@@ -32,7 +32,6 @@ namespace basecross {
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
 	}
-
 	void GameStage::CreatePlayer()
 	{
 		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,0.4f,0.0f),Vec3(0.3f,0.3f,0.3f),Vec3(0.0f,0.0f,0.0f));
@@ -60,7 +59,6 @@ namespace basecross {
 
 
 	}
-
 	void GameStage::CreateGround() {		
 		//for (int i = 0; i < 7;i++) {
 		//	/*auto ptrGround = */
@@ -70,7 +68,6 @@ namespace basecross {
 		AddGameObject<Ground>(Vec3(0.0f, -1.0f, 0.0f), Vec3(300.0f, 0.5f, 300.0f), L"SEA_TX");
 
 	}
-
 	void GameStage::CreateObstacle() {
 		//for (int i = 0; i < 7; i++) {
 		//	AddGameObject<MoveObject>(Vec3(0.0f, 1.0f, -50.0f * i), Vec3(0.05f, 0.05f, 0.05f),L"RED_TX");
@@ -78,14 +75,16 @@ namespace basecross {
 		//for (int i = 0; i < 1; i++) {
 		//	AddGameObject<MoveBuoy>(Vec3(-20.0f, 0.0f, -100.0f * i), Vec3(1.0f, 1.0f, 1.0f), L"RED_TX");
 		//}
+		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.5f, 1.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll", objPoll);
 
 		auto ptrobstacle = AddGameObject<Deployment>();
 	}
-
 	void GameStage::CreateTraceSprite() {
 		float a = -510.0f;
 		float b = 70.0f;
-
+		//AddGameObject<Time>(1,Vec3(1.0f,1.0f,1.0f),L"NUMBER_TX");
+		//AddGameObject<Score>();
 		//AddGameObject<Energy>(L"HANE_TX", true,
 		//    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
 		//AddGameObject<Energy>(L"HANE_TX", true,
@@ -94,14 +93,13 @@ namespace basecross {
 		//	Vec2(100.0f, 60.0f), Vec3(a + b, 350.0f, 0.0f));
 
 	}
-
 	void GameStage::CreateGoal(){
 		//AddGameObject<Goal>(
 		//	Vec3(0.0f, 25.0f, -240.0f),//pos z=-240
 		//	Vec3(100.0f, 50.0f, 1.0f),//scl
 		//	Vec3(0.0f,0.0f,0.0f));//rot
 	}
-
+	
 	void GameStage::OnCreate() {
 		try {
 			//ビューとライトの作成
