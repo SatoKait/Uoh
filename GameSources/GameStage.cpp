@@ -19,8 +19,8 @@ namespace basecross {
 	
 	void GameStage::CreateViewLight() {
 		// カメラの設定MainCamera
-		auto camera = ObjectFactory::Create<MainCamera>(90.0f);
-		//camera->SetEye(Vec3(0.0f, 15.0f, -5.0f));
+		auto camera = ObjectFactory::Create<MainCamera>(0.0f);
+		camera->SetEye(Vec3(0.0f, 2.5f, -3.5f));
 		//camera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
 
 		// ビューにカメラを設定
