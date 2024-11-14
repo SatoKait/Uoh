@@ -73,8 +73,50 @@ namespace basecross {
 		//初期化
 		virtual void OnCreate() override;
 		//更新
-		virtual void OnUpdate()override {}
+		//virtual void OnUpdate()override {}
 	};
 
 
 }
+
+namespace basecross {
+	//--------------------------------------------------------------------------------------
+	///	                             GameScoreスプライト
+	//--------------------------------------------------------------------------------------
+	class GameScoreSprite : public GameObject {
+		shared_ptr<Transform>m_ptrTrans;
+		bool m_Trace;
+		Vec2 m_StartScale;
+		Vec2 m_StartPos;
+		wstring m_ClearKey;
+
+		float m_NewPos;
+		float m_maxPos;
+		float m_minPos;
+		float m_yPosSpeed;
+		float m_highly;
+		float m_time;
+		float m_speed;
+		bool m_isPosMax;
+		bool m_isPosMin;
+		bool m_isDraw;
+
+		Vec3 m_nowpos;
+
+
+
+	public:
+
+		GameScoreSprite(const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
+			const Vec2& StartScale, const Vec2& StartPos);
+		//破棄
+		virtual ~GameScoreSprite();
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate()override;
+
+		//void OnDestroy();
+	};
+}
+
