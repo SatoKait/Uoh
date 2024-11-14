@@ -193,14 +193,12 @@ namespace basecross {
 			if (!m_isPosMax) {
 				m_NewPos += m_yPosSpeed * elapsedTime;	
 				m_nowpos.y += m_highly + m_NewPos;
-
 			}
 
 			if (m_maxPos < m_NewPos && !m_isPosMax) {
 				m_isPosMax = true;
 				m_isPosMin = false;
 				m_time += elapsedTime;//時間を確認してみる
-
 			}
 			m_ptrTrans->SetPosition(m_nowpos);
 
@@ -213,15 +211,11 @@ namespace basecross {
 			//	m_isPosMin = true;
 			//}
 
-
 			if (m_time >= 2.0f)
 			{
 				m_nowpos.y = -100.0f;
 				m_ptrTrans->SetPosition(m_nowpos);
-
 			}
-
-
 		};
 
 		//void GameScoreSprite::OnDestroy()
@@ -230,4 +224,61 @@ namespace basecross {
 		//}
 		
 }
+
+namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	///明減文字
+	//--------------------------------------------------------------------------------------
+	Flickering::Flickering(const shared_ptr<Stage>& StagePtr, const wstring& TextureKey, bool Trace,
+		const Vec2& StartScale, const Vec2& StartPos) :
+		GameObject(StagePtr),
+		m_TextureKey(TextureKey),
+		m_Trace(Trace),
+		m_StartScale(StartScale),
+		m_StartPos(StartPos),
+		m_TotalTime(0.0f)
+	{}
+	Flickering::~Flickering() {}
+
+	void Flickering::OnCreate() {
+		float HelfSize = 0.5f;
+		//頂点配列
+		vector<VertexPositionColorTexture> vertex = {
+		{ VertexPositionColorTexture(Vec3(-HelfSize,  HelfSize, 0),  Col4(1.0f, 1.0f, 1.0f, 1.0f), Vec2(0.0f, 0.0f)) },
+		{ VertexPositionColorTexture(Vec3(HelfSize,  HelfSize, 0),  Col4(1.0f, 1.0f, 1.0f, 1.0f), Vec2(1.0f, 0.0f)) },
+		{ VertexPositionColorTexture(Vec3(-HelfSize, -HelfSize, 0),  Col4(1.0f, 1.0f, 1.0f, 1.0f), Vec2(0.0f, 1.0f)) },
+		{ VertexPositionColorTexture(Vec3(HelfSize, -HelfSize, 0),  Col4(1.0f, 1.0f, 1.0f, 1.0f), Vec2(1.0f, 1.0f)) },
+		};
+
+		//インデックス配列
+		m_Trace = true;
+		vector<uint16_t> indices = { 0, 1, 2, 1, 3, 2 };
+		SetAlphaActive(m_Trace);
+		auto PtrTransform = GetComponent<Transform>();
+		PtrTransform->SetScale(m_StartScale.x, m_StartScale.y, 1.0f);
+		PtrTransform->SetRotation(0, 0, 0);
+		PtrTransform->SetPosition(m_StartPos.x, m_StartPos.y, 0.0f);
+		//スプライト作成
+		auto PtrDraw = AddComponent<PCTSpriteDraw>(vertex, indices);
+		PtrDraw->SetSamplerState(SamplerState::LinearWrap);
+		PtrDraw->SetTextureResource(m_TextureKey);
+	}
+
+
+	void Flickering::OnUpdate() {
+		float ElapsedTime = App::GetApp()->GetElapsedTime();
+		m_TotalTime += ElapsedTime * 3.0f;
+		if (m_TotalTime >= XM_2PI) {
+			m_TotalTime = 0.0f;
+		}
+
+		auto PtrDraw = GetComponent<PCTSpriteDraw>();
+		Col4 col(1.0, 1.0, 1.0, 1.0);
+		col.w = sin(m_TotalTime);
+		PtrDraw->SetDiffuse(col);
+	}
+
+}
+
 //end basecross
