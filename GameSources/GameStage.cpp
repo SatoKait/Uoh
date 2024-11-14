@@ -140,6 +140,8 @@ namespace basecross {
 		m_ToTalTime -= elapsedTime;
 		if (m_ToTalTime <= 0.0f) {
 			m_ToTalTime = 0.0f;
+			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");
+
 		}
 		//スコアを更新する
 		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
