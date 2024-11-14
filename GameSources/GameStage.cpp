@@ -129,7 +129,7 @@ namespace basecross {
 	{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y || KeyState.m_bPressedKeyTbl[VK_SPACE])
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
 			int a = 0;
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
@@ -138,9 +138,9 @@ namespace basecross {
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		m_ToTalTime;
 		m_ToTalTime -= elapsedTime;
-		if (m_ToTalTime <= 0.0f) {
-			m_ToTalTime = 0.0f;
-			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");
+		if (m_ToTalTime <= 0) {
+			//m_ToTalTime = 0.0f;
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");
 
 		}
 		//スコアを更新する
