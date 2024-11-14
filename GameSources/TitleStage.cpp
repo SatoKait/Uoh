@@ -25,7 +25,7 @@ namespace basecross {
 		AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
 			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		AddGameObject<StageSprite>(L"LOGO_TX", true,
-			Vec2(750.0f, 400.0f), Vec2(0.0f, 200.0f));
+			Vec2(750.0f, 300.0f), Vec2(0.0f, 200.0f));
 	}
 
 	void TitleStage::OnCreate() {
