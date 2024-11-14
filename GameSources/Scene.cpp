@@ -31,10 +31,14 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"STAGESELECT_TX", tex);
 			tex = texPath + L"GoalScene.png";
 			App::GetApp()->RegisterTexture(L"GOALSCENE_TX", tex);
+			tex = texPath + L"Logo.png";
+			App::GetApp()->RegisterTexture(L"LOGO_TX", tex);
+			tex = texPath + L"TItleBack.png";
+			App::GetApp()->RegisterTexture(L"TITLEBACK_TX", tex);
+
 
 			tex = texPath + L"Goal.png";
 			App::GetApp()->RegisterTexture(L"GOAL_TX",tex);
-
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
@@ -77,7 +81,7 @@ namespace basecross{
 			SetClearColor(Col);
 			//自分自身にイベントを送る
 			//これにより各ステージやオブジェクトがCreate時にシーンにアクセスできる
-			PostEvent(0.0f, GetThis<ObjectInterface>(), GetThis<Scene>(), L"ToSelectStage");
+			PostEvent(0.0f, GetThis<ObjectInterface>(), GetThis<Scene>(), L"ToTiTleStage");
 		}
 		catch (...) {
 			throw;
@@ -88,6 +92,10 @@ namespace basecross{
 	}
 
 	void Scene::OnEvent(const shared_ptr<Event>& event) {
+		if (event->m_MsgStr == L"ToTiTleStage") {
+			//最初のアクティブステージの設定
+			ResetActiveStage<TitleStage>();
+		}
 		if (event->m_MsgStr == L"ToSelectStage") {
 			//最初のアクティブステージの設定
 			ResetActiveStage<SelectStage>();

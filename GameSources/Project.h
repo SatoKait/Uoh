@@ -10,6 +10,7 @@
 #include "ProjectBehavior.h"
 #include "MyGameObject.h"
 #include "Scene.h"
+#include "TitleStage.h"
 #include "SelectStage.h"
 #include "GameStage.h"
 #include "Character.h"
@@ -30,3 +31,4 @@
 #include "ScoreSprite.h"
 #include "Score.h"
 #include "UITime.h"
+
