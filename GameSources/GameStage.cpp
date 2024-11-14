@@ -13,10 +13,10 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	// コンストラクタ
 	GameStage::GameStage() :
-		m_StageRation(10.0f) // ステージのサイズ倍率
+		m_StageRation(10.0f), // ステージのサイズ倍率
+		m_ToTalTime(90)
 	{}
 
-	
 	void GameStage::CreateViewLight() {
 		// カメラの設定MainCamera
 		auto camera = ObjectFactory::Create<MainCamera>(0.0f);
@@ -84,7 +84,6 @@ namespace basecross {
 		float a = -510.0f;
 		float b = 70.0f;
 		//AddGameObject<Time>(1,Vec3(1.0f,1.0f,1.0f),L"NUMBER_TX");
-		//AddGameObject<Score>();
 		//AddGameObject<Energy>(L"HANE_TX", true,
 		//    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
 		//AddGameObject<Energy>(L"HANE_TX", true,
@@ -99,7 +98,16 @@ namespace basecross {
 		//	Vec3(100.0f, 50.0f, 1.0f),//scl
 		//	Vec3(0.0f,0.0f,0.0f));//rot
 	}
-	
+	void GameStage::CreateTime()
+	{
+		AddGameObject<UITime>(2,
+			L"NUMBER2_TX",
+			true,
+			Vec2(240.0f, 60.0f),
+			Vec3(-440.0f, 350.0f, 0.0f));
+
+	}
+
 	void GameStage::OnCreate() {
 		try {
 			//ビューとライトの作成
@@ -110,10 +118,34 @@ namespace basecross {
 			CreateObstacle();
 			CreateGoal();
 			CreateTraceSprite();
+			CreateTime();
 		}
 		catch (...) {
 			throw;
 		}
+	}
+
+	void GameStage::OnUpdate()
+	{
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y || KeyState.m_bPressedKeyTbl[VK_SPACE])
+		{
+			int a = 0;
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+		}
+
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		m_ToTalTime;
+		m_ToTalTime -= elapsedTime;
+		if (m_ToTalTime <= 0.0f) {
+			m_ToTalTime = 0.0f;
+			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");
+
+		}
+		//スコアを更新する
+		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
+		ptrScor->SetScore(m_ToTalTime);
 	}
 
 }

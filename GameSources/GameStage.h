@@ -14,6 +14,7 @@ namespace basecross {
 	class GameStage : public Stage {
 		//ステージの倍率
 		float m_StageRation;
+		float m_ToTalTime;
 
 		//ビューの作成
 		void CreateViewLight();
@@ -29,6 +30,8 @@ namespace basecross {
 		void CreateTraceSprite();
 		//ゴール
 		void CreateGoal();
+		//時間
+		void CreateTime();
 		shared_ptr<SingleView> m_View;//ビューの変数
 
 	public:
@@ -37,7 +40,7 @@ namespace basecross {
 		virtual ~GameStage() {}
 		//初期化
 		virtual void OnCreate()override;
-		//virtual void OnUpdate()override;
+		virtual void OnUpdate()override;
 
 		
 	};

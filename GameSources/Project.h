@@ -29,5 +29,4 @@
 #include "Wall.h"
 #include "ScoreSprite.h"
 #include "Score.h"
-#include "Time.h"
-
+#include "UITime.h"

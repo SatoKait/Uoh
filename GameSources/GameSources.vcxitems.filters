@@ -58,7 +58,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Wall.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Time.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)UITime.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -124,7 +124,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Wall.h">
       <Filter>Stage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Time.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)UITime.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
