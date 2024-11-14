@@ -343,6 +343,7 @@ namespace basecross{
 			ptrPollCol->SetAfterCollision(AfterCollision::None);
 			m_ChangeFlag = true;
 			App::GetApp()->GetScene<Scene>()->AddScore(100);
+			GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
 		}
 		if(m_ChangeTime >= 2.0f)
 		{

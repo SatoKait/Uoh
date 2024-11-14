@@ -35,6 +35,7 @@ namespace basecross{
 		float m_GoalTime;		//ÉSÅ[ÉãÉ^ÉCÉÄ
 		float m_ChangeTime;
 		bool m_ChangeFlag;
+		bool m_DrawFlag;
 		//int m_Score;
 
 
@@ -62,7 +63,8 @@ namespace basecross{
 			m_GoalTime(0.0f),
 			m_SpeedUp(false),
 			m_ChangeTime(0),
-			m_ChangeFlag(false)
+			m_ChangeFlag(false),
+			m_DrawFlag(true)
 		{
 		}
 		Player::~Player() {}

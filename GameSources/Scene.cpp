@@ -25,6 +25,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"NUMBER_TX",tex);
 			tex = texPath + L"number.png";
 			App::GetApp()->RegisterTexture(L"NUMBER2_TX", tex);
+			tex = texPath + L"Score100.png";
+			App::GetApp()->RegisterTexture(L"SCORE_TX", tex);
 			tex = texPath + L"StageSlect.png";
 			App::GetApp()->RegisterTexture(L"STAGESELECT_TX", tex);
 			tex = texPath + L"GoalScene.png";
