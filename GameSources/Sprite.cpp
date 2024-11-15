@@ -148,16 +148,18 @@ namespace basecross {
 		m_StartScale(StartScale),
 		m_StartPos(StartPos),
 		m_NewPos(0.0f),
-		m_maxPos(0.5f),
+		m_maxPos(1.0f),
 		m_minPos(-0.1),
-		m_yPosSpeed(0.1f),
+		m_yPosSpeed(0.8f),
 		m_highly(0.15f),
 		m_time(0.0f),
 		m_isPosMax(false),
 		m_isPosMin(true),
 		m_isDraw(true),
+		m_istimeFlag(false),
 		m_nowpos(0.0f),
-		m_speed(1.0f)
+		m_speed(1.0f),
+		m_elapsedTime(App::GetApp()->GetElapsedTime())
 
 	{}
 
@@ -181,48 +183,39 @@ namespace basecross {
 			m_ptrTrans->SetRotation(0, 0, 0);
 			m_ptrTrans->SetPosition(m_StartPos.x, m_StartPos.y, 0.0f);
 			//頂点とインデックスを指定してスプライト作成
-			auto PtrDraw = AddComponent<PCTSpriteDraw>(vertices, indices);
-			PtrDraw->SetSamplerState(SamplerState::LinearWrap);
-			PtrDraw->SetTextureResource(m_ClearKey);
+			m_ptrDraw = AddComponent<PCTSpriteDraw>(vertices, indices);
+			m_ptrDraw->SetSamplerState(SamplerState::LinearWrap);
+			m_ptrDraw->SetTextureResource(m_ClearKey);
 	}
 		void GameScoreSprite::OnUpdate()
 		{
-			auto elapsedTime = App::GetApp()->GetElapsedTime();
+
 			m_nowpos = m_ptrTrans->GetPosition();
 
 			if (!m_isPosMax) {
-				m_NewPos += m_yPosSpeed * elapsedTime;	
+				m_NewPos += m_yPosSpeed * m_elapsedTime;
 				m_nowpos.y += m_highly + m_NewPos;
 			}
 
 			if (m_maxPos < m_NewPos && !m_isPosMax) {
 				m_isPosMax = true;
 				m_isPosMin = false;
-				m_time += elapsedTime;//時間を確認してみる
+				m_istimeFlag = true;
 			}
 			m_ptrTrans->SetPosition(m_nowpos);
 
-			//if (!m_isPosMin) {
-			//	m_NewPos -= m_yPosSpeed * elapsedTime;
-			//}
-
-			//if (m_minPos > m_NewPos && !m_isPosMin) {
-			//	m_isPosMax = false;
-			//	m_isPosMin = true;
-			//}
-
-			if (m_time >= 2.0f)
+			if (m_istimeFlag)
 			{
-				m_nowpos.y = -100.0f;
-				m_ptrTrans->SetPosition(m_nowpos);
+				m_time += m_elapsedTime * m_speed;
+			}
+
+			if (m_time >= 0.5f)
+			{		
+				m_istimeFlag = false;
+				m_time = 0.0f;
+				GetStage()->RemoveGameObject<GameScoreSprite>(GetThis<GameScoreSprite>());
 			}
 		};
-
-		//void GameScoreSprite::OnDestroy()
-		//{
-		//	Delete
-		//}
-		
 }
 
 namespace basecross {
@@ -277,8 +270,8 @@ namespace basecross {
 		Col4 col(1.0, 1.0, 1.0, 1.0);
 		col.w = sin(m_TotalTime);
 		PtrDraw->SetDiffuse(col);
-	}
-
+	};
 }
+
 
 //end basecross
