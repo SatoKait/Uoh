@@ -7,6 +7,32 @@
 #include "Project.h"
 
 namespace basecross{
+	// 構築と破棄
+	Player::Player(const shared_ptr<Stage>& StagePtr,
+		const Vec3& Position,
+		const Vec3& Scale,
+		const Vec3& Rot
+
+	) :
+		GameObject(StagePtr),
+		m_StartPos(Position),
+		m_StartScale(Scale),
+		m_StartRot(Rot),
+		m_Speed(10.0f),
+		m_JSpeed(6.0f),
+		m_grounded(true),
+		m_MoveFlag(true),
+		m_Goal(false),
+		m_GoalTime(0.0f),
+		m_SpeedUp(false),
+		m_Rotate(0.0f),
+		m_ChangeTime(0),
+		m_ChangeFlag(false),
+		m_DrawFlag(true),
+		m_Angle(0.0f)
+	{
+	}
+
 	Vec2 Player::GetInputState() const
 	{
 		float delta = App::GetApp()->GetElapsedTime();
@@ -45,8 +71,9 @@ namespace basecross{
 	}
 
 
-	Vec3 Player::GetMoveVector() const
+	Vec3 Player::GetMoveVector()
 	{
+
 		Vec3 angle(0, 0, 0);
 		//入力の取得
 		auto inPut = GetInputState();
@@ -68,9 +95,9 @@ namespace basecross{
 			//コントローラの向きから角度を計算
 			float cntlAngle = atan2(-moveX, moveZ);
 			//トータルの角度を算出
-			float totalAngle = frontAngle + cntlAngle;
+			m_Angle = frontAngle + cntlAngle;
 			//角度からベクトルを作成
-			angle = Vec3(cos(totalAngle), 0, sin(totalAngle));
+			angle = Vec3(cos(m_Angle), 0, sin(m_Angle));
 			//正規化する
 			angle.normalize();
 			//移動サイズを設定。
@@ -135,14 +162,18 @@ namespace basecross{
 			pos += angle * delta * m_Speed;
 			GetComponent<Transform>()->SetPosition(pos);
 		}
+
 		//回転の計算
 		if (angle.length() > 0.0f) {
 			auto utilPtr = GetBehavior<UtilBehavior>();
 			//utilPtr->RotToHead(angle, 1.0f);
+//			m_ptrTrans->SetRotation(0.0f, 0.0f, -m_Rotate.z);
+
+			m_ptrTrans->SetRotation(0.0f, -m_Angle + XM_PI/2, -m_Rotate.z);
 		}
+
 		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
 		{
-
 			if (m_grounded == true)
 			{
 				m_grounded = false;
@@ -161,20 +192,7 @@ namespace basecross{
 				ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
 			}
 
-
 			m_Accel -= 0.03f;
-			//if (ret.x >= 0.1)
-			//{
-			//	rotate.z += -4.0f * delta;
-			//}
-			//else if (ret.x <= -0.1)
-			//{
-			//	rotate.z += 4.0f * delta;
-			//}
-			//else
-			//{
-			//	rotate.z = 0;
-			//}
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
 			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
@@ -196,9 +214,8 @@ namespace basecross{
 		}
 
 		// プレイヤーの移動
-		pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
+		if(m_grounded) pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
 		m_ptrTrans->SetPosition(pos);
-		//m_ptrTrans->SetRotation(0.0f, 0.0f, -m_Rotate.z);
 
 	}
 
