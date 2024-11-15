@@ -34,7 +34,7 @@ namespace basecross {
 	}
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,0.4f,0.0f),Vec3(0.3f,0.3f,0.3f),Vec3(0.0f,0.0f,0.0f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,0.4f,0.0f),Vec3(0.25f,0.25f,0.25f),Vec3(0.0f,0.0f,0.0f));
 		SetSharedGameObject(L"Player", ptrPlayer);
     }
 	void GameStage::CreateWall()
@@ -105,7 +105,6 @@ namespace basecross {
 			true,
 			Vec2(240.0f, 60.0f),
 			Vec3(-440.0f, 350.0f, 0.0f));
-
 	}
 
 	void GameStage::OnCreate() {
@@ -140,7 +139,7 @@ namespace basecross {
 		m_ToTalTime -= elapsedTime;
 		if (m_ToTalTime <= 0) {
 			//m_ToTalTime = 0.0f;
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 
 		}
 		//スコアを更新する
