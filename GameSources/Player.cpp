@@ -138,7 +138,7 @@ namespace basecross{
 		//回転の計算
 		if (angle.length() > 0.0f) {
 			auto utilPtr = GetBehavior<UtilBehavior>();
-			utilPtr->RotToHead(angle, 1.0f);
+			//utilPtr->RotToHead(angle, 1.0f);
 		}
 		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
 		{
@@ -162,8 +162,7 @@ namespace basecross{
 			}
 
 
-			m_Accel -= 0.02f;
-
+			m_Accel -= 0.03f;
 			//if (ret.x >= 0.1)
 			//{
 			//	rotate.z += -4.0f * delta;
@@ -199,8 +198,8 @@ namespace basecross{
 		// プレイヤーの移動
 		pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
 		m_ptrTrans->SetPosition(pos);
+		//m_ptrTrans->SetRotation(0.0f, 0.0f, -m_Rotate.z);
 
-		m_ptrTrans->SetRotation(0, 0, -m_Rotate.z);
 	}
 
 	void Player::OnCreate()
@@ -345,6 +344,10 @@ namespace basecross{
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
+		
+		//auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+
+		//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
 
 
 		//m_ptrTrans->SetRotation(rotate);

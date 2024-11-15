@@ -34,6 +34,7 @@ namespace basecross{
 		bool m_MoveFlag;		//動けるまでのフラグ
 		float m_GoalTime;		//ゴールタイム
 		Vec3 m_Rotate;			//傾き
+		Vec3 m_CameraPos;
 		float m_ChangeTime;
 		bool m_ChangeFlag;
 		bool m_DrawFlag;
