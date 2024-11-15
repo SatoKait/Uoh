@@ -31,4 +31,6 @@
 #include "ScoreSprite.h"
 #include "Score.h"
 #include "UITime.h"
+#include "SelectStageSprite.h"
+#include "GameStage2.h"
 

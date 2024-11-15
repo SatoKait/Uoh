@@ -26,6 +26,9 @@ namespace basecross {
 			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		AddGameObject<StageSprite>(L"LOGO_TX", true,
 			Vec2(750.0f, 300.0f), Vec2(0.0f, 200.0f));
+		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
+			Vec2(750.0f, 300.0f), Vec2(0.0f,-200.0f));
+
 	}
 
 	void TitleStage::OnCreate() {
@@ -45,7 +48,7 @@ namespace basecross {
 		m_InputHandler.PushHandle(GetThis<TitleStage>());
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_A)
 		{
 			int a = 0;
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");

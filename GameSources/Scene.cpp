@@ -35,7 +35,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"LOGO_TX", tex);
 			tex = texPath + L"TItleBack.png";
 			App::GetApp()->RegisterTexture(L"TITLEBACK_TX", tex);
-
+			tex = texPath + L"TitleText.png";
+			App::GetApp()->RegisterTexture(L"TITLETEXT_TX", tex);
 
 			tex = texPath + L"Goal.png";
 			App::GetApp()->RegisterTexture(L"GOAL_TX",tex);
@@ -103,7 +104,12 @@ namespace basecross{
 		if (event->m_MsgStr == L"ToGameStage") {
 			//最初のアクティブステージの設定
 			ResetActiveStage<GameStage>();
+		}		
+		if (event->m_MsgStr == L"ToGameStage2") {
+			//最初のアクティブステージの設定
+			ResetActiveStage<GameStage2>();
 		}
+
 		if (event->m_MsgStr == L"ToGoalScene") {
 			//ゴールシーンに移動
 		    ResetActiveStage<GoalScene>();
