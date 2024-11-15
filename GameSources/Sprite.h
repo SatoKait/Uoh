@@ -85,10 +85,12 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class GameScoreSprite : public GameObject {
 		shared_ptr<Transform>m_ptrTrans;
+		shared_ptr<PCTSpriteDraw>m_ptrDraw;
 		bool m_Trace;
 		Vec2 m_StartScale;
 		Vec2 m_StartPos;
 		wstring m_ClearKey;
+		float m_elapsedTime;
 
 		float m_NewPos;
 		float m_maxPos;
@@ -100,6 +102,7 @@ namespace basecross {
 		bool m_isPosMax;
 		bool m_isPosMin;
 		bool m_isDraw;
+		bool m_istimeFlag;
 
 		Vec3 m_nowpos;
 
@@ -116,7 +119,7 @@ namespace basecross {
 		//çXêV
 		virtual void OnUpdate()override;
 
-		//void OnDestroy();
+		//virtual void OnDestroy()override;
 	};
 }
 
@@ -143,4 +146,7 @@ namespace basecross {
 			virtual void OnUpdate()override;
 		};
 }
+
+
+
 

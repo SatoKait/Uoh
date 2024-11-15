@@ -300,41 +300,41 @@ namespace basecross{
 		//	Vec3(0.0f, 0.0f, 0.0f)
 		//);
 
-		auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
+		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
-		// 座標
-			wss		<< L"\n\n\npos : (" <<
-			pos.x	<< L", "			<<
-			pos.y	<< L", "			<<
-			pos.z	<< L")"				<< 
-		// ゲーム画面fps
-			L"\nFPS : "					<<
-			fps							<<
-		// 加速度
-			L"\naccel : "				<< 
-			m_Accel						<<
-		// ジャンプからの経過時間
-			L"\nJumpTime : "			<<
-			m_JumpTime					<<
-		// プレイヤーの傾き
-			L"\nrotateZ : "				<<
-			m_Rotate.z					<<
-		// ゴールまでの時間
-			L"\nGoalTime : "			<<
-			m_GoalTime					<<
-			L"\nm_ChangeTime : " <<
-			m_ChangeTime <<
-			L"\nm_ChangeFlag : " <<
-			m_ChangeFlag <<
-			//L"\nm_Score : " <<
-			//m_Score <<
+		//// 座標
+		//	wss		<< L"\n\n\npos : (" <<
+		//	pos.x	<< L", "			<<
+		//	pos.y	<< L", "			<<
+		//	pos.z	<< L")"				<< 
+		//// ゲーム画面fps
+		//	L"\nFPS : "					<<
+		//	fps							<<
+		//// 加速度
+		//	L"\naccel : "				<< 
+		//	m_Accel						<<
+		//// ジャンプからの経過時間
+		//	L"\nJumpTime : "			<<
+		//	m_JumpTime					<<
+		//// プレイヤーの傾き
+		//	L"\nrotateZ : "				<<
+		//	m_Rotate.z					<<
+		//// ゴールまでの時間
+		//	L"\nGoalTime : "			<<
+		//	m_GoalTime					<<
+		//	L"\nm_ChangeTime : " <<
+		//	m_ChangeTime <<
+		//	L"\nm_ChangeFlag : " <<
+		//	m_ChangeFlag <<
+		//	//L"\nm_Score : " <<
+		//	//m_Score <<
 
 
-			endl;
+		//	endl;
 
-		 //ゴール判定
-			if (m_Goal){ wss << "Goal : true" << endl; }
-			else       { wss << "Goal : false" << endl; }
+		// //ゴール判定
+		//	if (m_Goal){ wss << "Goal : true" << endl; }
+		//	else       { wss << "Goal : false" << endl; }
 
 		//auto Draw = AddComponent<BcPNTStaticDraw>();
 
@@ -411,7 +411,7 @@ namespace basecross{
 			ptrPollCol->SetAfterCollision(AfterCollision::None);
 			m_ChangeFlag = true;
 			App::GetApp()->GetScene<Scene>()->AddScore(100);
-			GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
 		}
 		if(m_ChangeTime >= 2.0f)
 		{
