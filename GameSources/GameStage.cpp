@@ -39,26 +39,33 @@ namespace basecross {
     }
 	void GameStage::CreateWall()
 	{
-		auto ptrWall = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 50.0f), Vec3(95.0f, 20.0f, 1.0f));//上
+		auto WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 50.0f), Vec3(95.0f, 20.0f, 1.0f));//上
 
-	    ptrWall = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -49.0f), Vec3(95.0f, 20.0f, 1.0f));	
-		ptrWall = AddGameObject<Wall>(Vec3(47.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f));//左上の部分
-		ptrWall = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		ptrWall = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		ptrWall = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f));//左の部分
-		ptrWall = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 47.5f), Vec3(1.0f, 20.0f, 4.0f));//左下の部分
-		ptrWall = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f));//左下の部分
+	    WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -49.0f), Vec3(95.0f, 20.0f, 1.0f));	
+		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f));//左の部分
+		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 47.5f), Vec3(1.0f, 20.0f, 4.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f));//左下の部分
 
-		ptrWall = AddGameObject<Wall>(Vec3(-47.0f, 10.0f, 46.5f), Vec3(1.0f, 20.0f, 4.0f));//左上の部分
-		ptrWall = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		ptrWall = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		ptrWall = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f));//左の部分
-		ptrWall = AddGameObject<Wall>(Vec3(-47.0f, 10.0f, -47.5f), Vec3(1.0f, 20.0f, 4.0f));//左下の部分
-		ptrWall = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -43.0f), Vec3(1.0f, 20.0f, 5.2f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(-47.0f, 10.0f, 46.5f), Vec3(1.0f, 20.0f, 4.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f));//左の部分
+		WallCol = AddGameObject<Wall>(Vec3(-47.0f, 10.0f, -47.5f), Vec3(1.0f, 20.0f, 4.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -43.0f), Vec3(1.0f, 20.0f, 5.2f));//左下の部分
+	}
 
-
+	void GameStage::CreatePollCollision()
+	{
+		auto pollCol = AddGameObject<PollCollision>(Vec3(3.0f,3.75,0.0f), Vec3(1.5f, 7.25f, 2.0f),false);//左下の部分
+		pollCol = AddGameObject<PollCollision>(Vec3(-3.0f, 3.75, 0.0f), Vec3(1.5f, 7.25f, 2.0f), false);//左下の部分
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 4.8f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), false);//左下の部分
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 7.2f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), false);//左下の部分
 
 	}
+
 	void GameStage::CreateGround() {		
 		//for (int i = 0; i < 7;i++) {
 		//	/*auto ptrGround = */
@@ -69,13 +76,7 @@ namespace basecross {
 
 	}
 	void GameStage::CreateObstacle() {
-		//for (int i = 0; i < 7; i++) {
-		//	AddGameObject<MoveObject>(Vec3(0.0f, 1.0f, -50.0f * i), Vec3(0.05f, 0.05f, 0.05f),L"RED_TX");
-		//}
-		//for (int i = 0; i < 1; i++) {
-		//	AddGameObject<MoveBuoy>(Vec3(-20.0f, 0.0f, -100.0f * i), Vec3(1.0f, 1.0f, 1.0f), L"RED_TX");
-		//}
-		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.5f, 1.0f), L"RED_TX");
+		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.0f, 1.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll", objPoll);
 
 		auto ptrobstacle = AddGameObject<Deployment>();
@@ -118,6 +119,7 @@ namespace basecross {
 			CreateGoal();
 			CreateTraceSprite();
 			CreateTime();
+			CreatePollCollision();
 		}
 		catch (...) {
 			throw;
