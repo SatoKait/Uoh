@@ -86,7 +86,7 @@ namespace basecross {
 		MoveBuoy::~MoveBuoy() {}
 
 		//初期化
-		virtual void OnCreate()override;	
+		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
 		//virtual void OnDestroy()override;
 	};//end basecross
@@ -104,6 +104,7 @@ namespace basecross {
 		wstring m_ResKey;
 		float m_Speed;			 //スピード
 
+
 	public:
 		float m_Distance;       //距離
 		shared_ptr<CollisionObb>m_col;
@@ -113,14 +114,13 @@ namespace basecross {
 			const Vec3& Position,
 			const Vec3& Scale,
 			const wstring& ResKey
-
 		) :
 			GameObject(StagePtr),
 			m_Position(Position),
 			m_Scale(Scale),
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
-			m_Speed(1.0f)			//スピード
+			m_Speed(1.0f)		//スピード
 		{
 		}
 		Poll::~Poll() {}
@@ -131,6 +131,32 @@ namespace basecross {
 		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		//virtual void OnDestroy()override;
 	};//end basecross
+}
 
-}//end basecross
+	//--------------------------------------------------------------------------------------
+	// PollCollisionキャラ
+	//--------------------------------------------------------------------------------------
+   namespace basecross {
+	 class PollCollision : public GameObject
+	  {
+		 shared_ptr<Transform>m_ptrTrans;
+		 Vec3 m_Position;
+		 Vec3 m_Scale;
+		 bool m_DrawFlag;
+
+
+	public:
+		 PollCollision(const std::shared_ptr<Stage>& stage, const Vec3& Position, const Vec3& Scale, const bool& Flag) :
+			GameObject(stage),
+			m_Position(Position),
+			m_Scale(Scale),
+			 m_DrawFlag(Flag)
+
+		 {
+	   	 }
+		void OnCreate();
+
+	};
+}//end basecros
+
 

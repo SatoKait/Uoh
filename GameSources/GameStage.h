@@ -22,6 +22,7 @@ namespace basecross {
 		void CreatePlayer();
 		//壁
 		void CreateWall();
+
 		//ステージ
 		void CreateGround();
 		//障害物
@@ -32,6 +33,8 @@ namespace basecross {
 		void CreateGoal();
 		//時間
 		void CreateTime();
+
+		void CreatePollCollision();
 		shared_ptr<SingleView> m_View;//ビューの変数
 
 	public:

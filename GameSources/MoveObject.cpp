@@ -153,7 +153,7 @@ namespace basecross {
 		m_ptrTrans->SetPosition(m_Position);
 
 		m_col = AddComponent<CollisionObb>();
-		m_col->SetDrawActive(true);
+		m_col->SetDrawActive(false);
 		m_col->SetFixed(true);
 		m_col->SetSleepActive(true);
 		m_col->GetAfterCollision();
@@ -162,10 +162,10 @@ namespace basecross {
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
 		spanMat.affineTransformation(
-			Vec3(0.02f, 0.03f, 0.1f),//スケーリング
+			Vec3(0.02f, 0.035f, 0.1f),//スケーリング
 			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, -2.0f, 0.0f) //移動
+			Vec3(0.0f, -2.25f, 0.0f) //移動
 		);
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();
@@ -192,6 +192,15 @@ namespace basecross {
 	//}
 
 
-	
+	void PollCollision::OnCreate() {
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetScale(m_Scale);
+		m_ptrTrans->SetPosition(m_Position);
+
+		auto col = AddComponent<CollisionObb>();
+		col->SetDrawActive(m_DrawFlag);
+		col->SetFixed(true);
+	}
+
 
 };//end basecross

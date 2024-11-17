@@ -1,26 +1,51 @@
 /*!
-@file GameStage2.h
-@brief タイトルステージ
+@file GameStage.h
+@brief ゲームステージ
 */
 
 #pragma once
 #include "stdafx.h"
 
 namespace basecross {
-	class GameStage2 : public Stage
-	{
-		InputHandler<GameStage2> m_InputHandler;
-		shared_ptr<GameObject> m_SelectStage1;
-		void CreateViewLight(); //ビューの作成
-		void CreateSprite();
+
+	//--------------------------------------------------------------------------------------
+	//	ゲームステージクラス
+	//--------------------------------------------------------------------------------------
+	class GameStage2 : public Stage {
+		//ステージの倍率
+		float m_StageRation;
+		float m_ToTalTime;
+
+		//ビューの作成
+		void CreateViewLight();
+		// プレイヤーの作成
+		void CreatePlayer();
+		//壁
+		void CreateWall();
+		//ステージ
+		void CreateGround();
+		//障害物
+		void CreateObstacle();
+		//スプライト
+		void CreateTraceSprite();
+		//ゴール
+		void CreateGoal();
+		//時間
+		void CreateTime();
+		shared_ptr<SingleView> m_View;//ビューの変数
 
 	public:
-		GameStage2() : Stage() {}
+		//構築と破棄
+		GameStage2();
 		virtual ~GameStage2() {}
+		//初期化
+		virtual void OnCreate()override;
+		virtual void OnUpdate()override;
 
-		virtual void OnCreate() override; // 初期化
-		virtual void OnUpdate() override; // 更新
+
 	};
+
 
 }
 //end basecross
+

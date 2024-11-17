@@ -13,6 +13,7 @@
 #include "TitleStage.h"
 #include "SelectStage.h"
 #include "GameStage.h"
+#include "GameStage2.h"
 #include "Character.h"
 #include "MainCamera.h"
 #include "Player.h"
@@ -32,5 +33,4 @@
 #include "Score.h"
 #include "UITime.h"
 #include "SelectStageSprite.h"
-#include "GameStage2.h"
 
