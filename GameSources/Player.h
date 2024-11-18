@@ -17,6 +17,7 @@ namespace basecross{
 
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
+		shared_ptr<CollisionObb>m_ptrPollCol;
 		weak_ptr<MainCamera> m_camera;			// カメラ
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
@@ -37,6 +38,7 @@ namespace basecross{
 		Vec3 m_CameraPos;
 		float m_ChangeTime;
 		bool m_ChangeFlag;
+		bool m_PollChangeFlag;
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
 		//int m_Score;
@@ -66,6 +68,7 @@ namespace basecross{
 			m_Rotate(0.0f),
 			m_ChangeTime(2.0f),
 			m_ChangeFlag(false),
+			m_PollChangeFlag(false),
 			m_CircleChangeFlag(false),
 			m_DrawFlag(true)
 		{

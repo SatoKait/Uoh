@@ -367,10 +367,10 @@ namespace basecross{
 
 		if (m_ChangeTime <= 0.0)
 		{
-			m_ChangeTime = 2.0f;	
+			m_ChangeTime = 2.0f;
+			m_ptrPollCol->SetAfterCollision(AfterCollision::Auto);
 			m_ChangeFlag = false;
 			m_CircleChangeFlag = false;
-
 		}
 	}
 
@@ -391,11 +391,33 @@ namespace basecross{
 
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
+		
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
-		auto ptrPollCol = ptrPoll->m_col;
-		//auto ptrPoll1 = stage->GetSharedGameObject<Poll1>(L"Poll1");
-		//auto ptrPollcol1 = ptrPoll1->m_col;
 
+		auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
+		auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
+		auto ptrPoll1_1 = stage->GetSharedGameObject<Poll1> (L"Poll1_1");
+		auto ptrPoll1_2 = stage->GetSharedGameObject<Poll1> (L"Poll1_2");
+		auto ptrPoll1_3 = stage->GetSharedGameObject<Poll1> (L"Poll1_3");
+		auto ptrPoll1_4 = stage->GetSharedGameObject<Poll1> (L"Poll1_4");
+		auto ptrPoll1_5 = stage->GetSharedGameObject<Poll1> (L"Poll1_5");
+		auto ptrPoll1_6 = stage->GetSharedGameObject<Poll1> (L"Poll1_6");
+		auto ptrPoll1_7 = stage->GetSharedGameObject<Poll1> (L"Poll1_7");
+		auto ptrPoll1_8 = stage->GetSharedGameObject<Poll1> (L"Poll1_8");
+
+		
+	    m_ptrPollCol = ptrPoll->m_col;
+		auto ptrCiclePollcol  = ptrCirclePoll->m_col;
+		auto ptrCiclePollcol2 = ptrCirclePoll2->m_col;
+
+		auto ptrPoll1_1col =  ptrPoll1_1->m_col;
+		auto ptrPoll1_2col =  ptrPoll1_2->m_col;
+		auto ptrPoll1_3col =  ptrPoll1_3->m_col;
+		auto ptrPoll1_4col =  ptrPoll1_4->m_col;
+		auto ptrPoll1_5col =  ptrPoll1_5->m_col;
+		auto ptrPoll1_6col =  ptrPoll1_6->m_col;
+		auto ptrPoll1_7col =  ptrPoll1_7->m_col;
+		auto ptrPoll1_8col =  ptrPoll1_8->m_col;	
 
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
@@ -420,32 +442,40 @@ namespace basecross{
 
 		if (other->FindTag(L"Poll") && !m_ChangeFlag)
 		{
-			//ptrPollcol1->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_1col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_2col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_3col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_4col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_5col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_6col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_7col->SetAfterCollision(AfterCollision::None);
+			ptrPoll1_8col->SetAfterCollision(AfterCollision::None);
+			//ptrPoll1_9col->SetAfterCollision(AfterCollision::None);
+			//ptrPoll1_10col->SetAfterCollision(AfterCollision::None);
+			//ptrPoll1_11col->SetAfterCollision(AfterCollision::None);
+			//ptrPoll1_12col->SetAfterCollision(AfterCollision::None);
+
 			App::GetApp()->GetScene<Scene>()->AddScore(50);
 			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
 			m_ChangeFlag = true;
 
 		}
-		if (other->FindTag(L"Poll2") && !m_ChangeFlag)
+		if (other->FindTag(L"Poll2") && !m_PollChangeFlag)
 		{
-			ptrPollCol->SetAfterCollision(AfterCollision::None);
-			m_ChangeFlag = true;
-			App::GetApp()->GetScene<Scene>()->AddScore(200);
-			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE3_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+			m_ptrPollCol->SetAfterCollision(AfterCollision::None);
+			App::GetApp()->GetScene<Scene>()->AddScore(1000);
+			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE3_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));	
+			m_PollChangeFlag = true;
 		}
 		if (other->FindTag(L"CirclePoll") && !m_CircleChangeFlag)
 		{
-			//ptrCirclePollCol->SetAfterCollision(AfterCollision::None);
+			ptrCiclePollcol->SetAfterCollision(AfterCollision::None);
+			ptrCiclePollcol2->SetAfterCollision(AfterCollision::None);
 			App::GetApp()->GetScene<Scene>()->AddScore(100);
 			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));			
-			m_CircleChangeFlag = true;
+			//m_CircleChangeFlag = true;
 		}
 
-		if(m_ChangeTime >= 2.0f)
-		{
-			ptrPollCol->SetAfterCollision(AfterCollision::Auto);
-			//m_ChangeFlag = false;
-		}
 	}
 
 
