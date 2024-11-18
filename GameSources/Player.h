@@ -46,6 +46,7 @@ namespace basecross{
 		bool m_Goal;			//ゴール判定
 		bool m_SpeedUp;         //
 		float m_Angle;
+		Vec3 m_bfrAngle;
 
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
@@ -68,7 +69,8 @@ namespace basecross{
 			m_ChangeFlag(false),
 			m_CircleChangeFlag(false),
 			m_DrawFlag(true),
-			m_Angle(0.0f)
+			m_Angle(0.0f),
+			m_bfrAngle(0.0f)
 		{
 		}
 

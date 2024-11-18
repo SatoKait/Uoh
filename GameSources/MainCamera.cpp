@@ -52,7 +52,7 @@ namespace basecross {
 
 		}
 
-		if (abs(ret.x) > 0.5) {
+		if (abs(ret.x) > 0.4) {
 			m_angleY -= speed * delta * ret.x;
 		}
 
