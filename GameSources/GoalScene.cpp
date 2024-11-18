@@ -7,6 +7,18 @@
 #include "Project.h"
 
 namespace basecross{
+	void GoalScene::CreateBGM()
+	{
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
+		m_stageBGM = ptrMana->Start(L"GAMECREAL2SE", 0.0f, 1.0f);
+
+	}
+	void GoalScene::OnDestroy() {
+		auto XAPtr = App::GetApp()->GetXAudio2Manager();
+		XAPtr->Stop(m_stageBGM);
+	}
+
+
 	void GoalScene::CreateViewLight() {		//ÉrÉÖÅ[ÇÃÉJÉÅÉâÇÃê›íË
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<GoalScene>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
@@ -21,6 +33,8 @@ namespace basecross{
 	}
 	void GoalScene::CreateSprite()
 	{
+		AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
+			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		AddGameObject<StageSprite>(L"GOALSCENE_TX", true,
 			Vec2(750.0f, 400.0f), Vec2(0.0f, 200.0f));
 		AddGameObject<StageSprite>(L"GOALSCENE_TX", true,
@@ -42,6 +56,7 @@ namespace basecross{
 			CreateViewLight();
 			CreateSprite();
 			CreateScore();
+			CreateBGM();
 		}
 		catch (...) {
 			throw;
@@ -53,7 +68,7 @@ namespace basecross{
 		m_InputHandler.PushHandle(GetThis<GoalScene>());
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y || KeyState.m_bPressedKeyTbl[VK_SPACE])
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_B)
 		{
 			int a = 0;
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToSelectStage");

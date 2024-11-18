@@ -110,19 +110,30 @@ namespace basecross {
 		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll", objPoll);
 		auto objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 16.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll1_1", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(40.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll1_2", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 16.8f, 0.0f),  L"RED_TX");
+		SetSharedGameObject(L"Poll1_3", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(-40.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll1_4", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, 25.0f),  Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
-
+		SetSharedGameObject(L"Poll1_5", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(40.0f, 4.0f, 25.0f),  Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll1_6", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, 16.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll1_7", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(-40.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll1_8", objPollnol);
 
 		auto objCirclePollnol = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 25.0), Vec3(4.0f, 3.5f, 0.3f), Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"CirclePoll1", objCirclePollnol);
 		objCirclePollnol = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, -25.0), Vec3(4.0f, 3.5f, 0.3f),     Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"CirclePoll2", objCirclePollnol);
 		objCirclePollnol = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, 25.0), Vec3(4.0f, 3.5f, 0.3f),       Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"CirclePoll3", objCirclePollnol);
 		objCirclePollnol = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, -25.0), Vec3(4.0f, 3.5f, 0.3f),      Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"CirclePoll4", objCirclePollnol);
 
 		auto ptrobstacle = AddGameObject<Deployment2>();
 	}

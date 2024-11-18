@@ -22,7 +22,7 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
 
 			tex = texPath + L"numbers.png";
-			App::GetApp()->RegisterTexture(L"NUMBER_TX",tex);
+			App::GetApp()->RegisterTexture(L"NUMBER_TX", tex);
 			tex = texPath + L"number.png";
 			App::GetApp()->RegisterTexture(L"NUMBER2_TX", tex);
 			tex = texPath + L"Score100.png";
@@ -31,7 +31,7 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"SCORE_TX", tex);
 			tex = texPath + L"Score100.png";
 			App::GetApp()->RegisterTexture(L"SCORE2_TX", tex);
-			tex = texPath + L"Score200.png";
+			tex = texPath + L"Score1000.png";
 			App::GetApp()->RegisterTexture(L"SCORE3_TX", tex);
 			//Stageに使うテクスチャ
 			tex = texPath + L"StageSlect.png";
@@ -46,7 +46,7 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"TITLETEXT_TX", tex);
 
 			tex = texPath + L"Goal.png";
-			App::GetApp()->RegisterTexture(L"GOAL_TX",tex);
+			App::GetApp()->RegisterTexture(L"GOAL_TX", tex);
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
@@ -64,10 +64,10 @@ namespace basecross{
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Poll2.bmf");
 			App::GetApp()->RegisterResource(L"POLL2_MESH", StaticMultiModelMesh);
 
-            // テクスチャ
+			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
-			App::GetApp()->RegisterTexture(L"TOBIUO_TX",Modeltex);
-		
+			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);
+
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
 			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
@@ -79,8 +79,25 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);
 
 		}
-	}
 
+		// モデルのリソース
+		{
+			auto SoundPath = path + L"Sounds/";
+
+			// 鳩時計の音
+			wstring strSE = SoundPath + L"Wave.wav";
+			App::GetApp()->RegisterWav(L"STAGEBGM", strSE);
+			strSE = SoundPath + L"Kamome.wav";
+			App::GetApp()->RegisterWav(L"KAMOMESE", strSE);
+			strSE = SoundPath + L"GameCreal.wav";
+			App::GetApp()->RegisterWav(L"GAMECREALSE", strSE);
+			strSE = SoundPath + L"GameCreal2.wav";
+			App::GetApp()->RegisterWav(L"GAMECREAL2SE", strSE);
+
+
+
+		}
+	}
 
 	void Scene::OnCreate(){
 		try {
