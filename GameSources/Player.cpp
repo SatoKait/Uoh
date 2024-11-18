@@ -157,6 +157,7 @@ namespace basecross{
 				m_JumpTime = 0;
 				m_Accel = 2.0f;
 				m_SpeedUp = true;
+				m_bfrAngle = angle;
 			}
 		}
 		if (m_grounded == false)
@@ -191,7 +192,15 @@ namespace basecross{
 		}
 
 		// プレイヤーの移動
-		if(m_grounded) pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
+		if(m_grounded) 
+			pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
+
+		if (!m_grounded)
+		{
+
+			if (ret.x || ret.y) pos += angle * m_Speed * delta;
+			else  pos += m_bfrAngle * m_Speed * delta;
+		}
 		m_ptrTrans->SetPosition(pos);
 	}
 
