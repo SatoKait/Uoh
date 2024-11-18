@@ -34,50 +34,73 @@ namespace basecross {
 	}
 	void GameStage::CreatePlayer()
 	{
-		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f,0.4f,0.0f),Vec3(0.25f,0.25f,0.25f),Vec3(0.0f,0.0f,0.0f));
+		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.5f,0.4f,-45.0f),Vec3(0.25f,0.25f,0.25f),Vec3(0.0f,0.0f,0.0f));
 		SetSharedGameObject(L"Player", ptrPlayer);
     }
 	void GameStage::CreateWall()
 	{
-		auto WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 50.0f), Vec3(95.0f, 20.0f, 1.0f));//上
+		auto WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 50.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));//上
 
-	    WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -49.0f), Vec3(95.0f, 20.0f, 1.0f));	
-		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f));//左の部分
-		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 47.5f), Vec3(1.0f, 20.0f, 4.0f));//左下の部分
-		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f));//左下の部分
+	    WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -49.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 47.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 
-		WallCol = AddGameObject<Wall>(Vec3(-47.0f, 10.0f, 46.5f), Vec3(1.0f, 20.0f, 4.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 42.0f), Vec3(1.0f, 20.0f, 5.2f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f));//左の部分
-		WallCol = AddGameObject<Wall>(Vec3(-47.0f, 10.0f, -47.5f), Vec3(1.0f, 20.0f, 4.0f));//左下の部分
-		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -43.0f), Vec3(1.0f, 20.0f, 5.2f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f,  47.5f),  Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f,  43.0f),  Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(-50.0f, 10.0f,  0.5f),  Vec3(1.0f, 20.0f, 80.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 	}
 
 	void GameStage::CreatePollCollision()
 	{
-		auto pollCol = AddGameObject<PollCollision>(Vec3(3.0f,3.75,0.0f), Vec3(1.5f, 7.25f, 2.0f),false);//左下の部分
-		pollCol = AddGameObject<PollCollision>(Vec3(-3.0f, 3.75, 0.0f), Vec3(1.5f, 7.25f, 2.0f), false);//左下の部分
-		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 4.8f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), false);//左下の部分
-		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 7.2f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), false);//左下の部分
+		//pollCollision
+		auto pollCol = AddGameObject<PollCollision>(Vec3(3.0f,3.75,0.0f), Vec3(1.5f, 7.25f, 2.0f),Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-3.0f, 3.75, 0.0f), Vec3(1.5f, 7.25f, 2.0f),Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 4.8f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 7.2f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+		//CirecleCollision
+		auto CirclepollColrig = AddGameObject<PollCollision>(Vec3(30.0f, 12.75f, 0.0f), Vec3(4.0f,2.0f,0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 7.35f, 0.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(27.15f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(32.9f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		//CirecleCollision左側
+		auto CirclepollCollef = AddGameObject<PollCollision>(Vec3(-30.0f, 12.75f, 0.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-30.0f, 7.35f, 0.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-27.15f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-32.9f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 0.0f, 0.0f));
+
+		auto pollCollef = AddGameObject<PollCollision>(Vec3(18.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(12.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-18.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-12.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(18.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(12.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-18.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-12.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
 
 	}
 
 	void GameStage::CreateGround() {		
-		//for (int i = 0; i < 7;i++) {
-		//	/*auto ptrGround = */
-		//	AddGameObject<Ground>(Vec3(0.0f, 0.0f, -50.0f * i), Vec3(100.0f, 0.5f, 50.0f), L"SEA_TX");
-		//	//SetSharedGameObject(L"Ground" + i, ptrGround);
-		//}
 		AddGameObject<Ground>(Vec3(0.0f, -1.0f, 0.0f), Vec3(300.0f, 0.5f, 300.0f), L"SEA_TX");
 
 	}
 	void GameStage::CreateObstacle() {
-		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.0f, 1.0f), L"RED_TX");
+		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll", objPoll);
+		auto objCirclePoll = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, 0.0f), Vec3(4.0f,3.5f,0.3f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objCirclePoll = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 0.3f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		//SetSharedGameObject(L"CirclePoll", objCirclePoll);
+		auto objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f,2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		//SetSharedGameObject(L"Poll1", objPollnol);
+
 
 		auto ptrobstacle = AddGameObject<Deployment>();
 	}
