@@ -170,6 +170,7 @@ namespace basecross{
 //			m_ptrTrans->SetRotation(0.0f, 0.0f, -m_Rotate.z);
 
 			m_ptrTrans->SetRotation(0.0f, -m_Angle + XM_PI/2, -m_Rotate.z);
+			//ptrCamera->SetEye(pos.x + 10.0f, 1.0f, pos.z);
 		}
 
 		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
@@ -189,7 +190,7 @@ namespace basecross{
 			if (m_Rotate.z <= 1.5f && m_Rotate.z >= -1.5f)
 			{
 				m_Rotate.z += ret.x * 0.015;
-				ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
+				//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
 			}
 
 			m_Accel -= 0.03f;
@@ -210,13 +211,12 @@ namespace basecross{
 			m_Accel = 0.0f;
 			m_Rotate.z = 0;
 			m_SpeedUp = false;
-			ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
+			//ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
 		}
 
 		// プレイヤーの移動
 		if(m_grounded) pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
 		m_ptrTrans->SetPosition(pos);
-
 	}
 
 	void Player::OnCreate()
@@ -235,8 +235,7 @@ namespace basecross{
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
-			ptrCamera->SetTargetObject(GetThis<GameObject>());
-			ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
+			ptrCamera->SetTarget(GetThis<GameObject>());
 			//ptrCamera->
 		}
 		
@@ -280,6 +279,8 @@ namespace basecross{
 
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+
+		//auto frontAngle = PlayerAngle();
 
 		//auto stage = GetStage();
 		//auto ptrGround = stage->GetSharedGameObject<Ground>(L"Ground");
@@ -382,6 +383,19 @@ namespace basecross{
 			m_ChangeTime = 0.0f;
 		}
 	}
+
+	//float Player::PlayerAngle() const {
+
+	//	//進行方向の向きを計算
+	//	auto ptrCamera = OnGetDrawCamera();
+	//	auto front = m_trans->GetPosition() - ptrCamera->GetEye();
+	//	front.y = 0;
+	//	front.normalize();
+	//	//進行方向の向きからの角度を算出
+	//	float frontAngle = atan2(front.z, front.x);
+
+	//	return frontAngle;
+	//}
 
 	void Player::Goaltrue()
 	{

@@ -37,7 +37,9 @@ namespace basecross{
 		float m_ChangeTime;
 		bool m_ChangeFlag;
 		bool m_DrawFlag;
-		//int m_Score;
+
+	private:
+		shared_ptr<Transform> m_trans;
 
 	public:
 		bool m_Goal;			//ゴール判定
@@ -56,6 +58,8 @@ namespace basecross{
 		//当たり判定(当たった瞬間)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 		void Goaltrue();
+		//float PlayerAngle() const;
+
 		//Aボタン
 		//void OnPushA();
 	};
