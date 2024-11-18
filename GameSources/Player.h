@@ -20,7 +20,7 @@ namespace basecross{
 		weak_ptr<MainCamera> m_camera;			// カメラ
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
-		Vec3 GetMoveVector() const;		// コントローラから方向ベクトルを得る
+		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
 		void MovePlayer();				// プレイヤーの移動
 		
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
@@ -34,21 +34,24 @@ namespace basecross{
 		bool m_MoveFlag;		//動けるまでのフラグ
 		float m_GoalTime;		//ゴールタイム
 		Vec3 m_Rotate;			//傾き
-		Vec3 m_CameraPos;
 		float m_ChangeTime;
 		bool m_ChangeFlag;
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
-		//int m_Score;
+
+	private:
+		shared_ptr<Transform> m_trans;
 
 	public:
 		bool m_Goal;			//ゴール判定
 		bool m_SpeedUp;         //
+		float m_Angle;
 
-		// 構築と破棄
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
+
+			const Vec3& Rot);
 			const Vec3& Rot
 
 		) :
@@ -70,6 +73,7 @@ namespace basecross{
 			m_DrawFlag(true)
 		{
 		}
+
 		Player::~Player() {}
 
 		virtual void OnCreate() override;
@@ -78,6 +82,8 @@ namespace basecross{
 		//当たり判定(当たった瞬間)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 		void Goaltrue();
+		//float PlayerAngle() const;
+
 		//Aボタン
 		//void OnPushA();
 	};
