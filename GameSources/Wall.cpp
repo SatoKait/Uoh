@@ -11,9 +11,10 @@ namespace basecross {
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
+		m_ptrTrans->SetRotation(m_Rotate);
 
 		auto col = AddComponent<CollisionObb>();
-		col->SetDrawActive(true);
+		col->SetDrawActive(m_DrawFlag);
 		col->SetFixed(true);
 	}
 }
