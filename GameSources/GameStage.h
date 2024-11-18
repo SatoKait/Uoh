@@ -15,6 +15,7 @@ namespace basecross {
 		//ステージの倍率
 		float m_StageRation;
 		float m_ToTalTime;
+		wstring m_Number;
 
 		//ビューの作成
 		void CreateViewLight();
