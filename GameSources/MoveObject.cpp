@@ -198,7 +198,7 @@ namespace basecross {
 		m_ptrTrans->SetPosition(m_Position);
 		m_ptrTrans->SetRotation(m_Rotate);
 		m_Number = (to_wstring(m_Count));
-		AddTag(L"CirclePoll"+ m_Number);
+		AddTag(L"CirclePoll");
 		m_Count++;
 
 		m_col = AddComponent<CollisionObb>();
