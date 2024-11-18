@@ -28,6 +28,8 @@ namespace basecross {
 		void CreateObstacle();
 		//スプライト
 		void CreateTraceSprite();
+
+		void CreatePollCollision();
 		//ゴール
 		void CreateGoal();
 		//時間
