@@ -20,6 +20,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Deployment.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Energy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Goal.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Ground.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Score.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ScoreSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SelectStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelectStageSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Sprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UITime.h" />
@@ -48,6 +50,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Deployment.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Energy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Goal.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Ground.cpp" />
@@ -63,6 +66,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Score.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ScoreSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SelectStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelectStageSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Sprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)UITime.cpp" />

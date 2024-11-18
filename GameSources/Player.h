@@ -36,6 +36,7 @@ namespace basecross{
 		Vec3 m_Rotate;			//傾き
 		float m_ChangeTime;
 		bool m_ChangeFlag;
+		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
 
 	private:
@@ -49,7 +50,30 @@ namespace basecross{
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
+
 			const Vec3& Rot);
+			const Vec3& Rot
+
+		) :
+			GameObject(StagePtr),
+			m_StartPos(Position),
+			m_StartScale(Scale),
+			m_StartRot(Rot),
+			m_Speed(10.0f),
+			m_JSpeed(6.0f),
+			m_grounded(true),
+			m_MoveFlag(true),
+			m_Goal(false),
+			m_GoalTime(0.0f),
+			m_SpeedUp(false),
+			m_Rotate(0.0f),
+			m_ChangeTime(2.0f),
+			m_ChangeFlag(false),
+			m_CircleChangeFlag(false),
+			m_DrawFlag(true)
+		{
+		}
+
 		Player::~Player() {}
 
 		virtual void OnCreate() override;

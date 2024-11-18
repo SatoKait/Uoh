@@ -1,0 +1,199 @@
+/*!
+@file　GameStage2.cpp
+@brief タイトルなど実体
+*/
+
+#include "stdafx.h"
+#include "Project.h"
+
+namespace basecross {
+	//--------------------------------------------------------------------------------------
+	//	ゲームステージクラス実体
+	//--------------------------------------------------------------------------------------
+	// コンストラクタ
+	GameStage2::GameStage2() :
+		m_StageRation(10.0f), // ステージのサイズ倍率
+		m_ToTalTime(90)
+	{}
+
+	void GameStage2::CreateViewLight() {
+		// カメラの設定MainCamera
+		auto camera = ObjectFactory::Create<MainCamera>(0.0f);
+		camera->SetEye(Vec3(0.0f, 2.5f, -3.5f));
+		//camera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
+
+		// ビューにカメラを設定
+		m_View = CreateView<SingleView>();
+		m_View->SetCamera(camera);
+
+		//マルチライトの作成
+		auto PtrMultiLight = CreateLight<MultiLight>();
+		//デフォルトのライティングを指定
+		PtrMultiLight->SetDefaultLighting();
+	}
+	void GameStage2::CreatePlayer()
+	{
+		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.0f, 0.4f, 0.0f), Vec3(0.25f, 0.25f, 0.25f), Vec3(0.0f, 0.0f, 0.0f));
+		SetSharedGameObject(L"Player", ptrPlayer);
+	}
+	void GameStage2::CreateWall()
+	{
+		auto ptrWall = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f),    Vec3(1.0f, 20.0f, 100.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3(-50.0f, 10.0f,   0.0f), Vec3(1.0f, 20.0f, 100.0f),Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3( 34.0f, 10.0f, -49.0f), Vec3(29.0f, 20.0f,  1.0f),Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3(-35.0f, 10.0f, -49.0f), Vec3(29.0f, 20.0f,  1.0f),Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3( 34.0f, 10.0f,  49.0f), Vec3(29.0f, 20.0f,  1.0f),Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3(-35.0f, 10.0f,  49.0f), Vec3(29.0f, 20.0f,  1.0f),Vec3(0.0f, 0.0f, 0.0f));//左の部分
+
+		ptrWall = AddGameObject<Wall>(Vec3(-10.0f, 10.0f, 39.0f),  Vec3(27.5f, 20.0f, 1.0f), Vec3(0.0f, 0.8f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3( 10.0f, 10.0f, 39.0f),  Vec3(29.0f, 20.0f, 1.0f), Vec3(0.0f, -0.8f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3(-11.0f, 10.0f, -38.5f), Vec3(28.0f, 20.0f, 1.0f), Vec3(0.0f, -0.8f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3(10.0f, 10.0f, -39.0f),  Vec3(29.0f, 20.0f, 1.0f), Vec3(0.0f, 0.8f, 0.0f));//左の部分
+		
+		ptrWall = AddGameObject<Wall>(Vec3( 29.5f, 10.0f,  1.0f), Vec3(20.0f, 20.0f, 21.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		ptrWall = AddGameObject<Wall>(Vec3(-30.5f, 10.0f,  1.0f), Vec3(20.0f, 20.0f, 21.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+
+	}
+	void GameStage2::CreateGround() {
+		AddGameObject<Ground>(Vec3(0.0f, -1.0f, 0.0f), Vec3(300.0f, 0.5f, 300.0f), L"SEA_TX");
+	}
+	void GameStage2::CreatePollCollision()
+	{
+		auto pollCollef = AddGameObject<PollCollision>(Vec3(16.4f, 4.0f, -27.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(13.8f, 4.0f, -22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(38.7f, 4.0f, -27.3f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(41.4f, 4.0f, -22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-41.4f, 4.0f, -27.3f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-38.7f, 4.0f, -22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-13.8f, 4.0f, -27.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-16.4f, 4.0f, -22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(41.4f, 4.0f, 27.3f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(38.7f, 4.0f, 22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(41.4f, 4.0f, 27.3f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(38.7f, 4.0f, 22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(16.4f, 4.0f, 27.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(13.8f, 4.0f, 22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-16.4f, 4.0f, 27.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-13.8f, 4.0f, 22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-38.7f, 4.0f, 27.3f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+		pollCollef = AddGameObject<PollCollision>(Vec3(-41.4f, 4.0f, 22.5f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, -16.8f, 0.0f));
+
+		//pollCollision
+		auto pollCol = AddGameObject<PollCollision>(Vec3(3.0f, 3.75, 0.0f), Vec3(1.5f, 7.25f, 2.0f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-3.0f, 3.75, 0.0f), Vec3(1.5f, 7.25f, 2.0f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 4.8f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 7.2f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+
+		//CirecleCollision
+		auto CirclepollColrig = AddGameObject<PollCollision>(Vec3(-30.0f, 12.75f, 25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-30.0f, 7.35f, 25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-29.7f, 10.0f, 28.0f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-30.0f, 10.0f, 22.0f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		
+		CirclepollColrig = AddGameObject<PollCollision>(Vec3(-30.0f, 12.75f, -25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-30.0f, 7.35f, -25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-29.7f, 10.0f, -22.2f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-30.0f, 10.0f, -27.8f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+
+		CirclepollColrig = AddGameObject<PollCollision>(Vec3(30.0f, 12.75f, 25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 7.35f, 25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(29.7f, 10.0f, 22.2f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 10.0f, 27.8f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+
+		CirclepollColrig = AddGameObject<PollCollision>(Vec3(30.0f, 12.75f, -25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 7.35f,-25.0f), Vec3(4.0f, 2.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(29.7f, 10.0f, -27.8f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 10.0f, -22.2f), Vec3(1.7f, 6.0f, 0.3f), Vec3(0.0f, 70.8f, 0.0f));
+
+	}
+	void GameStage2::CreateObstacle() {
+		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 6.0f, 0.0f), Vec3(5.0f, 2.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Poll", objPoll);
+		auto objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 16.8f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(40.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 16.8f, 0.0f),  L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-40.0f, 4.0f, -25.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, 25.0f),  Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+
+		objPollnol = AddGameObject<Poll1>(Vec3(40.0f, 4.0f, 25.0f),  Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, 16.8f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-40.0f, 4.0f, 25.0f), Vec3(3.0f, 8.0f, 2.0f),  Vec3(0.0f, -16.8f, 0.0f), L"RED_TX");
+
+		auto objCirclePollnol = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 25.0), Vec3(4.0f, 3.5f, 0.3f), Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		objCirclePollnol = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, -25.0), Vec3(4.0f, 3.5f, 0.3f),     Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		objCirclePollnol = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, 25.0), Vec3(4.0f, 3.5f, 0.3f),       Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+		objCirclePollnol = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, -25.0), Vec3(4.0f, 3.5f, 0.3f),      Vec3(0.0f, 70.8f, 0.0f), L"RED_TX");
+
+		auto ptrobstacle = AddGameObject<Deployment2>();
+	}
+
+	void GameStage2::CreateTraceSprite() {
+		float a = -510.0f;
+		float b = 70.0f;
+		//AddGameObject<Time>(1,Vec3(1.0f,1.0f,1.0f),L"NUMBER_TX");
+		//AddGameObject<Energy>(L"HANE_TX", true,
+		//    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
+		//AddGameObject<Energy>(L"HANE_TX", true,
+		//	Vec2(100.0f, 60.0f), Vec3(a - b, 350.0f, 0.0f));
+		//AddGameObject<Energy>(L"HANE_TX", true,
+		//	Vec2(100.0f, 60.0f), Vec3(a + b, 350.0f, 0.0f));
+
+	}
+	void GameStage2::CreateGoal() {
+		//AddGameObject<Goal>(
+		//	Vec3(0.0f, 25.0f, -240.0f),//pos z=-240
+		//	Vec3(100.0f, 50.0f, 1.0f),//scl
+		//	Vec3(0.0f,0.0f,0.0f));//rot
+	}
+	void GameStage2::CreateTime()
+	{
+		AddGameObject<UITime>(2,
+			L"NUMBER2_TX",
+			true,
+			Vec2(240.0f, 60.0f),
+			Vec3(-440.0f, 350.0f, 0.0f));
+	}
+
+	void GameStage2::OnCreate() {
+		try {
+			//ビューとライトの作成
+			CreateViewLight();
+			CreatePlayer();
+			CreateWall();
+			CreateGround();
+			CreatePollCollision();
+			CreateObstacle();
+			CreateGoal();
+			CreateTraceSprite();
+			CreateTime();
+		}
+		catch (...) {
+			throw;
+		}
+	}
+
+	void GameStage2::OnUpdate()
+	{
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
+		{
+			int a = 0;
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+		}
+
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		m_ToTalTime;
+		m_ToTalTime -= elapsedTime;
+		if (m_ToTalTime <= 0) {
+			//m_ToTalTime = 0.0f;
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+
+		}
+		//スコアを更新する
+		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
+		ptrScor->SetScore(m_ToTalTime);
+	}
+
+}
+//end basecross

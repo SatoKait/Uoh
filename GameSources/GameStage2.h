@@ -1,6 +1,6 @@
 /*!
 @file GameStage.h
-@brief ã‚²ãƒ¼ãƒ ã‚¹ãƒ†ãƒ¼ã‚¸
+@brief ƒQ[ƒ€ƒXƒe[ƒW
 */
 
 #pragma once
@@ -9,44 +9,42 @@
 namespace basecross {
 
 	//--------------------------------------------------------------------------------------
-	//	ã‚²ãƒ¼ãƒ ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒ©ã‚¹
+	//	ƒQ[ƒ€ƒXƒe[ƒWƒNƒ‰ƒX
 	//--------------------------------------------------------------------------------------
-	class GameStage : public Stage {
-		//ã‚¹ãƒ†ãƒ¼ã‚¸ã®å€ç‡
+	class GameStage2 : public Stage {
+		//ƒXƒe[ƒW‚Ì”{—¦
 		float m_StageRation;
 		float m_ToTalTime;
-		wstring m_Number;
 
-		//ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
+		//ƒrƒ…[‚Ìì¬
 		void CreateViewLight();
-		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½œæˆ
+		// ƒvƒŒƒCƒ„[‚Ìì¬
 		void CreatePlayer();
-		//å£
+		//•Ç
 		void CreateWall();
-
-		//ã‚¹ãƒ†ãƒ¼ã‚¸
+		//ƒXƒe[ƒW
 		void CreateGround();
-		//éšœå®³ç‰©
+		//áŠQ•¨
 		void CreateObstacle();
-		//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+		//ƒXƒvƒ‰ƒCƒg
 		void CreateTraceSprite();
-		//ã‚´ãƒ¼ãƒ«
-		void CreateGoal();
-		//æ™‚é–“
-		void CreateTime();
 
 		void CreatePollCollision();
-		shared_ptr<SingleView> m_View;//ãƒ“ãƒ¥ãƒ¼ã®å¤‰æ•°
+		//ƒS[ƒ‹
+		void CreateGoal();
+		//ŠÔ
+		void CreateTime();
+		shared_ptr<SingleView> m_View;//ƒrƒ…[‚Ì•Ï”
 
 	public:
-		//æ§‹ç¯‰ã¨ç ´æ£„
-		GameStage();
-		virtual ~GameStage() {}
-		//åˆæœŸåŒ–
+		//\’z‚Æ”jŠü
+		GameStage2();
+		virtual ~GameStage2() {}
+		//‰Šú‰»
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
 
-		
+
 	};
 
 

@@ -27,6 +27,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)UITime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Wall.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelectStageSprite.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Block.h" />
@@ -55,5 +57,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UITime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Wall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelectStageSprite.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage2.h" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,14 @@ namespace basecross{
 			tex = texPath + L"number.png";
 			App::GetApp()->RegisterTexture(L"NUMBER2_TX", tex);
 			tex = texPath + L"Score100.png";
+			//Scoreテクスチャ
+			tex = texPath + L"Score50.png";
 			App::GetApp()->RegisterTexture(L"SCORE_TX", tex);
+			tex = texPath + L"Score100.png";
+			App::GetApp()->RegisterTexture(L"SCORE2_TX", tex);
+			tex = texPath + L"Score200.png";
+			App::GetApp()->RegisterTexture(L"SCORE3_TX", tex);
+			//Stageに使うテクスチャ
 			tex = texPath + L"StageSlect.png";
 			App::GetApp()->RegisterTexture(L"STAGESELECT_TX", tex);
 			tex = texPath + L"GoalScene.png";
@@ -35,7 +42,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"LOGO_TX", tex);
 			tex = texPath + L"TItleBack.png";
 			App::GetApp()->RegisterTexture(L"TITLEBACK_TX", tex);
-
+			tex = texPath + L"TitleText.png";
+			App::GetApp()->RegisterTexture(L"TITLETEXT_TX", tex);
 
 			tex = texPath + L"Goal.png";
 			App::GetApp()->RegisterTexture(L"GOAL_TX",tex);
@@ -52,7 +60,7 @@ namespace basecross{
 			auto StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole.bmf");
 			App::GetApp()->RegisterResource(L"POLE_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole2.bmf");
-			App::GetApp()->RegisterResource(L"POLE2_MESH", StaticMultiModelMesh);
+			App::GetApp()->RegisterResource(L"POLL_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Poll2.bmf");
 			App::GetApp()->RegisterResource(L"POLL2_MESH", StaticMultiModelMesh);
 
@@ -63,10 +71,12 @@ namespace basecross{
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
 			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
-			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
-			App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
+			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
+			//App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"FlyingFish.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll3.bmf");
+			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);
 
 		}
 	}
@@ -103,7 +113,12 @@ namespace basecross{
 		if (event->m_MsgStr == L"ToGameStage") {
 			//最初のアクティブステージの設定
 			ResetActiveStage<GameStage>();
+		}		
+		if (event->m_MsgStr == L"ToGameStage2") {
+			//最初のアクティブステージの設定
+			ResetActiveStage<GameStage2>();
 		}
+
 		if (event->m_MsgStr == L"ToGoalScene") {
 			//ゴールシーンに移動
 		    ResetActiveStage<GoalScene>();
