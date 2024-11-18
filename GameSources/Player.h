@@ -37,6 +37,7 @@ namespace basecross{
 		Vec3 m_CameraPos;
 		float m_ChangeTime;
 		bool m_ChangeFlag;
+		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
 		//int m_Score;
 
@@ -63,8 +64,9 @@ namespace basecross{
 			m_GoalTime(0.0f),
 			m_SpeedUp(false),
 			m_Rotate(0.0f),
-			m_ChangeTime(0),
+			m_ChangeTime(2.0f),
 			m_ChangeFlag(false),
+			m_CircleChangeFlag(false),
 			m_DrawFlag(true)
 		{
 		}

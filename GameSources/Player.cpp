@@ -358,11 +358,19 @@ namespace basecross{
 		}
 		if (m_ChangeFlag == true)
 		{
-			m_ChangeTime += delta;
+			m_ChangeTime -= delta;
 		}
-		else if (m_ChangeTime >= 2.0)
+		if (m_CircleChangeFlag == true)
 		{
-			m_ChangeTime = 0.0f;
+			m_ChangeTime -= delta;
+		}
+
+		if (m_ChangeTime <= 0.0)
+		{
+			m_ChangeTime = 2.0f;	
+			m_ChangeFlag = false;
+			m_CircleChangeFlag = false;
+
 		}
 	}
 
@@ -385,6 +393,9 @@ namespace basecross{
 		auto stage = GetStage();
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
 		auto ptrPollCol = ptrPoll->m_col;
+		//auto ptrPoll1 = stage->GetSharedGameObject<Poll1>(L"Poll1");
+		//auto ptrPollcol1 = ptrPoll1->m_col;
+
 
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
@@ -406,13 +417,30 @@ namespace basecross{
 		     
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
+
 		if (other->FindTag(L"Poll") && !m_ChangeFlag)
+		{
+			//ptrPollcol1->SetAfterCollision(AfterCollision::None);
+			App::GetApp()->GetScene<Scene>()->AddScore(50);
+			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+			m_ChangeFlag = true;
+
+		}
+		if (other->FindTag(L"Poll2") && !m_ChangeFlag)
 		{
 			ptrPollCol->SetAfterCollision(AfterCollision::None);
 			m_ChangeFlag = true;
-			App::GetApp()->GetScene<Scene>()->AddScore(100);
-			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+			App::GetApp()->GetScene<Scene>()->AddScore(200);
+			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE3_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
 		}
+		if (other->FindTag(L"CirclePoll") && !m_CircleChangeFlag)
+		{
+			//ptrCirclePollCol->SetAfterCollision(AfterCollision::None);
+			App::GetApp()->GetScene<Scene>()->AddScore(100);
+			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));			
+			m_CircleChangeFlag = true;
+		}
+
 		if(m_ChangeTime >= 2.0f)
 		{
 			ptrPollCol->SetAfterCollision(AfterCollision::Auto);
