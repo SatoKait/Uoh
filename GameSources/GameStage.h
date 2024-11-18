@@ -12,10 +12,16 @@ namespace basecross {
 	//	ゲームステージクラス
 	//--------------------------------------------------------------------------------------
 	class GameStage : public Stage {
+		// BGM
+		shared_ptr<SoundItem> m_stageBGM;
+
 		//ステージの倍率
 		float m_StageRation;
 		float m_ToTalTime;
 		wstring m_Number;
+
+		// BGMの再生
+		void PlayBGM();
 
 		//ビューの作成
 		void CreateViewLight();
@@ -45,6 +51,7 @@ namespace basecross {
 		//初期化
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
+		//virtual void OnDestroy()override;
 
 		
 	};
