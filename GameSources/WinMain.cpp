@@ -108,6 +108,10 @@ HWND InitInstance(HINSTANCE hInstance, int nCmdShow, bool isFullScreen, int iCli
 			return 0;   //エラー終了
 		}
 	}
+
+	//マウスカーソル
+	ShowCursor(FALSE);
+
 	//ウインドウの表示
 	ShowWindow(
 		hWnd,       //取得したウインドウのハンドル
