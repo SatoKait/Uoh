@@ -50,10 +50,7 @@ namespace basecross{
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
-
-			const Vec3& Rot);
 			const Vec3& Rot
-
 		) :
 			GameObject(StagePtr),
 			m_StartPos(Position),
@@ -70,7 +67,8 @@ namespace basecross{
 			m_ChangeTime(2.0f),
 			m_ChangeFlag(false),
 			m_CircleChangeFlag(false),
-			m_DrawFlag(true)
+			m_DrawFlag(true),
+			m_Angle(0.0f)
 		{
 		}
 
