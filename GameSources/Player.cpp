@@ -164,7 +164,7 @@ namespace basecross{
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 
-			if (m_Rotate.z <= 1.5f && m_Rotate.z >= -1.5f)
+			if (m_Rotate.z <= 1.0f && m_Rotate.z >= -1.0f)
 			{
 				m_Rotate.z += ret.x * 0.015;
 				//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
