@@ -170,7 +170,19 @@ namespace basecross{
 				//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
 			}
 
-			m_Accel -= 0.03f;
+			if (m_Rotate.z >= 1.0f && ret.x <= -0.1f)
+			{
+				m_Rotate.z = 0.9f;
+			}
+			if (m_Rotate.z <= -1.0f && ret.x >= 0.1f)
+			{
+				m_Rotate.z = -0.9f;
+			}
+
+			if (m_JumpTime <= 2.0f)
+				m_Accel -= 0.03f;
+			else
+				m_Accel -= 0.015f;
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
 			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
