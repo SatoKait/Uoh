@@ -180,7 +180,7 @@ namespace basecross{
 			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
 		}
-		const float posYcnst = 1.25f;
+		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
 			m_grounded = true;
@@ -230,7 +230,7 @@ namespace basecross{
 			Vec3(1.0f, 1.0f, 1.0f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
-			Vec3(0.0f, 0.0f, 0.0f)
+			Vec3(0.0f, -3.6f, 0.0f)
 		);
 
 		//影をつける（シャドウマップを描画する）
