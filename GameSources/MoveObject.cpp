@@ -312,6 +312,8 @@ namespace basecross {
 		auto col = AddComponent<CollisionObb>();
 		col->SetDrawActive(m_DrawFlag);
 		col->SetFixed(true);
+
+		AddTag(L"StanObject");
 	}
 
 
