@@ -33,4 +33,5 @@
 #include "Score.h"
 #include "UITime.h"
 #include "SelectStageSprite.h"
+#include "GameOverStage.h"
 
