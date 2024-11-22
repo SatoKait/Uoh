@@ -126,7 +126,7 @@ namespace basecross {
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
 			m_Speed(1.0f),		//スピード
-			m_DrawFlag(false)
+			m_DrawFlag(true)
 
 		{
 		}
@@ -231,7 +231,7 @@ namespace basecross {
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
 			m_Speed(1.0f),		//スピード
-			m_DrawFlag(false),
+			m_DrawFlag(true),
 			m_Count(0)
 
 		{
@@ -276,7 +276,7 @@ namespace basecross {
 			m_Position(Position),
 			m_Scale(Scale),
 			 m_Rotate(m_Rotate),
-			 m_DrawFlag(false)
+			 m_DrawFlag(true)
 
 		 {
 	   	 }

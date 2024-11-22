@@ -163,10 +163,10 @@ namespace basecross {
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
 		spanMat.affineTransformation(
-			Vec3(0.02f, 0.035f, 0.1f),//スケーリング
+			Vec3(0.02f, 0.0405f, 0.25f),//スケーリング
 			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, -2.25f, 0.0f) //移動
+			Vec3(0.0f, -2.6f, 0.0f) //移動
 		);
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();
@@ -179,15 +179,6 @@ namespace basecross {
 		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
-
-	//void Poll::OnCollisionEnter(shared_ptr<GameObject>& other)
-	//{
-	//	if (other->FindTag(L"Player"))
-	//	{
-	//		m_col->SetAfterCollision(AfterCollision::None);
-	//	}
-
-	//}
 
 	//--------------------------------------------------------------------------------------
 	// CirclePollキャラ
@@ -211,7 +202,7 @@ namespace basecross {
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
 		spanMat.affineTransformation(
-			Vec3(0.09f, 0.125f, 0.1f),//スケーリング
+			Vec3(0.09f, 0.125f, 0.3f),//スケーリング
 			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
 			Vec3(0.0f, 0.0f, 0.0f) //移動
