@@ -59,7 +59,7 @@ namespace basecross {
 					auto blockInstance = pole->GetComponent<PNTStaticInstanceDraw>();
 					Mat4x4 matrix, mtxScale;
 					//mtxScale.scale(Vec3(2.0f, 2.0f, 2.0f));
-					matrix.translation(Vec3(m_Side, 0.0f, m_Warp));
+					matrix.translation(Vec3(m_Side, 0.5f, m_Warp));
 
 					blockInstance->AddMatrix(matrix);
 

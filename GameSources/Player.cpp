@@ -232,7 +232,12 @@ namespace basecross{
 		m_ptrTrans->SetScale(m_StartScale);
 
 		// コリジョン
-		auto col = AddComponent<CollisionSphere>();
+ 		auto col = AddComponent<CollisionObb>();
+		
+		//auto col = AddComponent<CollisionCapsule>();
+		//col->SetMakedDiameter(3.0f);
+		//col->SetMakedHeight(1.0f);
+		col->SetDrawActive(true);
 
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
@@ -244,10 +249,10 @@ namespace basecross{
 		// プレイヤーの描画
 		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
 		spanMat.affineTransformation(
-			Vec3(1.0f, 1.0f, 1.0f),
+			Vec3(1.0f, 1.0f, 0.12f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
-			Vec3(0.0f, -3.6f, 0.0f)
+			Vec3(0.0f, -1.3f, -2.0f)
 		);
 
 		//影をつける（シャドウマップを描画する）
@@ -517,7 +522,10 @@ namespace basecross{
 		{
 			m_Accel = -4.0f;
 			m_MoveFlag = false;
-			m_StanTime = 0.0f;
+			if(m_StanTime >= 3.0f)
+			{ 
+				m_StanTime = 0.0f;
+			}
 		}
 
 	}
