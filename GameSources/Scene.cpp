@@ -44,6 +44,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"TITLEBACK_TX", tex);
 			tex = texPath + L"TitleText.png";
 			App::GetApp()->RegisterTexture(L"TITLETEXT_TX", tex);
+			tex = texPath + L"GameOver.png";
+			App::GetApp()->RegisterTexture(L"GAMEOVER_TX", tex);
 
 			tex = texPath + L"Goal.png";
 			App::GetApp()->RegisterTexture(L"GOAL_TX", tex);
@@ -94,8 +96,6 @@ namespace basecross{
 			strSE = SoundPath + L"GameCreal2.wav";
 			App::GetApp()->RegisterWav(L"GAMECREAL2SE", strSE);
 
-
-
 		}
 	}
 
@@ -135,7 +135,10 @@ namespace basecross{
 			//最初のアクティブステージの設定
 			ResetActiveStage<GameStage2>();
 		}
-
+		if (event->m_MsgStr == L"ToGameOverStage") {
+			//最初のアクティブステージの設定
+			ResetActiveStage<GameOverStage>();
+		}
 		if (event->m_MsgStr == L"ToGoalScene") {
 			//ゴールシーンに移動
 		    ResetActiveStage<GoalScene>();

@@ -17,7 +17,10 @@ namespace basecross {
 
 		//ステージの倍率
 		float m_StageRation;
+		//ステージの時間
 		float m_ToTalTime;
+		float m_ToStartTime;
+		bool m_isStartFlag;
 		wstring m_Number;
 
 		// BGMの再生
@@ -40,7 +43,7 @@ namespace basecross {
 		void CreateGoal();
 		//時間
 		void CreateTime();
-
+		void CreateStageTime();
 		void CreatePollCollision();
 		shared_ptr<SingleView> m_View;//ビューの変数
 

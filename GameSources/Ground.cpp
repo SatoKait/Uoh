@@ -57,10 +57,10 @@ namespace basecross {
 		m_ptrTrans->SetPosition(Vec3(m_Position.x, m_Position.y, m_Position.z));
 		//m_Position.x += 10.0f * delta * m_Speed;
 
-		if (camerapos.z + 60.0f <= m_Position.z)
-		{
-			m_Position.z = -250.0f;
-		}
+		//if (camerapos.z + 60.0f <= m_Position.z)
+		//{
+		//	m_Position.z = -250.0f;
+		//}
 
 		if (ptrplayerFlag == true)
 		{
