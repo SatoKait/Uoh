@@ -232,12 +232,16 @@ namespace basecross{
 		m_ptrTrans->SetScale(m_StartScale);
 
 		// コリジョン
- 		auto col = AddComponent<CollisionObb>();
-		
+ 		//m_col1 = AddComponent<CollisionSphere>();
+		m_col2 = AddComponent<CollisionObb>();
+		//m_col1->SetAfterCollision(AfterCollision::None);
+		m_col2->SetAfterCollision(AfterCollision::None);
+
 		//auto col = AddComponent<CollisionCapsule>();
 		//col->SetMakedDiameter(3.0f);
 		//col->SetMakedHeight(1.0f);
-		col->SetDrawActive(true);
+		//m_col1->SetDrawActive(true);
+		m_col2->SetDrawActive(true);
 
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
@@ -283,7 +287,6 @@ namespace basecross{
 		auto rotate = trans->GetRotation();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
-
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 
@@ -306,6 +309,23 @@ namespace basecross{
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
 
+		if (m_StanFlag)
+		{
+			m_ptrTrans->SetRotation(0.0f,m_StanTime * 10.0f,0.0f);
+		}
+		//m_col1->SetSleepActive(true);
+		//m_col2->SetSleepActive(true);
+
+		//if (m_grounded)
+		//{
+		//	m_col1 = GetComponent<CollisionSphere>();	
+		//	m_col1->SetAfterCollision(AfterCollision::None);
+		//}
+		//else if (!m_grounded)
+		//{
+		//	m_col2 = GetComponent<CollisionObb>();
+		//	//m_col2->SetAfterCollision(AfterCollision::Auto);
+		//}
 
 		if (cntl[0].bConnected)
 		{
@@ -392,6 +412,7 @@ namespace basecross{
 
 		if (m_StanTime >= 2.0f)
 		{
+			m_StanFlag = false;
 			m_MoveFlag = true;
 		}
 
@@ -522,6 +543,7 @@ namespace basecross{
 		{
 			m_Accel = -4.0f;
 			m_MoveFlag = false;
+			m_StanFlag = true;
 			if(m_StanTime >= 3.0f)
 			{ 
 				m_StanTime = 0.0f;

@@ -41,9 +41,12 @@ namespace basecross{
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
 		float m_StanTime;
+		bool m_StanFlag;
 
 	private:
 		shared_ptr<Transform> m_trans;
+		shared_ptr<CollisionSphere> m_col1;
+		shared_ptr<CollisionObb> m_col2;
 
 	public:
 		bool m_Goal;			//ゴール判定
