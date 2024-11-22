@@ -106,7 +106,6 @@ namespace basecross{
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 
 		Vec2 ret;
-
 		if (cntl[0].bConnected)
 		{
 			if (m_MoveFlag)//フラグがたっていなければ操作ができない
@@ -148,29 +147,43 @@ namespace basecross{
 			m_ptrTrans->SetRotation(0.0f, -m_Angle + XM_PI/2, -m_Rotate.z);
 			//ptrCamera->SetEye(pos.x + 10.0f, 1.0f, pos.z);
 		}
-
-		if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
+		if (m_MoveFlag)
 		{
-			if (m_grounded == true)
+			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
 			{
-				m_grounded = false;
-				m_JumpTime = 0;
-				m_Accel = 2.0f;
-				m_SpeedUp = true;
-				m_bfrAngle = angle;
+				if (m_grounded == true)
+				{
+					m_grounded = false;
+					m_JumpTime = 0;
+					m_Accel = 2.0f;
+					m_SpeedUp = true;
+					m_bfrAngle = angle;
+				}
 			}
 		}
 		if (m_grounded == false)
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 
-			if (m_Rotate.z <= 1.5f && m_Rotate.z >= -1.5f)
+			if (m_Rotate.z <= 1.0f && m_Rotate.z >= -1.0f)
 			{
 				m_Rotate.z += ret.x * 0.015;
 				//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
 			}
 
-			m_Accel -= 0.03f;
+			if (m_Rotate.z >= 1.0f && ret.x <= -0.1f)
+			{
+				m_Rotate.z = 0.9f;
+			}
+			if (m_Rotate.z <= -1.0f && ret.x >= 0.1f)
+			{
+				m_Rotate.z = -0.9f;
+			}
+
+			if (m_JumpTime <= 2.0f)
+				m_Accel -= 0.03f;
+			else
+				m_Accel -= 0.015f;
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
 			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
@@ -180,7 +193,7 @@ namespace basecross{
 			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
 		}
-		const float posYcnst = 1.25f;
+		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
 			m_grounded = true;
@@ -191,16 +204,20 @@ namespace basecross{
 			//ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
 		}
 
-		// プレイヤーの移動
-		if(m_grounded) 
-			pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
-
-		if (!m_grounded)
+		if (m_MoveFlag)
 		{
+			// プレイヤーの移動
+			if(m_grounded) 
+				pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
 
-			if (ret.x || ret.y) pos += angle * m_Speed * delta;
-			else  pos += m_bfrAngle * m_Speed * delta;
+			if (!m_grounded)
+			{
+
+				if (ret.x || ret.y) pos += angle * m_Speed * delta;
+				else  pos += m_bfrAngle * m_Speed * delta;
+			}
 		}
+
 		m_ptrTrans->SetPosition(pos);
 	}
 
@@ -215,7 +232,12 @@ namespace basecross{
 		m_ptrTrans->SetScale(m_StartScale);
 
 		// コリジョン
-		auto col = AddComponent<CollisionSphere>();
+ 		auto col = AddComponent<CollisionObb>();
+		
+		//auto col = AddComponent<CollisionCapsule>();
+		//col->SetMakedDiameter(3.0f);
+		//col->SetMakedHeight(1.0f);
+		col->SetDrawActive(true);
 
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
@@ -227,10 +249,10 @@ namespace basecross{
 		// プレイヤーの描画
 		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
 		spanMat.affineTransformation(
-			Vec3(1.0f, 1.0f, 1.0f),
+			Vec3(1.0f, 1.0f, 0.12f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
-			Vec3(0.0f, 0.0f, 0.0f)
+			Vec3(0.0f, -1.3f, -2.0f)
 		);
 
 		//影をつける（シャドウマップを描画する）
@@ -272,6 +294,7 @@ namespace basecross{
 		//auto ptrGroundflag = ptrGround->m_Speed = 5;
 		// ジャンプしてからの経過時間
 		m_JumpTime += delta;
+		m_StanTime += delta;
 		// 開始してからの経過時間
 		if (m_Goal == false)
 		{
@@ -294,22 +317,17 @@ namespace basecross{
 
 		}
 
-		//// プレイヤーの描画
-		//Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
-		//spanMat.affineTransformation(
-		//	Vec3(1.0f, 1.0f, 1.0f),
-		//	Vec3(0.0f, 0.0f, 0.0f),
-		//	Vec3(ret.x, 0.0f, 0.0f),
-		//	Vec3(0.0f, 0.0f, 0.0f)
-		//);
-
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
-		//// 座標
-		//	wss		<< L"\n\n\npos : (" <<
-		//	pos.x	<< L", "			<<
-		//	pos.y	<< L", "			<<
-		//	pos.z	<< L")"				<< 
+		// 座標
+			wss		<< L"\n\n\npos : (" <<
+			//pos.x	<< L", "			<<
+			//pos.y	<< L", "			<<
+			//pos.z	<< L")"				<< 
+
+			L"\nstantime : "			<<
+			m_StanTime					<<
+
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
 		//	fps							<<
@@ -333,11 +351,15 @@ namespace basecross{
 		//	//m_Score <<
 
 
-		//	endl;
+			endl;
 
 		// //ゴール判定
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
 		//	else       { wss << "Goal : false" << endl; }
+
+		 //ゴール判定
+			if (m_MoveFlag){ wss << "moveflag : true" << endl; }
+			else       { wss << "moveflag : false" << endl; }
 
 		//auto Draw = AddComponent<BcPNTStaticDraw>();
 
@@ -366,6 +388,11 @@ namespace basecross{
 		if (m_CircleChangeFlag == true)
 		{
 			m_ChangeTime -= delta;
+		}
+
+		if (m_StanTime >= 2.0f)
+		{
+			m_MoveFlag = true;
 		}
 
 		if (m_ChangeTime <= 0.0)
@@ -490,6 +517,15 @@ namespace basecross{
 			App::GetApp()->GetScene<Scene>()->AddScore(100);
 			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));			
 			//m_CircleChangeFlag = true;
+		}
+		if (other->FindTag(L"StanObject"))
+		{
+			m_Accel = -4.0f;
+			m_MoveFlag = false;
+			if(m_StanTime >= 3.0f)
+			{ 
+				m_StanTime = 0.0f;
+			}
 		}
 
 	}

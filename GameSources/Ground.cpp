@@ -15,16 +15,16 @@ namespace basecross {
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
 
-		auto col = AddComponent<CollisionObb>();
-		col->SetDrawActive(true);
-		col->SetFixed(true);
+		//auto col = AddComponent<CollisionObb>();
+		//col->SetDrawActive(true);
+		//col->SetFixed(true);
 
 		Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
 		spanMat.affineTransformation(
 			Vec3(1.0f, 2.5f, 1.0f),//スケーリング
 			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, 0.5f, 0.0f) //移動
+			Vec3(0.0f, 1.7f, 0.0f) //移動
 		);
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();

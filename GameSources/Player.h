@@ -40,6 +40,7 @@ namespace basecross{
 		bool m_PollChangeFlag;
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
+		float m_StanTime;
 
 	private:
 		shared_ptr<Transform> m_trans;
@@ -73,7 +74,8 @@ namespace basecross{
 			m_CircleChangeFlag(false),
 			m_DrawFlag(true),
 			m_Angle(0.0f),
-			m_bfrAngle(0.0f)
+			m_bfrAngle(0.0f),
+			m_StanTime(0.0f)
 		{
 		}
 
