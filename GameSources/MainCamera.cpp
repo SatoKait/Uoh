@@ -39,8 +39,7 @@ namespace basecross {
 
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		Vec2 ret;
-		auto speed = 50.0f;
-
+		auto speed = 100.0f;
 
 		if (cntlVec[0].bConnected)
 		{
@@ -68,7 +67,8 @@ namespace basecross {
 		auto at = targetTrans->GetPosition();
 
 		at += frontVec * m_camDis;
-		SetAt(at);
+		m_at = at.y;
+		//SetAt(at);
 
 		//ƒJƒƒ‰‚ÌÀ•W“_‚ğİ’è
 		auto eye = at + radVec * m_distance;

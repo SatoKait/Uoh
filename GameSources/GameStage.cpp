@@ -192,7 +192,7 @@ namespace basecross {
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto score = App::GetApp()->GetScene<Scene>()->GetScore();
-	
+
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
 			int a = 0;

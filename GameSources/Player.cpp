@@ -85,7 +85,9 @@ namespace basecross{
 
 	}
 
-	// ほぼこの中にUpdate()関数内の内容が入ってる
+	// ------------------------------------------ //
+	// ほぼこの中にUpdate()関数内の内容が入ってる //
+	// ------------------------------------------ //
 	void Player::MovePlayer() {
 		//キーボードの取得(キーボード優先)
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
@@ -100,8 +102,6 @@ namespace basecross{
 		auto pos = trans->GetPosition();
 		// 大きさの取得
 		auto scale = trans->GetScale();
-		// 傾きの取得
-		//auto rotate = trans->GetRotation();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 
@@ -141,14 +141,17 @@ namespace basecross{
 		//回転の計算
 		if (angle.length() > 0.0f) {
 			auto utilPtr = GetBehavior<UtilBehavior>();
-			//utilPtr->RotToHead(angle, 1.0f);
-//			m_ptrTrans->SetRotation(0.0f, 0.0f, -m_Rotate.z);
-
-			m_ptrTrans->SetRotation(0.0f, -m_Angle + XM_PI/2, -m_Rotate.z);
+			if (m_grounded)
+			{
+				m_rotAng = -m_Angle + XM_PI / 2;
+				m_ptrTrans->SetRotation(0.0f, m_rotAng, 0.0f);
+			}
+			else m_ptrTrans->SetRotation(0.0f, m_rotAng, -m_Rotate.z);
 			//ptrCamera->SetEye(pos.x + 10.0f, 1.0f, pos.z);
 		}
 		if (m_MoveFlag)
 		{
+			// 飛んだ瞬間の判定
 			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
 			{
 				if (m_grounded == true)
@@ -161,16 +164,17 @@ namespace basecross{
 				}
 			}
 		}
+		// ジャンプと左右移動したときの傾き
 		if (m_grounded == false)
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 
+			// 傾きの制限
 			if (m_Rotate.z <= 1.0f && m_Rotate.z >= -1.0f)
 			{
 				m_Rotate.z += ret.x * 0.015;
-				//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
 			}
-
+			// 傾きの制限以上になった時のリセット的なやつ
 			if (m_Rotate.z >= 1.0f && ret.x <= -0.1f)
 			{
 				m_Rotate.z = 0.9f;
@@ -179,7 +183,7 @@ namespace basecross{
 			{
 				m_Rotate.z = -0.9f;
 			}
-
+			// 滞空時間の引き延ばし
 			if (m_JumpTime <= 2.0f)
 				m_Accel -= 0.03f;
 			else
@@ -201,23 +205,50 @@ namespace basecross{
 			m_Accel = 0.0f;
 			m_Rotate.z = 0;
 			m_SpeedUp = false;
-			//ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
 		}
-
+		const float AngleLim = 1.1f, lim = 0.1f;
 		if (m_MoveFlag)
 		{
 			// プレイヤーの移動
-			if(m_grounded) 
-				pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
+			if (m_grounded)
+			{
+				if (ret.x || ret.y)
+				{
+					pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
+					if ((ret.x <= AngleLim && ret.x >= -AngleLim) ||
+						(ret.y <= AngleLim && ret.y >= -AngleLim))
+					{
+						m_moveAngle = angle;
+						if (m_moveAngle.x <= lim || m_moveAngle.x >= -lim)
+						{
+							m_moveAngle.x *= 1.5f;
+						}
+						if (m_moveAngle.z <= lim || m_moveAngle.z >= -lim)
+						{
+							m_moveAngle.z *= 1.5f;
+						}
+					}
+				}
+				else pos += m_moveAngle * m_Speed * delta;
+			}
 
 			if (!m_grounded)
 			{
-
-				if (ret.x || ret.y) pos += angle * m_Speed * delta;
-				else  pos += m_bfrAngle * m_Speed * delta;
+				// 飛んでいるときの移動処理
+				if (!ret.x || !ret.y)
+				{
+					pos += m_moveAngle * m_Speed * delta;
+				}
+				else if (ret.x || ret.y)
+				{
+					pos += angle * m_Speed * delta;
+				}
+				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
 		}
-
+		Vec3 change = { pos.x + ret.x * 2,ptrCamera->m_at, pos.z/* + ret.x */};
+		ptrCamera->SetAt(change);
+		// 位置の更新
 		m_ptrTrans->SetPosition(pos);
 	}
 
@@ -232,16 +263,12 @@ namespace basecross{
 		m_ptrTrans->SetScale(m_StartScale);
 
 		// コリジョン
- 		//m_col1 = AddComponent<CollisionSphere>();
-		m_col2 = AddComponent<CollisionObb>();
-		//m_col1->SetAfterCollision(AfterCollision::None);
-		m_col2->SetAfterCollision(AfterCollision::None);
 
-		//auto col = AddComponent<CollisionCapsule>();
-		//col->SetMakedDiameter(3.0f);
-		//col->SetMakedHeight(1.0f);
-		//m_col1->SetDrawActive(true);
-		m_col2->SetDrawActive(true);
+		m_col = AddComponent<CollisionCapsule>();
+		m_col->SetAfterCollision(AfterCollision::Auto);
+
+		//m_col->SetDrawActive(true);
+		//m_col2->SetDrawActive(true);
 
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
@@ -290,8 +317,6 @@ namespace basecross{
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 
-		//auto frontAngle = PlayerAngle();
-
 		//auto stage = GetStage();
 		//auto ptrGround = stage->GetSharedGameObject<Ground>(L"Ground");
 		//auto ptrGroundflag = ptrGround->m_Speed = 5;
@@ -313,19 +338,15 @@ namespace basecross{
 		{
 			m_ptrTrans->SetRotation(0.0f,m_StanTime * 10.0f,0.0f);
 		}
-		//m_col1->SetSleepActive(true);
-		//m_col2->SetSleepActive(true);
+		if (m_grounded)
+		{
+			m_ptrTrans->SetScale(0.25f, 0.25f, 0.25f);
 
-		//if (m_grounded)
-		//{
-		//	m_col1 = GetComponent<CollisionSphere>();	
-		//	m_col1->SetAfterCollision(AfterCollision::None);
-		//}
-		//else if (!m_grounded)
-		//{
-		//	m_col2 = GetComponent<CollisionObb>();
-		//	//m_col2->SetAfterCollision(AfterCollision::Auto);
-		//}
+		}
+		else if (!m_grounded)
+		{
+			m_ptrTrans->SetScale(2.0f, 0.25f, 0.25f);
+		}
 
 		if (cntl[0].bConnected)
 		{
@@ -344,9 +365,12 @@ namespace basecross{
 			//pos.x	<< L", "			<<
 			//pos.y	<< L", "			<<
 			//pos.z	<< L")"				<< 
+			pos.x	<< L", "			<<
+			pos.y	<< L", "			<<
+			pos.z	<< L")"				<< 
 
-			L"\nstantime : "			<<
-			m_StanTime					<<
+			//L"\nstantime : "			<<
+			//m_StanTime					<<
 
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
@@ -370,7 +394,6 @@ namespace basecross{
 		//	//L"\nm_Score : " <<
 		//	//m_Score <<
 
-
 			endl;
 
 		// //ゴール判定
@@ -381,22 +404,11 @@ namespace basecross{
 			if (m_MoveFlag){ wss << "moveflag : true" << endl; }
 			else       { wss << "moveflag : false" << endl; }
 
-		//auto Draw = AddComponent<BcPNTStaticDraw>();
-
-		//Draw->SetMeshToTransformMatrix(spanMat);
-
 		// デバッグ用文字列
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
-		
-		//auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
-
-		//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
-
-
-		//m_ptrTrans->SetRotation(rotate);
-		
+			
 		if (m_Goal)
 		{
 			Player::Goaltrue();
@@ -425,19 +437,6 @@ namespace basecross{
 		}
 	}
 
-	//float Player::PlayerAngle() const {
-
-	//	//進行方向の向きを計算
-	//	auto ptrCamera = OnGetDrawCamera();
-	//	auto front = m_trans->GetPosition() - ptrCamera->GetEye();
-	//	front.y = 0;
-	//	front.normalize();
-	//	//進行方向の向きからの角度を算出
-	//	float frontAngle = atan2(front.z, front.x);
-
-	//	return frontAngle;
-	//}
-
 	void Player::Goaltrue()
 	{
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
@@ -451,11 +450,9 @@ namespace basecross{
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
-		auto Stage = GetStage();
-
+		
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
-		
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
 
 		auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
@@ -493,7 +490,7 @@ namespace basecross{
 		if (other->FindTag(L"Goal"))
 		{
 
-			Stage->AddGameObject<GoalSprite>(L"GOAL_TX",
+			stage->AddGameObject<GoalSprite>(L"GOAL_TX",
 		    Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
 
 			//Stage->AddGameObject<TimeSprite>(L"",
@@ -544,7 +541,7 @@ namespace basecross{
 			m_Accel = -4.0f;
 			m_MoveFlag = false;
 			m_StanFlag = true;
-			if(m_StanTime >= 3.0f)
+			if(m_StanTime >= 3.5f)
 			{ 
 				m_StanTime = 0.0f;
 			}

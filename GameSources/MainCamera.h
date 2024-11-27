@@ -38,6 +38,7 @@ namespace basecross {
 		void SetAngle();
 		void SetMove(bool MoveOn);
 
+		float m_at;
 	};
 }
 //end basecross
