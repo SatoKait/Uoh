@@ -46,13 +46,17 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"TITLETEXT_TX", tex);
 			tex = texPath + L"GameOver.png";
 			App::GetApp()->RegisterTexture(L"GAMEOVER_TX", tex);
-
+			tex = texPath + L"Time.png";
+			App::GetApp()->RegisterTexture(L"TIME_TX", tex);
 			tex = texPath + L"Goal.png";
 			App::GetApp()->RegisterTexture(L"GOAL_TX", tex);
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
 			App::GetApp()->RegisterTexture(L"RED_TX", tex);
+			tex = texPath + L"line.png";
+			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
+
 		}
 		// モデルのリソース
 		{
