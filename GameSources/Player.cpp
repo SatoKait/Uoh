@@ -1,6 +1,6 @@
 /*!
 @file Player.cpp
-@brief ƒvƒŒƒCƒ„[‚È‚ÇÀ‘Ì
+@brief ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ namespace basecross{
 		Vec2 ret;
 		ret.x = 0.0f;
 		ret.y = 0.0f;
-		//ƒRƒ“ƒgƒ[ƒ‰‚Ìæ“¾
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®å–å¾—
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		if (cntlVec[0].bConnected) {
 			ret.x = cntlVec[0].fThumbLX;
@@ -23,23 +23,23 @@ namespace basecross{
 			//m_FrontRadian += (XM_PI / (m_Status.turnPaformanve / m_SpeedRate)) * m_ElapsedTime * (m_Slope.x / 20.0f);
 
 		}
-		//ƒL[ƒ{[ƒh‚Ìæ“¾(ƒL[ƒ{[ƒh—Dæ)
+		//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å–å¾—(ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å„ªå…ˆ)
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		float BaseSpeed = 3.0f;
 		if (KeyState.m_bPushKeyTbl['W']) {
-			//‘O
+			//å‰
 			ret.y = BaseSpeed * m_Speed * delta;
 		}
 		if (KeyState.m_bPushKeyTbl['A']) {
-			//¶
+			//å·¦
 			ret.x = -BaseSpeed * m_Speed * delta;
 		}
 		if (KeyState.m_bPushKeyTbl['S']) {
-			//Œã‚ë
+			//å¾Œã‚
 			ret.y = -BaseSpeed * m_Speed * delta;
 		}
 		if (KeyState.m_bPushKeyTbl['D']) {
-			//‰E
+			//å³
 			ret.x = BaseSpeed * m_Speed * delta;
 		}
 		return ret;
@@ -50,34 +50,34 @@ namespace basecross{
 	{
 
 		Vec3 angle(0, 0, 0);
-		//“ü—Í‚Ìæ“¾
+		//å…¥åŠ›ã®å–å¾—
 		auto inPut = GetInputState();
 		float moveX = inPut.x;
 		float moveZ = inPut.y;
 		if (moveX != 0 || moveZ != 0) {
-			float moveLength = 0;	//“®‚¢‚½‚ÌƒXƒs[ƒh
+			float moveLength = 0;	//å‹•ã„ãŸæ™‚ã®ã‚¹ãƒ”ãƒ¼ãƒ‰
 			auto ptrTransform = GetComponent<Transform>();
 			auto ptrCamera = OnGetDrawCamera();
-			//is•ûŒü‚ÌŒü‚«‚ğŒvZ
+			//é€²è¡Œæ–¹å‘ã®å‘ãã‚’è¨ˆç®—
 			auto front = ptrTransform->GetPosition() - ptrCamera->GetEye();
 			front.y = 0;
 			front.normalize();
-			//is•ûŒüŒü‚«‚©‚ç‚ÌŠp“x‚ğZo
+			//é€²è¡Œæ–¹å‘å‘ãã‹ã‚‰ã®è§’åº¦ã‚’ç®—å‡º
 			float frontAngle = atan2(front.z, front.x);
-			//ƒRƒ“ƒgƒ[ƒ‰‚ÌŒü‚«ŒvZ
+			//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®å‘ãè¨ˆç®—
 			Vec2 moveVec(moveX, moveZ);
 			float moveSize = moveVec.length();
-			//ƒRƒ“ƒgƒ[ƒ‰‚ÌŒü‚«‚©‚çŠp“x‚ğŒvZ
+			//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®å‘ãã‹ã‚‰è§’åº¦ã‚’è¨ˆç®—
 			float cntlAngle = atan2(-moveX, moveZ);
-			//ƒg[ƒ^ƒ‹‚ÌŠp“x‚ğZo
+			//ãƒˆãƒ¼ã‚¿ãƒ«ã®è§’åº¦ã‚’ç®—å‡º
 			m_Angle = frontAngle + cntlAngle;
-			//Šp“x‚©‚çƒxƒNƒgƒ‹‚ğì¬
+			//è§’åº¦ã‹ã‚‰ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä½œæˆ
 			angle = Vec3(cos(m_Angle), 0, sin(m_Angle));
-			//³‹K‰»‚·‚é
+			//æ­£è¦åŒ–ã™ã‚‹
 			angle.normalize();
-			//ˆÚ“®ƒTƒCƒY‚ğİ’èB
+			//ç§»å‹•ã‚µã‚¤ã‚ºã‚’è¨­å®šã€‚
 			angle *= moveSize;
-			//Y²‚Í•Ï‰»‚³‚¹‚È‚¢
+			//Yè»¸ã¯å¤‰åŒ–ã•ã›ãªã„
 			angle.y = 0;
 		}
 
@@ -85,30 +85,30 @@ namespace basecross{
 
 	}
 
-	// ‚Ù‚Ú‚±‚Ì’†‚ÉUpdate()ŠÖ”“à‚Ì“à—e‚ª“ü‚Á‚Ä‚é
+	// ------------------------------------------ //
+	// ã»ã¼ã“ã®ä¸­ã«Update()é–¢æ•°å†…ã®å†…å®¹ãŒå…¥ã£ã¦ã‚‹ //
+	// ------------------------------------------ //
 	void Player::MovePlayer() {
-		//ƒL[ƒ{[ƒh‚Ìæ“¾(ƒL[ƒ{[ƒh—Dæ)
+		//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å–å¾—(ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å„ªå…ˆ)
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
-		//ƒJƒƒ‰ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é
+		//ã‚«ãƒ¡ãƒ©ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
-		//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚Ìæ“¾
+		//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®å–å¾—
 		auto trans = GetComponent<Transform>();
-		//ƒ|ƒWƒVƒ‡ƒ“‚Ìæ“¾
+		//ãƒã‚¸ã‚·ãƒ§ãƒ³ã®å–å¾—
 		auto pos = trans->GetPosition();
-		// ‘å‚«‚³‚Ìæ“¾
+		// å¤§ãã•ã®å–å¾—
 		auto scale = trans->GetScale();
-		// ŒX‚«‚Ìæ“¾
-		//auto rotate = trans->GetRotation();
-		//ƒRƒ“ƒgƒ[ƒ‰‚Ìæ“¾
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®å–å¾—
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 
 		Vec2 ret;
 		if (cntl[0].bConnected)
 		{
-			if (m_MoveFlag)//ƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚È‚¯‚ê‚Î‘€ì‚ª‚Å‚«‚È‚¢
+			if (m_MoveFlag)//ãƒ•ãƒ©ã‚°ãŒãŸã£ã¦ã„ãªã‘ã‚Œã°æ“ä½œãŒã§ããªã„
 			{
 				ret.x = cntl[0].fThumbLX;
 				ret.y = cntl[0].fThumbLY;
@@ -138,21 +138,25 @@ namespace basecross{
 			GetComponent<Transform>()->SetPosition(pos);
 		}
 
-		//‰ñ“]‚ÌŒvZ
+		//å›è»¢ã®è¨ˆç®—
 		if (angle.length() > 0.0f) {
 			auto utilPtr = GetBehavior<UtilBehavior>();
-			//utilPtr->RotToHead(angle, 1.0f);
-//			m_ptrTrans->SetRotation(0.0f, 0.0f, -m_Rotate.z);
-
-			m_ptrTrans->SetRotation(0.0f, -m_Angle + XM_PI/2, -m_Rotate.z);
+			if (m_grounded)
+			{
+				m_rotAng = -m_Angle + XM_PI / 2;
+				m_ptrTrans->SetRotation(0.0f, m_rotAng, 0.0f);
+			}
+			else m_ptrTrans->SetRotation(0.0f, m_rotAng, -m_Rotate.z);
 			//ptrCamera->SetEye(pos.x + 10.0f, 1.0f, pos.z);
 		}
 		if (m_MoveFlag)
 		{
+			// é£›ã‚“ã ç¬é–“ã®åˆ¤å®š
 			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
 			{
 				if (m_grounded == true)
 				{
+					m_ptrXA->Start(L"FloatSE", 0, 2.0f);
 					m_grounded = false;
 					m_JumpTime = 0;
 					m_Accel = 2.0f;
@@ -161,16 +165,17 @@ namespace basecross{
 				}
 			}
 		}
+		// ã‚¸ãƒ£ãƒ³ãƒ—ã¨å·¦å³ç§»å‹•ã—ãŸã¨ãã®å‚¾ã
 		if (m_grounded == false)
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 
+			// å‚¾ãã®åˆ¶é™
 			if (m_Rotate.z <= 1.0f && m_Rotate.z >= -1.0f)
 			{
-				m_Rotate.z += ret.x * 0.015;
-				//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
+				m_Rotate.z += ret.x * 0.025;
 			}
-
+			// å‚¾ãã®åˆ¶é™ä»¥ä¸Šã«ãªã£ãŸæ™‚ã®ãƒªã‚»ãƒƒãƒˆçš„ãªã‚„ã¤
 			if (m_Rotate.z >= 1.0f && ret.x <= -0.1f)
 			{
 				m_Rotate.z = 0.9f;
@@ -179,7 +184,7 @@ namespace basecross{
 			{
 				m_Rotate.z = -0.9f;
 			}
-
+			// æ»ç©ºæ™‚é–“ã®å¼•ãå»¶ã°ã—
 			if (m_JumpTime <= 2.0f)
 				m_Accel -= 0.03f;
 			else
@@ -196,28 +201,57 @@ namespace basecross{
 		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
+			if (m_grounded == false)
+			{
+				m_ptrXA->Start(L"EnterWaterSE", 0, 2.0f);
+			}
 			m_grounded = true;
 			pos.y = scale.y * posYcnst;
 			m_Accel = 0.0f;
 			m_Rotate.z = 0;
 			m_SpeedUp = false;
-			//ptrCamera->SetTargetToAt(Vec3(0, 1.0f, 0));
 		}
-
+		const float AngleLim = 1.1f, lim = 0.1f;
 		if (m_MoveFlag)
 		{
-			// ƒvƒŒƒCƒ„[‚ÌˆÚ“®
-			if(m_grounded) 
-				pos += angle * m_Speed * delta; // ƒfƒ‹ƒ^ƒ^ƒCƒ€‚ğŠ|‚¯‚Äu•bŠÔv‚ÌˆÚ“®—Ê‚É•ÏŠ·‚·‚é
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•
+			if (m_grounded)
+			{
+				if (ret.x || ret.y)
+				{
+					pos += angle * m_Speed * delta; // ãƒ‡ãƒ«ã‚¿ã‚¿ã‚¤ãƒ ã‚’æ›ã‘ã¦ã€Œç§’é–“ã€ã®ç§»å‹•é‡ã«å¤‰æ›ã™ã‚‹
+					if ((ret.x <= AngleLim && ret.x >= -AngleLim) ||
+						(ret.y <= AngleLim && ret.y >= -AngleLim))
+					{
+						m_moveAngle = angle;
+						if (m_moveAngle.x <= lim || m_moveAngle.x >= -lim)
+						{
+							m_moveAngle.x *= 1.5f;
+						}
+						if (m_moveAngle.z <= lim || m_moveAngle.z >= -lim)
+						{
+							m_moveAngle.z *= 1.5f;
+						}
+					}
+				}
+				else pos += m_moveAngle * m_Speed * delta;
+			}
 
 			if (!m_grounded)
 			{
-
-				if (ret.x || ret.y) pos += angle * m_Speed * delta;
-				else  pos += m_bfrAngle * m_Speed * delta;
+				// é£›ã‚“ã§ã„ã‚‹ã¨ãã®ç§»å‹•å‡¦ç†
+				if (!ret.x || !ret.y)
+				{
+					pos += m_moveAngle * m_Speed * delta;
+				}
+				else if (ret.x || ret.y)
+				{
+					pos += angle * m_Speed * delta;
+				}
+				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
-		}
-
+		}		
+		// ä½ç½®ã®æ›´æ–°
 		m_ptrTrans->SetPosition(pos);
 	}
 
@@ -225,29 +259,29 @@ namespace basecross{
 	{
 
 		AddTag(L"Player");
-		// ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+		// ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ 
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetPosition(m_StartPos);
 		m_ptrTrans->SetRotation(m_StartRot);
 		m_ptrTrans->SetScale(m_StartScale);
 
-		// ƒRƒŠƒWƒ‡ƒ“
- 		auto col = AddComponent<CollisionObb>();
-		
-		//auto col = AddComponent<CollisionCapsule>();
-		//col->SetMakedDiameter(3.0f);
-		//col->SetMakedHeight(1.0f);
-		col->SetDrawActive(true);
+		// ã‚³ãƒªã‚¸ãƒ§ãƒ³
 
-		//ƒJƒƒ‰ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é
+		m_col = AddComponent<CollisionCapsule>();
+		m_col->SetAfterCollision(AfterCollision::Auto);
+
+		//m_col->SetDrawActive(true);
+		//m_col2->SetDrawActive(true);
+
+		//ã‚«ãƒ¡ãƒ©ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
 			ptrCamera->SetTarget(GetThis<GameObject>());
 			//ptrCamera->
 		}
 		
-		// ƒvƒŒƒCƒ„[‚Ì•`‰æ
-		Mat4x4 spanMat; // ƒ‚ƒfƒ‹‚Æƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚ÌŠÔ‚Ì·•ªs—ñ
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»
+		Mat4x4 spanMat; // ãƒ¢ãƒ‡ãƒ«ã¨ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®é–“ã®å·®åˆ†è¡Œåˆ—
 		spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 0.12f),
 			Vec3(0.0f, 0.0f, 0.0f),
@@ -255,9 +289,9 @@ namespace basecross{
 			Vec3(0.0f, -1.3f, -2.0f)
 		);
 
-		//‰e‚ğ‚Â‚¯‚éiƒVƒƒƒhƒEƒ}ƒbƒv‚ğ•`‰æ‚·‚éj
+		//å½±ã‚’ã¤ã‘ã‚‹ï¼ˆã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã‚’æç”»ã™ã‚‹ï¼‰
 		auto ptrShadow = AddComponent<Shadowmap>();
-		//‰e‚ÌŒ`iƒƒbƒVƒ…j‚ğİ’è
+		//å½±ã®å½¢ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ï¼‰ã‚’è¨­å®š
 		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
@@ -270,46 +304,57 @@ namespace basecross{
 	void Player::OnUpdate()
 	{
 
-		// ƒfƒoƒbƒO—pƒXƒgƒŠ[ƒ€
+		// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚¹ãƒˆãƒªãƒ¼ãƒ 
 		wstringstream wss(L"");
-
-		//ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚Ìæ“¾
+		// ã‚«ãƒ¡ãƒ©ã®å–å¾—
+		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+		//ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®å–å¾—
 		auto trans = GetComponent<Transform>();
-		//ƒ|ƒWƒVƒ‡ƒ“‚Ìæ“¾
+		//ãƒã‚¸ã‚·ãƒ§ãƒ³ã®å–å¾—
 		auto pos = trans->GetPosition();
-		// ‘å‚«‚³‚Ìæ“¾
+		// å¤§ãã•ã®å–å¾—
 		auto scale = trans->GetScale();
-		// ŒX‚«‚Ìæ“¾
+		// å‚¾ãã®å–å¾—
 		auto rotate = trans->GetRotation();
-		//ƒRƒ“ƒgƒ[ƒ‰‚Ìæ“¾
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®å–å¾—
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
-
-		// ƒfƒ‹ƒ^ƒ^ƒCƒ€‚ğæ“¾‚·‚é
-		float delta = App::GetApp()->GetElapsedTime(); // ‘OƒtƒŒ[ƒ€‚©‚ç‚ÌuŒo‰ßŠÔv
-
-		//auto frontAngle = PlayerAngle();
+		// ãƒ‡ãƒ«ã‚¿ã‚¿ã‚¤ãƒ ã‚’å–å¾—ã™ã‚‹
+		float delta = App::GetApp()->GetElapsedTime(); // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®ã€ŒçµŒéæ™‚é–“ã€
 
 		//auto stage = GetStage();
 		//auto ptrGround = stage->GetSharedGameObject<Ground>(L"Ground");
 		//auto ptrGroundflag = ptrGround->m_Speed = 5;
-		// ƒWƒƒƒ“ƒv‚µ‚Ä‚©‚ç‚ÌŒo‰ßŠÔ
+		// ã‚¸ãƒ£ãƒ³ãƒ—ã—ã¦ã‹ã‚‰ã®çµŒéæ™‚é–“
 		m_JumpTime += delta;
 		m_StanTime += delta;
-		// ŠJn‚µ‚Ä‚©‚ç‚ÌŒo‰ßŠÔ
+		// é–‹å§‹ã—ã¦ã‹ã‚‰ã®çµŒéæ™‚é–“
 		if (m_Goal == false)
 		{
 			m_GoalTime += delta;
 		}
 
 		Vec2 ret;
-		//ƒRƒ“ƒgƒ[ƒ‰ƒ`ƒFƒbƒN‚µ‚Ä“ü—Í‚ª‚ ‚ê‚ÎƒRƒ}ƒ“ƒhŒÄ‚Ño‚µ
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒã‚§ãƒƒã‚¯ã—ã¦å…¥åŠ›ãŒã‚ã‚Œã°ã‚³ãƒãƒ³ãƒ‰å‘¼ã³å‡ºã—
 		m_InputHandler.PushHandle(GetThis<Player>());
 		MovePlayer();
 
+		if (m_StanFlag)
+		{
+			m_ptrTrans->SetRotation(0.0f,m_StanTime * 10.0f,0.0f);
+		}
+		if (m_grounded)
+		{
+			m_ptrTrans->SetScale(0.25f, 0.25f, 0.25f);
+
+		}
+		else if (!m_grounded)
+		{
+			m_ptrTrans->SetScale(2.0f, 0.25f, 0.25f);
+		}
 
 		if (cntl[0].bConnected)
 		{
-			if (m_MoveFlag)//ƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚È‚¯‚ê‚Î‘€ì‚ª‚Å‚«‚È‚¢
+			if (m_MoveFlag)//ãƒ•ãƒ©ã‚°ãŒãŸã£ã¦ã„ãªã‘ã‚Œã°æ“ä½œãŒã§ããªã„
 			{
 				ret.x = cntl[0].fThumbLX;
 				ret.y = cntl[0].fThumbLY;
@@ -317,30 +362,74 @@ namespace basecross{
 
 		}
 
+		int AngleState,a = 4;
+		if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
+		{
+			AngleState = 1;
+			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a));
+		}
+		else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
+		{
+			AngleState = 2;
+			ptrCamera->SetAt(Vec3(pos.x - ret.x * a, ptrCamera->m_at, pos.z));
+		}
+		else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
+		{
+			AngleState = 3;
+			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a));
+
+		}
+		else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
+		{
+			AngleState = 4;
+			ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
+
+		}
+
+		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
+		//ptrCamera->SetAt(m_change);
+
+
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
-		// À•W
+		// åº§æ¨™
 			wss		<< L"\n\n\npos : (" <<
-			//pos.x	<< L", "			<<
-			//pos.y	<< L", "			<<
-			//pos.z	<< L")"				<< 
+			pos.x	<< L", "			<<
+			pos.y	<< L", "			<<
+			pos.z	<< L")"				<< 
 
-			L"\nstantime : "			<<
-			m_StanTime					<<
+			//L"\nrotate : ("				<<
+			//rotate.x	<< L", "		<<
+			//rotate.y	<< L", "		<<
+			//rotate.z	<< L")"			<< 
 
-		//// ƒQ[ƒ€‰æ–Êfps
+			L"\nAt : ("				<<
+			ptrCamera->GetAt().x	<< L", "	<<
+			ptrCamera->GetAt().y	<< L", "	<<
+			ptrCamera->GetAt().z	<< L")"		<<
+
+			//L"\nstantime : "			<<
+			//m_StanTime					<<
+		// ã‚²ãƒ¼ãƒ ç”»é¢fps
+			L"\nm_rotAng : "			<<
+			m_rotAng					<<
+
+			L"\nAngleState : "			<<
+			AngleState					<<
+
+		//// ã‚²ãƒ¼ãƒ ç”»é¢fps
 		//	L"\nFPS : "					<<
 		//	fps							<<
-		//// ‰Á‘¬“x
+		//// åŠ é€Ÿåº¦
 		//	L"\naccel : "				<< 
 		//	m_Accel						<<
-		//// ƒWƒƒƒ“ƒv‚©‚ç‚ÌŒo‰ßŠÔ
+		//// ã‚¸ãƒ£ãƒ³ãƒ—ã‹ã‚‰ã®çµŒéæ™‚é–“
 		//	L"\nJumpTime : "			<<
 		//	m_JumpTime					<<
-		//// ƒvƒŒƒCƒ„[‚ÌŒX‚«
+		//// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‚¾ã
 		//	L"\nrotateZ : "				<<
 		//	m_Rotate.z					<<
-		//// ƒS[ƒ‹‚Ü‚Å‚ÌŠÔ
+		//// ã‚´ãƒ¼ãƒ«ã¾ã§ã®æ™‚é–“
 		//	L"\nGoalTime : "			<<
 		//	m_GoalTime					<<
 		//	L"\nm_ChangeTime : " <<
@@ -350,33 +439,21 @@ namespace basecross{
 		//	//L"\nm_Score : " <<
 		//	//m_Score <<
 
-
 			endl;
 
-		// //ƒS[ƒ‹”»’è
+		// //ã‚´ãƒ¼ãƒ«åˆ¤å®š
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
 		//	else       { wss << "Goal : false" << endl; }
 
-		 //ƒS[ƒ‹”»’è
-			if (m_MoveFlag){ wss << "moveflag : true" << endl; }
-			else       { wss << "moveflag : false" << endl; }
+		 ////ã‚´ãƒ¼ãƒ«åˆ¤å®š
+			//if (m_MoveFlag){ wss << "moveflag : true" << endl; }
+			//else       { wss << "moveflag : false" << endl; }
 
-		//auto Draw = AddComponent<BcPNTStaticDraw>();
-
-		//Draw->SetMeshToTransformMatrix(spanMat);
-
-		// ƒfƒoƒbƒO—p•¶š—ñ
+		// ãƒ‡ãƒãƒƒã‚°ç”¨æ–‡å­—åˆ—
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
-		
-		//auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
-
-		//ptrCamera->SetTargetToAt(Vec3(m_Rotate.z * 1.2f, 1.0f, 0));
-
-
-		//m_ptrTrans->SetRotation(rotate);
-		
+			
 		if (m_Goal)
 		{
 			Player::Goaltrue();
@@ -392,6 +469,7 @@ namespace basecross{
 
 		if (m_StanTime >= 2.0f)
 		{
+			m_StanFlag = false;
 			m_MoveFlag = true;
 		}
 
@@ -403,19 +481,6 @@ namespace basecross{
 			m_CircleChangeFlag = false;
 		}
 	}
-
-	//float Player::PlayerAngle() const {
-
-	//	//is•ûŒü‚ÌŒü‚«‚ğŒvZ
-	//	auto ptrCamera = OnGetDrawCamera();
-	//	auto front = m_trans->GetPosition() - ptrCamera->GetEye();
-	//	front.y = 0;
-	//	front.normalize();
-	//	//is•ûŒü‚ÌŒü‚«‚©‚ç‚ÌŠp“x‚ğZo
-	//	float frontAngle = atan2(front.z, front.x);
-
-	//	return frontAngle;
-	//}
 
 	void Player::Goaltrue()
 	{
@@ -430,8 +495,7 @@ namespace basecross{
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
-		auto Stage = GetStage();
-
+		
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
@@ -460,8 +524,8 @@ namespace basecross{
 		//auto ptrPoll1_7col = ptrPoll1_7->m_col;
 		//auto ptrPoll1_8col = ptrPoll1_8->m_col;
 
-		// ƒfƒ‹ƒ^ƒ^ƒCƒ€‚ğæ“¾‚·‚é
-		float delta = App::GetApp()->GetElapsedTime(); // ‘OƒtƒŒ[ƒ€‚©‚ç‚ÌuŒo‰ßŠÔv
+		// ãƒ‡ãƒ«ã‚¿ã‚¿ã‚¤ãƒ ã‚’å–å¾—ã™ã‚‹
+		float delta = App::GetApp()->GetElapsedTime(); // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®ã€ŒçµŒéæ™‚é–“ã€
 		auto  Time = 0;
 		auto  flag = false;
 
@@ -469,9 +533,8 @@ namespace basecross{
 
 		if (other->FindTag(L"Goal"))
 		{
-
-			Stage->AddGameObject<GoalSprite>(L"GOAL_TX",
-				Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
+			stage->AddGameObject<GoalSprite>(L"GOAL_TX",
+		    Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
 
 			//Stage->AddGameObject<TimeSprite>(L"",
 			//	Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
@@ -544,8 +607,10 @@ namespace basecross{
 			//m_CircleCount = 0;
 	/*		m_Accel = -4.0f;
 			m_MoveFlag = false;
-			if(m_StanTime >= 3.0f)
+			m_StanFlag = true;
+			if(m_StanTime >= 3.5f)
 			{ 
+				m_ptrXA->Start(L"DamageSE", 0, 2.0f);
 				m_StanTime = 0.0f;
 			}*/
 		}

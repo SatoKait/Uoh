@@ -15,10 +15,13 @@ namespace basecross{
 		Vec3 m_StartRot;
 		Vec3 m_PlayerPos;		// プレイヤーの位置
 
+		Vec3 m_change;
+
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
 		shared_ptr<CollisionObb>m_ptrPollCol;
-		weak_ptr<MainCamera> m_camera;			// カメラ
+		shared_ptr<MainCamera> m_ptrCamera;
+		shared_ptr<XAudio2Manager> m_ptrXA = App::GetApp()->GetXAudio2Manager();
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
@@ -29,7 +32,6 @@ namespace basecross{
 		
 		float m_Speed;			//スピード
 		float m_JSpeed;			//ジャンプするスピード
-		bool m_grounded;		//接地しているかどうか
 		float m_Accel;			//y軸加速度
 		float m_JumpTime;		//ジャンプしてからの経過時間
 		bool m_MoveFlag;		//動けるまでのフラグ
@@ -41,16 +43,23 @@ namespace basecross{
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
 		float m_StanTime;
+		bool m_StanFlag;
 		int m_CircleCount;
-			
+
 	private:
 		shared_ptr<Transform> m_trans;
+		shared_ptr<CollisionCapsule> m_col;
+		//shared_ptr<CollisionObb> m_col;
+		//shared_ptr<CollisionObb> m_col2;
 
 	public:
 		bool m_Goal;			//ゴール判定
 		bool m_SpeedUp;         //
 		float m_Angle;
 		Vec3 m_bfrAngle;
+		Vec3 m_moveAngle;
+		float m_rotAng;
+		bool m_grounded;		//接地しているかどうか
 		int  m_Nextcircle;
 
 		Player::Player(const shared_ptr<Stage>& StagePtr,
@@ -78,6 +87,7 @@ namespace basecross{
 			m_Angle(0.0f),
 			m_bfrAngle(0.0f),
 			m_StanTime(0.0f),
+			m_moveAngle(0.0f)
 			m_Nextcircle(0),
 			m_CircleCount(0)
 		{

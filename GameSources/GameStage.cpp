@@ -176,6 +176,13 @@ namespace basecross {
 			Vec3(250.0f, 0.0f, 0.0f));
 
 	}
+
+	void GameStage::CreateBGM(){
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
+		m_BGM = m_ptrXA->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.4f);
+		//m_ptrXA->Start(L"StageBGM2", XAUDIO2_LOOP_INFINITE, 0.5f);
+	}
+
 	void GameStage::CreateFloatCircle()
 	{
 		// 筒状ポリゴン
@@ -214,6 +221,7 @@ namespace basecross {
 			CreateTime();
 			CreateStageTime();
 			CreatePollCollision();
+			CreateBGM();
 			CreateFloatCircle();
 			CreateWave();
 			CreateMoveCamera();
@@ -227,14 +235,13 @@ namespace basecross {
 	{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+
 		auto score = 0;
-		//auto ptrScore = GetSharedGameObject<Score>(L"Score");
-		//auto math = ptrScore->m_;
-		//App::GetApp()->GetScene<Scene>()->SetScore(math);
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
 			int a = 0;
+			m_ptrXA->Stop(m_BGM);
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
@@ -277,13 +284,13 @@ namespace basecross {
 				//m_ToTalTime = 0.0f;
 				if (score >= 1000)
 				{
+					m_ptrXA->Stop(m_BGM);
 					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-
 				}
 				if (score <= 999)
 				{
+					m_ptrXA->Stop(m_BGM);
 					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-
 				}
 
 			}

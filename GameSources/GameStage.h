@@ -14,6 +14,9 @@ namespace basecross {
 	class GameStage : public Stage {
 		// BGM
 		shared_ptr<SoundItem> m_stageBGM;
+		shared_ptr<XAudio2Manager> m_ptrXA = App::GetApp()->GetXAudio2Manager();
+		shared_ptr<SoundItem> m_BGM;
+
 		shared_ptr<SingleView> m_View;//ビューの変数
 		//ステージの倍率
 		float m_StageRation;
@@ -27,7 +30,7 @@ namespace basecross {
 		wstring m_Number;
 
 		// BGMの再生
-		void PlayBGM();
+		void CreateBGM();
 
 		//ビューの作成
 		void CreateViewLight();
