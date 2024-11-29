@@ -5,6 +5,8 @@
 
 #include "stdafx.h"
 #include "Project.h"
+#include <Windows.h>
+#include <d3d11.h>
 
 namespace basecross {
 
@@ -14,9 +16,12 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(90),
-		m_ToStartTime(5),
-		m_isStartFlag(false)
+		m_ToTalTime(30),
+		m_ToStartTime(3),
+		m_ToTalTime2(1),
+		m_isStartFlag(false),
+		m_TimeFlag(false),
+		m_Flag(false)
 	{}
 
 
@@ -59,7 +64,6 @@ namespace basecross {
 		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 	}
-
 	void GameStage::CreatePollCollision()
 	{
 		//pollCollision
@@ -95,11 +99,6 @@ namespace basecross {
 		pollCollef = AddGameObject<PollCollision>(Vec3( 27.3f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCollef = AddGameObject<PollCollision>(Vec3( 32.8f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCollef = AddGameObject<PollCollision>(Vec3(-32.8f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
-
-
-		
-
-
 	}
 	void GameStage::CreateGround() {		
 		AddGameObject<Ground>(Vec3(0.0f, -1.0f, 0.0f), Vec3(300.0f, 0.5f, 300.0f), L"SEA_TX");
@@ -120,7 +119,6 @@ namespace basecross {
 		SetSharedGameObject(L"Poll1_3", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, 35.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll1_4", objPollnol);
-		
 		objPollnol = AddGameObject<Poll1>(Vec3(30.0f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll1_5", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(30.0f, 4.0f, -20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
@@ -156,8 +154,18 @@ namespace basecross {
 		AddGameObject<UITime>(2,
 			L"NUMBER2_TX",
 			true,
-			Vec2(240.0f, 60.0f),
-			Vec3(-440.0f, 350.0f, 0.0f));
+			Vec2(220.0f, 60.0f),
+			Vec3(-340.0f, 350.0f, 0.0f));
+		AddGameObject<UITime2>(2,
+			L"NUMBER2_TX",
+			true,
+			Vec2(220.0f, 60.0f),
+			Vec3(-470.0f, 350.0f, 0.0f));
+		AddGameObject<StageSprite>(L"TIME_TX", true,
+			Vec2(350.0f, 80.0f), Vec2(-515.0f, 350.0f));
+		//auto ptrscore = AddGameObject<Score>();
+		//SetSharedGameObject(L"Score", ptrscore);
+	    
 	}
 	void GameStage::CreateStageTime()
 	{
@@ -168,6 +176,31 @@ namespace basecross {
 			Vec3(250.0f, 0.0f, 0.0f));
 
 	}
+	void GameStage::CreateFloatCircle()
+	{
+		// 筒状ポリゴン
+		auto Circle = AddGameObject<FloatCircle>(L"LINE_TX"); // 使用するテクスチャキーを設定できる
+		Circle->SetHeight(1.0f); // 筒の高さ
+		Circle->SetTopRadius(1.0f); // 上の輪の半径
+		Circle->SetBottomRadius(1.0f); // 下の輪の半径
+		Circle->SetTopColor(1.0f, 1.0f, 1.0f, 1.0f); // 上の方の色
+		Circle->SetBottomColor(1.0f, 1.0f, 1.0f, 1.0f); // 下の方の色
+		Circle->SetLoops({ 1.0f, 1.0f }); // テクスチャの繰り返し数(U方向とV方向)
+		Circle->SetScrollPerSecond({ 0.0f, 0.0f }); // テクスチャアニメーションの速さ（UV方向、秒単位）
+		auto cicleTrans = Circle->GetComponent<Transform>();
+		cicleTrans->SetPosition(-15.0f, 6.0f, -35.0f);
+		cicleTrans->SetRotation(Vec3(XM_PIDIV2, 0.0f, 0.0f));
+		cicleTrans->SetScale(Vec3(2.5f, 0.25f, 2.5f));
+		SetSharedGameObject(L"FloatCircle", Circle);
+	}
+	void GameStage::CreateWave()
+	{
+	}	
+	void GameStage::CreateMoveCamera()
+	{
+		AddGameObject<MoveCamera>(Vec3(1.0f),Vec3(1.0f),Vec3(1.0f),Vec3(1.0f));
+	}
+
 	void GameStage::OnCreate() {
 		try {
 			//ビューとライトの作成
@@ -176,29 +209,34 @@ namespace basecross {
 			CreateWall();
 			CreateGround();
 			CreateObstacle();
-			CreateGoal();
+			//CreateGoal();
 			CreateTraceSprite();
 			CreateTime();
 			CreateStageTime();
 			CreatePollCollision();
+			CreateFloatCircle();
+			CreateWave();
+			CreateMoveCamera();
 		}
 		catch (...) {
 			throw;
 		}
 	}
-
+	
 	void GameStage::OnUpdate()
 	{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		auto score = App::GetApp()->GetScene<Scene>()->GetScore();
-	
+		auto score = 0;
+		//auto ptrScore = GetSharedGameObject<Score>(L"Score");
+		//auto math = ptrScore->m_;
+		//App::GetApp()->GetScene<Scene>()->SetScore(math);
+
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
 			int a = 0;
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
-
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		if (m_isStartFlag == false)
 		{
@@ -212,7 +250,30 @@ namespace basecross {
 		if (m_isStartFlag)
 		{
 			m_ToTalTime -= elapsedTime;
-			if (m_ToTalTime <= 0) {
+
+			if (m_ToTalTime <= 0 && m_TimeFlag == false)
+			{
+				m_Flag = true;		
+				m_TimeFlag = true;
+				m_ToTalTime = 60;
+			}
+			if (m_ToTalTime == 0 && m_TimeFlag == true)
+			{
+				m_ToTalTime = 0;
+			}
+
+			if (m_Flag == true)
+			{
+				m_ToTalTime2 -= elapsedTime;
+
+			}
+			if (m_ToTalTime2 <= 0)
+			{
+				m_ToTalTime2 = 0;
+			}
+		
+
+			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
 				//m_ToTalTime = 0.0f;
 				if (score >= 1000)
 				{
@@ -230,17 +291,66 @@ namespace basecross {
 		//スコアを更新する
 		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
 		ptrScor->SetScore(m_ToTalTime);
-	
+		auto ptrScor2 = GetSharedGameObject<UITime2>(L"UITime2");
+		ptrScor2->SetScore(m_ToTalTime2);
 		if (m_isStartFlag == false)
 		{
 			auto ptrScor2 = GetSharedGameObject<UITimeStage>(L"UITimeStage");
 			ptrScor2->SetScore2(m_ToStartTime);
 		}
-
 		if(m_isStartFlag == true)
 		{ 
 			auto ptrScoreDraw= GetSharedGameObject<UITimeStage>(L"UITimeStage");
 			ptrScoreDraw->m_isDrawFlag = true;
+		}
+
+		//CirCleや他の場所に移動
+		auto circle = GetSharedGameObject<FloatCircle>(L"FloatCircle");
+		auto ciclenext = circle->m_next;
+		auto circleCount = circle->m_ComboCount;
+		auto cicleTrans = circle->GetComponent<Transform>();
+
+		switch (ciclenext)
+		{
+		case 1:
+			cicleTrans->SetPosition(-15.0f, 6.0f, -35.0f);
+			break;
+		case 2:
+			cicleTrans->SetPosition(-30.0f, 6.0f, -20.0f);
+			break;		
+		case 3:
+			cicleTrans->SetPosition(-29.95f, 10.2f, -0.5f);
+			break;
+		case 4:
+			cicleTrans->SetPosition(-30.0f, 6.0f, 20.0f);
+			break;
+		case 5:
+			cicleTrans->SetPosition(-15.0f, 6.0f, 35.0f);
+			break;
+		case 6:
+			cicleTrans->SetPosition(15.0f, 6.0f, 35.0f);
+			break;
+		case 7:
+			cicleTrans->SetPosition(30.0f, 6.0f, 20.0f);
+			break;
+		case 8:
+			cicleTrans->SetPosition(29.95f, 10.2f, 0.5f);
+			break;
+		case 9:
+			cicleTrans->SetPosition(30.0f, 6.0f, -20.0f);
+			break;
+		case 10:
+			cicleTrans->SetPosition(15.0f, 6.0f, -35.0f);
+			break;
+		case 11:
+			cicleTrans->SetPosition(0.0f, 6.0f, 0.0f);
+			break;	
+		case 12:
+			cicleTrans->SetPosition(0.0f, 6.0f, 0.0f);
+			break;
+		case 13:
+			ciclenext = circle->m_next = 0;
+         	break;
 		}
 	}
 }
