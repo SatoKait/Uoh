@@ -13,12 +13,14 @@ namespace basecross {
 	class Score : public GameObject
 	{
 		vector<shared_ptr<ScoreSprite>> m_numberSprites;
-		int m_nowScore = 0;
+		shared_ptr<ScoreSprite>number;
 
 	public:
 		
 		shared_ptr<Transform> m_numberTrans;
         int m_score;
+		int m_nowScore;
+		int GameScore;
 
 		// \’z‚Æ”jŠü
 		Score(const shared_ptr<Stage>& stage) :
@@ -32,8 +34,8 @@ namespace basecross {
 		}
 
 		virtual void OnCreate() override; // ‰Šú‰»
-		//virtual void OnUpdate() override; // XV
 		virtual void OnDraw() override; // •`‰æ
+		virtual void OnUpdate() override; // XV
 
 
 		void UpdateScore()
