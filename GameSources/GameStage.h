@@ -17,12 +17,16 @@ namespace basecross {
 		shared_ptr<XAudio2Manager> m_ptrXA = App::GetApp()->GetXAudio2Manager();
 		shared_ptr<SoundItem> m_BGM;
 
+		shared_ptr<SingleView> m_View;//ビューの変数
 		//ステージの倍率
 		float m_StageRation;
 		//ステージの時間
-		float m_ToTalTime;
-		float m_ToStartTime;
+	    float m_ToTalTime;
+		float m_ToTalTime2;
+		int m_ToStartTime;
 		bool m_isStartFlag;
+		bool m_TimeFlag;
+		bool m_Flag;
 		wstring m_Number;
 
 		// BGMの再生
@@ -47,12 +51,17 @@ namespace basecross {
 		void CreateTime();
 		void CreateStageTime();
 		void CreatePollCollision();
-		shared_ptr<SingleView> m_View;//ビューの変数
+		void CreateFloatCircle();
+		
+		void CreateWave();
+		void CreateMoveCamera();
 
 	public:
 		//構築と破棄
 		GameStage();
-		virtual ~GameStage() {}
+		virtual ~GameStage() 
+		{
+		}
 		//初期化
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;

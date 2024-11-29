@@ -46,13 +46,17 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"TITLETEXT_TX", tex);
 			tex = texPath + L"GameOver.png";
 			App::GetApp()->RegisterTexture(L"GAMEOVER_TX", tex);
-
+			tex = texPath + L"Time.png";
+			App::GetApp()->RegisterTexture(L"TIME_TX", tex);
 			tex = texPath + L"Goal.png";
 			App::GetApp()->RegisterTexture(L"GOAL_TX", tex);
 			tex = texPath + L"sea2.png";
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
 			App::GetApp()->RegisterTexture(L"RED_TX", tex);
+			tex = texPath + L"line.png";
+			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
+
 		}
 		// モデルのリソース
 		{
@@ -75,7 +79,7 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"BUOY_MESH", StaticModelMesh);
 			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
 			//App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
-			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"FlyingFish.bmf");
+			StaticModelMesh = MeshResource::CreateBoneModelMesh(modelPath, L"FlyingFish.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll3.bmf");
 			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);

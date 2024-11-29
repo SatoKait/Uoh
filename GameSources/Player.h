@@ -44,6 +44,7 @@ namespace basecross{
 		bool m_DrawFlag;
 		float m_StanTime;
 		bool m_StanFlag;
+		int m_CircleCount;
 
 	private:
 		shared_ptr<Transform> m_trans;
@@ -59,6 +60,7 @@ namespace basecross{
 		Vec3 m_moveAngle;
 		float m_rotAng;
 		bool m_grounded;		//接地しているかどうか
+		int  m_Nextcircle;
 
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
@@ -86,6 +88,8 @@ namespace basecross{
 			m_bfrAngle(0.0f),
 			m_StanTime(0.0f),
 			m_moveAngle(0.0f)
+			m_Nextcircle(0),
+			m_CircleCount(0)
 		{
 		}
 
