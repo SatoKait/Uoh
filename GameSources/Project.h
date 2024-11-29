@@ -34,4 +34,7 @@
 #include "UITime.h"
 #include "SelectStageSprite.h"
 #include "GameOverStage.h"
-
+#include "FloatCircle.h"
+#include "Wave.h"
+#include "D3DApp.h"
+#include "MoveCamera.h"
