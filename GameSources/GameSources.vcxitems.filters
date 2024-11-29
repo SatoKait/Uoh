@@ -30,6 +30,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)SelectStageSprite.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStage2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GameOverStage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)FloatCircle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Wave.cpp">
+      <Filter>Sharder</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)D3DApp.cpp">
+      <Filter>Sharder</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MoveCamera.cpp">
+      <Filter>MoveCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Block.h" />
@@ -61,5 +71,28 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SelectStageSprite.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStage2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GameOverStage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FloatCircle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h">
+      <Filter>Sharder</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)D3DApp.h">
+      <Filter>Sharder</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MoveCamera.h">
+      <Filter>MoveCamera</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sharder">
+      <UniqueIdentifier>{0f9ae91b-cce2-42b6-a654-245b24b5cfb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MoveCamera">
+      <UniqueIdentifier>{e1269066-9336-4d87-8cec-99ccf6c16998}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)Wave.hlsl">
+      <Filter>Sharder</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

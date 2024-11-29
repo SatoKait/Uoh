@@ -434,33 +434,31 @@ namespace basecross{
 
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
-		
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
 
-		auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
-		auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
-		auto ptrPoll1_1 = stage->GetSharedGameObject<Poll1> (L"Poll1_1");
-		auto ptrPoll1_2 = stage->GetSharedGameObject<Poll1> (L"Poll1_2");
-		auto ptrPoll1_3 = stage->GetSharedGameObject<Poll1> (L"Poll1_3");
-		auto ptrPoll1_4 = stage->GetSharedGameObject<Poll1> (L"Poll1_4");
-		auto ptrPoll1_5 = stage->GetSharedGameObject<Poll1> (L"Poll1_5");
-		auto ptrPoll1_6 = stage->GetSharedGameObject<Poll1> (L"Poll1_6");
-		auto ptrPoll1_7 = stage->GetSharedGameObject<Poll1> (L"Poll1_7");
-		auto ptrPoll1_8 = stage->GetSharedGameObject<Poll1> (L"Poll1_8");
+		//auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
+		//auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
+		//auto ptrPoll1_1 = stage->GetSharedGameObject<Poll1>(L"Poll1_1");
+		//auto ptrPoll1_2 = stage->GetSharedGameObject<Poll1>(L"Poll1_2");
+		//auto ptrPoll1_3 = stage->GetSharedGameObject<Poll1>(L"Poll1_3");
+		//auto ptrPoll1_4 = stage->GetSharedGameObject<Poll1>(L"Poll1_4");
+		//auto ptrPoll1_5 = stage->GetSharedGameObject<Poll1>(L"Poll1_5");
+		//auto ptrPoll1_6 = stage->GetSharedGameObject<Poll1>(L"Poll1_6");
+		//auto ptrPoll1_7 = stage->GetSharedGameObject<Poll1>(L"Poll1_7");
+		//auto ptrPoll1_8 = stage->GetSharedGameObject<Poll1>(L"Poll1_8");
+		auto ptrCircle = stage->GetSharedGameObject<FloatCircle>(L"FloatCircle");
 
-		
-	    m_ptrPollCol = ptrPoll->m_col;
-		auto ptrCiclePollcol  = ptrCirclePoll->m_col;
-		auto ptrCiclePollcol2 = ptrCirclePoll2->m_col;
-
-		auto ptrPoll1_1col =  ptrPoll1_1->m_col;
-		auto ptrPoll1_2col =  ptrPoll1_2->m_col;
-		auto ptrPoll1_3col =  ptrPoll1_3->m_col;
-		auto ptrPoll1_4col =  ptrPoll1_4->m_col;
-		auto ptrPoll1_5col =  ptrPoll1_5->m_col;
-		auto ptrPoll1_6col =  ptrPoll1_6->m_col;
-		auto ptrPoll1_7col =  ptrPoll1_7->m_col;
-		auto ptrPoll1_8col =  ptrPoll1_8->m_col;	
+		//m_ptrPollCol = ptrPoll->m_col;
+		//auto ptrCiclePollcol = ptrCirclePoll->m_col;
+		//auto ptrCiclePollcol2 = ptrCirclePoll2->m_col;
+		//auto ptrPoll1_1col = ptrPoll1_1->m_col;
+		//auto ptrPoll1_2col = ptrPoll1_2->m_col;
+		//auto ptrPoll1_3col = ptrPoll1_3->m_col;
+		//auto ptrPoll1_4col = ptrPoll1_4->m_col;
+		//auto ptrPoll1_5col = ptrPoll1_5->m_col;
+		//auto ptrPoll1_6col = ptrPoll1_6->m_col;
+		//auto ptrPoll1_7col = ptrPoll1_7->m_col;
+		//auto ptrPoll1_8col = ptrPoll1_8->m_col;
 
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
@@ -473,64 +471,85 @@ namespace basecross{
 		{
 
 			Stage->AddGameObject<GoalSprite>(L"GOAL_TX",
-		    Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
+				Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
 
 			//Stage->AddGameObject<TimeSprite>(L"",
 			//	Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
 
 			m_Goal = true;
-		     
+
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 
-		if (other->FindTag(L"Poll") && !m_ChangeFlag)
-		{
-			ptrPoll1_1col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_2col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_3col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_4col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_5col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_6col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_7col->SetAfterCollision(AfterCollision::None);
-			ptrPoll1_8col->SetAfterCollision(AfterCollision::None);
-			//ptrPoll1_9col->SetAfterCollision(AfterCollision::None);
-			//ptrPoll1_10col->SetAfterCollision(AfterCollision::None);
-			//ptrPoll1_11col->SetAfterCollision(AfterCollision::None);
-			//ptrPoll1_12col->SetAfterCollision(AfterCollision::None);
+		//if (other->FindTag(L"Poll") && !m_ChangeFlag)
+		//{
+		//	ptrPoll1_1col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_2col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_3col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_4col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_5col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_6col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_7col->SetAfterCollision(AfterCollision::None);
+		//	ptrPoll1_8col->SetAfterCollision(AfterCollision::None);
+		//	//ptrPoll1_9col->SetAfterCollision(AfterCollision::None);
+		//	//ptrPoll1_10col->SetAfterCollision(AfterCollision::None);
+		//	//ptrPoll1_11col->SetAfterCollision(AfterCollision::None);
+		//	//ptrPoll1_12col->SetAfterCollision(AfterCollision::None);
 
-			App::GetApp()->GetScene<Scene>()->AddScore(50);
-			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
-			m_ChangeFlag = true;
+		//	App::GetApp()->GetScene<Scene>()->AddScore(50);
+		//	auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+		//	m_ChangeFlag = true;
 
-		}
-		if (other->FindTag(L"Poll2") && !m_PollChangeFlag)
+		//}
+		//if (other->FindTag(L"Poll2") && !m_PollChangeFlag)
+		//{
+		//	m_ptrPollCol->SetAfterCollision(AfterCollision::None);
+		//	App::GetApp()->GetScene<Scene>()->AddScore(1000);
+		//	auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE3_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+		//	m_PollChangeFlag = true;
+		//}
+		//if (other->FindTag(L"CirclePoll") && !m_CircleChangeFlag)
+		//{
+		//	ptrCiclePollcol->SetAfterCollision(AfterCollision::None);
+		//	ptrCiclePollcol2->SetAfterCollision(AfterCollision::None);
+		//	App::GetApp()->GetScene<Scene>()->AddScore(100);
+		//	auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+		//	//m_CircleChangeFlag = true;
+		//}
+		auto ScoreFlag = false;
+
+		if (other->FindTag(L"FloatCircle") && ScoreFlag == false)
 		{
-			m_ptrPollCol->SetAfterCollision(AfterCollision::None);
-			App::GetApp()->GetScene<Scene>()->AddScore(1000);
-			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE3_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));	
-			m_PollChangeFlag = true;
+			//App::GetApp()->GetScene<Scene>()->AddScore(100);
+			//auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+			ScoreFlag = true;
+		    auto ciclenext = ptrCircle->m_next++;
+			auto comboCount = ptrCircle->m_ComboCount;
+			comboCount++;
+			if (ScoreFlag && comboCount == 1)
+			{
+				m_CircleCount++;
+				App::GetApp()->GetScene<Scene>()->AddScore(100 * m_CircleCount);
+				ScoreFlag = false;
+				comboCount--;
+			}
+			//stage->RemoveGameObject<Deployment>(Get);
 		}
-		if (other->FindTag(L"CirclePoll") && !m_CircleChangeFlag)
-		{
-			ptrCiclePollcol->SetAfterCollision(AfterCollision::None);
-			ptrCiclePollcol2->SetAfterCollision(AfterCollision::None);
-			App::GetApp()->GetScene<Scene>()->AddScore(100);
-			auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));			
-			//m_CircleChangeFlag = true;
-		}
+		//else if(!other->FindTag(L"FloatCircle")) {
+		//	ScoreFlag = false;
+		//}
+
 		if (other->FindTag(L"StanObject"))
 		{
-			m_Accel = -4.0f;
+			//m_CircleCount = 0;
+	/*		m_Accel = -4.0f;
 			m_MoveFlag = false;
 			if(m_StanTime >= 3.0f)
 			{ 
 				m_StanTime = 0.0f;
-			}
+			}*/
 		}
-
 	}
-
-
 }
 //end basecross
 

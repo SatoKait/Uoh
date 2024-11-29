@@ -153,11 +153,11 @@ namespace basecross {
 		m_ptrTrans->SetPosition(m_Position);
 		m_ptrTrans->SetRotation(m_Rotate);
 
-		m_col = AddComponent<CollisionObb>();
-		m_col->SetDrawActive(m_DrawFlag);
-		m_col->SetFixed(true);
-		m_col->SetSleepActive(true);
-		m_col->GetAfterCollision();
+		//m_col = AddComponent<CollisionObb>();
+		//m_col->SetDrawActive(m_DrawFlag);
+		//m_col->SetFixed(true);
+		//m_col->SetSleepActive(true);
+		//m_col->GetAfterCollision();
 		//m_col->SetAfterCollision(AfterCollision::None);
 
 
@@ -192,11 +192,11 @@ namespace basecross {
 		AddTag(L"CirclePoll");
 		m_Count++;
 
-		m_col = AddComponent<CollisionObb>();
-		m_col->SetDrawActive(m_DrawFlag);
-		m_col->SetFixed(true);
-		m_col->SetSleepActive(true);
-		m_col->GetAfterCollision();
+		//m_col = AddComponent<CollisionObb>();
+		//m_col->SetDrawActive(m_DrawFlag);
+		//m_col->SetFixed(true);
+		//m_col->SetSleepActive(true);
+		//m_col->GetAfterCollision();
 		//m_col->SetAfterCollision(AfterCollision::None);
 
 
@@ -238,26 +238,11 @@ namespace basecross {
 		m_ptrTrans->SetPosition(m_Position);
 		m_ptrTrans->SetRotation(m_Rotate);
 
-		//bool null = true;
-		//int sharedNum = 1;
-		//do {
-		//	auto effNullCheck = GetStage()->GetSharedGameObject<Poll>(m_sharedName, false);
-		//	if (effNullCheck == nullptr) {
-		//		GetStage()->SetSharedGameObject(m_sharedName, false);
-		//		null = false;
-		//	}
-		//	else {
-		//		sharedNum++;
-		//		m_sharedName += Util::IntToWStr(sharedNum);
-		//	}
-		//} while (null);
-
-
-		m_col = AddComponent<CollisionObb>();
-		m_col->SetDrawActive(m_DrawFlag);
-		m_col->SetFixed(true);
-		m_col->SetSleepActive(true);
-		m_col->GetAfterCollision();
+		//m_col = AddComponent<CollisionObb>();
+		//m_col->SetDrawActive(m_DrawFlag);
+		//m_col->SetFixed(true);
+		//m_col->SetSleepActive(true);
+		//m_col->GetAfterCollision();
 		//m_col->SetAfterCollision(AfterCollision::None);
 
 
@@ -279,14 +264,6 @@ namespace basecross {
 		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
-	//void Poll1::OnCollisionEnter(shared_ptr<GameObject>& other)
-	//{
-	//	if (other->FindTag(L"Player"))
-	//	{
-	//		m_col->SetAfterCollision(AfterCollision::None);
-	//	}
-
-	//}
 
 
 	//--------------------------------------------------------------------------------------
