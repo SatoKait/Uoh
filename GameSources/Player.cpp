@@ -156,6 +156,7 @@ namespace basecross{
 			{
 				if (m_grounded == true)
 				{
+					m_ptrXA->Start(L"FloatSE", 0, 2.0f);
 					m_grounded = false;
 					m_JumpTime = 0;
 					m_Accel = 2.0f;
@@ -172,7 +173,7 @@ namespace basecross{
 			// 傾きの制限
 			if (m_Rotate.z <= 1.0f && m_Rotate.z >= -1.0f)
 			{
-				m_Rotate.z += ret.x * 0.015;
+				m_Rotate.z += ret.x * 0.025;
 			}
 			// 傾きの制限以上になった時のリセット的なやつ
 			if (m_Rotate.z >= 1.0f && ret.x <= -0.1f)
@@ -200,6 +201,10 @@ namespace basecross{
 		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
+			if (m_grounded == false)
+			{
+				m_ptrXA->Start(L"EnterWaterSE", 0, 2.0f);
+			}
 			m_grounded = true;
 			pos.y = scale.y * posYcnst;
 			m_Accel = 0.0f;
@@ -245,9 +250,7 @@ namespace basecross{
 				}
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
-		}
-		Vec3 change = { pos.x + ret.x * 2,ptrCamera->m_at, pos.z/* + ret.x */};
-		ptrCamera->SetAt(change);
+		}		
 		// 位置の更新
 		m_ptrTrans->SetPosition(pos);
 	}
@@ -303,7 +306,8 @@ namespace basecross{
 
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
-
+		// カメラの取得
+		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		//トランスフォームの取得
 		auto trans = GetComponent<Transform>();
 		//ポジションの取得
@@ -358,19 +362,60 @@ namespace basecross{
 
 		}
 
+		int AngleState,a = 4;
+		if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
+		{
+			AngleState = 1;
+			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a));
+		}
+		else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
+		{
+			AngleState = 2;
+			ptrCamera->SetAt(Vec3(pos.x - ret.x * a, ptrCamera->m_at, pos.z));
+		}
+		else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
+		{
+			AngleState = 3;
+			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a));
+
+		}
+		else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
+		{
+			AngleState = 4;
+			ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
+
+		}
+
+		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
+		//ptrCamera->SetAt(m_change);
+
+
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
 			wss		<< L"\n\n\npos : (" <<
-			//pos.x	<< L", "			<<
-			//pos.y	<< L", "			<<
-			//pos.z	<< L")"				<< 
 			pos.x	<< L", "			<<
 			pos.y	<< L", "			<<
 			pos.z	<< L")"				<< 
 
+			//L"\nrotate : ("				<<
+			//rotate.x	<< L", "		<<
+			//rotate.y	<< L", "		<<
+			//rotate.z	<< L")"			<< 
+
+			L"\nAt : ("				<<
+			ptrCamera->GetAt().x	<< L", "	<<
+			ptrCamera->GetAt().y	<< L", "	<<
+			ptrCamera->GetAt().z	<< L")"		<<
+
 			//L"\nstantime : "			<<
 			//m_StanTime					<<
+		// ゲーム画面fps
+			L"\nm_rotAng : "			<<
+			m_rotAng					<<
+
+			L"\nAngleState : "			<<
+			AngleState					<<
 
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
@@ -400,9 +445,9 @@ namespace basecross{
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
 		//	else       { wss << "Goal : false" << endl; }
 
-		 //ゴール判定
-			if (m_MoveFlag){ wss << "moveflag : true" << endl; }
-			else       { wss << "moveflag : false" << endl; }
+		 ////ゴール判定
+			//if (m_MoveFlag){ wss << "moveflag : true" << endl; }
+			//else       { wss << "moveflag : false" << endl; }
 
 		// デバッグ用文字列
 		auto scene = App::GetApp()->GetScene<Scene>();
@@ -543,6 +588,7 @@ namespace basecross{
 			m_StanFlag = true;
 			if(m_StanTime >= 3.5f)
 			{ 
+				m_ptrXA->Start(L"DamageSE", 0, 2.0f);
 				m_StanTime = 0.0f;
 			}
 		}

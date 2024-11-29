@@ -86,7 +86,6 @@ namespace basecross{
 		{
 			auto SoundPath = path + L"Sounds/";
 
-			// 鳩時計の音
 			wstring strSE = SoundPath + L"Wave.wav";
 			App::GetApp()->RegisterWav(L"STAGEBGM", strSE);
 			strSE = SoundPath + L"Kamome.wav";
@@ -95,6 +94,16 @@ namespace basecross{
 			App::GetApp()->RegisterWav(L"GAMECREALSE", strSE);
 			strSE = SoundPath + L"GameCreal2.wav";
 			App::GetApp()->RegisterWav(L"GAMECREAL2SE", strSE);
+			strSE = SoundPath + L"BGM1.wav";
+			App::GetApp()->RegisterWav(L"StageBGM1", strSE);
+			strSE = SoundPath + L"BGM2.wav";
+			App::GetApp()->RegisterWav(L"StageBGM2", strSE);
+			strSE = SoundPath + L"EnterWater.wav";
+			App::GetApp()->RegisterWav(L"EnterWaterSE", strSE);
+			strSE = SoundPath + L"Damage.wav";
+			App::GetApp()->RegisterWav(L"DamageSE", strSE);
+			strSE = SoundPath + L"Float.wav";
+			App::GetApp()->RegisterWav(L"FloatSE", strSE);
 
 		}
 	}

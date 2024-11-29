@@ -15,10 +15,13 @@ namespace basecross{
 		Vec3 m_StartRot;
 		Vec3 m_PlayerPos;		// プレイヤーの位置
 
+		Vec3 m_change;
+
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
 		shared_ptr<CollisionObb>m_ptrPollCol;
 		shared_ptr<MainCamera> m_ptrCamera;
+		shared_ptr<XAudio2Manager> m_ptrXA = App::GetApp()->GetXAudio2Manager();
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
