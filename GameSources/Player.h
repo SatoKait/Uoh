@@ -41,7 +41,8 @@ namespace basecross{
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
 		float m_StanTime;
-
+		int m_CircleCount;
+			
 	private:
 		shared_ptr<Transform> m_trans;
 
@@ -50,6 +51,7 @@ namespace basecross{
 		bool m_SpeedUp;         //
 		float m_Angle;
 		Vec3 m_bfrAngle;
+		int  m_Nextcircle;
 
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
@@ -75,7 +77,9 @@ namespace basecross{
 			m_DrawFlag(true),
 			m_Angle(0.0f),
 			m_bfrAngle(0.0f),
-			m_StanTime(0.0f)
+			m_StanTime(0.0f),
+			m_Nextcircle(0),
+			m_CircleCount(0)
 		{
 		}
 
