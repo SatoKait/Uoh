@@ -24,10 +24,9 @@ namespace basecross {
 		m_Flag(false)
 	{}
 
-
-
-	void GameStage::CreateViewLight() {
+	void GameStage::CreateViewLight() {	
 		// カメラの設定MainCamera
+		m_View = ObjectFactory::Create<SingleView>(GetThis<Stage>());
 		auto camera = ObjectFactory::Create<MainCamera>(-90.0f);
 		camera->SetEye(Vec3(0.0f, 2.5f, -3.5f));
 		//camera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
@@ -40,7 +39,22 @@ namespace basecross {
 		auto PtrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
+
 	}
+	void GameStage::CameraSetting(const shared_ptr<GameObject>& ptrObj)
+	{
+		//// カメラの設定
+		//auto ptrCamera = GetView()->GetTargetCamera();
+		//auto ptrMainCamera = dynamic_pointer_cast<MainCamera>(ptrCamera);
+		//ptrMainCamera->SetTarget(ptrObj);
+
+		////カメラのオブジェクトの設定
+		//auto ptrCameraObject = AddGameObject<MoveCamera>();
+		//ptrCameraObject->SetOwner(ptrMainCamera);
+		//ptrCameraObject->GetComponent<Transform>()->SetPosition(ptrMainCamera->GetEye());
+		//ptrCameraObject->GetComponent<CollisionSphere>()->AddExcludeCollisionGameObject(ptrObj);
+	}
+
 	void GameStage::CreatePlayer()
 	{
 		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.5f,-15.0f,-45.0f),Vec3(2.0f,0.25f,0.25f),Vec3(0.0f,0.0f,0.0f));
@@ -163,7 +177,10 @@ namespace basecross {
 			Vec3(-470.0f, 350.0f, 0.0f));
 		AddGameObject<StageSprite>(L"TIME_TX", true,
 			Vec2(350.0f, 80.0f), Vec2(-515.0f, 350.0f));
-		//auto ptrscore = AddGameObject<Score>();
+		AddGameObject<StageSprite>(L"PARTITION_TX", true,
+			Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
+		auto score = AddGameObject<Score>();
+		AddGameObject<TargetsScore>();
 		//SetSharedGameObject(L"Score", ptrscore);
 	    
 	}
@@ -205,7 +222,6 @@ namespace basecross {
 	}	
 	void GameStage::CreateMoveCamera()
 	{
-		AddGameObject<MoveCamera>(Vec3(1.0f),Vec3(1.0f),Vec3(1.0f),Vec3(1.0f));
 	}
 
 	void GameStage::OnCreate() {
@@ -216,7 +232,7 @@ namespace basecross {
 			CreateWall();
 			CreateGround();
 			CreateObstacle();
-			//CreateGoal();
+			CreateGoal();
 			CreateTraceSprite();
 			CreateTime();
 			CreateStageTime();
@@ -230,7 +246,7 @@ namespace basecross {
 			throw;
 		}
 	}
-	
+
 	void GameStage::OnUpdate()
 	{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
@@ -283,12 +299,12 @@ namespace basecross {
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
 				//m_ToTalTime = 0.0f;
-				if (score >= 1000)
+				if (score >= 10000)
 				{
 					ptrMana->Stop(m_BGM);
 					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 				}
-				if (score <= 999)
+				if (score <= 9999)
 				{
 					ptrMana->Stop(m_BGM);
 					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");

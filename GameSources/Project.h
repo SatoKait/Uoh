@@ -37,4 +37,5 @@
 #include "FloatCircle.h"
 #include "Wave.h"
 #include "D3DApp.h"
+#include "Startcamera.h"
 #include "MoveCamera.h"
