@@ -3,130 +3,136 @@
 
 namespace basecross {
 
+	MoveCamera::MoveCamera(const shared_ptr<Stage>& ptrStage) :
+		GameObject(ptrStage),
+		m_AlphaAngle(XMConvertToRadians(-90.0f)),
+		m_BetaAngle(XMConvertToRadians(45.0f)),
+		m_Distance(5)
+	{
+	}
+
+	MoveCamera::~MoveCamera()
+	{
+
+	}
+
 	void MoveCamera::OnCreate()
 	{
-		m_ptrTrans = GetComponent<Transform>();//toransformを取得
+		auto ptrTrans = GetComponent<Transform>();
+		ptrTrans->SetScale(Vec3(1.5f));
 
-		m_ptrTrans->SetPosition(m_Position);//位置を設定	
-		m_ptrTrans->SetRotation(0.0f, 0.0f, 0.0f);//ローテーション（回転）を設定
-		m_ptrTrans->SetScale(m_Scale);//大きさを設定
+		auto ptrColl = AddComponent<CollisionSphere>();
+	}
 
-		//接触のコリジョンを追加
-		Mat4x4 spanMat;
-		spanMat.affineTransformation(
-			Vec3(0.0f, 0.0f, 0.0f),
-			Vec3(0.0f, 0.0f, 0.0f),
-			Vec3(0.0f, 0.0f, 0.0f),
-			Vec3(0.0f, 0.0f, 0.0f)
-		);
-		auto collider = AddComponent<CollisionObb>();
-		//collider->SetFixed(true);//これでぶつかっても動かないようにする
-		collider->SetAfterCollision(AfterCollision::None);
-		collider->SetDrawActive(false);//コリジョンを見えるようにする
-		
-		//描画コンポーネント
-		auto ptrDraw = AddComponent<PNTStaticDraw>();
-		ptrDraw->SetMeshResource(L"DEFAULT_CUBE");
-		ptrDraw->SetMeshToTransformMatrix(spanMat);
-		AddTag(L"Ground2");
+	void MoveCamera::CameraOperate()
+	{
+		//// ゲームクリアのフラグが立っている場合、コントローラーの受付を必要とする処理は一切行わない
+		//auto& gptrGameManager = GameManager::GetGameManager();
+		//auto isSelected = gptrGameManager->IsStageSelected();
+		//auto isClear = gptrGameManager->IsStageClear();
+		//if (isSelected && isClear)
+		//{
+		//	return;
+		//}
+
+		auto& app = App::GetApp();
+		auto elapsed = app->GetElapsedTime();
+		auto inputDevice = app->GetInputDevice();
+		auto pad = inputDevice.GetControlerVec()[0];
+
+		m_AlphaAngle += -XMConvertToRadians(90.0f * pad.fThumbRX) * elapsed;
+		m_BetaAngle += -XMConvertToRadians(90.0f * pad.fThumbRY) * elapsed;
+
+		if (m_BetaAngle > XMConvertToRadians(45.0f))
+		{
+			m_BetaAngle = XMConvertToRadians(45.0f);
+		}
+		else if (m_BetaAngle < XMConvertToRadians(-30.0f))
+		{
+			m_BetaAngle = XMConvertToRadians(-30.0f);
+		}
+	}
+
+	void MoveCamera::CameraReset()
+	{
+		auto ptrCameraTrans = GetComponent<Transform>();
+		auto ptrTargetTrans = m_Owner.lock()->GetTarget()->GetComponent<Transform>();
+
+		auto cameraPos = ptrCameraTrans->GetPosition();
+		auto targetPos = ptrTargetTrans->GetPosition();
+
+		auto distance = (cameraPos - targetPos).length();
+
+		if (m_Distance * 2.0f < distance)
+		{
+			Vec3 pos = Vec3(0.0f);
+			pos.x = m_Distance * cosf(m_BetaAngle) * cosf(m_AlphaAngle);
+			pos.y = m_Distance * sinf(m_BetaAngle);
+			pos.z = m_Distance * cosf(m_BetaAngle) * sinf(m_AlphaAngle);
+			pos += ptrTargetTrans->GetPosition();
+
+			ptrCameraTrans->SetPosition(pos);
+		}
 	}
 
 	void MoveCamera::OnUpdate()
 	{
-		if (m_Count == 1)//動作①
+		auto ptrOwner = m_Owner.lock();
+		if (ptrOwner == nullptr) return;
+
+		auto ptrTarget = ptrOwner->GetTarget();
+		if (ptrTarget == nullptr) return;
+
+		auto& app = App::GetApp();
+		auto elapsed = app->GetElapsedTime();
+
+		auto ptrCameraTrans = GetComponent<Transform>();
+		auto ptrTargetTrans = ptrTarget->GetComponent<Transform>();
+
+		// カメラの操作
+		CameraOperate();
+
+		// カメラとプレイヤーの距離が離れ過ぎたら即座に正しい位置に戻す
+		CameraReset();
+
+		// 壁などを考慮しないで操作出来た場合のカメラの位置
+		Vec3 imaginaryEyePos = Vec3(0.0f);
+		imaginaryEyePos.x = m_Distance * cosf(m_BetaAngle) * cosf(m_AlphaAngle);
+		imaginaryEyePos.y = m_Distance * sinf(m_BetaAngle);
+		imaginaryEyePos.z = m_Distance * cosf(m_BetaAngle) * sinf(m_AlphaAngle);
+		imaginaryEyePos += ptrTargetTrans->GetPosition();
+
+		// 実際の位置
+		Vec3 realityEyePos = ptrCameraTrans->GetPosition();
+
+		// t秒後の距離が現在の距離のn倍になるようなスピードを計算
+		float decayRate = 0.9f;
+		float decayConstant = log(decayRate);
+		float speed = -(imaginaryEyePos - realityEyePos).length() * decayConstant * exp(decayConstant * elapsed);
+
+		// 空想の位置と実際の位置からカメラの動く方向を計算
+		Vec3 moveDirection = imaginaryEyePos - realityEyePos;
+		moveDirection = moveDirection.normalize();
+
+		// 計算したスピードと方向から移動ベクトルを作成し位置ベクトルに足す
+		Vec3 moveVec = speed * moveDirection;
+		realityEyePos += moveVec;
+		if ((imaginaryEyePos - realityEyePos).length() < speed)
 		{
-			//AtをEnemyに合わせる
-			auto EnemyPos = GetStage()->GetSharedGameObject<Player>(L"Player")->GetComponent<Transform>()->GetPosition();
-			Vec3 cameraAt = m_MovieCamera->GetAt();//注視点
-
-			if (cameraAt != EnemyPos)
-			{
-				cameraAt.y = 2.5f;
-				cameraAt += MoveVec(5.0f, cameraAt, m_MovieAt);
-
-				m_MovieCamera->SetAt(cameraAt);//数値をセットする
-
-				if (abs(cameraAt.x - m_MovieAt.x) <= 1.5f && abs(cameraAt.z - m_MovieAt.z) <= 1.5f)//ほぼ注視点がEnemyのPosと一緒なら
-				{
-					EnemyPos.y = cameraAt.y;
-					m_MovieCamera->SetAt(EnemyPos);//一緒とみなす
-					//GetStage()->RemoveGameObject<Sprite>(m_MovieBand);//帯を消す
-					//m_Count = 2;
-				}
-
-			}
-
-			/*	if (m_Count > 0)
-				{
-					wstringstream wss(L"");
-					auto scene = App::GetApp()->GetScene<Scene>();
-					wss << L"At.X : "
-						<< L""
-						<< m_MovieCamera->GetAt().x
-						<< L"\nAt.Y"
-						<< m_MovieCamera->GetAt().y
-						<< L"\nAt.Z"
-						<< m_MovieCamera->GetAt().z
-						<< endl;
-					scene->SetDebugString(wss.str());
-
-				}*/
-
-			}
+			realityEyePos = imaginaryEyePos;
 		}
 
-		Vec3 MoveCamera::MoveVec(float speed, Vec3 pos, Vec3 tagetPos)//移動する距離を決めている
-		{
-			float VecX = tagetPos.x - pos.x;//目標位置とPlayerとのX座標の距離を測っている
-			float VecZ = tagetPos.z - pos.z;//目標位置とPlayerとのZ座標の距離を測っている
-			float rad = atan2(VecZ, VecX);//角度を求める（ラジアン）
+		ptrCameraTrans->SetPosition(realityEyePos);
 
-			Vec3 moveVec(0.0f, 0.0f, 0.0f);
+		// 空想位置から見たプレイヤーの方向と同じ方向を見る
+		auto atPos = Vec3(0.0f);
+		atPos.x = ptrTargetTrans->GetPosition().x;
+		atPos.y = realityEyePos.y + ptrTargetTrans->GetPosition().y - imaginaryEyePos.y;
+		atPos.z = ptrTargetTrans->GetPosition().z;
 
-			auto& app = App::GetApp();
-			float delta = app->GetElapsedTime();//デルタタイムを取得
-			moveVec.x = (speed * cos(rad)) * delta;//間接的に距離を足している
-			moveVec.z = (speed * sin(rad)) * delta;//間接的に距離を足している
-
-			return moveVec;
-		}
-
-		void MoveCamera::OnCollisionEnter(shared_ptr<GameObject>&Other)
-		{
-			auto stage = GetStage();
-
-
-			if (Other->FindTag(L"Ground") && m_Count == 0)
-			{
-				//m_Player = stage->GetSharedGameObject<Player>(L"GamePlayer");//GamePlayerを取得
-				//m_AfterPlayerScale = m_Player.lock()->GetComponent<Transform>()->GetScale();//変更前のサイズを取得
-				////m_AfterPlayerMat = m_Player.lock()->GetComponent<PNTBoneModelDraw>()->GetMeshToTransformMatrix();//変更前の差分行列を取得
-
-				////stage->GetSharedGameObject<StageManager>(L"StageManager")->SetStartFlag(false);//Playerの操作を効かなくさせる
-
-
-				//m_Player.lock()->GetComponent<Transform>()->SetScale(1.0f, 1.0f, 1.0f);//ムービー用のサイズにする
-				//Mat4x4 spanMat;
-				//spanMat.affineTransformation(
-				//	Vec3(1.0f, 1.0f, 1.0f),
-				//	Vec3(0.0f, 0.0f, 0.0f),
-				//	Vec3(0.0f, XM_PI, 0.0f),
-				//	Vec3(0.0f, -0.5f, -0.05f)
-				//);
-				//m_Player.lock()->GetComponent<PNTBoneModelDraw>()->SetMeshToTransformMatrix(spanMat);//ムービー用のメッシュの大きさにする
-
-
-				//m_Count = 1;
-				//m_StageView = GetStage()->GetView();
-				//m_StageCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
-
-				//デバック用
-				m_MovieCamera = ObjectFactory::Create<Camera>();
-				m_MovieCamera->SetEye(m_StageCamera.lock()->GetEye());
-				m_MovieCamera->SetAt(m_StageCamera.lock()->GetAt());
-				auto testView = GetStage()->CreateView<SingleView>();
-				testView->SetCamera(m_MovieCamera);
-				GetStage()->SetView(testView);
-			}
-		}
+		// カメラの位置と注視点を設定
+		ptrOwner->SetAngleY(m_AlphaAngle);
+		ptrOwner->SetEye(realityEyePos);
+		ptrOwner->SetAt(atPos);
+	}
 }

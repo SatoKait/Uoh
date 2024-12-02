@@ -56,6 +56,10 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"RED_TX", tex);
 			tex = texPath + L"line.png";
 			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
+			tex = texPath + L"Partition.png";
+			App::GetApp()->RegisterTexture(L"PARTITION_TX", tex);
+
+		
 
 		}
 		// モデルのリソース

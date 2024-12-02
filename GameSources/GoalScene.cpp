@@ -44,7 +44,7 @@ namespace basecross{
 	}
 	void GoalScene::CreateScore()
 	{
-		AddGameObject<Score>();
+		AddGameObject<StageScore>();
 	}
 
 
