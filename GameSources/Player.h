@@ -87,7 +87,7 @@ namespace basecross{
 			m_Angle(0.0f),
 			m_bfrAngle(0.0f),
 			m_StanTime(0.0f),
-			m_moveAngle(0.0f)
+			m_moveAngle(0.0f),
 			m_Nextcircle(0),
 			m_CircleCount(0)
 		{
