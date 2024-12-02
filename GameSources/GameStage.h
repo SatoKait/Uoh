@@ -7,14 +7,14 @@
 #include "stdafx.h"
 
 namespace basecross {
-
 	//--------------------------------------------------------------------------------------
 	//	ゲームステージクラス
 	//--------------------------------------------------------------------------------------
 	class GameStage : public Stage {
-		// BGM
-		shared_ptr<SoundItem> m_stageBGM;
+		// BGM	
+		shared_ptr<SoundItem> m_stageBGM;	
 		shared_ptr<SingleView> m_View;//ビューの変数
+
 		//ステージの倍率
 		float m_StageRation;
 		//ステージの時間
@@ -49,9 +49,11 @@ namespace basecross {
 		void CreateStageTime();
 		void CreatePollCollision();
 		void CreateFloatCircle();
-		
 		void CreateWave();
 		void CreateMoveCamera();
+
+		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
+
 
 	public:
 		//構築と破棄
@@ -59,9 +61,9 @@ namespace basecross {
 		virtual ~GameStage() 
 		{
 		}
-		//初期化
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
+
 		//virtual void OnDestroy()override;
 
 		
