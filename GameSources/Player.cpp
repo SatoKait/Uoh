@@ -104,6 +104,7 @@ namespace basecross{
 		auto scale = trans->GetScale();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
 		Vec2 ret;
 		if (cntl[0].bConnected)
@@ -156,7 +157,7 @@ namespace basecross{
 			{
 				if (m_grounded == true)
 				{
-					m_ptrXA->Start(L"FloatSE", 0, 2.0f);
+					ptrMana->Start(L"FloatSE", 0, 2.0f);
 					m_grounded = false;
 					m_JumpTime = 0;
 					m_Accel = 2.0f;
@@ -186,9 +187,9 @@ namespace basecross{
 			}
 			// 滞空時間の引き延ばし
 			if (m_JumpTime <= 2.0f)
-				m_Accel -= 0.03f;
+				m_Accel -= 0.025f;
 			else
-				m_Accel -= 0.015f;
+				m_Accel -= 0.005f;
 		}
 		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
 			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
@@ -203,7 +204,7 @@ namespace basecross{
 		{
 			if (m_grounded == false)
 			{
-				m_ptrXA->Start(L"EnterWaterSE", 0, 2.0f);
+				ptrMana->Start(L"EnterWaterSE", 0, 2.0f);
 			}
 			m_grounded = true;
 			pos.y = scale.y * posYcnst;
