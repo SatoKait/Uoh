@@ -15,8 +15,8 @@ namespace basecross {
 	//構築と破棄
 	MainCamera::MainCamera(float angleY) :
 		m_angleY(angleY),
-		m_distance(10.0f),//6.0
-		m_height(2.5f),  //2.5
+		m_distance(13.0f),//6.0
+		m_height(1.5f),  //2.5
 		m_camDis(5.0f),   //5.0
 		m_MoveFlag(true)
 	{
@@ -24,7 +24,7 @@ namespace basecross {
 	MainCamera::MainCamera() :
 		m_angleY(90.0f),
 		m_distance(6.0f),//6.0
-		m_height(2.5f),  //2.5
+		m_height(1.5f),  //2.5
 		m_camDis(5.0f),   //5.0
 		m_MoveFlag(true)
 	{
@@ -39,8 +39,7 @@ namespace basecross {
 
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		Vec2 ret;
-		auto speed = 50.0f;
-
+		auto speed = 100.0f;
 
 		if (cntlVec[0].bConnected)
 		{
@@ -68,7 +67,8 @@ namespace basecross {
 		auto at = targetTrans->GetPosition();
 
 		at += frontVec * m_camDis;
-		SetAt(at);
+		m_at = at.y;
+		//SetAt(at);
 
 		//カメラの座標点を設定
 		auto eye = at + radVec * m_distance;

@@ -27,7 +27,7 @@ namespace basecross {
 		AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
 			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		AddGameObject<StageSprite>(L"LOGO_TX", true,
-			Vec2(750.0f, 300.0f), Vec2(0.0f, 200.0f));
+			Vec2(1300.0f, 800.0f), Vec2(0.0f, 200.0f));
 		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
 			Vec2(450.0f, 100.0f), Vec2(0.0f, -150.0f));
 

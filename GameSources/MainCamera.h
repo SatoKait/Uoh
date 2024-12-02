@@ -1,6 +1,6 @@
 /*!
 @file MainCamera.h
-@brief ƒJƒƒ‰
+@brief ã‚«ãƒ¡ãƒ©
 */
 
 #pragma once
@@ -10,7 +10,7 @@ namespace basecross {
 
 
 	//--------------------------------------------------------------------------------------
-	//	MyCameraƒJƒƒ‰iƒRƒ“ƒ|[ƒlƒ“ƒg‚Å‚Í‚È‚¢j
+	//	MyCameraã‚«ãƒ¡ãƒ©ï¼ˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã§ã¯ãªã„ï¼‰
 	//--------------------------------------------------------------------------------------
 	class MainCamera :public Camera {
 
@@ -46,6 +46,8 @@ namespace basecross {
 		{
 			m_angleY = angle;
 		}
+    
+		float m_at;
 	};
 }
 //end basecross
