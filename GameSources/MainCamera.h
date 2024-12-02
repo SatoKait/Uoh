@@ -15,7 +15,7 @@ namespace basecross {
 	class MainCamera :public Camera {
 
 		weak_ptr<Transform> m_targetTrans;
-
+		weak_ptr<GameObject> m_Target;
 		shared_ptr<Stage> m_stage;
 
 		float m_angleY;
@@ -34,10 +34,18 @@ namespace basecross {
 		virtual void OnCreate() override;
 		virtual void OnUpdate() override;
 
+		shared_ptr <GameObject> GetTarget()const
+		{
+			return m_Target.lock();
+		}
+
 		void SetTarget(const shared_ptr <GameObject>& target);
 		void SetAngle();
 		void SetMove(bool MoveOn);
-
+		void SetAngleY(const float& angle)
+		{
+			m_angleY = angle;
+		}
 	};
 }
 //end basecross
