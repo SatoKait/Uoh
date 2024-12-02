@@ -15,6 +15,13 @@ namespace basecross {
 		//ステージの倍率
 		float m_StageRation;
 		float m_ToTalTime;
+		float m_ToTalTime2;
+		float m_ToStartTime;
+		bool m_isStartFlag;
+		bool m_TimeFlag;
+		bool m_Flag;
+		bool DrawFlag;
+		wstring m_Number;
 
 		//ビューの作成
 		void CreateViewLight();
@@ -26,15 +33,16 @@ namespace basecross {
 		void CreateGround();
 		//障害物
 		void CreateObstacle();
-		//スプライト
-		void CreateTraceSprite();
 
 		void CreatePollCollision();
 		//ゴール
 		void CreateGoal();
+		void CreateFloatCircle();
 		//時間
 		void CreateTime();
+		void CreateBGM();
 		shared_ptr<SingleView> m_View;//ビューの変数
+		shared_ptr<SoundItem> m_BGM;
 
 	public:
 		//構築と破棄
