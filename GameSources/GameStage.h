@@ -13,8 +13,6 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class GameStage : public Stage {
 		// BGM
-		shared_ptr<SoundItem> m_stageBGM;
-		shared_ptr<XAudio2Manager> m_ptrXA = App::GetApp()->GetXAudio2Manager();
 		shared_ptr<SoundItem> m_BGM;
 
 		shared_ptr<SingleView> m_View;//ビューの変数

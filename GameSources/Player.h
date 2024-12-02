@@ -21,7 +21,6 @@ namespace basecross{
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
 		shared_ptr<CollisionObb>m_ptrPollCol;
 		shared_ptr<MainCamera> m_ptrCamera;
-		shared_ptr<XAudio2Manager> m_ptrXA = App::GetApp()->GetXAudio2Manager();
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
@@ -87,7 +86,7 @@ namespace basecross{
 			m_Angle(0.0f),
 			m_bfrAngle(0.0f),
 			m_StanTime(0.0f),
-			m_moveAngle(0.0f)
+			m_moveAngle(0.0f),
 			m_Nextcircle(0),
 			m_CircleCount(0)
 		{

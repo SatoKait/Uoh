@@ -179,7 +179,7 @@ namespace basecross {
 
 	void GameStage::CreateBGM(){
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
-		m_BGM = m_ptrXA->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.4f);
+		m_BGM = ptrMana->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.4f);
 		//m_ptrXA->Start(L"StageBGM2", XAUDIO2_LOOP_INFINITE, 0.5f);
 	}
 
@@ -235,13 +235,14 @@ namespace basecross {
 	{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
 		auto score = 0;
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
 			int a = 0;
-			m_ptrXA->Stop(m_BGM);
+			ptrMana->Stop(m_BGM);
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
@@ -284,12 +285,12 @@ namespace basecross {
 				//m_ToTalTime = 0.0f;
 				if (score >= 1000)
 				{
-					m_ptrXA->Stop(m_BGM);
+					ptrMana->Stop(m_BGM);
 					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 				}
 				if (score <= 999)
 				{
-					m_ptrXA->Stop(m_BGM);
+					ptrMana->Stop(m_BGM);
 					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 				}
 
