@@ -73,6 +73,8 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Poll2.bmf");
 			App::GetApp()->RegisterResource(L"POLL2_MESH", StaticMultiModelMesh);
+			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Trophy.bmf");
+			App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticMultiModelMesh);
 
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
@@ -87,6 +89,9 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll3.bmf");
 			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);
+			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Trophy.bmf");
+			//App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticModelMesh);
+
 
 		}
 

@@ -284,5 +284,37 @@ namespace basecross {
 		AddTag(L"StanObject");
 	}
 
+	//--------------------------------------------------------------------------------------
+	// GoalTrophyキャラ
+	//--------------------------------------------------------------------------------------
+	void GoalTrophy::OnCreate() {
+		AddTag(L"GoalTrophy");
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetScale(m_Scale);
+		m_ptrTrans->SetPosition(m_Position);
+		m_ptrTrans->SetRotation(m_Rotate);
+
+
+		auto col = AddComponent<CollisionObb>();
+		col->SetDrawActive(m_DrawFlag);
+		col->SetFixed(true);
+
+
+		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
+		spanMat.affineTransformation(
+			Vec3(0.1f, 0.1f, 0.2f),//スケーリング
+			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+			Vec3(0.0f, -0.25f, 0.1f) //移動
+		);
+
+		//影の形（メッシュ）を設定		
+		auto ptrShadow = AddComponent<Shadowmap>();
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+		
+		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
+		m_ptrDraw->SetMultiMeshResource(L"TROPHY_MESH");
+		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
+	}
 
 };//end basecross

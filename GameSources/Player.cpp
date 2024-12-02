@@ -545,6 +545,18 @@ namespace basecross{
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 
+
+		if (other->FindTag(L"GoalTrophy"))
+		{
+			m_GoalFlag = true;
+			if (m_StopFlag == true)
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			}
+		}
+
+
+
 		//if (other->FindTag(L"Poll") && !m_ChangeFlag)
 		//{
 		//	ptrPoll1_1col->SetAfterCollision(AfterCollision::None);
