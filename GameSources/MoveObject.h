@@ -283,6 +283,38 @@ namespace basecross {
 		void OnCreate();
 
 	};
+
+	 //--------------------------------------------------------------------------------------
+     // TrophyƒLƒƒƒ‰
+	 //--------------------------------------------------------------------------------------
+	 class GoalTrophy : public GameObject
+	 {
+		 shared_ptr<Transform>m_ptrTrans;
+		 shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+
+		 Vec3 m_Position;
+		 Vec3 m_Scale;
+		 Vec3 m_Rotate;
+
+		 bool m_DrawFlag;
+
+
+	 public:
+		 GoalTrophy(const std::shared_ptr<Stage>& stage, const Vec3& Position, const Vec3& Scale, const Vec3& m_Rotate) :
+			 GameObject(stage),
+			 m_Position(Position),
+			 m_Scale(Scale),
+			 m_Rotate(m_Rotate),
+			 m_DrawFlag(true)
+
+		 {
+		 }
+		 void OnCreate();
+		 //void OnUpdate();
+		 //virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
+
+	 };
+
 }//end basecros
 
 
