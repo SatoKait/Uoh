@@ -13,9 +13,6 @@ namespace basecross{
 		shared_ptr<GameObject> m_SelectStage1;
 		void CreateViewLight(); //ƒrƒ…[‚Ìì¬
 		void CreateSprite();
-		void SwitchSelect();
-
-		int m_select;
 
 	public:
 		SelectStage() : Stage() {}

@@ -135,25 +135,4 @@ namespace basecross {
 		ptrOwner->SetEye(realityEyePos);
 		ptrOwner->SetAt(atPos);
 	}
-
-	MainCamera2::MainCamera2() :
-		m_AngleY(XMConvertToRadians(-90.0f))
-	{
-	}
-
-	MainCamera2::~MainCamera2()
-	{
-
-	}
-
-	void MainCamera2::OnCreate()
-	{
-
-	}
-
-	void MainCamera2::OnUpdate()
-	{
-
-	}
-
 }

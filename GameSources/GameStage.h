@@ -22,11 +22,10 @@ namespace basecross {
 		//ステージの時間
 	    float m_ToTalTime;
 		float m_ToTalTime2;
-		float m_ToStartTime;
+		int m_ToStartTime;
 		bool m_isStartFlag;
 		bool m_TimeFlag;
 		bool m_Flag;
-		bool DrawFlag;
 		wstring m_Number;
 
 		// BGMの再生
@@ -59,8 +58,6 @@ namespace basecross {
 
 
 	public:
-		bool m_GoalFlag;
-
 		//構築と破棄
 		GameStage();
 		virtual ~GameStage() 
