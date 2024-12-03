@@ -10,7 +10,7 @@ namespace basecross{
 	void GoalScene::CreateBGM()
 	{
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
-		m_stageBGM = ptrMana->Start(L"GAMEOVERSE", 0.0f, 1.0f);
+		m_stageBGM = ptrMana->Start(L"GAMECREAL2SE", 0.0f, 1.0f);
 
 	}
 	void GoalScene::OnDestroy() {

@@ -1,6 +1,6 @@
 /*!
 @file MoveObject.h
-@brief ƒXƒe[ƒW‚È‚Ç
+@brief ã‚¹ãƒ†ãƒ¼ã‚¸ãªã©
 */
 
 #pragma once
@@ -9,22 +9,22 @@
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	// MoveObjectƒLƒƒƒ‰
+	// MoveObjectã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	class MoveObject : public GameObject {
-		shared_ptr<Transform>m_ptrTrans;		// TransformƒRƒ“ƒ|[ƒlƒ“ƒg
+		shared_ptr<Transform>m_ptrTrans;		// Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		shared_ptr<MainCamera>m_camera;
 		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
 		Vec3 m_Position;
 		Vec3 m_Scale;
 		Vec3 m_Goal;
 		wstring m_ResKey;
-		float m_Speed;			 //ƒXƒs[ƒh
+		float m_Speed;			 //ã‚¹ãƒ”ãƒ¼ãƒ‰
 
 	public:
-		float m_Distance;       //‹——£
+		float m_Distance;       //è·é›¢
 
-		// \’z‚Æ”jŠü
+		// æ§‹ç¯‰ã¨ç ´æ£„
 		MoveObject::MoveObject(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
@@ -36,14 +36,14 @@ namespace basecross {
 			m_Scale(Scale),
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
-			m_Speed(1.0f),			//ƒXƒs[ƒh
+			m_Speed(1.0f),			//ã‚¹ãƒ”ãƒ¼ãƒ‰
 			m_Goal(Vec3(0.0f, 0.0f, 100.0f))
 
 		{
 		}
 		MoveObject::~MoveObject() {}
 
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		virtual void OnCreate()override;
 		//
 		virtual void OnUpdate()override;
@@ -53,22 +53,22 @@ namespace basecross {
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
-	// MoveBuyoƒLƒƒƒ‰
+	// MoveBuyoã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	class MoveBuoy : public GameObject {
-		shared_ptr<Transform>m_ptrTrans;		// TransformƒRƒ“ƒ|[ƒlƒ“ƒg
+		shared_ptr<Transform>m_ptrTrans;		// Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		shared_ptr<MainCamera>m_camera;
 		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
 		Vec3 m_Position;
 		Vec3 m_Scale;
 		Vec3 m_Goal;
 		wstring m_ResKey;
-		float m_Speed;			 //ƒXƒs[ƒh
+		float m_Speed;			 //ã‚¹ãƒ”ãƒ¼ãƒ‰
 
 	public:
-		float m_Distance;       //‹——£
+		float m_Distance;       //è·é›¢
 
-		// \’z‚Æ”jŠü
+		// æ§‹ç¯‰ã¨ç ´æ£„
 		MoveBuoy::MoveBuoy(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
@@ -80,22 +80,22 @@ namespace basecross {
 			m_Scale(Scale),
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
-			m_Speed(1.0f)			//ƒXƒs[ƒh
+			m_Speed(1.0f)			//ã‚¹ãƒ”ãƒ¼ãƒ‰
 		{
 		}
 		MoveBuoy::~MoveBuoy() {}
 
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
 		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
-	// PollƒLƒƒƒ‰
+	// Pollã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	class Poll : public GameObject {
-		shared_ptr<Transform>m_ptrTrans;		// TransformƒRƒ“ƒ|[ƒlƒ“ƒg
+		shared_ptr<Transform>m_ptrTrans;		// Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		shared_ptr<MainCamera>m_camera;
 		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
 		Vec3 m_Position;
@@ -103,36 +103,36 @@ namespace basecross {
 		Vec3 m_Rotate;
 
 		Vec3 m_Goal;
-		wstring m_ResKey;
-		float m_Speed;			 //ƒXƒs[ƒh
+		//wstring m_ResKey;
+		float m_Speed;			 //ã‚¹ãƒ”ãƒ¼ãƒ‰
 		bool m_DrawFlag;
 
 
 	public:
-		float m_Distance;       //‹——£
+		float m_Distance;       //è·é›¢
 		shared_ptr<CollisionObb>m_col;
 
-		// \’z‚Æ”jŠü
+		// æ§‹ç¯‰ã¨ç ´æ£„
 		Poll::Poll(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
-			const Vec3& m_Rotate,
-			const wstring& ResKey
+			const Vec3& m_Rotate
+			//const wstring& ResKey
 		) :
 			GameObject(StagePtr),
 			m_Position(Position),
 			m_Scale(Scale),
 			m_Rotate(m_Rotate),
-			m_ResKey(ResKey),
+			//m_ResKey(ResKey),
 			m_Distance(10.0f),
-			m_Speed(1.0f),		//ƒXƒs[ƒh
+			m_Speed(1.0f),		//ã‚¹ãƒ”ãƒ¼ãƒ‰
 			m_DrawFlag(true)
 
 		{
 		}
 		Poll::~Poll() {}
 
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		virtual void OnCreate()override;	
 		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		//virtual void OnUpdate()override;
@@ -140,10 +140,10 @@ namespace basecross {
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
-	// Poll1ƒLƒƒƒ‰
+	// Poll1ã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	class Poll1 : public GameObject {
-		shared_ptr<Transform>m_ptrTrans;		// TransformƒRƒ“ƒ|[ƒlƒ“ƒg
+		shared_ptr<Transform>m_ptrTrans;		// Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		shared_ptr<MainCamera>m_camera;
 		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
 		Vec3 m_Position;
@@ -152,37 +152,37 @@ namespace basecross {
 		Vec3 m_Goal;
 		wstring m_sharedName;
 
-		wstring m_ResKey;
-		float m_Speed;			 //ƒXƒs[ƒh
+		//wstring m_ResKey;
+		float m_Speed;			 //ã‚¹ãƒ”ãƒ¼ãƒ‰
 		bool m_DrawFlag;
 
 
 	public:
-		float m_Distance;       //‹——£
+		float m_Distance;       //è·é›¢
 		shared_ptr<CollisionObb>m_col;
 
-		// \’z‚Æ”jŠü
+		// æ§‹ç¯‰ã¨ç ´æ£„
 		Poll1::Poll1(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
-			const Vec3& m_Rotate,
+			const Vec3& m_Rotate
 
-			const wstring& ResKey
+			//const wstring& ResKey
 		) :
 			GameObject(StagePtr),
 			m_Position(Position),
 			m_Scale(Scale),
 			m_Rotate(m_Rotate),
-			m_ResKey(ResKey),
+			//m_ResKey(ResKey),
 			m_Distance(10.0f),
-			m_Speed(1.0f),		//ƒXƒs[ƒh
+			m_Speed(1.0f),		//ã‚¹ãƒ”ãƒ¼ãƒ‰
 			m_DrawFlag(false)
 
 		{
 		}
 		Poll1::~Poll1() {}
 
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		virtual void OnCreate()override;	
 		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		//virtual void OnUpdate()override;
@@ -190,10 +190,10 @@ namespace basecross {
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
-	// CirclePollƒLƒƒƒ‰
+	// CirclePollã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	class CirclePoll : public GameObject {
-		shared_ptr<Transform>m_ptrTrans;		// TransformƒRƒ“ƒ|[ƒlƒ“ƒg
+		shared_ptr<Transform>m_ptrTrans;		// Transformã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		shared_ptr<MainCamera>m_camera;
 		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
 		Vec3 m_Position;
@@ -203,20 +203,20 @@ namespace basecross {
 		Vec3 m_Goal;
 		wstring m_ResKey;
 		wstring m_sharedName;
-		////ƒ^ƒOİ’è
+		////ã‚¿ã‚°è¨­å®š
 		vector<wstring> m_Tags;
 		wstring m_Number;
 		int m_Count;
-		float m_Speed;			 //ƒXƒs[ƒh
+		float m_Speed;			 //ã‚¹ãƒ”ãƒ¼ãƒ‰
 		bool m_DrawFlag;
 
 
 
 	public:
-		float m_Distance;       //‹——£
+		float m_Distance;       //è·é›¢
 		shared_ptr<CollisionObb>m_col;
 
-		// \’z‚Æ”jŠü
+		// æ§‹ç¯‰ã¨ç ´æ£„
 		CirclePoll::CirclePoll(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
@@ -230,7 +230,7 @@ namespace basecross {
 			m_Rotate(m_Rotate),
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
-			m_Speed(1.0f),		//ƒXƒs[ƒh
+			m_Speed(1.0f),		//ã‚¹ãƒ”ãƒ¼ãƒ‰
 			m_DrawFlag(true),
 			m_Count(0)
 
@@ -238,7 +238,7 @@ namespace basecross {
 		}
 		CirclePoll::~CirclePoll() {}
 
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		virtual void OnCreate()override;
 		void BaseAddTag(const wstring& tag)
 		{
@@ -258,7 +258,7 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
-	// PollCollisionƒLƒƒƒ‰
+	// PollCollisionã‚­ãƒ£ãƒ©
 	//--------------------------------------------------------------------------------------
 	 class PollCollision : public GameObject
 	  {
@@ -283,6 +283,40 @@ namespace basecross {
 		void OnCreate();
 
 	};
+
+
+	 //--------------------------------------------------------------------------------------
+     // Trophyã‚­ãƒ£ãƒ©
+	 //--------------------------------------------------------------------------------------
+	 class GoalTrophy : public GameObject
+	 {
+		 shared_ptr<Transform>m_ptrTrans;
+		 shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+
+		 Vec3 m_Position;
+		 Vec3 m_Scale;
+		 Vec3 m_Rotate;
+
+		 bool m_DrawFlag;
+
+
+	 public:
+		 GoalTrophy(const std::shared_ptr<Stage>& stage, const Vec3& Position, const Vec3& Scale, const Vec3& m_Rotate) :
+			 GameObject(stage),
+			 m_Position(Position),
+			 m_Scale(Scale),
+			 m_Rotate(m_Rotate),
+			 m_DrawFlag(true)
+
+		 {
+		 }
+		 void OnCreate();
+		 //void OnUpdate();
+		 //virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
+
+	 };
+
+
 }//end basecros
 
 

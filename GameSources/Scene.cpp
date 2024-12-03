@@ -71,12 +71,16 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLE_MESH", StaticMultiModelMesh);
 			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Pole2.bmf");
 			App::GetApp()->RegisterResource(L"POLL_MESH", StaticMultiModelMesh);
-			StaticMultiModelMesh = MultiMeshResource::CreateStaticModelMultiMesh(modelPath, L"Poll2.bmf");
-			App::GetApp()->RegisterResource(L"POLL2_MESH", StaticMultiModelMesh);
 
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
-			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);
+			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);			
+			Modeltex = modelPath + L"T_Poll.png";
+			App::GetApp()->RegisterTexture(L"POLL_TX", Modeltex);
+			Modeltex = modelPath + L"T_Poll2.png";
+			App::GetApp()->RegisterTexture(L"POLL2_TX", Modeltex);
+
+
 
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
@@ -87,6 +91,11 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll3.bmf");
 			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
+			App::GetApp()->RegisterResource(L"POLL_1_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll2.bmf");
+			App::GetApp()->RegisterResource(L"POLL_2_MESH", StaticModelMesh);
+
 
 		}
 
@@ -100,8 +109,8 @@ namespace basecross{
 			App::GetApp()->RegisterWav(L"KAMOMESE", strSE);
 			strSE = SoundPath + L"GameCreal.wav";
 			App::GetApp()->RegisterWav(L"GAMECREALSE", strSE);
-			strSE = SoundPath + L"GameOver.wav";
-			App::GetApp()->RegisterWav(L"GAMEOVERSE", strSE);
+			strSE = SoundPath + L"GameCreal2.wav";
+			App::GetApp()->RegisterWav(L"GAMECREAL2SE", strSE);
 			strSE = SoundPath + L"BGM1.wav";
 			App::GetApp()->RegisterWav(L"StageBGM1", strSE);
 			strSE = SoundPath + L"BGM2.wav";
