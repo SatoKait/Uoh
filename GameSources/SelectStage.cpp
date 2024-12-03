@@ -30,6 +30,7 @@ namespace basecross{
 		App::GetApp()->GetScene<Scene>()->SetScore(0);
 
 		try {
+			m_select = 0;
 			CreateViewLight();
 			CreateSprite();
 		}
@@ -39,18 +40,22 @@ namespace basecross{
 	}
 
 	void SelectStage::OnUpdate() {
+		// デバッグ用ストリーム
+		wstringstream wss(L"");
+
 		//コントローラチェックして入力があればコマンド呼び出し
 		m_InputHandler.PushHandle(GetThis<SelectStage>());
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_B || KeyState.m_bPressedKeyTbl[VK_SPACE])
+
+		SwitchSelect();
+
+		if ((cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE]) && m_select == 0)
 		{
-			int a = 0;
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage");
 		}
-		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
+		if ((cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE]) && m_select == 1)
 		{
-			int a = 0;
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage2");
 		}
 
@@ -62,7 +67,33 @@ namespace basecross{
 		{
 
 		}
+		wss << L"m_select : " <<
+			m_select <<
 
+			endl;
+
+		// デバッグ用文字列
+		auto scene = App::GetApp()->GetScene<Scene>();
+		auto dstr = scene->GetDebugString();
+		scene->SetDebugString(wss.str());
+
+	}
+
+	void SelectStage::SwitchSelect()
+	{
+		//コントローラチェックして入力があればコマンド呼び出し
+		m_InputHandler.PushHandle(GetThis<SelectStage>());
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+
+		if ((cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_DPAD_RIGHT || KeyState.m_bPressedKeyTbl['D']) && m_select <= 0)
+		{
+			m_select += 1;
+		}
+		if ((cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_DPAD_LEFT || KeyState.m_bPressedKeyTbl['A']) && m_select >= 1)
+		{
+			m_select -= 1;
+		}
 	}
 }
 //end basecross
