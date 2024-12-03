@@ -73,7 +73,7 @@ namespace basecross {
 		SetAlphaActive(true);
 
 		auto col = AddComponent<CollisionObb>();
-		col->SetDrawActive(true);
+		col->SetDrawActive(false);
 		col->SetFixed(true);
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
