@@ -100,8 +100,8 @@ namespace basecross{
 			App::GetApp()->RegisterWav(L"KAMOMESE", strSE);
 			strSE = SoundPath + L"GameCreal.wav";
 			App::GetApp()->RegisterWav(L"GAMECREALSE", strSE);
-			strSE = SoundPath + L"GameCreal2.wav";
-			App::GetApp()->RegisterWav(L"GAMECREAL2SE", strSE);
+			strSE = SoundPath + L"GameOver.wav";
+			App::GetApp()->RegisterWav(L"GAMEOVERSE", strSE);
 			strSE = SoundPath + L"BGM1.wav";
 			App::GetApp()->RegisterWav(L"StageBGM1", strSE);
 			strSE = SoundPath + L"BGM2.wav";
