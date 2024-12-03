@@ -119,7 +119,7 @@ namespace basecross {
 
 	}
 	void GameStage::CreateObstacle() {
-		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 5.55f, 0.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 5.55f, 0.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 		SetSharedGameObject(L"Poll", objPoll);
 		auto objCirclePoll = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, 0.0f), Vec3(4.0f,3.5f,1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"CirclePoll1", objCirclePoll);

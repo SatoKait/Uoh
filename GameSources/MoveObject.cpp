@@ -175,8 +175,8 @@ namespace basecross {
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
-		m_ptrDraw->SetMultiMeshResource(L"POLL2_MESH");
-		m_ptrDraw->SetTextureResource(m_ResKey);
+		m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
+		m_ptrDraw->SetTextureResource(L"POLL2_TX");
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
@@ -275,7 +275,7 @@ namespace basecross {
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
 		m_ptrTrans->SetRotation(m_Rotate);
-
+		 
 
 		auto col = AddComponent<CollisionObb>();
 		col->SetDrawActive(m_DrawFlag);

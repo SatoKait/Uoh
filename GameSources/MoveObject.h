@@ -103,7 +103,7 @@ namespace basecross {
 		Vec3 m_Rotate;
 
 		Vec3 m_Goal;
-		wstring m_ResKey;
+		//wstring m_ResKey;
 		float m_Speed;			 //スピード
 		bool m_DrawFlag;
 
@@ -116,14 +116,14 @@ namespace basecross {
 		Poll::Poll(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
-			const Vec3& m_Rotate,
-			const wstring& ResKey
+			const Vec3& m_Rotate
+			//const wstring& ResKey
 		) :
 			GameObject(StagePtr),
 			m_Position(Position),
 			m_Scale(Scale),
 			m_Rotate(m_Rotate),
-			m_ResKey(ResKey),
+			//m_ResKey(ResKey),
 			m_Distance(10.0f),
 			m_Speed(1.0f),		//スピード
 			m_DrawFlag(true)
@@ -309,14 +309,10 @@ namespace basecross {
 			 m_DrawFlag(false)
 
 		 {
-		 }
-		 void OnCreate();
-		 //void OnUpdate();
-		 //virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
+	   	 }
+		//void OnCreate();
 
-	 };
-
-
+	};
 }//end basecros
 
 
