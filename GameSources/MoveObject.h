@@ -310,7 +310,7 @@ namespace basecross {
 
 		 {
 	   	 }
-		//void OnCreate();
+		void OnCreate();
 
 	};
 }//end basecros
