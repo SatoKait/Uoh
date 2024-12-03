@@ -152,7 +152,7 @@ namespace basecross {
 		Vec3 m_Goal;
 		wstring m_sharedName;
 
-		wstring m_ResKey;
+		//wstring m_ResKey;
 		float m_Speed;			 //スピード
 		bool m_DrawFlag;
 
@@ -165,15 +165,15 @@ namespace basecross {
 		Poll1::Poll1(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
-			const Vec3& m_Rotate,
+			const Vec3& m_Rotate
 
-			const wstring& ResKey
+			//const wstring& ResKey
 		) :
 			GameObject(StagePtr),
 			m_Position(Position),
 			m_Scale(Scale),
 			m_Rotate(m_Rotate),
-			m_ResKey(ResKey),
+			//m_ResKey(ResKey),
 			m_Distance(10.0f),
 			m_Speed(1.0f),		//スピード
 			m_DrawFlag(false)
@@ -283,38 +283,6 @@ namespace basecross {
 		void OnCreate();
 
 	};
-
-	 //--------------------------------------------------------------------------------------
-     // Trophyキャラ
-	 //--------------------------------------------------------------------------------------
-	 class GoalTrophy : public GameObject
-	 {
-		 shared_ptr<Transform>m_ptrTrans;
-		 shared_ptr<BcPNTStaticDraw>m_ptrDraw;
-
-		 Vec3 m_Position;
-		 Vec3 m_Scale;
-		 Vec3 m_Rotate;
-
-		 bool m_DrawFlag;
-
-
-	 public:
-		 GoalTrophy(const std::shared_ptr<Stage>& stage, const Vec3& Position, const Vec3& Scale, const Vec3& m_Rotate) :
-			 GameObject(stage),
-			 m_Position(Position),
-			 m_Scale(Scale),
-			 m_Rotate(m_Rotate),
-			 m_DrawFlag(true)
-
-		 {
-		 }
-		 void OnCreate();
-		 //void OnUpdate();
-		 //virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
-
-	 };
-
 }//end basecros
 
 
