@@ -276,7 +276,7 @@ namespace basecross {
 			m_Position(Position),
 			m_Scale(Scale),
 			 m_Rotate(m_Rotate),
-			 m_DrawFlag(true)
+			 m_DrawFlag(false)
 
 		 {
 	   	 }
@@ -305,7 +305,7 @@ namespace basecross {
 			 m_Position(Position),
 			 m_Scale(Scale),
 			 m_Rotate(m_Rotate),
-			 m_DrawFlag(true)
+			 m_DrawFlag(false)
 
 		 {
 		 }
