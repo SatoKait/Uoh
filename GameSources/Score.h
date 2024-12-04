@@ -94,7 +94,7 @@ namespace basecross {
 		TargetsScore::TargetsScore(const shared_ptr<Stage>& StagePtr
 		) :
 			GameObject(StagePtr),
-			m_score(10000)
+			m_score(1000)
 		{
 		}
 

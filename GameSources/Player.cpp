@@ -500,6 +500,7 @@ namespace basecross{
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
 		//auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
 		//auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
@@ -598,6 +599,8 @@ namespace basecross{
 		{
 			//App::GetApp()->GetScene<Scene>()->AddScore(100);
 			//auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
+			ptrMana->Start(L"PointSE", 0, 2.0f);
+
 			ScoreFlag = true;
 		    auto ciclenext = ptrCircle->m_next++;
 			auto comboCount = ptrCircle->m_ComboCount;
@@ -617,15 +620,15 @@ namespace basecross{
 
 		if (other->FindTag(L"StanObject"))
 		{
-			//m_CircleCount = 0;
-	/*		m_Accel = -4.0f;
+			m_CircleCount = 0;
+			m_Accel = -4.0f;
 			m_MoveFlag = false;
 			m_StanFlag = true;
 			if(m_StanTime >= 3.5f)
 			{ 
-				m_ptrXA->Start(L"DamageSE", 0, 2.0f);
+				ptrMana->Start(L"DamageSE", 0, 2.0f);
 				m_StanTime = 0.0f;
-			}*/
+			}
 		}
 	}
 }
