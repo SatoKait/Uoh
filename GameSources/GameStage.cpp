@@ -247,6 +247,22 @@ namespace basecross {
 			CreateBGM();
 			CreateFloatCircle();
 			CreateWave();
+			CreateMoveCamera();	
+			CameraSetting(ptrPlayer);
+			auto& app = App::GetApp();
+			auto path = app->GetDataDirWString();
+
+			auto skyboxPath = path + L"skybox/";
+			for (const auto& keyName : Skybox2::pairs) {
+				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
+			}
+
+			// Skyboxクラス用
+			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
+			// スカイボックス
+			AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
+			//AddGameObject<Skybox2>();
+
 			CreateMoveCamera();
 		}
 		catch (...) {
@@ -305,7 +321,7 @@ namespace basecross {
 				m_ToTalTime2 = 0;
 			}
 		
-			if (score >= 10000 && DrawFlag == true)
+			if (score >= 1000 && DrawFlag == true)
 			{
 				//ptrMana->Stop(m_BGM);
 				AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
@@ -313,8 +329,8 @@ namespace basecross {
 			}
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
-					ptrMana->Stop(m_BGM);
-					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+				ptrMana->Stop(m_BGM);
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 			}
 
 		}

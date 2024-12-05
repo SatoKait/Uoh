@@ -125,6 +125,8 @@ namespace basecross{
 			App::GetApp()->RegisterWav(L"DamageSE", strSE);
 			strSE = SoundPath + L"Float.wav";
 			App::GetApp()->RegisterWav(L"FloatSE", strSE);
+			strSE = SoundPath + L"Points.wav";
+			App::GetApp()->RegisterWav(L"PointSE", strSE);
 
 		}
 	}
