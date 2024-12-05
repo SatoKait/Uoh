@@ -393,30 +393,30 @@ namespace basecross{
 
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
-		//// 座標
-		//	wss		<< L"\n\n\npos : (" <<
-		//	pos.x	<< L", "			<<
-		//	pos.y	<< L", "			<<
-		//	pos.z	<< L")"				<< 
+		// 座標
+			wss		<< L"\n\n\npos : (" <<
+			pos.x	<< L", "			<<
+			pos.y	<< L", "			<<
+			pos.z	<< L")"				<< 
 
-		//	//L"\nrotate : ("				<<
-		//	//rotate.x	<< L", "		<<
-		//	//rotate.y	<< L", "		<<
-		//	//rotate.z	<< L")"			<< 
+			//L"\nrotate : ("				<<
+			//rotate.x	<< L", "		<<
+			//rotate.y	<< L", "		<<
+			//rotate.z	<< L")"			<< 
 
-		//	L"\nAt : ("				<<
-		//	ptrCamera->GetAt().x	<< L", "	<<
-		//	ptrCamera->GetAt().y	<< L", "	<<
-		//	ptrCamera->GetAt().z	<< L")"		<<
+			L"\nAt : ("				<<
+			ptrCamera->GetAt().x	<< L", "	<<
+			ptrCamera->GetAt().y	<< L", "	<<
+			ptrCamera->GetAt().z	<< L")"		<<
 
-		//	//L"\nstantime : "			<<
-		//	//m_StanTime					<<
-		//// ゲーム画面fps
-		//	L"\nm_rotAng : "			<<
-		//	m_rotAng					<<
+			//L"\nstantime : "			<<
+			//m_StanTime					<<
+		// ゲーム画面fps
+			L"\nm_rotAng : "			<<
+			m_rotAng					<<
 
-		//	L"\nAngleState : "			<<
-		//	AngleState					<<
+			L"\nAngleState : "			<<
+			AngleState					<<
 
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
@@ -440,7 +440,7 @@ namespace basecross{
 		//	//L"\nm_Score : " <<
 		//	//m_Score <<
 
-		//	endl;
+			endl;
 
 		// //ゴール判定
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
@@ -546,18 +546,6 @@ namespace basecross{
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 
-
-		if (other->FindTag(L"GoalTrophy"))
-		{
-			m_GoalFlag = true;
-			if (m_StopFlag == true)
-			{
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-			}
-		}
-
-
-
 		//if (other->FindTag(L"Poll") && !m_ChangeFlag)
 		//{
 		//	ptrPoll1_1col->SetAfterCollision(AfterCollision::None);
@@ -617,6 +605,19 @@ namespace basecross{
 		//else if(!other->FindTag(L"FloatCircle")) {
 		//	ScoreFlag = false;
 		//}
+
+		
+        if (other->FindTag(L"GoalTrophy"))
+        {
+            m_GoalFlag = true;
+            if (m_StopFlag == true)
+            {
+                PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+            }
+        }
+
+
+
 
 		if (other->FindTag(L"StanObject"))
 		{

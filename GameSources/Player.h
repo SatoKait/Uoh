@@ -22,7 +22,6 @@ namespace basecross{
 		shared_ptr<CollisionObb>m_ptrPollCol;
 		shared_ptr<MainCamera> m_ptrCamera;
 		shared_ptr<GameStage> m_Stage;
-		shared_ptr<BcPNTBoneModelDraw> m_MoveAnimation;
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
@@ -53,7 +52,9 @@ namespace basecross{
 		//shared_ptr<CollisionObb> m_col;
 		//shared_ptr<CollisionObb> m_col2;
 
-	public:
+	public:	
+		bool  m_GoalFlag;	
+		bool m_StopFlag;
 		bool m_Goal;			//ゴール判定
 		bool m_SpeedUp;         //
 		float m_Angle;
@@ -62,8 +63,6 @@ namespace basecross{
 		float m_rotAng;
 		bool m_grounded;		//接地しているかどうか
 		int  m_Nextcircle;
-		bool  m_GoalFlag;
-		bool m_StopFlag;
 
 		Player::Player(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
@@ -94,7 +93,7 @@ namespace basecross{
 			m_Nextcircle(0),
 			m_CircleCount(0),
 			m_GoalFlag(false),
-			m_StopFlag(false)
+			m_StopFlag(false) 
 		{
 		}
 

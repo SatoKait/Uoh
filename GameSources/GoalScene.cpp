@@ -1,6 +1,6 @@
 /*!
 @file Character.cpp
-@brief ƒLƒƒƒ‰ƒNƒ^[‚È‚ÇÀ‘Ì
+@brief ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãªã©å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -19,15 +19,15 @@ namespace basecross{
 	}
 
 
-	void GoalScene::CreateViewLight() {		//ƒrƒ…[‚ÌƒJƒƒ‰‚Ìİ’è
+	void GoalScene::CreateViewLight() {		//ãƒ“ãƒ¥ãƒ¼ã®ã‚«ãƒ¡ãƒ©ã®è¨­å®š
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<GoalScene>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
 		cameraView->SetCamera(ptrMyCamera);
 		ptrMyCamera->SetEye(Vec3(0.0f, 5.0f, -5.0f));
 		ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
-		//ƒ}ƒ‹ƒ`ƒ‰ƒCƒg‚Ìì¬
+		//ãƒãƒ«ãƒãƒ©ã‚¤ãƒˆã®ä½œæˆ
 		auto ptrMultiLight = CreateLight<MultiLight>();
-		//ƒfƒtƒHƒ‹ƒg‚Ìƒ‰ƒCƒeƒBƒ“ƒO‚ğw’è
+		//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã‚’æŒ‡å®š
 		ptrMultiLight->SetDefaultLighting();
 		SetView(cameraView);
 	}
@@ -62,7 +62,7 @@ namespace basecross{
 	}
 
 	void GoalScene::OnUpdate() {
-		//ƒRƒ“ƒgƒ[ƒ‰ƒ`ƒFƒbƒN‚µ‚Ä“ü—Í‚ª‚ ‚ê‚ÎƒRƒ}ƒ“ƒhŒÄ‚Ño‚µ
+		//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒã‚§ãƒƒã‚¯ã—ã¦å…¥åŠ›ãŒã‚ã‚Œã°ã‚³ãƒãƒ³ãƒ‰å‘¼ã³å‡ºã—
 		m_InputHandler.PushHandle(GetThis<GoalScene>());
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();

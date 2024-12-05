@@ -33,16 +33,18 @@ namespace basecross {
 		void CreateGround();
 		//障害物
 		void CreateObstacle();
+		//スプライト
+		void CreateTraceSprite();
 
 		void CreatePollCollision();
 		//ゴール
 		void CreateGoal();
-		void CreateFloatCircle();
 		//時間
 		void CreateTime();
+		void CreateFloatCircle();
 		void CreateBGM();
-		shared_ptr<SingleView> m_View;//ビューの変数
 		shared_ptr<SoundItem> m_BGM;
+		shared_ptr<SingleView> m_View;//ビューの変数
 
 	public:
 		//構築と破棄
