@@ -248,7 +248,7 @@ namespace basecross {
 			CreateFloatCircle();
 			CreateWave();
 			CreateMoveCamera();	
-			CameraSetting(ptrPlayer);
+			//CameraSetting(ptrPlayer);
 			auto& app = App::GetApp();
 			auto path = app->GetDataDirWString();
 
