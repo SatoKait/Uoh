@@ -22,7 +22,7 @@ namespace basecross {
 		//ステージの時間
 	    float m_ToTalTime;
 		float m_ToTalTime2;
-		int m_ToStartTime;
+	    float m_ToStartTime;
 		bool m_isStartFlag;
 		bool m_TimeFlag;
 		bool m_Flag;

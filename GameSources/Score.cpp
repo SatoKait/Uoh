@@ -62,8 +62,6 @@ namespace basecross {
 		//m_Trans = GetComponent<Transform>();
 		//m_Trans->SetPosition(m_Position);
 
-
-
 		const int numPlaces = 5;
 		m_numberSprites.reserve(numPlaces);
 		int place = 10000;
@@ -101,8 +99,6 @@ namespace basecross {
 	{
 		//m_Trans = GetComponent<Transform>();
 		//m_Trans->SetPosition(m_Position);
-
-
 
 		const int numPlaces = 5;
 		m_numberSprites.reserve(numPlaces);

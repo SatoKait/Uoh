@@ -61,13 +61,23 @@ namespace basecross {
 		shared_ptr<Transform> m_numberTrans;
 		int m_score;
 		int m_nowScore;
+		int m_numPlaces;
+		int m_numPlaces1;
+		int m_place;
+		int m_place1;
+		int m_place2;
 
 		// \’z‚Æ”jŠü
 		StageScore::StageScore(const shared_ptr<Stage>& StagePtr
-		):
+		) :
 			GameObject(StagePtr),
 			m_score(App::GetApp()->GetScene<Scene>()->m_Score),
-			m_nowScore(0)
+			m_nowScore(0),
+			m_numPlaces(5),//‚±‚ê‚ª5Œ…‚Å
+			m_place(10000),//00000‚ğo‚·‚±‚Æ‚ªo—ˆ‚é
+			m_numPlaces1(3),
+			m_place1(100),
+			m_place2(100)
 		{
 		}
 
