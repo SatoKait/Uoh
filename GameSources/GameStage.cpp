@@ -246,18 +246,18 @@ namespace basecross {
 			CreateWave();
 			CreateMoveCamera();	
 			CameraSetting(ptrPlayer);
-			//auto& app = App::GetApp();
-			//auto path = app->GetDataDirWString();
+			auto& app = App::GetApp();
+			auto path = app->GetDataDirWString();
 
-			//auto skyboxPath = path + L"skybox/";
-			//for (const auto& keyName : Skybox2::pairs) {
-			//	app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
-			//}
+			auto skyboxPath = path + L"skybox/";
+			for (const auto& keyName : Skybox2::pairs) {
+				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
+			}
 
-			//// Skyboxクラス用
-			//app->RegisterTexture(L"skybox", skyboxPath + L"skybox.png"); // テクスチャを１枚にまとめたバージョン
-			//// スカイボックス
-			////AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
+			// Skyboxクラス用
+			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
+			// スカイボックス
+			AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
 			//AddGameObject<Skybox2>();
 
 		}

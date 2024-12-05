@@ -1,36 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Block.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Buoy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Deployment.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Energy.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Goal.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Ground.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Map.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MoveObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Score.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ScoreSprite.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelectStage.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Sprite.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)UITime.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Wall.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)SelectStageSprite.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage2.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)GameOverStage.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)FloatCircle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Wave.cpp">
       <Filter>Sharder</Filter>
     </ClCompile>
@@ -43,38 +15,97 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Startcamera.cpp">
       <Filter>MoveCamera</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MoveObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Block.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Buoy.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Deployment.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Ground.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Wall.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)FloatCircle.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectShader.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ProjectBehavior.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameOverStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameStage2.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SelectStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Goal.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sprite.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)UITime.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Score.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ScoreSprite.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp">
+      <Filter>MainCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Map.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Skybox2.cpp">
+      <Filter>SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Skybox.cpp">
+      <Filter>SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Plane.cpp">
+      <Filter>SkyBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Block.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Buoy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Character.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Deployment.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Energy.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Goal.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Ground.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Map.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MoveObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Player.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Project.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Score.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ScoreSprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelectStage.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Sprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)UITime.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Wall.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SelectStageSprite.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage2.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GameOverStage.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)FloatCircle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h">
       <Filter>Sharder</Filter>
     </ClInclude>
@@ -87,6 +118,93 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Startcamera.h">
       <Filter>MoveCamera</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MoveObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Block.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Buoy.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Deployment.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Ground.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Wall.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FloatCircle.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectShader.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ProjectBehavior.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Project.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameOverStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameStage2.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SelectStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Goal.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sprite.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)UITime.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Score.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ScoreSprite.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h">
+      <Filter>MainCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Map.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Skybox2.h">
+      <Filter>SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Skybox.h">
+      <Filter>SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Plane.h">
+      <Filter>SkyBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sharder">
@@ -94,6 +212,27 @@
     </Filter>
     <Filter Include="MoveCamera">
       <UniqueIdentifier>{e1269066-9336-4d87-8cec-99ccf6c16998}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{d286c033-356e-438b-b911-f3df2befcf74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{812bf7f9-c8d2-4238-8b2f-26d902186941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{d7c1e439-5baa-43c5-82b7-e4e4f71350f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{a67cdd89-3e08-4e80-8494-431128168380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{63d2f00b-fa57-4207-953a-a6f69d2479b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainCamera">
+      <UniqueIdentifier>{2960bcf9-19cb-481e-a167-07faf3e553dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkyBox">
+      <UniqueIdentifier>{e04738be-a787-4cb7-930b-311899a0ad08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
