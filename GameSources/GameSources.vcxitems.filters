@@ -68,8 +68,8 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
       <Filter>Stage</Filter>
-     </ClCompile>
-   <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
       <Filter>Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SelectStage.cpp">
@@ -345,9 +345,6 @@
     <Filter Include="MainCamera">
       <UniqueIdentifier>{2960bcf9-19cb-481e-a167-07faf3e553dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SkyBox">
-      <UniqueIdentifier>{e04738be-a787-4cb7-930b-311899a0ad08}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{26a74bad-fc25-47e5-9a9b-3a9b095f47fc}</UniqueIdentifier>
     </Filter>
@@ -365,6 +362,9 @@
     </Filter>
     <Filter Include="MainCamera">
       <UniqueIdentifier>{fbb29b70-b6c8-4b24-b662-934c7116663e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkyBox">
+      <UniqueIdentifier>{e04738be-a787-4cb7-930b-311899a0ad08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
