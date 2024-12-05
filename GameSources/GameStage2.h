@@ -15,6 +15,13 @@ namespace basecross {
 		//ステージの倍率
 		float m_StageRation;
 		float m_ToTalTime;
+		float m_ToTalTime2;
+		float m_ToStartTime;
+		bool m_isStartFlag;
+		bool m_TimeFlag;
+		bool m_Flag;
+		bool DrawFlag;
+		wstring m_Number;
 
 		//ビューの作成
 		void CreateViewLight();
@@ -34,6 +41,9 @@ namespace basecross {
 		void CreateGoal();
 		//時間
 		void CreateTime();
+		void CreateFloatCircle();
+		void CreateBGM();
+		shared_ptr<SoundItem> m_BGM;
 		shared_ptr<SingleView> m_View;//ビューの変数
 
 	public:
