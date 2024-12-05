@@ -603,6 +603,19 @@ namespace basecross{
 		//	ScoreFlag = false;
 		//}
 
+		
+        if (other->FindTag(L"GoalTrophy"))
+        {
+            m_GoalFlag = true;
+            if (m_StopFlag == true)
+            {
+                PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+            }
+        }
+
+
+
+
 		if (other->FindTag(L"StanObject"))
 		{
 			//m_CircleCount = 0;

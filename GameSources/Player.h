@@ -51,7 +51,9 @@ namespace basecross{
 		//shared_ptr<CollisionObb> m_col;
 		//shared_ptr<CollisionObb> m_col2;
 
-	public:
+	public:	
+		bool  m_GoalFlag;	
+		bool m_StopFlag;
 		bool m_Goal;			//ゴール判定
 		bool m_SpeedUp;         //
 		float m_Angle;
@@ -88,7 +90,9 @@ namespace basecross{
 			m_StanTime(0.0f),
 			m_moveAngle(0.0f),
 			m_Nextcircle(0),
-			m_CircleCount(0)
+			m_CircleCount(0),
+			m_GoalFlag(false),
+			m_StopFlag(false) 
 		{
 		}
 
