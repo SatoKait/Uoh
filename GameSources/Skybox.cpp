@@ -61,13 +61,13 @@ namespace basecross{
 		SetAlphaActive(true);
 
 		auto transComp = GetComponent<Transform>();
-		transComp->SetScale(Vec3(707.0f));
+		transComp->SetScale(Vec3(1000.0f));
 	}
 
-	void Skybox::OnUpdate()
-	{
-		auto transComp = GetComponent<Transform>();
-		transComp->SetPosition(GetStage()->GetView()->GetTargetCamera()->GetEye());
-	}
+	//void Skybox::OnUpdate()
+	//{
+	//	auto transComp = GetComponent<Transform>();
+	//	transComp->SetPosition(GetStage()->GetView()->GetTargetCamera()->GetEye());
+	//}
 }
 //end basecross
