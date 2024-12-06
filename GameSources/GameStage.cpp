@@ -16,9 +16,9 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(30),
+		m_ToTalTime(10),
 		m_ToStartTime(3),
-		m_ToTalTime2(1),
+		m_ToTalTime2(0),
 		m_isStartFlag(false),
 		m_TimeFlag(false),
 		m_Flag(false),
@@ -148,7 +148,9 @@ namespace basecross {
 		SetSharedGameObject(L"Poll1_7", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(-30.0f, 4.0f, -20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f));
 		SetSharedGameObject(L"Poll1_8", objPollnol);
-
+		//AddGameObject<UpdownPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
+		//AddGameObject<OnewaytrafficPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
+		//AddGameObject<OneWayPollCollision>(Vec3(0.0f, 5.55f, -11.0f), Vec3(5.0f, 2.0f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 
 		auto ptrobstacle = AddGameObject<Deployment>();
 	}
@@ -184,12 +186,15 @@ namespace basecross {
 			Vec3(-470.0f, 350.0f, 0.0f));
 		AddGameObject<StageSprite>(L"TIME_TX", true,
 			Vec2(350.0f, 80.0f), Vec2(-515.0f, 350.0f));
-		AddGameObject<StageSprite>(L"PARTITION_TX", true,
-			Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
-		auto score = AddGameObject<Score>();
-		AddGameObject<TargetsScore>();
+		//AddGameObject<StageSprite>(L"PARTITION_TX", true,
+	    //Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
+		//auto score = AddGameObject<Score>();
+		//AddGameObject<TargetsScore>();
 		//SetSharedGameObject(L"Score", ptrscore);
-	    
+	    // HPゲージの生成
+		auto ptrHpGauge = AddGameObject<GaugeScore>(false,
+			Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"RED_TX");
+
 	}
 	void GameStage::CreateStageTime()
 	{

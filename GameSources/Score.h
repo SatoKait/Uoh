@@ -61,13 +61,25 @@ namespace basecross {
 		shared_ptr<Transform> m_numberTrans;
 		int m_score;
 		int m_nowScore;
+		int m_numPlaces;
+		int m_numPlaces1;
+		int m_numPlaces2;
+	    int m_place;
+		int m_place1;
+		int m_place2;
 
 		// 構築と破棄
 		StageScore::StageScore(const shared_ptr<Stage>& StagePtr
-		):
+		) :
 			GameObject(StagePtr),
 			m_score(App::GetApp()->GetScene<Scene>()->m_Score),
-			m_nowScore(0)
+			m_nowScore(0),
+			m_numPlaces(5),//これが5桁で
+			m_place(10000),//00000を出すことが出来る
+			m_numPlaces1(3),
+			m_numPlaces2(4),
+		    m_place1(100),
+		    m_place2(100)
 		{
 		}
 
@@ -80,29 +92,46 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	//　Targetsスコアクラス	
 	//--------------------------------------------------------------------------------------
-	class TargetsScore : public GameObject
+	class GaugeScore : public GameObject
 	{
-		vector<shared_ptr<ScoreSprite>> m_numberSprites;
-		shared_ptr<ScoreSprite>number;
+		shared_ptr<Transform> m_ptrTrans;
+		//バックアップの頂点データ
+		vector<VertexPositionColorTexture>m_BackupVertices;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_HpKey;
+		bool m_Trace;
+		float m_TotalTime;
+		float m_Widthsize;
+		float m_Hp_now = 50; //現在のHP
+		const float m_Max_hp = 100; //HPの最大値
+		
 
 	public:
-		shared_ptr<Transform> m_numberTrans;
-		int m_score;
-		int m_nowScore;
+		//構築と破壊
+		GaugeScore::GaugeScore(const shared_ptr<Stage>& StagePtr,
+			bool Trace,
+			const Vec2& StartScale,
+			const Vec3& StartPos,
+			const wstring& HpKey
 
-		// 構築と破棄
-		TargetsScore::TargetsScore(const shared_ptr<Stage>& StagePtr
 		) :
 			GameObject(StagePtr),
-			m_score(1000)
-		{
-		}
+			m_Trace(Trace),
+			m_StartScale(StartScale),
+			m_StartPos(StartPos),
+			m_TotalTime(0),
+			m_HpKey(HpKey),
+			m_Hp_now(50)
 
-		TargetsScore:: ~TargetsScore() {}
+		{}
 
-		virtual void OnCreate() override; // 初期化
+		GaugeScore::~GaugeScore() {}
+
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate() override;
 	};
-
-
 }
 //end basecross

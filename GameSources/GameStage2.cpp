@@ -196,7 +196,7 @@ namespace basecross {
 			AddGameObject<StageSprite>(L"PARTITION_TX", true,
 			Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
 			auto score = AddGameObject<Score>();
-			AddGameObject<TargetsScore>();
+			//AddGameObject<TargetsScore>();
 			//SetSharedGameObject(L"Score", ptrscore);
 			AddGameObject<UITimeStage>(1,
 			L"NUMBER2_TX",

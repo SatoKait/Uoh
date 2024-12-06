@@ -180,7 +180,121 @@ namespace basecross {
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
+	void Poll::OnUpdate()
+	{
+
+	}
+
 	//--------------------------------------------------------------------------------------
+	// OnewaytrafficPollキャラ
+	//--------------------------------------------------------------------------------------
+	void OnewaytrafficPoll::OnCreate() {
+		//AddTag(L"Poll2");
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetScale(m_Scale);
+		m_ptrTrans->SetPosition(m_Position);
+		m_ptrTrans->SetRotation(m_Rotate);
+
+		m_col = AddComponent<CollisionObb>();
+		m_col->SetDrawActive(m_DrawFlag);
+		m_col->SetFixed(true);
+		m_col->SetSleepActive(true);
+		m_col->GetAfterCollision();
+		m_col->SetAfterCollision(AfterCollision::None);
+
+
+		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
+		spanMat.affineTransformation(
+			Vec3(0.02f, 0.0405f, 0.25f),//スケーリング
+			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+			Vec3(0.0f, -2.6f, -0.5f) //移動
+		);
+		//影をつける（シャドウマップを描画する）
+		auto ptrShadow = AddComponent<Shadowmap>();
+		//影の形（メッシュ）を設定
+		//ptrShadow->SetMeshResource(L"BED_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
+		m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
+		m_ptrDraw->SetTextureResource(L"POLL2_TX");
+		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
+	}
+	void OnewaytrafficPoll::OnUpdate()
+	{
+
+	}
+
+	//--------------------------------------------------------------------------------------
+	// UpdownPollキャラ
+	//--------------------------------------------------------------------------------------
+	void UpdownPoll::OnCreate() {
+		//AddTag(L"Poll2");
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetScale(m_Scale);
+		m_ptrTrans->SetPosition(m_Position);
+		m_ptrTrans->SetRotation(m_Rotate);
+
+		//m_col = AddComponent<CollisionObb>();
+		//m_col->SetDrawActive(m_DrawFlag);
+		//m_col->SetFixed(true);
+		//m_col->SetSleepActive(true);
+		//m_col->GetAfterCollision();
+		//m_col->SetAfterCollision(AfterCollision::None);
+
+
+		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
+		spanMat.affineTransformation(
+			Vec3(0.02f, 0.0405f, 0.25f),//スケーリング
+			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+			Vec3(0.0f, -2.6f, 0.0f) //移動
+		);
+		//影をつける（シャドウマップを描画する）
+		auto ptrShadow = AddComponent<Shadowmap>();
+		//影の形（メッシュ）を設定
+		//ptrShadow->SetMeshResource(L"BED_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
+		m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
+		m_ptrDraw->SetTextureResource(L"POLL2_TX");
+		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
+	}
+
+	void UpdownPoll::OnUpdate()
+	{
+		auto  MovePos = m_ptrTrans->GetPosition();
+		// デルタタイムを取得する
+		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+		auto MaxPos = 10.0f;
+		auto MinPos = 5.55f;
+
+		if (MovePos.y <= MaxPos && UpFlag == false)
+		{
+			MovePos.y += 1.0f * delta;
+		}
+		if (MovePos.y >= MaxPos && UpFlag == false)
+		{
+			UpFlag = true;
+			DownFlag = true;
+		}
+		if (MovePos.y >= MinPos && DownFlag == true)
+		{
+			MovePos.y -= 1.0f * delta;
+		}
+		if (MovePos.y <= MinPos)
+		{
+			UpFlag = false;
+			DownFlag = false;
+		}
+
+
+		m_ptrTrans->SetPosition(MovePos);
+	}
+
+	//--------------------------------------- =-----------------------------------------------
 	// CirclePollキャラ
 	//--------------------------------------------------------------------------------------
 	void CirclePoll::OnCreate() {
@@ -265,12 +379,30 @@ namespace basecross {
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
-
 	//--------------------------------------------------------------------------------------
 	// PollCollisionキャラ
 	//--------------------------------------------------------------------------------------
 
-	void PollCollision::OnCreate() {
+		void PollCollision::OnCreate() {
+		m_ptrTrans = GetComponent<Transform>();
+		m_ptrTrans->SetScale(m_Scale);
+		m_ptrTrans->SetPosition(m_Position);
+		m_ptrTrans->SetRotation(m_Rotate);
+
+
+		auto col = AddComponent<CollisionObb>();
+		col->SetDrawActive(m_DrawFlag);
+		col->SetFixed(true);
+
+		AddTag(L"StanObject");
+	}
+
+
+	//--------------------------------------------------------------------------------------
+	// OneWayPollCollisionキャラ
+	//--------------------------------------------------------------------------------------
+
+	void OneWayPollCollision::OnCreate() {
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
