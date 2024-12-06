@@ -94,26 +94,42 @@ namespace basecross {
 
 namespace basecross {
 
-	//初期化
-	void TargetsScore::OnCreate()
-	{
-		//m_Trans = GetComponent<Transform>();
-		//m_Trans->SetPosition(m_Position);
+	void GaugeScore::OnCreate() {
 
-		const int numPlaces = 5;
-		m_numberSprites.reserve(numPlaces);
-		int place = 10000;
+		m_ptrTrans = GetComponent<Transform>();
 
-		for (int i = 0; i < numPlaces; i++)
-		{
-			auto stage = GetStage();
-			number = stage->AddGameObject<ScoreSprite>();
-			m_numberTrans = number->GetComponent<Transform>();
-			m_numberTrans->SetPosition(500 * 0.5f - 50.0f * (numPlaces - i), 800 * 0.5f, 0.0f);
-			number->UpdateValue(m_score / place % 10);
-			place /= 10;
-			m_numberSprites.push_back(number);
-		}
+		//色の設定
+		Col4 color(1, 1, 1, 1); //ポリゴンの色
+		float widthSize = m_Hp_now; //ポリゴンの幅
+		float helfSize = 20.0f; //ポリゴンの高さ
+
+
+		m_BackupVertices = {
+			{VertexPositionColorTexture(Vec3(0, 0, 0), color, Vec2(0, 0))},
+			{VertexPositionColorTexture(Vec3(widthSize, 0, 0), color, Vec2(1, 0))},
+			{VertexPositionColorTexture(Vec3(0, helfSize, 0), color, Vec2(0, 1))},
+			{VertexPositionColorTexture(Vec3(widthSize, helfSize, 0), color, Vec2(1, 1))},
+		};
+
+		//インデックス配列
+		vector<uint16_t> indices = { 2, 1, 0, 3, 1, 2 };
+		SetAlphaActive(m_Trace);
+		auto ptrTrans = GetComponent<Transform>();
+		ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 1.0f);
+		ptrTrans->SetRotation(0, 0, 0);
+		ptrTrans->SetPosition(m_StartPos);
+		//頂点とインデックスを指定してスプライト作成
+		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
+		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
+		ptrDraw->SetTextureResource(m_HpKey);
 	}
+
+	void GaugeScore::OnUpdate() {
+
+		m_Hp_now = App::GetApp()->GetScene<Scene>()->GetScore() * 1.0f;
+		m_ptrTrans->SetScale(1.0f,m_Hp_now / m_Max_hp * 1.0f, 1.0f);
+
+	}
+
 }
 
