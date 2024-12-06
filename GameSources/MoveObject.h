@@ -134,8 +134,109 @@ namespace basecross {
 
 		//初期化
 		virtual void OnCreate()override;	
+		virtual void OnUpdate()override;
 		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnUpdate()override;
+		//virtual void OnDestroy()override;
+	};//end basecross
+
+	//--------------------------------------------------------------------------------------
+	// OnewaytrafficPollキャラ
+	//--------------------------------------------------------------------------------------
+	class OnewaytrafficPoll : public GameObject {
+		shared_ptr<Transform>m_ptrTrans;		// Transformコンポーネント
+		shared_ptr<MainCamera>m_camera;
+		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+		Vec3 m_Position;
+		Vec3 m_Scale;
+		Vec3 m_Rotate;
+
+		Vec3 m_Goal;
+		//wstring m_ResKey;
+		float m_Speed;			 //スピード
+		bool m_DrawFlag;
+
+
+	public:
+		float m_Distance;       //距離
+		shared_ptr<CollisionObb>m_col;
+
+		// 構築と破棄
+		OnewaytrafficPoll::OnewaytrafficPoll(const shared_ptr<Stage>& StagePtr,
+			const Vec3& Position,
+			const Vec3& Scale,
+			const Vec3& m_Rotate
+			//const wstring& ResKey
+		) :
+			GameObject(StagePtr),
+			m_Position(Position),
+			m_Scale(Scale),
+			m_Rotate(m_Rotate),
+			//m_ResKey(ResKey),
+			m_Distance(10.0f),
+			m_Speed(1.0f),		//スピード
+			m_DrawFlag(true)
+
+		{
+		}
+		OnewaytrafficPoll::~OnewaytrafficPoll() {}
+
+		//初期化
+		virtual void OnCreate()override;
+		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
+		virtual void OnUpdate()override;
+		//virtual void OnDestroy()override;
+	};//end basecross
+
+	//--------------------------------------------------------------------------------------
+	// UpdownPollキャラ
+	//--------------------------------------------------------------------------------------
+	class UpdownPoll : public GameObject {
+		shared_ptr<Transform>m_ptrTrans;		// Transformコンポーネント
+		shared_ptr<MainCamera>m_camera;
+		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+		Vec3 m_Position;
+		Vec3 m_Scale;
+		Vec3 m_Rotate;
+
+		Vec3 m_Goal;
+		//wstring m_ResKey;
+		float m_Speed;			 //スピード
+		bool m_DrawFlag;
+		bool DownFlag;
+		bool UpFlag;
+
+
+
+	public:
+		float m_Distance;       //距離
+		shared_ptr<CollisionObb>m_col;
+
+		// 構築と破棄
+		UpdownPoll::UpdownPoll(const shared_ptr<Stage>& StagePtr,
+			const Vec3& Position,
+			const Vec3& Scale,
+			const Vec3& m_Rotate
+			//const wstring& ResKey
+		) :
+			GameObject(StagePtr),
+			m_Position(Position),
+			m_Scale(Scale),
+			m_Rotate(m_Rotate),
+			//m_ResKey(ResKey),
+			m_Distance(10.0f),
+			m_Speed(1.0f),		//スピード
+			m_DrawFlag(true),
+			DownFlag(false),
+			UpFlag(false)
+
+		{
+		}
+		UpdownPoll::~UpdownPoll() {}
+
+		//初期化
+		virtual void OnCreate()override;
+		virtual void OnUpdate()override;	
+		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		//virtual void OnDestroy()override;
 	};//end basecross
 
@@ -277,13 +378,34 @@ namespace basecross {
 			m_Scale(Scale),
 			 m_Rotate(m_Rotate),
 			 m_DrawFlag(false)
-
 		 {
 	   	 }
 		void OnCreate();
 
 	};
 
+	 //--------------------------------------------------------------------------------------
+	 // OneWayPollCollisionキャラ
+	 //--------------------------------------------------------------------------------------
+	 class OneWayPollCollision : public GameObject
+	 {
+		 shared_ptr<Transform>m_ptrTrans;
+		 Vec3 m_Position;
+		 Vec3 m_Scale;
+		 Vec3 m_Rotate;
+		 bool m_DrawFlag;
+
+	 public:
+		 OneWayPollCollision(const std::shared_ptr<Stage>& stage, const Vec3& Position, const Vec3& Scale, const Vec3& m_Rotate) :
+			 GameObject(stage),
+			 m_Position(Position),
+			 m_Scale(Scale),
+			 m_Rotate(m_Rotate),
+			 m_DrawFlag(true)
+		 {
+		 }
+		 void OnCreate();
+	 };
 
 	 //--------------------------------------------------------------------------------------
      // Trophyキャラ
