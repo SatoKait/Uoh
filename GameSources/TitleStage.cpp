@@ -1,5 +1,5 @@
 /*!
-@file　TitleStage.cpp
+@file　TitleStage.cpp5
 @brief タイトルなど実体
 */
 
@@ -11,7 +11,7 @@ namespace basecross {
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<TitleStage>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
 		cameraView->SetCamera(ptrMyCamera);
-		ptrMyCamera->SetEye(Vec3(0.0f, 5.0f, -5.0f));
+		ptrMyCamera->SetEye(Vec3(0.0f, 0.0f, -5.0f));
 		ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
 		//マルチライトの作成
 		auto ptrMultiLight = CreateLight<MultiLight>();
@@ -24,8 +24,12 @@ namespace basecross {
 
 	void TitleStage::CreateSprite()
 	{		
-		AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
+		auto title = AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
 			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
+		SetSharedGameObject(L"TitleLogo", title);
+		auto Layer = GetSharedGameObject<StageSprite>(L"TitleLogo");
+		Layer->SetDrawLayer(-100);
+
 		AddGameObject<StageSprite>(L"LOGO_TX", true,
 			Vec2(1300.0f, 800.0f), Vec2(0.0f, 200.0f));
 		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
@@ -35,6 +39,7 @@ namespace basecross {
 
 	void TitleStage::OnCreate() {
 		App::GetApp()->GetScene<Scene>()->SetScore(0);
+		AddGameObject<Model1>(Vec3(0.0f, -1.0f, -2.0f));
 
 		try {
 			CreateViewLight();
@@ -78,6 +83,62 @@ namespace basecross {
 		auto XAPtr = App::GetApp()->GetXAudio2Manager();
 		XAPtr->Stop(m_stageBGM);
 		XAPtr->Stop(m_stageBGM2);
+	}
+
+	Model1::Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos) :
+		GameObject(StagePtr),
+		m_StartPos(StartPos)
+	{
+	}
+	Model1::~Model1() {}
+
+	//初期化
+	void Model1::OnCreate() {
+		//初期位置などの設定
+		auto trans = GetComponent<Transform>();
+
+		auto deg = 0;
+		auto deg2 = 0;
+		auto rad = XMConvertToRadians(deg);
+		auto rad2 = XMConvertToRadians(deg2);
+
+		trans->SetScale(1.0f, 1.0f, 1.0f);
+		trans->SetRotation(Vec3(0.0f, rad, rad2));
+		trans->SetPosition(m_StartPos);
+
+		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
+		spanMat.affineTransformation(
+			Vec3(0.4f, 0.4f, 0.4f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, -0.3f, 0.0f)
+		);
+
+		//影をつける（シャドウマップを描画する）
+		auto ptrShadow = AddComponent<Shadowmap>();
+
+		//影の形（メッシュ）を設定
+		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+		//描画コンポーネントの設定
+		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
+		//描画するメッシュを設定
+		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
+		ptrDraw->SetMeshToTransformMatrix(spanMat);
+
+		ptrDraw->AddAnimation(L"Default", 15, 40, true, 30.0f);
+		ptrDraw->ChangeCurrentAnimation(L"Default");
+
+		//透明処理
+		SetAlphaActive(true);
+	}
+
+	void Model1::OnUpdate()
+	{
+		auto elapsedTime = App::GetApp()->GetElapsedTime();
+		auto drawComp = GetComponent<PNTBoneModelDraw>();
+		drawComp->UpdateAnimation(elapsedTime);
 	}
 
 

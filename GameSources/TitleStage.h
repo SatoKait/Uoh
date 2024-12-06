@@ -28,5 +28,17 @@ namespace basecross {
 		virtual void OnDestroy() override;
 	};
 
+	class Model1 : public GameObject {
+		Vec3 m_StartPos;
+		bool m_TextureUse;
+	public:
+		//\’z‚Æ”jŠü
+		Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos);
+		virtual ~Model1();
+		//‰Šú‰»
+		virtual void OnCreate() override;
+		virtual void OnUpdate() override;
+	};
+
 }
 //end basecross
