@@ -153,7 +153,7 @@ namespace basecross{
 		if (m_MoveFlag)
 		{
 			// 飛んだ瞬間の判定
-			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
+			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_B || KeyState.m_bPressedKeyTbl[VK_SPACE])
 			{
 				if (m_grounded == true)
 				{
@@ -191,8 +191,8 @@ namespace basecross{
 			else
 				m_Accel -= 0.005f;
 		}
-		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
-			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
+		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
+			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
 			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
 			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
 		{
@@ -284,7 +284,7 @@ namespace basecross{
 		// プレイヤーの描画
 		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
 		spanMat.affineTransformation(
-			Vec3(1.0f, 1.0f, 0.12f),
+			Vec3(1.0f, 1.0f, 0.2f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
 			Vec3(0.0f, -1.3f, -2.0f)
@@ -350,7 +350,7 @@ namespace basecross{
 		}
 		else if (!m_grounded)
 		{
-			m_ptrTrans->SetScale(2.0f, 0.25f, 0.25f);
+			m_ptrTrans->SetScale(1.5f, 0.25f, 0.25f);
 		}
 
 		if (cntl[0].bConnected)
@@ -363,29 +363,31 @@ namespace basecross{
 
 		}
 
-		int AngleState,a = 10;
-		if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
-		{
-			AngleState = 1;
-			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a * delta));
-		}
-		else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
-		{
-			AngleState = 2;
-			ptrCamera->SetAt(Vec3(pos.x - ret.x * a * delta, ptrCamera->m_at, pos.z));
-		}
-		else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
-		{
-			AngleState = 3;
-			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a * delta));
+		//int AngleState;
+		//float a = 3.0f;
+		//if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
+		//{
+		//	AngleState = 1;
+		//	ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a));
+		//}
+		//else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
+		//{
+		//	AngleState = 2;
+		//	ptrCamera->SetAt(Vec3(pos.x - ret.x * a, ptrCamera->m_at, pos.z));
+		//}
+		//else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
+		//{
+		//	AngleState = 3;
+		//	ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a));
 
-		}
-		else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
-		{
-			AngleState = 4;
-			ptrCamera->SetAt(Vec3(pos.x + ret.x * a * delta, ptrCamera->m_at, pos.z)); 
+		//}
+		//else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
+		//{
+		//	AngleState = 4;
+		//	ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
 
-		}
+		//}
+		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z)); 
 
 		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
 		//ptrCamera->SetAt(m_change);
@@ -415,8 +417,8 @@ namespace basecross{
 			L"\nm_rotAng : "			<<
 			m_rotAng					<<
 
-			L"\nAngleState : "			<<
-			AngleState					<<
+			//L"\nAngleState : "			<<
+			//AngleState					<<
 
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<

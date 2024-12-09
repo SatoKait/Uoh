@@ -11,8 +11,14 @@ namespace basecross{
 	{
 		InputHandler<SelectStage> m_InputHandler;
 		shared_ptr<GameObject> m_SelectStage1;
+		shared_ptr<GameObject> m_Ptr1;
+		shared_ptr<GameObject> m_Ptr2;
+
 		void CreateViewLight(); //ƒrƒ…[‚Ìì¬
 		void CreateSprite();
+		void SwitchSelect();
+		void CreateSelect();
+		int m_select;
 
 	public:
 		SelectStage() : Stage() {}
