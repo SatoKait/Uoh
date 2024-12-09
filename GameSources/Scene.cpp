@@ -60,6 +60,9 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"PARTITION_TX", tex);
 			tex = texPath + L"Combo.png";
 			App::GetApp()->RegisterTexture(L"COMBO_TX", tex);
+			tex = texPath + L"Bar.png";
+			App::GetApp()->RegisterTexture(L"BAR_TX", tex);
+
 
 		
 
