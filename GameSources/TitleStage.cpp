@@ -18,6 +18,11 @@ namespace basecross {
 		//デフォルトのライティングを指定
 		ptrMultiLight->SetDefaultLighting();
 		SetView(cameraView);
+
+		m_comX = 3.0f;
+		m_flag = false;
+		deg = 0.0f;
+		deg2 = 0.0f;
 	}
 
 
@@ -39,7 +44,7 @@ namespace basecross {
 
 	void TitleStage::OnCreate() {
 		App::GetApp()->GetScene<Scene>()->SetScore(0);
-		AddGameObject<Model1>(Vec3(0.0f, -1.0f, -2.0f));
+		flyingfish = AddGameObject<Model1>(Vec3(0.0f, -1.0f, -2.0f), Vec3(0.0f, rad, 0.0f));
 
 		try {
 			CreateViewLight();
@@ -49,6 +54,7 @@ namespace basecross {
 		catch (...) {
 			throw;
 		}
+
 	}
 
 	void TitleStage::OnUpdate() {
@@ -70,6 +76,38 @@ namespace basecross {
 		{
 
 		}
+
+		auto flyngfishtrans = flyingfish->GetComponent<Transform>();
+		Vec3 spritepos = flyngfishtrans->GetPosition();
+		Vec3 spriterot = flyngfishtrans->GetRotation();
+
+		if (!m_flag)
+		{
+			deg = 0.0f;
+			rad = XMConvertToRadians(deg);
+			flyngfishtrans->SetRotation(0.0f, rad, 0.0f);
+
+			m_comX -= 0.01f;
+			flyngfishtrans->SetPosition(m_comX, -1.0f, -2.0f);
+		}
+		if (m_comX <= -4.0f)
+		{
+			m_flag = true;
+		}
+
+		if (m_flag == true)
+		{
+			deg = 180.0f;
+			rad = XMConvertToRadians(deg);
+			flyngfishtrans->SetRotation(0.0f, rad, 0.0f);
+
+			m_comX += 0.01f;
+			flyngfishtrans->SetPosition(m_comX, -1.0f, -2.0f);
+		}
+		if (m_comX >= 4.0f)
+		{
+			m_flag = false;
+		}
 	}
 
 	// BGMの再生
@@ -85,9 +123,10 @@ namespace basecross {
 		XAPtr->Stop(m_stageBGM2);
 	}
 
-	Model1::Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos) :
+	Model1::Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot) :
 		GameObject(StagePtr),
-		m_StartPos(StartPos)
+		m_StartPos(StartPos),
+		m_StartRot(StartRot)
 	{
 	}
 	Model1::~Model1() {}
@@ -97,13 +136,13 @@ namespace basecross {
 		//初期位置などの設定
 		auto trans = GetComponent<Transform>();
 
-		auto deg = 0;
-		auto deg2 = 0;
-		auto rad = XMConvertToRadians(deg);
-		auto rad2 = XMConvertToRadians(deg2);
+		//auto deg = 0;;
+		//auto deg2 = 0;
+		//auto rad = XMConvertToRadians(deg);
+		//auto rad2 = XMConvertToRadians(deg2);
 
-		trans->SetScale(1.0f, 1.0f, 1.0f);
-		trans->SetRotation(Vec3(0.0f, rad, rad2));
+		trans->SetScale(0.5f, 0.5f, 0.5f);
+		trans->SetRotation(m_StartRot);
 		trans->SetPosition(m_StartPos);
 
 		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
