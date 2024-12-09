@@ -147,6 +147,30 @@ namespace basecross {
 		};
 }
 
+namespace basecross {
+
+	//--------------------------------------------------------------------------------------
+	///	                             Comboスプライト
+	//--------------------------------------------------------------------------------------
+	class ComboSprite : public GameObject {
+		bool m_Trace;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_ClearKey;
+	public:
+
+		ComboSprite(const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
+			const Vec2& StartScale, const Vec3& StartPos);
+		//破棄
+		virtual ~ComboSprite();
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		//virtual void OnUpdate()override {}
+	};
+
+
+}
 
 
 
