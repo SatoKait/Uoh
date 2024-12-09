@@ -15,9 +15,18 @@ namespace basecross {
 
 		InputHandler<TitleStage> m_InputHandler;
 		shared_ptr<GameObject> m_SelectStage1;
+		shared_ptr<GameObject> flyingfish;
+
 		void CreateViewLight(); //ƒrƒ…[‚Ìì¬
 		void CreateSprite();
 		void CreateBGM();
+
+		float m_comX;
+		float deg;
+		float deg2;
+		float rad;
+		float rad2;
+		bool m_flag;
 
 	public:
 		TitleStage() : Stage() {}
@@ -30,10 +39,11 @@ namespace basecross {
 
 	class Model1 : public GameObject {
 		Vec3 m_StartPos;
+		Vec3 m_StartRot;
 		bool m_TextureUse;
 	public:
 		//\’z‚Æ”jŠü
-		Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos);
+		Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot);
 		virtual ~Model1();
 		//‰Šú‰»
 		virtual void OnCreate() override;
