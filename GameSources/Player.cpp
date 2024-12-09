@@ -191,14 +191,14 @@ namespace basecross{
 			else
 				m_Accel -= 0.005f;
 		}
-		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
-			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
-		{
-			pos.y += m_JSpeed * m_Accel * delta;
-			m_Accel = -3.0f;
-		}
+		//if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
+		//	m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
+		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
+		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
+		//{
+		//	pos.y += m_JSpeed * m_Accel * delta;
+		//	m_Accel = -3.0f;
+		//}
 		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
@@ -218,6 +218,7 @@ namespace basecross{
 			// プレイヤーの移動
 			if (m_grounded)
 			{
+
 				if (ret.x || ret.y)
 				{
 					pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
@@ -252,6 +253,7 @@ namespace basecross{
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
 		}		
+
 		// 位置の更新
 		m_ptrTrans->SetPosition(pos);
 	}
@@ -274,6 +276,10 @@ namespace basecross{
 		//m_col->SetDrawActive(true);
 		//m_col2->SetDrawActive(true);
 
+		AnimationSet();
+
+		//m_Animation->ChangeCurrentAnimation(L"Swim");
+
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
@@ -282,8 +288,7 @@ namespace basecross{
 		}
 		
 		// プレイヤーの描画
-		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
-		spanMat.affineTransformation(
+		m_spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 0.2f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
@@ -294,16 +299,26 @@ namespace basecross{
 		auto ptrShadow = AddComponent<Shadowmap>();
 		//影の形（メッシュ）を設定
 		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
-		ptrShadow->SetMeshToTransformMatrix(spanMat);
+		ptrShadow->SetMeshToTransformMatrix(m_spanMat);
 
-		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
-		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
-		ptrDraw->SetMeshToTransformMatrix(spanMat);
+		m_Animation = AddComponent<BcPNTBoneModelDraw>();
+		m_Animation->SetMeshResource(L"TOBIUO_MESH");
+		m_Animation->SetMeshToTransformMatrix(m_spanMat);
+
+		m_Animation->AddAnimation(L"Default", 0, 50, true, 20.0f);
+		m_Animation->ChangeCurrentAnimation(L"Default");
+
+		//透明処理
+		SetAlphaActive(true);
 
 	}
 
 	void Player::OnUpdate()
 	{
+		//アニメーションを更新する
+		auto ptrDraw = GetComponent<PNTBoneModelDraw>();
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		ptrDraw->UpdateAnimation(elapsedTime);
 
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
@@ -494,6 +509,19 @@ namespace basecross{
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage");
 		}
 
+	}
+
+	void Player::AnimationSet()
+	{
+		m_Animation = AddComponent<BcPNTBoneModelDraw>();
+
+		m_Animation->SetTextureResource(L"TOBIUO_TX");
+
+		m_Animation->SetMeshToTransformMatrix(m_spanMat);
+		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
+		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
+		m_Animation->AddAnimation(L"Jump", 57, 59, true, 30.0f);
+		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
 	}
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
