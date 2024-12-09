@@ -39,14 +39,14 @@ namespace basecross {
 
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		Vec2 ret;
-		auto speed = 100.0f;
+		auto speed = 120.0f;
 
 		if (cntlVec[0].bConnected)
 		{
 			if (m_MoveFlag)//ƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚È‚¯‚ê‚Î‘€ì‚ª‚Å‚«‚È‚¢
 			{
-				ret.x = cntlVec[0].fThumbLX;
-				ret.y = cntlVec[0].fThumbLY;
+				ret.x = cntlVec[0].fThumbRX;
+				ret.y = cntlVec[0].fThumbRY;
 			}
 
 		}
