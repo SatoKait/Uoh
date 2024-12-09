@@ -301,19 +301,19 @@ namespace basecross{
 		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
 		ptrShadow->SetMeshToTransformMatrix(m_spanMat);
 
-		m_Animation = AddComponent<BcPNTBoneModelDraw>();
-		m_Animation->SetMeshResource(L"TOBIUO_MESH");
-		m_Animation->SetMeshToTransformMatrix(m_spanMat);
+		//m_Animation = AddComponent<BcPNTBoneModelDraw>();
+		//m_Animation->SetMeshResource(L"TOBIUO_MESH");
+		//m_Animation->SetMeshToTransformMatrix(m_spanMat);
 
-		m_Animation->AddAnimation(L"Default", 0, 50, true, 20.0f);
-		m_Animation->ChangeCurrentAnimation(L"Default");
+		//m_Animation->AddAnimation(L"Default", 0, 50, true, 20.0f);
+		//m_Animation->ChangeCurrentAnimation(L"Default");
 
 		//透明処理
 		SetAlphaActive(true);
 
 		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
 		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
-		ptrDraw->SetMeshToTransformMatrix(spanMat);
+		ptrDraw->SetMeshToTransformMatrix(m_spanMat);
 
 		ptrDraw->AddAnimation(L"Default", 15, 40, true, 30.0f);
 		ptrDraw->ChangeCurrentAnimation(L"Default");
