@@ -152,17 +152,9 @@ namespace basecross {
 
 		auto ptrobstacle = AddGameObject<Deployment>();
 	}
-	void GameStage::CreateTraceSprite() {
-		float a = -510.0f;
-		float b = 70.0f;
-		//AddGameObject<Time>(1,Vec3(1.0f,1.0f,1.0f),L"NUMBER_TX");
-		//AddGameObject<Energy>(L"HANE_TX", true,
-		//    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
-		//AddGameObject<Energy>(L"HANE_TX", true,
-		//	Vec2(100.0f, 60.0f), Vec3(a - b, 350.0f, 0.0f));
-		//AddGameObject<Energy>(L"HANE_TX", true,
-		//	Vec2(100.0f, 60.0f), Vec3(a + b, 350.0f, 0.0f));
-
+	void GameStage::CreateComboSprite() {
+		AddGameObject<ComboSprite>(L"HANE_TX", true,
+			Vec2(100.0f, 60.0f), Vec3(400.0f,350.0f, 0.0f));
 	}
 	void GameStage::CreateGoal(){
 		//AddGameObject<Goal>(
@@ -240,7 +232,7 @@ namespace basecross {
 			CreateGround();
 			CreateObstacle();
 			CreateGoal();
-			CreateTraceSprite();
+			CreateComboSprite();
 			CreateTime();
 			CreateStageTime();
 			CreatePollCollision();
