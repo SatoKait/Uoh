@@ -296,14 +296,22 @@ namespace basecross{
 		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
-		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
+		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
 		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
 
+		ptrDraw->AddAnimation(L"Default", 15, 40, true, 30.0f);
+		ptrDraw->ChangeCurrentAnimation(L"Default");
+
+		SetAlphaActive(true);
 	}
 
 	void Player::OnUpdate()
 	{
+		//アニメーションを更新する
+		auto ptrDraw = GetComponent<PNTBoneModelDraw>();
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		ptrDraw->UpdateAnimation(elapsedTime);
 
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
