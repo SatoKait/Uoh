@@ -311,6 +311,14 @@ namespace basecross{
 		//透明処理
 		SetAlphaActive(true);
 
+		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
+		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
+		ptrDraw->SetMeshToTransformMatrix(spanMat);
+
+		ptrDraw->AddAnimation(L"Default", 15, 40, true, 30.0f);
+		ptrDraw->ChangeCurrentAnimation(L"Default");
+
+		SetAlphaActive(true);
 	}
 
 	void Player::OnUpdate()
