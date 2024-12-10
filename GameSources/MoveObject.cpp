@@ -176,7 +176,7 @@ namespace basecross {
 
 		auto m_ptrDraw = AddComponent<PNTStaticDraw>();
 		m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
-		m_ptrDraw->SetTextureResource(L"POLL2_TX");
+		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
@@ -218,7 +218,7 @@ namespace basecross {
 
 		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
 		m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
-		m_ptrDraw->SetTextureResource(L"POLL2_TX");
+		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 	void OnewaytrafficPoll::OnUpdate()
@@ -259,7 +259,7 @@ namespace basecross {
 
 		m_ptrDraw = AddComponent<BcPNTStaticDraw>();
 		m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
-		m_ptrDraw->SetTextureResource(L"POLL2_TX");
+		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
@@ -373,9 +373,9 @@ namespace basecross {
 		//ptrShadow->SetMeshResource(L"BED_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
-		auto m_ptrDraw = AddComponent<PNTStaticModelDraw>();
+		auto m_ptrDraw = AddComponent<PNTStaticDraw>();
 		m_ptrDraw->SetMeshResource(L"POLL_1_MESH");
-		m_ptrDraw->SetTextureResource(L"POLL_TX");
+		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 

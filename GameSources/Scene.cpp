@@ -54,7 +54,11 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
 			App::GetApp()->RegisterTexture(L"RED_TX", tex);
-			tex = texPath + L"line.png";
+			tex = texPath + L"Blue.png";
+			App::GetApp()->RegisterTexture(L"BLUE_TX", tex);
+			tex = texPath + L"Green.png";
+			App::GetApp()->RegisterTexture(L"GREEN_TX", tex);
+			tex = texPath + L"Line.png";
 			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
 			tex = texPath + L"Partition.png";
 			App::GetApp()->RegisterTexture(L"PARTITION_TX", tex);
@@ -82,12 +86,6 @@ namespace basecross{
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
 			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);			
-			Modeltex = modelPath + L"T_Poll.png";
-			App::GetApp()->RegisterTexture(L"POLL_TX", Modeltex);
-			Modeltex = modelPath + L"T_Poll2.png";
-			App::GetApp()->RegisterTexture(L"POLL2_TX", Modeltex);
-
-
 
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");

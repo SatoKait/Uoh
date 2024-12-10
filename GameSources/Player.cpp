@@ -314,7 +314,7 @@ namespace basecross {
 
 		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
 		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
-		m_Animation->AddAnimation(L"Jump", 58, 58, false, 60.0f);
+		m_Animation->AddAnimation(L"Jump", 66, 50, false, 60.0f);
 		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
 
 		m_Animation->ChangeCurrentAnimation(L"Swim");
