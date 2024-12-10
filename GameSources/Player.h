@@ -24,6 +24,7 @@ namespace basecross{
 		shared_ptr<CollisionObb>m_ptrPollCol;
 		shared_ptr<MainCamera> m_ptrCamera;
 		shared_ptr<GameStage> m_Stage;
+		//shared_ptr<Gate> m_ptrGate;
 		shared_ptr<BcPNTBoneModelDraw> m_Animation;
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
