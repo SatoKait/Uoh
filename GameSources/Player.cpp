@@ -6,7 +6,7 @@
 #include "stdafx.h"
 #include "Project.h"
 
-namespace basecross{
+namespace basecross {
 
 	Vec2 Player::GetInputState() const
 	{
@@ -253,10 +253,9 @@ namespace basecross{
 				{
 					pos += angle * m_Speed * delta;
 				}
-				m_AnimationFlag[0] = false;
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
-		}		
+		}
 
 		// 位置の更新
 		m_ptrTrans->SetPosition(pos);
@@ -264,7 +263,6 @@ namespace basecross{
 
 	void Player::OnCreate()
 	{
-
 		AddTag(L"Player");
 		// トランスフォーム
 		m_ptrTrans = GetComponent<Transform>();
@@ -273,16 +271,11 @@ namespace basecross{
 		m_ptrTrans->SetScale(m_StartScale);
 
 		// コリジョン
-
 		m_col = AddComponent<CollisionCapsule>();
 		m_col->SetAfterCollision(AfterCollision::Auto);
 
 		//m_col->SetDrawActive(true);
 		//m_col2->SetDrawActive(true);
-
-		//AnimationSet();
-
-		//m_Animation->ChangeCurrentAnimation(L"Swim");
 
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
@@ -290,7 +283,7 @@ namespace basecross{
 			ptrCamera->SetTarget(GetThis<GameObject>());
 			//ptrCamera->
 		}
-		
+
 		// プレイヤーの描画
 		m_spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 0.2f),
@@ -418,7 +411,7 @@ namespace basecross{
 		//	ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
 
 		//}
-		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z)); 
+		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z));
 
 		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
 		//ptrCamera->SetAt(m_change);
@@ -427,26 +420,26 @@ namespace basecross{
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
-			wss		<< L"\n\n\npos : (" <<
-			pos.x	<< L", "			<<
-			pos.y	<< L", "			<<
-			pos.z	<< L")"				<< 
+		wss << L"\n\n\npos : (" <<
+			pos.x << L", " <<
+			pos.y << L", " <<
+			pos.z << L")" <<
 
 			//L"\nrotate : ("				<<
 			//rotate.x	<< L", "		<<
 			//rotate.y	<< L", "		<<
 			//rotate.z	<< L")"			<< 
 
-			L"\nAt : ("				<<
-			ptrCamera->GetAt().x	<< L", "	<<
-			ptrCamera->GetAt().y	<< L", "	<<
-			ptrCamera->GetAt().z	<< L")"		<<
+			L"\nAt : (" <<
+			ptrCamera->GetAt().x << L", " <<
+			ptrCamera->GetAt().y << L", " <<
+			ptrCamera->GetAt().z << L")" <<
 
 			//L"\nstantime : "			<<
 			//m_StanTime					<<
 		// ゲーム画面fps
-			L"\nm_rotAng : "			<<
-			m_rotAng					<<
+			L"\nm_rotAng : " <<
+			m_rotAng <<
 
 			//L"\nAngleState : "			<<
 			//AngleState					<<
@@ -487,7 +480,7 @@ namespace basecross{
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto dstr = scene->GetDebugString();
 		scene->SetDebugString(wss.str());
-			
+
 		if (m_Goal)
 		{
 			Player::Goaltrue();
@@ -527,19 +520,6 @@ namespace basecross{
 
 	}
 
-	void Player::AnimationSet()
-	{
-		m_Animation = AddComponent<BcPNTBoneModelDraw>();
-
-		m_Animation->SetTextureResource(L"TOBIUO_TX");
-
-		m_Animation->SetMeshToTransformMatrix(m_spanMat);
-		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
-		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
-		m_Animation->AddAnimation(L"Jump", 66, 50, true, 30.0f);
-		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
-	}
-
 	void Player::ChangeAnimation(const wstring& animationName)
 	{
 		if (m_Animation->GetCurrentAnimation() != animationName)
@@ -550,7 +530,7 @@ namespace basecross{
 
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
-		
+
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
 		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
@@ -589,7 +569,7 @@ namespace basecross{
 		if (other->FindTag(L"Goal"))
 		{
 			stage->AddGameObject<GoalSprite>(L"GOAL_TX",
-		    Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
+				Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
 
 			//Stage->AddGameObject<TimeSprite>(L"",
 			//	Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
@@ -643,12 +623,15 @@ namespace basecross{
 			ptrMana->Start(L"PointSE", 0, 2.0f);
 
 			ScoreFlag = true;
-		    auto ciclenext = ptrCircle->m_next++;
+			auto ciclenext = ptrCircle->m_next++;
 			auto comboCount = ptrCircle->m_ComboCount;
 			comboCount++;
 			if (ScoreFlag && comboCount == 1)
 			{
-				m_CircleCount++;
+				if (m_CircleCount < 5)
+				{
+					m_CircleCount++;
+				}
 				App::GetApp()->GetScene<Scene>()->AddScore(100 * m_CircleCount);
 				ScoreFlag = false;
 				comboCount--;
@@ -659,15 +642,15 @@ namespace basecross{
 		//	ScoreFlag = false;
 		//}
 
-		
-        if (other->FindTag(L"GoalTrophy"))
-        {
-            m_GoalFlag = true;
-            if (m_StopFlag == true)
-            {
-                PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-            }
-        }
+
+		if (other->FindTag(L"GoalTrophy"))
+		{
+			m_GoalFlag = true;
+			if (m_StopFlag == true)
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			}
+		}
 
 		if (other->FindTag(L"Gate"))
 		{
@@ -682,8 +665,8 @@ namespace basecross{
 			m_Accel = -4.0f;
 			m_MoveFlag = false;
 			m_StanFlag = true;
-			if(m_StanTime >= 3.5f)
-			{ 
+			if (m_StanTime >= 3.5f)
+			{
 				ptrMana->Start(L"DamageSE", 0, 2.0f);
 				m_StanTime = 0.0f;
 			}
