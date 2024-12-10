@@ -30,7 +30,6 @@ namespace basecross{
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
 		void MovePlayer();				// プレイヤーの移動
-		void AnimationSet();
 
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
@@ -49,9 +48,6 @@ namespace basecross{
 		bool m_DrawFlag;
 		float m_StanTime;
 		bool m_StanFlag;
-		int m_CircleCount;
-
-		bool m_AnimationFlag[3];
 
 	private:
 		shared_ptr<Transform> m_trans;
@@ -60,6 +56,7 @@ namespace basecross{
 		//shared_ptr<CollisionObb> m_col2;
 
 	public:	
+		int m_CircleCount;
 		bool  m_GoalFlag;	
 		bool m_StopFlag;
 		bool m_Goal;			//ゴール判定
@@ -100,8 +97,7 @@ namespace basecross{
 			m_Nextcircle(0),
 			m_CircleCount(0),
 			m_GoalFlag(false),
-			m_StopFlag(false),
-			m_AnimationFlag{false}
+			m_StopFlag(false)
 		{
 		}
 
