@@ -616,7 +616,11 @@ namespace basecross{
             }
         }
 
-
+		if (other->FindTag(L"Gate"))
+		{
+			//auto CountFlag = m_ptrGate;
+			//CountFlag->hasPassed = true;
+		}
 
 
 		if (other->FindTag(L"StanObject"))
