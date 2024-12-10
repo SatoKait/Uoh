@@ -56,8 +56,8 @@ namespace basecross {
 		virtual void OnEvent(const shared_ptr<Event>& event) override;
 
 		// スコアをAdd
-		void SetScore(int score) {
-			m_Score = score;
+		int SetScore(int score) {
+		  return	m_Score = score;
 		}
 
 		// スコアを足す
