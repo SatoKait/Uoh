@@ -82,8 +82,8 @@ namespace basecross{
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
 			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);			
-			Modeltex = modelPath + L"T_Poll.png";
-			App::GetApp()->RegisterTexture(L"POLL_TX", Modeltex);
+			//Modeltex = modelPath + L"T_Poll.png";
+			//App::GetApp()->RegisterTexture(L"POLL_TX", Modeltex);
 			Modeltex = modelPath + L"T_Poll2.png";
 			App::GetApp()->RegisterTexture(L"POLL2_TX", Modeltex);
 
