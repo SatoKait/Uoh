@@ -17,17 +17,21 @@ namespace basecross{
 
 		Vec3 m_change;
 
+		Mat4x4 m_spanMat; // モデルとトランスフォームの間の差分行列
+
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
 		shared_ptr<CollisionObb>m_ptrPollCol;
 		shared_ptr<MainCamera> m_ptrCamera;
 		shared_ptr<GameStage> m_Stage;
 		//shared_ptr<Gate> m_ptrGate;
+		shared_ptr<BcPNTBoneModelDraw> m_Animation;
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
 		void MovePlayer();				// プレイヤーの移動
-		
+		void AnimationSet();
+
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
 		
@@ -46,6 +50,8 @@ namespace basecross{
 		float m_StanTime;
 		bool m_StanFlag;
 		int m_CircleCount;
+
+		bool m_AnimationFlag[3];
 
 	private:
 		shared_ptr<Transform> m_trans;
@@ -94,7 +100,8 @@ namespace basecross{
 			m_Nextcircle(0),
 			m_CircleCount(0),
 			m_GoalFlag(false),
-			m_StopFlag(false) 
+			m_StopFlag(false),
+			m_AnimationFlag{false}
 		{
 		}
 
@@ -106,6 +113,7 @@ namespace basecross{
 		//当たり判定(当たった瞬間)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 		void Goaltrue();
+		void ChangeAnimation(const wstring& animationName);
 		//float PlayerAngle() const;
 
 		//Aボタン

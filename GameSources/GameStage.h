@@ -44,7 +44,7 @@ namespace basecross {
 		//障害物
 		void CreateObstacle();
 		//スプライト
-		void CreateTraceSprite();
+		void CreateComboSprite();
 		//ゴール
 		void CreateGoal();
 		//時間

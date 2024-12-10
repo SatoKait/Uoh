@@ -153,7 +153,7 @@ namespace basecross{
 		if (m_MoveFlag)
 		{
 			// 飛んだ瞬間の判定
-			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_A || KeyState.m_bPressedKeyTbl[VK_SPACE])
+			if (cntl[0].wPressedButtons & XINPUT_GAMEPAD_B || KeyState.m_bPressedKeyTbl[VK_SPACE])
 			{
 				if (m_grounded == true)
 				{
@@ -191,14 +191,14 @@ namespace basecross{
 			else
 				m_Accel -= 0.005f;
 		}
-		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_A ||
-			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_A ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
-		{
-			pos.y += m_JSpeed * m_Accel * delta;
-			m_Accel = -3.0f;
-		}
+		//if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
+		//	m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
+		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
+		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
+		//{
+		//	pos.y += m_JSpeed * m_Accel * delta;
+		//	m_Accel = -3.0f;
+		//}
 		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
@@ -218,6 +218,8 @@ namespace basecross{
 			// プレイヤーの移動
 			if (m_grounded)
 			{
+				ChangeAnimation(L"Swim");
+
 				if (ret.x || ret.y)
 				{
 					pos += angle * m_Speed * delta; // デルタタイムを掛けて「秒間」の移動量に変換する
@@ -240,6 +242,8 @@ namespace basecross{
 
 			if (!m_grounded)
 			{
+				ChangeAnimation(L"Jump");
+
 				// 飛んでいるときの移動処理
 				if (!ret.x || !ret.y)
 				{
@@ -249,9 +253,11 @@ namespace basecross{
 				{
 					pos += angle * m_Speed * delta;
 				}
+				m_AnimationFlag[0] = false;
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
 		}		
+
 		// 位置の更新
 		m_ptrTrans->SetPosition(pos);
 	}
@@ -274,6 +280,10 @@ namespace basecross{
 		//m_col->SetDrawActive(true);
 		//m_col2->SetDrawActive(true);
 
+		//AnimationSet();
+
+		//m_Animation->ChangeCurrentAnimation(L"Swim");
+
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
 		if (ptrCamera) {
@@ -282,9 +292,8 @@ namespace basecross{
 		}
 		
 		// プレイヤーの描画
-		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
-		spanMat.affineTransformation(
-			Vec3(1.0f, 1.0f, 0.12f),
+		m_spanMat.affineTransformation(
+			Vec3(1.0f, 1.0f, 0.2f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
 			Vec3(0.0f, -1.3f, -2.0f)
@@ -294,16 +303,38 @@ namespace basecross{
 		auto ptrShadow = AddComponent<Shadowmap>();
 		//影の形（メッシュ）を設定
 		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
-		ptrShadow->SetMeshToTransformMatrix(spanMat);
+		ptrShadow->SetMeshToTransformMatrix(m_spanMat);
 
-		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
-		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
-		ptrDraw->SetMeshToTransformMatrix(spanMat);
+		//m_Animation = AddComponent<BcPNTBoneModelDraw>();
+		//m_Animation->SetMeshResource(L"TOBIUO_MESH");
+		//m_Animation->SetMeshToTransformMatrix(m_spanMat);
 
+		//m_Animation->AddAnimation(L"Default", 0, 50, true, 20.0f);
+		//m_Animation->ChangeCurrentAnimation(L"Default");
+
+		//透明処理
+		SetAlphaActive(true);
+
+		m_Animation = AddComponent<BcPNTBoneModelDraw>();
+		m_Animation->SetMeshResource(L"TOBIUO_MESH");
+		m_Animation->SetMeshToTransformMatrix(m_spanMat);
+
+		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
+		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
+		m_Animation->AddAnimation(L"Jump", 58, 58, false, 60.0f);
+		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
+
+		m_Animation->ChangeCurrentAnimation(L"Swim");
+
+		SetAlphaActive(true);
 	}
 
 	void Player::OnUpdate()
 	{
+		//アニメーションを更新する
+		auto ptrDraw = GetComponent<BcPNTBoneModelDraw>();
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		ptrDraw->UpdateAnimation(elapsedTime);
 
 		// デバッグ用ストリーム
 		wstringstream wss(L"");
@@ -341,7 +372,7 @@ namespace basecross{
 
 		if (m_StanFlag)
 		{
-			m_ptrTrans->SetRotation(0.0f,m_StanTime * 10.0f,0.0f);
+			m_ptrTrans->SetRotation(0.0f, m_StanTime * 10.0f, 0.0f);
 		}
 		if (m_grounded)
 		{
@@ -350,7 +381,7 @@ namespace basecross{
 		}
 		else if (!m_grounded)
 		{
-			m_ptrTrans->SetScale(2.0f, 0.25f, 0.25f);
+			m_ptrTrans->SetScale(1.5f, 0.25f, 0.25f);
 		}
 
 		if (cntl[0].bConnected)
@@ -363,29 +394,31 @@ namespace basecross{
 
 		}
 
-		int AngleState,a = 10;
-		if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
-		{
-			AngleState = 1;
-			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a * delta));
-		}
-		else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
-		{
-			AngleState = 2;
-			ptrCamera->SetAt(Vec3(pos.x - ret.x * a * delta, ptrCamera->m_at, pos.z));
-		}
-		else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
-		{
-			AngleState = 3;
-			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a * delta));
+		//int AngleState;
+		//float a = 3.0f;
+		//if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
+		//{
+		//	AngleState = 1;
+		//	ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a));
+		//}
+		//else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
+		//{
+		//	AngleState = 2;
+		//	ptrCamera->SetAt(Vec3(pos.x - ret.x * a, ptrCamera->m_at, pos.z));
+		//}
+		//else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
+		//{
+		//	AngleState = 3;
+		//	ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a));
 
-		}
-		else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
-		{
-			AngleState = 4;
-			ptrCamera->SetAt(Vec3(pos.x + ret.x * a * delta, ptrCamera->m_at, pos.z)); 
+		//}
+		//else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
+		//{
+		//	AngleState = 4;
+		//	ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
 
-		}
+		//}
+		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z)); 
 
 		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
 		//ptrCamera->SetAt(m_change);
@@ -415,8 +448,8 @@ namespace basecross{
 			L"\nm_rotAng : "			<<
 			m_rotAng					<<
 
-			L"\nAngleState : "			<<
-			AngleState					<<
+			//L"\nAngleState : "			<<
+			//AngleState					<<
 
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
@@ -494,6 +527,27 @@ namespace basecross{
 
 	}
 
+	void Player::AnimationSet()
+	{
+		m_Animation = AddComponent<BcPNTBoneModelDraw>();
+
+		m_Animation->SetTextureResource(L"TOBIUO_TX");
+
+		m_Animation->SetMeshToTransformMatrix(m_spanMat);
+		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
+		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
+		m_Animation->AddAnimation(L"Jump", 57, 59, true, 30.0f);
+		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
+	}
+
+	void Player::ChangeAnimation(const wstring& animationName)
+	{
+		if (m_Animation->GetCurrentAnimation() != animationName)
+		{
+			m_Animation->ChangeCurrentAnimation(animationName);
+		}
+	}
+
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
 		
@@ -530,7 +584,6 @@ namespace basecross{
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 		auto  Time = 0;
 		auto  flag = false;
-
 
 
 		if (other->FindTag(L"Goal"))

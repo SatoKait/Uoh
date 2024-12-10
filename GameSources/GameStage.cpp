@@ -151,20 +151,12 @@ namespace basecross {
 		//AddGameObject<UpdownPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 		//AddGameObject<OnewaytrafficPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 		//AddGameObject<OneWayPollCollision>(Vec3(0.0f, 5.55f, -11.0f), Vec3(5.0f, 2.0f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
-
+		
 		auto ptrobstacle = AddGameObject<Deployment>();
 	}
-	void GameStage::CreateTraceSprite() {
-		float a = -510.0f;
-		float b = 70.0f;
-		//AddGameObject<Time>(1,Vec3(1.0f,1.0f,1.0f),L"NUMBER_TX");
-		//AddGameObject<Energy>(L"HANE_TX", true,
-		//    Vec2(100.0f, 60.0f), Vec3(a,350.0f, 0.0f));
-		//AddGameObject<Energy>(L"HANE_TX", true,
-		//	Vec2(100.0f, 60.0f), Vec3(a - b, 350.0f, 0.0f));
-		//AddGameObject<Energy>(L"HANE_TX", true,
-		//	Vec2(100.0f, 60.0f), Vec3(a + b, 350.0f, 0.0f));
-
+	void GameStage::CreateComboSprite() {
+		AddGameObject<ComboSprite>(L"HANE_TX", true,
+			Vec2(100.0f, 60.0f), Vec3(400.0f,350.0f, 0.0f));
 	}
 	void GameStage::CreateGoal(){
 		//AddGameObject<Goal>(
@@ -247,7 +239,7 @@ namespace basecross {
 			CreateGround();
 			CreateObstacle();
 			CreateGoal();
-			CreateTraceSprite();
+			CreateComboSprite();
 			CreateTime();
 			CreateStageTime();
 			CreatePollCollision();
@@ -263,6 +255,9 @@ namespace basecross {
 			for (const auto& keyName : Skybox2::pairs) {
 				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
 			}
+
+			AddGameObject<StageSprite>(L"BAR_TX", true,
+				Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
 
 			// Skyboxクラス用
 			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
