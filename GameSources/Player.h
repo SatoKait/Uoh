@@ -50,7 +50,7 @@ namespace basecross{
 		bool m_StanFlag;
 		int m_CircleCount;
 
-		bool m_TestFlag;
+		bool m_AnimationFlag[3];
 
 	private:
 		shared_ptr<Transform> m_trans;
@@ -100,7 +100,7 @@ namespace basecross{
 			m_CircleCount(0),
 			m_GoalFlag(false),
 			m_StopFlag(false),
-			m_TestFlag(false)
+			m_AnimationFlag{false}
 		{
 		}
 
@@ -112,6 +112,7 @@ namespace basecross{
 		//当たり判定(当たった瞬間)
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 		void Goaltrue();
+		void ChangeAnimation(const wstring& animationName);
 		//float PlayerAngle() const;
 
 		//Aボタン

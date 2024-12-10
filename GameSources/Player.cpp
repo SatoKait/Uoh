@@ -218,6 +218,7 @@ namespace basecross{
 			// プレイヤーの移動
 			if (m_grounded)
 			{
+				ChangeAnimation(L"Swim");
 
 				if (ret.x || ret.y)
 				{
@@ -241,6 +242,8 @@ namespace basecross{
 
 			if (!m_grounded)
 			{
+				ChangeAnimation(L"Jump");
+
 				// 飛んでいるときの移動処理
 				if (!ret.x || !ret.y)
 				{
@@ -250,6 +253,7 @@ namespace basecross{
 				{
 					pos += angle * m_Speed * delta;
 				}
+				m_AnimationFlag[0] = false;
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
 		}		
@@ -276,7 +280,7 @@ namespace basecross{
 		//m_col->SetDrawActive(true);
 		//m_col2->SetDrawActive(true);
 
-		AnimationSet();
+		//AnimationSet();
 
 		//m_Animation->ChangeCurrentAnimation(L"Swim");
 
@@ -311,12 +315,16 @@ namespace basecross{
 		//透明処理
 		SetAlphaActive(true);
 
-		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
-		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
-		ptrDraw->SetMeshToTransformMatrix(m_spanMat);
+		m_Animation = AddComponent<BcPNTBoneModelDraw>();
+		m_Animation->SetMeshResource(L"TOBIUO_MESH");
+		m_Animation->SetMeshToTransformMatrix(m_spanMat);
 
-		ptrDraw->AddAnimation(L"Default", 15, 40, true, 30.0f);
-		ptrDraw->ChangeCurrentAnimation(L"Default");
+		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
+		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
+		m_Animation->AddAnimation(L"Jump", 58, 58, false, 60.0f);
+		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
+
+		m_Animation->ChangeCurrentAnimation(L"Swim");
 
 		SetAlphaActive(true);
 	}
@@ -324,7 +332,7 @@ namespace basecross{
 	void Player::OnUpdate()
 	{
 		//アニメーションを更新する
-		auto ptrDraw = GetComponent<PNTBoneModelDraw>();
+		auto ptrDraw = GetComponent<BcPNTBoneModelDraw>();
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		ptrDraw->UpdateAnimation(elapsedTime);
 
@@ -364,7 +372,7 @@ namespace basecross{
 
 		if (m_StanFlag)
 		{
-			m_ptrTrans->SetRotation(0.0f,m_StanTime * 10.0f,0.0f);
+			m_ptrTrans->SetRotation(0.0f, m_StanTime * 10.0f, 0.0f);
 		}
 		if (m_grounded)
 		{
@@ -532,6 +540,14 @@ namespace basecross{
 		m_Animation->AddAnimation(L"Goal", 123, 140, true, 30.0f);
 	}
 
+	void Player::ChangeAnimation(const wstring& animationName)
+	{
+		if (m_Animation->GetCurrentAnimation() != animationName)
+		{
+			m_Animation->ChangeCurrentAnimation(animationName);
+		}
+	}
+
 	void Player::OnCollisionEnter(shared_ptr<GameObject>& other)
 	{
 		
@@ -568,7 +584,6 @@ namespace basecross{
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 		auto  Time = 0;
 		auto  flag = false;
-
 
 
 		if (other->FindTag(L"Goal"))
