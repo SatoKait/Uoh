@@ -16,9 +16,9 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(10),
+		m_ToTalTime(30),
 		m_ToStartTime(3),
-		m_ToTalTime2(0),
+		m_ToTalTime2(1),
 		m_isStartFlag(false),
 		m_TimeFlag(false),
 		m_Flag(false),
@@ -234,6 +234,8 @@ namespace basecross {
 	}	
 	void GameStage::CreateMoveCamera()
 	{
+		AddGameObject<Gate>(1,0,Vec3(0.0f, 5.55f,-3.0f), Vec3(5.0f, 1.75f, 0.5f));
+
 	}
 
 	void GameStage::OnCreate() {
