@@ -72,7 +72,7 @@ namespace basecross {
 			number = stage->AddGameObject<ScoreSprite>();
 			m_numberTrans = number->GetComponent<Transform>();
 			m_numberTrans->SetPosition(200 * 0.5f - 50.0f * (numPlaces - i), -50 * 0.5f, 0.0f);
-			number->UpdateValue(m_score / place % 10);
+			number->UpdateValue(m_score / place % 1);
 			place /= 10;
 			m_numberSprites.push_back(number);
 		}
@@ -84,7 +84,6 @@ namespace basecross {
 		m_score = App::GetApp()->GetScene<Scene>()->GetScore();//更新で最新の数字を見る
 		int place = 10000;
 		for (int i = 0; i < m_numberSprites.size(); ++i) {
-
 			int digit = (m_score / place) % 10;// 現在の桁の数字を計算
 			m_numberSprites[i]->UpdateValue(digit);// スプライトの数字を更新
 			place /= 10;// 次の桁に移動
@@ -127,9 +126,14 @@ namespace basecross {
 	void GaugeScore::OnUpdate() {
 
 		m_Hp_now = App::GetApp()->GetScene<Scene>()->GetScore() * 1.0f;
-		m_ptrTrans->SetScale(1.0f,m_Hp_now / m_Max_hp * 1.0f, 1.0f);
-
+		if (m_Hp_now <= 1000)
+		{
+			m_ptrTrans->SetScale(1.0f, m_Hp_now / m_Max_hp * 1.0f, 1.0f);
+		}
+		if (m_Hp_now >= 1000)
+		{
+			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore(m_Reset);
+		}
 	}
-
 }
 

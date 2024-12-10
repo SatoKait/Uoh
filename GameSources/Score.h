@@ -103,7 +103,8 @@ namespace basecross {
 		bool m_Trace;
 		float m_TotalTime;
 		float m_Widthsize;
-		float m_Hp_now = 50; //åªç›ÇÃHP
+		int m_Hp_now ; //åªç›ÇÃHP
+		const int m_Reset = 90;
 		const float m_Max_hp = 100; //HPÇÃç≈ëÂíl
 		
 
