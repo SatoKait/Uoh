@@ -44,7 +44,7 @@ namespace basecross {
 	}
 	void GameOverStage::CreateScore()
 	{
-		AddGameObject<StageScore>();
+		//AddGameObject<StageScore>();
 	}
 
 
