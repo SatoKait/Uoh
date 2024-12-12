@@ -105,6 +105,7 @@ namespace basecross {
 		float m_TotalTime;
 		float m_Widthsize;
 		int m_Hp_now ; //åªç›ÇÃHP
+		int m_gauge;
 		const int m_Reset = 90;
 		const float m_Max_hp = 100; //HPÇÃç≈ëÂíl
 		
@@ -125,7 +126,8 @@ namespace basecross {
 			m_StartPos(StartPos),
 			m_TotalTime(0),
 			m_HpKey(HpKey),
-			m_Hp_now(50)
+			m_Hp_now(50),
+			m_gauge(50)
 
 		{}
 
@@ -147,6 +149,7 @@ namespace basecross {
 
 
 		int m_Hp_now ; //åªç›ÇÃHP
+		int m_gauge;
 		const int m_Reset = 90;
 		const float m_Max_hp = 100; //HPÇÃç≈ëÂíl
 		Vec3 m_Position;

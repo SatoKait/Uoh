@@ -126,27 +126,27 @@ namespace basecross {
 
 	}
 	void GameStage::CreateObstacle() {
-		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 5.55f, 0.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 5.55f, 0.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f), L"GREEN_TX");
 		SetSharedGameObject(L"Poll", objPoll);
 		auto objCirclePoll = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"CirclePoll1", objCirclePoll);
-		objCirclePoll = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objCirclePoll = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"CirclePoll2", objCirclePoll);
 		auto objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, -35.0f), Vec3(3.0f, 8.0f,2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll1_1", objPollnol);
-		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, -35.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, -35.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"Poll1_2", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(15.0f, 4.0f, 35.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll1_3", objPollnol);
-		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, 35.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-15.0f, 4.0f, 35.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"Poll1_4", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(30.0f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll1_5", objPollnol);
 		objPollnol = AddGameObject<Poll1>(Vec3(30.0f, 4.0f, -20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Poll1_6", objPollnol);
-		objPollnol = AddGameObject<Poll1>(Vec3(-30.0f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-30.0f, 4.0f, 20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"Poll1_7", objPollnol);
-		objPollnol = AddGameObject<Poll1>(Vec3(-30.0f, 4.0f, -20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		objPollnol = AddGameObject<Poll1>(Vec3(-30.0f, 4.0f, -20.0f), Vec3(3.0f, 8.0f, 2.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"Poll1_8", objPollnol);
 		//AddGameObject<UpdownPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 		//AddGameObject<OnewaytrafficPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
@@ -211,7 +211,7 @@ namespace basecross {
 		AddGameObject<UITimeStage>(1,
 			L"NUMBER2_TX",
 			true,
-			Vec2(480.0f, 120.0f),
+			Vec2(480.0f, 200.0f),
 			Vec3(250.0f, 0.0f, 0.0f));
 
 	}
@@ -302,6 +302,8 @@ namespace basecross {
 		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
 		auto GoalFlag = ptrPlayer->m_GoalFlag;
 		auto count = ptrPlayer->m_CircleCount;
+		auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
+		auto gaugecount = gauge->Count;
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
@@ -344,10 +346,11 @@ namespace basecross {
 				m_ToTalTime2 = 0;
 			}
 
-			if (score >= 1000 && DrawFlag == true)
+			if (gaugecount == 2 && !gaugeFlag)
 			{
 				//ptrMana->Stop(m_BGM);
 				AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
+				gaugeFlag = true;
 				DrawFlag = false;
 			}
 
