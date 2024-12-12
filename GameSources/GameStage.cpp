@@ -244,7 +244,7 @@ namespace basecross {
 	}
 	void GameStage::CreateMoveCamera()
 	{
-		AddGameObject<Gate>(1, 0, Vec3(0.0f, 5.55f, -3.0f), Vec3(5.0f, 1.75f, 0.5f));
+		//AddGameObject<Gate>(1, 0, Vec3(0.0f, 5.55f, -3.0f), Vec3(5.0f, 1.75f, 0.5f));
 
 	}
 
@@ -276,8 +276,8 @@ namespace basecross {
 
 			AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
-			AddGameObject<StageSprite>(L"BAR_TX", true,
-				Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
+			//AddGameObject<StageSprite>(L"BAR_TX", true,
+			//	Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
 
 			// Skyboxクラス用
 			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
