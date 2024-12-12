@@ -58,6 +58,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"BLUE_TX", tex);
 			tex = texPath + L"Green.png";
 			App::GetApp()->RegisterTexture(L"GREEN_TX", tex);
+			tex = texPath + L"Yellow.png";
+			App::GetApp()->RegisterTexture(L"YELLOW_TX", tex);
 			tex = texPath + L"Line.png";
 			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
 			tex = texPath + L"Partition.png";
@@ -104,6 +106,9 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL_1_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll2.bmf");
 			App::GetApp()->RegisterResource(L"POLL_2_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Crown.bmf");
+			App::GetApp()->RegisterResource(L"CROWN_MESH", StaticModelMesh);
+
 
 			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Trophy.bmf");
 			//App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticModelMesh);
@@ -160,7 +165,7 @@ namespace basecross{
 	void Scene::OnEvent(const shared_ptr<Event>& event) {
 		if (event->m_MsgStr == L"ToTiTleStage") {
 			//最初のアクティブステージの設定
-			ResetActiveStage<TitleStage>();
+			ResetActiveStage<GoalScene>();
 		}
 		if (event->m_MsgStr == L"ToSelectStage") {
 			//最初のアクティブステージの設定
