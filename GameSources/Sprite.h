@@ -193,7 +193,7 @@ namespace basecross {
 		ComboSpriteNumber(
 			const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
 			const Vec2& StartScale, const Vec3& StartPos
-		):
+		) :
 			GameObject(StagePtr),
 			m_ClearKey(ClearKey),
 			m_Trace(Trace),
@@ -210,8 +210,47 @@ namespace basecross {
 
 		void UpdateValue(int value);
 	};
-
-
 }
+
+	namespace basecross {
+
+		//--------------------------------------------------------------------------------------
+		//	Scoreスプライトクラス
+		//--------------------------------------------------------------------------------------
+		class GaugeSpriteNumber : public GameObject
+		{
+			vector<VertexPositionColorTexture> m_vertices;
+
+			shared_ptr<PCTSpriteDraw>m_ptrDraw;
+
+			bool m_Trace;
+			Vec2 m_StartScale;
+			Vec3 m_StartPos;
+			wstring m_ClearKey;
+
+		public:
+			// 構築と破棄
+			GaugeSpriteNumber(
+				const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
+				const Vec2& StartScale, const Vec3& StartPos
+			) :
+				GameObject(StagePtr),
+				m_ClearKey(ClearKey),
+				m_Trace(Trace),
+				m_StartScale(StartScale),
+				m_StartPos(StartPos)
+			{
+			}
+			virtual ~GaugeSpriteNumber()
+			{
+			}
+
+			virtual void OnCreate() override; // 初期化
+			virtual void OnUpdate() override; // 更新
+
+			void UpdateValue(int value);
+		};
+
+	}
 
 

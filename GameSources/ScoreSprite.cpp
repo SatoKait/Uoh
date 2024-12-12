@@ -48,7 +48,7 @@ namespace basecross {
 	void ScoreSprite::UpdateValue(int value)//切り出せるようにint valueしている
 	{
 		//ポリゴンの頂点データを更新する(valueの数値に合わせた「画像」を切り抜く)
-		const float numberW = 50.0f / 512.0f;
+		const float numberW = 51.0f / 512.0f;
 		int number = value;
 
 		m_vertices[0].textureCoordinate.x = numberW * number;//0番目の頂点の物になる//.のあとに入れるもので色々変えることができる

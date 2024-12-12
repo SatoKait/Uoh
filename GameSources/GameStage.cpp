@@ -200,6 +200,10 @@ namespace basecross {
 		// HPゲージの生成
 		auto ptrHpGauge = AddGameObject<GaugeScore>(false,
 			Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"Gauge", ptrHpGauge);
+		AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
+			true,
+			Vec2(1.0f, 1.0f), Vec3(-445.0f, -290.0f, 0.0f));
 
 	}
 	void GameStage::CreateStageTime()
@@ -343,13 +347,13 @@ namespace basecross {
 			if (score >= 1000 && DrawFlag == true)
 			{
 				//ptrMana->Stop(m_BGM);
-				//AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
+				AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
 				DrawFlag = false;
 			}
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
 				ptrMana->Stop(m_BGM);
-				//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 			}
 
 		}
