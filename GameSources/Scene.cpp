@@ -91,7 +91,7 @@ namespace basecross{
 
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
-			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);			
+			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);
 
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
@@ -100,6 +100,8 @@ namespace basecross{
 			//App::GetApp()->RegisterResource(L"POLL_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateBoneModelMesh(modelPath, L"FlyingFish.bmf");
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateBoneModelMesh(modelPath, L"DeadFlyingFish.bmf");
+			App::GetApp()->RegisterResource(L"DEADTOBIUO_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll3.bmf");
 			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
@@ -108,7 +110,6 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL_2_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Crown.bmf");
 			App::GetApp()->RegisterResource(L"CROWN_MESH", StaticModelMesh);
-
 
 			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Trophy.bmf");
 			//App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticModelMesh);

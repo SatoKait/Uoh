@@ -11,12 +11,16 @@ namespace basecross {
 	{
 		shared_ptr<SoundItem> m_stageBGM;
 		InputHandler<GameOverStage> m_InputHandler;
+		shared_ptr<GameObject> flyingfish;
 
 		void CreateViewLight();
 		void CreateScore();
 		void CreateSprite();
 		void CreateBGM();
 
+		float deg;
+		float rad;
+		bool m_flag;
 
 	public:
 		GameOverStage() : Stage() {}
@@ -28,6 +32,18 @@ namespace basecross {
 
 	};
 
+	class Model4 : public GameObject {
+		Vec3 m_StartPos;
+		Vec3 m_StartRot;
+		bool m_TextureUse;
 
+	public:
+		//\’z‚Æ”jŠü
+		Model4(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot);
+		virtual ~Model4();
+		//‰Šú‰»
+		virtual void OnCreate() override;
+		virtual void OnUpdate() override;
+	};
 }
 //end basecross
