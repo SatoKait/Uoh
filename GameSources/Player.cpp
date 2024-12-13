@@ -599,41 +599,6 @@ namespace basecross{
 			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 
-		//if (other->FindTag(L"Poll") && !m_ChangeFlag)
-		//{
-		//	ptrPoll1_1col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_2col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_3col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_4col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_5col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_6col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_7col->SetAfterCollision(AfterCollision::None);
-		//	ptrPoll1_8col->SetAfterCollision(AfterCollision::None);
-		//	//ptrPoll1_9col->SetAfterCollision(AfterCollision::None);
-		//	//ptrPoll1_10col->SetAfterCollision(AfterCollision::None);
-		//	//ptrPoll1_11col->SetAfterCollision(AfterCollision::None);
-		//	//ptrPoll1_12col->SetAfterCollision(AfterCollision::None);
-
-		//	App::GetApp()->GetScene<Scene>()->AddScore(50);
-		//	auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
-		//	m_ChangeFlag = true;
-
-		//}
-		//if (other->FindTag(L"Poll2") && !m_PollChangeFlag)
-		//{
-		//	m_ptrPollCol->SetAfterCollision(AfterCollision::None);
-		//	App::GetApp()->GetScene<Scene>()->AddScore(1000);
-		//	auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE3_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
-		//	m_PollChangeFlag = true;
-		//}
-		//if (other->FindTag(L"CirclePoll") && !m_CircleChangeFlag)
-		//{
-		//	ptrCiclePollcol->SetAfterCollision(AfterCollision::None);
-		//	ptrCiclePollcol2->SetAfterCollision(AfterCollision::None);
-		//	App::GetApp()->GetScene<Scene>()->AddScore(100);
-		//	auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
-		//	//m_CircleChangeFlag = true;
-		//}
 		auto ScoreFlag = false;
 
 		if (other->FindTag(L"FloatCircle") && ScoreFlag == false)
@@ -669,11 +634,10 @@ namespace basecross{
             }
         }
 
-		if (other->FindTag(L"Gate"))
-		{
-			//auto CountFlag = m_ptrGate;
-			//CountFlag->hasPassed = true;
-		}
+		//if (other->FindTag(L"Gate"))
+		//{
+		//	GateFlag--;
+		//}
 
 
 		if (other->FindTag(L"StanObject"))
