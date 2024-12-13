@@ -38,9 +38,9 @@ namespace basecross {
         //ptrShadow->SetMeshResource(L"BED_MESH");
         ptrShadow->SetMeshToTransformMatrix(spanMat);
 
-        m_ptrDraw = AddComponent<BcPNTStaticDraw>();
+        m_ptrDraw = AddComponent<PNTStaticDraw>();
         m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
-       // m_ptrDraw->SetTextureResource(L"POLL2_TX");
+        m_ptrDraw->SetTextureResource(L"GREEN_TX");
         m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 
     }

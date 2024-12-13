@@ -8,7 +8,7 @@ namespace basecross {
     class Gate : public GameObject 
     { 
         shared_ptr<Transform> m_Trans;
-        shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+        shared_ptr<PNTStaticDraw>m_ptrDraw;
         shared_ptr<CollisionObb> m_col;
         int id;                  // Šø–å‚ÌID
         int remainingPasses;     // c‚è‰ñ”

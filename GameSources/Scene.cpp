@@ -165,7 +165,7 @@ namespace basecross{
 	void Scene::OnEvent(const shared_ptr<Event>& event) {
 		if (event->m_MsgStr == L"ToTiTleStage") {
 			//最初のアクティブステージの設定
-			ResetActiveStage<GoalScene>();
+			ResetActiveStage<TitleStage>();
 		}
 		if (event->m_MsgStr == L"ToSelectStage") {
 			//最初のアクティブステージの設定
