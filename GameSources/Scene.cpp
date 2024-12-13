@@ -54,7 +54,13 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"SEA_TX", tex);
 			tex = texPath + L"Red.png";
 			App::GetApp()->RegisterTexture(L"RED_TX", tex);
-			tex = texPath + L"line.png";
+			tex = texPath + L"Blue.png";
+			App::GetApp()->RegisterTexture(L"BLUE_TX", tex);
+			tex = texPath + L"Green.png";
+			App::GetApp()->RegisterTexture(L"GREEN_TX", tex);
+			tex = texPath + L"Yellow.png";
+			App::GetApp()->RegisterTexture(L"YELLOW_TX", tex);
+			tex = texPath + L"Line.png";
 			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
 			tex = texPath + L"Partition.png";
 			App::GetApp()->RegisterTexture(L"PARTITION_TX", tex);
@@ -62,6 +68,10 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"COMBO_TX", tex);
 			tex = texPath + L"Bar.png";
 			App::GetApp()->RegisterTexture(L"BAR_TX", tex);
+			tex = texPath + L"counts.png";
+			App::GetApp()->RegisterTexture(L"COUNT_TX", tex);
+			tex = texPath + L"kakeru.png";
+			App::GetApp()->RegisterTexture(L"KAKERU_TX", tex);
 
 
 		
@@ -82,12 +92,6 @@ namespace basecross{
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
 			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);			
-			Modeltex = modelPath + L"T_Poll.png";
-			App::GetApp()->RegisterTexture(L"POLL_TX", Modeltex);
-			Modeltex = modelPath + L"T_Poll2.png";
-			App::GetApp()->RegisterTexture(L"POLL2_TX", Modeltex);
-
-
 
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
@@ -102,6 +106,9 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL_1_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll2.bmf");
 			App::GetApp()->RegisterResource(L"POLL_2_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Crown.bmf");
+			App::GetApp()->RegisterResource(L"CROWN_MESH", StaticModelMesh);
+
 
 			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Trophy.bmf");
 			//App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticModelMesh);
@@ -158,7 +165,7 @@ namespace basecross{
 	void Scene::OnEvent(const shared_ptr<Event>& event) {
 		if (event->m_MsgStr == L"ToTiTleStage") {
 			//最初のアクティブステージの設定
-			ResetActiveStage<TitleStage>();
+			ResetActiveStage<GoalScene>();
 		}
 		if (event->m_MsgStr == L"ToSelectStage") {
 			//最初のアクティブステージの設定

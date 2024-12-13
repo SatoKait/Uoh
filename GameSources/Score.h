@@ -95,6 +95,7 @@ namespace basecross {
 	class GaugeScore : public GameObject
 	{
 		shared_ptr<Transform> m_ptrTrans;
+		shared_ptr<ScoreSprite>score;
 		//バックアップの頂点データ
 		vector<VertexPositionColorTexture>m_BackupVertices;
 		Vec2 m_StartScale;
@@ -104,11 +105,13 @@ namespace basecross {
 		float m_TotalTime;
 		float m_Widthsize;
 		int m_Hp_now ; //現在のHP
+		int m_gauge;
 		const int m_Reset = 90;
 		const float m_Max_hp = 100; //HPの最大値
 		
 
 	public:
+		int Count = 0;
 		//構築と破壊
 		GaugeScore::GaugeScore(const shared_ptr<Stage>& StagePtr,
 			bool Trace,
@@ -123,11 +126,46 @@ namespace basecross {
 			m_StartPos(StartPos),
 			m_TotalTime(0),
 			m_HpKey(HpKey),
-			m_Hp_now(50)
+			m_Hp_now(50),
+			m_gauge(50)
 
 		{}
 
 		GaugeScore::~GaugeScore() {}
+
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate() override;
+	};
+
+	//--------------------------------------------------------------------------------------
+	//　Gaugeスコアクラス	
+	//--------------------------------------------------------------------------------------
+	class OverGauge : public GameObject
+	{
+		shared_ptr<Transform> m_scoreTrans;
+		shared_ptr<ScoreSprite>score;
+
+
+		int m_Hp_now ; //現在のHP
+		int m_gauge;
+		const int m_Reset = 90;
+		const float m_Max_hp = 100; //HPの最大値
+		Vec3 m_Position;
+
+	public:
+		int Count = 0;
+		//構築と破壊
+		OverGauge::OverGauge(const shared_ptr<Stage>& StagePtr,
+			Vec3 Pos
+
+		) :
+			GameObject(StagePtr),
+			m_Position(Pos)
+		{}
+
+		OverGauge::~OverGauge() {}
 
 		//初期化
 		virtual void OnCreate() override;

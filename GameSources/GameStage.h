@@ -61,6 +61,7 @@ namespace basecross {
 
 	public:
 		bool m_GoalFlag;
+		bool gaugeFlag;
 		//構築と破棄
 		GameStage();
 		virtual ~GameStage() 

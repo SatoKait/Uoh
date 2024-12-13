@@ -313,4 +313,145 @@ namespace basecross {
 	};
 }
 
+namespace basecross {
+	//初期化
+	void ComboSpriteNumber::OnCreate()
+	{
+		auto stage = GetStage();
+		auto ptrPlayer = stage->GetSharedGameObject<Player>(L"Player");
+		auto count = ptrPlayer->m_CircleCount;
+		// ポリゴンの自作
+		Col4 color(1, 1, 1, 1); // ポリゴンの色
+		const float w = 50.0f; // ポリゴンの幅
+		const float h = 100.0f; // ポリゴンの高さ//ここでポリゴンの大きさが変わるため画像をデカくできる
+		const float numberW = 50.0f / 512.0f;//nember×１
+		const float numberH = 100.0f / 128.0f;
+		int number = count;
+		m_vertices = { // 頂点データ//sprite.hに持って行った
+			//             座標           ,頂点色,        UV座標 
+			{Vec3(-w * 0.0f, +h * 0.0f, 0.0), color, Vec2(numberW * number,          0.0f)}, // 0//512=1.0fになっている256で0.5ｆ
+			{Vec3(+w * 1.0f, +h * 0.0f, 0.0), color, Vec2(numberW * (number + 1),    0.0f)}, // 1
+			{Vec3(-w * 0.0f, -h * 1.0f, 0.0), color, Vec2(numberW * number,       numberH)}, // 2
+			{Vec3(+w * 1.0f, -h * 1.0f, 0.0), color, Vec2(numberW * (number + 1), numberH)}, // 3
+		};
+
+		vector<uint16_t> indices = { // 頂点インデックス（頂点のつなげ順）
+			0, 1, 2,
+			2, 1, 3
+		};
+
+		SetAlphaActive(true);
+		auto PtrTransform = GetComponent<Transform>();
+		PtrTransform->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
+		PtrTransform->SetPosition(m_StartPos.x, m_StartPos.y, 0.0f);
+
+		m_ptrDraw = AddComponent<PCTSpriteDraw>(m_vertices, indices); // スプライト用のドローコンポーネント//メンバ変数にするためautoを消した
+		m_ptrDraw->SetTextureResource(L"NUMBER_TX");
+		m_ptrDraw->SetSamplerState(SamplerState::LinearWrap); // テクスチャを繰り返して貼り付ける設定
+		m_ptrDraw->SetDiffuse(Col4(1, 1, 1, 1)); // ポリゴンを色を設定する
+
+		// アルファブレンド(透過処理)を有効にする
+		//SetAlphaActive(m_Trace);
+		////頂点とインデックスを指定してスプライト作成
+		//auto PtrDraw = AddComponent<PCTSpriteDraw>(m_vertices, indices);
+		//PtrDraw->SetSamplerState(SamplerState::LinearWrap);
+		//PtrDraw->SetTextureResource(m_ClearKey);
+
+	}
+
+	void ComboSpriteNumber::OnUpdate()
+	{
+		auto stage = GetStage();
+		auto ptrPlayer = stage->GetSharedGameObject<Player>(L"Player");
+		auto count = ptrPlayer->m_CircleCount;
+
+		UpdateValue(count);
+	}
+
+	void ComboSpriteNumber::UpdateValue(int value)//切り出せるようにint valueしている
+	{
+		//ポリゴンの頂点データを更新する(valueの数値に合わせた「画像」を切り抜く)
+		const float numberW = 50.0f / 512.0f;
+		int number = value;
+
+		m_vertices[0].textureCoordinate.x = numberW * number;//0番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+		m_vertices[1].textureCoordinate.x = numberW * (number + 1);//1番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+		m_vertices[2].textureCoordinate.x = numberW * number;//2番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+		m_vertices[3].textureCoordinate.x = numberW * (number + 1);//3番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+
+		//更新されたデータでポリゴンを作り直す
+		m_ptrDraw->UpdateVertices(m_vertices);
+	}
+}
+
+namespace basecross {
+	//初期化
+	void GaugeSpriteNumber::OnCreate()
+	{
+		auto stage = GetStage();
+		auto ptrGauge = stage->GetSharedGameObject<GaugeScore>(L"Gauge");
+		auto count = ptrGauge->Count;
+		// ポリゴンの自作
+		Col4 color(1, 1, 1, 1); // ポリゴンの色
+		const float w = 50.0f; // ポリゴンの幅
+		const float h = 100.0f; // ポリゴンの高さ//ここでポリゴンの大きさが変わるため画像をデカくできる
+		const float numberW = 50.0f / 512.0f;//nember×１
+		const float numberH = 100.0f / 128.0f;
+		int number = count;
+		m_vertices = { // 頂点データ//sprite.hに持って行った
+			//             座標           ,頂点色,        UV座標 
+			{Vec3(-w * 0.0f, +h * 0.0f, 0.0), color, Vec2(numberW * number,          0.0f)}, // 0//512=1.0fになっている256で0.5ｆ
+			{Vec3(+w * 1.0f, +h * 0.0f, 0.0), color, Vec2(numberW * (number + 1),    0.0f)}, // 1
+			{Vec3(-w * 0.0f, -h * 1.0f, 0.0), color, Vec2(numberW * number,       numberH)}, // 2
+			{Vec3(+w * 1.0f, -h * 1.0f, 0.0), color, Vec2(numberW * (number + 1), numberH)}, // 3
+		};
+
+		vector<uint16_t> indices = { // 頂点インデックス（頂点のつなげ順）
+			0, 1, 2,
+			2, 1, 3
+		};
+
+		SetAlphaActive(true);
+		auto PtrTransform = GetComponent<Transform>();
+		PtrTransform->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
+		PtrTransform->SetPosition(m_StartPos.x, m_StartPos.y, 0.0f);
+
+		m_ptrDraw = AddComponent<PCTSpriteDraw>(m_vertices, indices); // スプライト用のドローコンポーネント//メンバ変数にするためautoを消した
+		m_ptrDraw->SetTextureResource(L"COUNT_TX");
+		m_ptrDraw->SetSamplerState(SamplerState::LinearWrap); // テクスチャを繰り返して貼り付ける設定
+		m_ptrDraw->SetDiffuse(Col4(1, 1, 1, 1)); // ポリゴンを色を設定する
+
+		// アルファブレンド(透過処理)を有効にする
+		//SetAlphaActive(m_Trace);
+		////頂点とインデックスを指定してスプライト作成
+		//auto PtrDraw = AddComponent<PCTSpriteDraw>(m_vertices, indices);
+		//PtrDraw->SetSamplerState(SamplerState::LinearWrap);
+		//PtrDraw->SetTextureResource(m_ClearKey);
+
+	}
+
+	void GaugeSpriteNumber::OnUpdate()
+	{
+		auto stage = GetStage();
+		auto ptrGauge = stage->GetSharedGameObject<GaugeScore>(L"Gauge");
+		auto count = ptrGauge->Count;
+
+		UpdateValue(count);
+	}
+
+	void GaugeSpriteNumber::UpdateValue(int value)//切り出せるようにint valueしている
+	{
+		//ポリゴンの頂点データを更新する(valueの数値に合わせた「画像」を切り抜く)
+		const float numberW = 51.0f / 512.0f;
+		int number = value;
+
+		m_vertices[0].textureCoordinate.x = numberW * number;//0番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+		m_vertices[1].textureCoordinate.x = numberW * (number + 1);//1番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+		m_vertices[2].textureCoordinate.x = numberW * number;//2番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+		m_vertices[3].textureCoordinate.x = numberW * (number + 1);//3番目の頂点の物になる//.のあとに入れるもので色々変えることができる
+
+		//更新されたデータでポリゴンを作り直す
+		m_ptrDraw->UpdateVertices(m_vertices);
+	}
+}
 //end basecross

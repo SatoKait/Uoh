@@ -11,11 +11,6 @@ namespace basecross {
 	//‰Šú‰»
 	void Score::OnCreate()
 	{
-		//m_Trans = GetComponent<Transform>();
-		//m_Trans->SetPosition(m_Position);
-
-
-
 		const int numPlaces = 5;
 		m_numberSprites.reserve(numPlaces);
 		int place = 10000;
@@ -125,6 +120,8 @@ namespace basecross {
 
 	void GaugeScore::OnUpdate() {
 
+		auto stage = GetStage();
+
 		m_Hp_now = App::GetApp()->GetScene<Scene>()->GetScore() * 1.0f;
 		if (m_Hp_now <= 1000)
 		{
@@ -132,8 +129,35 @@ namespace basecross {
 		}
 		if (m_Hp_now >= 1000)
 		{
+			Count++;
 			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore(m_Reset);
+			stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
+				Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
 		}
 	}
 }
+
+namespace basecross {
+
+	void OverGauge::OnCreate() {
+
+		auto stage = GetStage();
+		score = stage->AddGameObject<ScoreSprite>();
+		m_scoreTrans = GetComponent<Transform>();
+		m_scoreTrans->SetPosition(m_Position);
+	}
+
+	void OverGauge::OnUpdate() {
+
+
+		m_Hp_now = App::GetApp()->GetScene<Scene>()->GetScore() * 1.0f;
+		if (m_Hp_now >= 1000)
+		{
+			Count++;
+			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore(m_Reset);
+		}
+		score->UpdateValue(Count);
+	}
+}
+
 
