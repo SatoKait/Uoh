@@ -166,7 +166,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h">
       <Filter>Sharder</Filter>
     </ClInclude>
@@ -329,6 +328,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Character.h">
       <Filter>Project</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sharder">
