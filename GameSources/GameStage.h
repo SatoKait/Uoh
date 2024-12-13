@@ -17,6 +17,7 @@ namespace basecross {
 		shared_ptr<SoundItem> m_BGM;
 		shared_ptr<SingleView> m_View;//ビューの変数
 
+		int count;
 		//ステージの倍率
 		float m_StageRation;
 		//ステージの時間

@@ -23,7 +23,8 @@ namespace basecross {
 		m_TimeFlag(false),
 		m_Flag(false),
 		DrawFlag(true),
-		m_GoalFlag(false)
+		m_GoalFlag(false),
+		count(0)
 	{}
 
 	void GameStage::CreateViewLight() {
@@ -244,8 +245,9 @@ namespace basecross {
 	}
 	void GameStage::CreateMoveCamera()
 	{
-		//AddGameObject<Gate>(1, 0, Vec3(0.0f, 5.55f, -3.0f), Vec3(5.0f, 1.75f, 0.5f));
 
+		//auto gate = AddGameObject<Gate>(1,0,Vec3(0.0f, 5.55f,-3.0f), Vec3(5.0f, 1.75f, 0.5f));
+		//SetSharedGameObject(L"RandGate", gate);
 	}
 
 	void GameStage::OnCreate() {
@@ -388,12 +390,14 @@ namespace basecross {
 		auto circleCount = circle->m_ComboCount;
 		auto cicleTrans = circle->GetComponent<Transform>();
 
+
 		switch (ciclenext)
 		{
-		case 1:
+		case 1:			
 			cicleTrans->SetPosition(-15.0f, 6.0f, -35.0f);
 			break;
 		case 2:
+
 			cicleTrans->SetPosition(-30.0f, 6.0f, -20.0f);
 			break;
 		case 3:
@@ -406,12 +410,55 @@ namespace basecross {
 			cicleTrans->SetPosition(-15.0f, 6.0f, 35.0f);
 			break;
 		case 6:
-			cicleTrans->SetPosition(0.0f, 6.0f, 0.0f);
+			if (count == 0)
+			{
+				auto ptrgate = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f));
+				SetSharedGameObject(L"Gate", ptrgate);
+				auto ptrRandFlag = ptrgate->m_RandFlag = false;
+				auto ptrFlag = ptrgate->flag;
+   				count ++;
+				if (ptrFlag == 0)
+				{
+					cicleTrans->SetPosition(0.0f, 6.0f, 20.0f);
+				}
+				if (ptrFlag == 1)
+				{
+			    	cicleTrans->SetPosition(20.0f, 6.0f, 0.0f);
+				}
+				if (ptrFlag == 2)
+				{
+					cicleTrans->SetPosition(0.0f, 6.0f, -20.0f);
+				}
+				if (ptrFlag == 3)
+				{
+					cicleTrans->SetPosition(-20.0f, 6.0f, 0.0f);
+					//ptrFlag--;
+				}
+			}
+
 			break;
-		case 7:
+		case 7: 
+			if (count == 1)
+			{
+				auto ptrgate2 = GetSharedGameObject<Gate>(L"Gate");
+				auto ptrFlag = ptrgate2->flag = 0;
+				auto ptrRandFlag = ptrgate2->m_RandFlag = false;
+				auto ptrDownFlag = ptrgate2->m_DownFlag = true;
+				auto ptrChangeFlag = ptrgate2->m_ChangeFlag = false;
+				auto ptrChangeFlag2 = ptrgate2->m_ChangeFlag2 = false;
+				auto ptrChangeFlag3 = ptrgate2->m_ChangeFlag3 = false;
+			}
+
 			cicleTrans->SetPosition(15.0f, 6.0f, -35.0f);
 			break;
 		case 8:
+			if (count == 1)
+			{	
+				auto ptrgate2 = GetSharedGameObject<Gate>(L"Gate");
+				RemoveGameObject<Gate>(ptrgate2);
+				count--;
+			}
+
 			cicleTrans->SetPosition(30.0f, 6.0f, -20.0f);
 			break;
 		case 9:
@@ -424,10 +471,53 @@ namespace basecross {
 			cicleTrans->SetPosition(15.0f, 6.0f, 35.0f);
 			break;
 		case 12:
-			cicleTrans->SetPosition(0.0f, 6.0f, 0.0f);
+			if (count == 0)
+			{
+				auto ptrgate3 = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f));
+				SetSharedGameObject(L"Gate2", ptrgate3);
+				auto ptrRandFlag2 = ptrgate3->m_RandFlag = false;
+				auto ptrFlag2 = ptrgate3->flag;
+				count++;
+				if (ptrFlag2 == 0)
+				{
+					cicleTrans->SetPosition(0.0f, 6.0f, 20.0f);
+				}
+				if (ptrFlag2 == 1)
+				{
+					cicleTrans->SetPosition(20.0f, 6.0f, 0.0f);
+				}
+				if (ptrFlag2 == 2)
+				{
+					cicleTrans->SetPosition(0.0f, 6.0f, -20.0f);
+				}
+				if (ptrFlag2 == 3)
+				{
+					cicleTrans->SetPosition(-20.0f, 6.0f, 0.0f);
+					//ptrFlag--;
+				}
+			}
 			break;
 		case 13:
 			cicleTrans->SetPosition(-15.0f, 6.0f, -35.0f);
+			if (count == 1)
+			{
+				auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate2");
+				auto ptrFlag2 = ptrgate3->flag = 0;
+				auto ptrRandFlag2 = ptrgate3->m_RandFlag = false;
+				auto ptrDownFlag2 = ptrgate3->m_DownFlag = true;
+				auto ptrChangeFlag_1 = ptrgate3->m_ChangeFlag = false;
+				auto ptrChangeFlag2_2 = ptrgate3->m_ChangeFlag2 = false;
+				auto ptrChangeFlag3_3 = ptrgate3->m_ChangeFlag3 = false;
+				auto PosHigh = ptrgate3->GetComponent<Transform>();
+				auto ptrPos = PosHigh->GetPosition();
+				if (ptrPos.y <= -2.0f)
+				{
+					auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate2");
+					RemoveGameObject<Gate>(ptrgate3);
+					count--;
+				}
+			}
+
 			circle->m_next = 1;
 			break;
 		}

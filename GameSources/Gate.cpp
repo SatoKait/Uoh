@@ -1,6 +1,6 @@
-/*!
+ï»¿/*!
 @file Score.cpp
-@brief ƒXƒRƒA‚ÌÀ‘Ì
+@brief ã‚¹ã‚³ã‚¢ã®å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -15,8 +15,8 @@ namespace basecross {
         m_Trans->SetPosition(m_Pos);
         m_Trans->SetScale(m_Scale);
 
-        remainingPasses = flag;  // ƒtƒ‰ƒO‚ÉŠî‚Ã‚¢‚Ä‰Šú‰»
-        isActive = true;         // ƒAƒNƒeƒBƒuó‘Ô‚Éİ’è
+        remainingPasses = flag;  // ãƒ•ãƒ©ã‚°ã«åŸºã¥ã„ã¦åˆæœŸåŒ–
+        isActive = true;         // ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã«è¨­å®š
         
         m_col = AddComponent<CollisionObb>();
         m_col->SetDrawActive(m_DrawFlag);
@@ -25,16 +25,16 @@ namespace basecross {
         m_col->GetAfterCollision();
         m_col->SetAfterCollision(AfterCollision::None);
 
-        Mat4x4 spanMat; // ƒ‚ƒfƒ‹‚Æƒgƒ‰ƒ“ƒXƒt ƒH[ƒ€ŠÔ‚Ì·•ªs—ñ
+        Mat4x4 spanMat; // ãƒ¢ãƒ‡ãƒ«ã¨ãƒˆãƒ©ãƒ³ã‚¹ãƒ• ã‚©ãƒ¼ãƒ é–“ã®å·®åˆ†è¡Œåˆ—
         spanMat.affineTransformation(
-            Vec3(0.02f, 0.0405f, 0.25f),//ƒXƒP[ƒŠƒ“ƒO
-            Vec3(0.0f, 0.0f, 0.0f),//‰ñ“]‚Ì’†S
-            Vec3(0.0f, 0.0f, 0.0f),//‰ñ“]‚ÌƒxƒNƒgƒ‹
-            Vec3(0.0f, -2.6f, -0.5f) //ˆÚ“®
+            Vec3(0.02f, 0.0405f, 0.25f),//ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°
+            Vec3(0.0f, 0.0f, 0.0f),//å›è»¢ã®ä¸­å¿ƒ
+            Vec3(0.0f, 0.0f, 0.0f),//å›è»¢ã®ãƒ™ã‚¯ãƒˆãƒ«
+            Vec3(0.0f, -2.6f, -0.5f) //ç§»å‹•
         );
-        //‰e‚ğ‚Â‚¯‚éiƒVƒƒƒhƒEƒ}ƒbƒv‚ğ•`‰æ‚·‚éj
+        //å½±ã‚’ã¤ã‘ã‚‹ï¼ˆã‚·ãƒ£ãƒ‰ã‚¦ãƒãƒƒãƒ—ã‚’æç”»ã™ã‚‹ï¼‰
         auto ptrShadow = AddComponent<Shadowmap>();
-        //‰e‚ÌŒ`iƒƒbƒVƒ…j‚ğİ’è
+        //å½±ã®å½¢ï¼ˆãƒ¡ãƒƒã‚·ãƒ¥ï¼‰ã‚’è¨­å®š
         //ptrShadow->SetMeshResource(L"BED_MESH");
         ptrShadow->SetMeshToTransformMatrix(spanMat);
 
@@ -45,41 +45,94 @@ namespace basecross {
 
     }
 
-    void Gate::OnUpdate(bool hasPassed)
+    void Gate::OnUpdate()
     {
-        if (hasPassed) {
-            pass();  // ’Ê‰ßˆ—
-        }
-    }
+        float delta = App::GetApp()->GetElapsedTime();
 
-    void Gate::pass()
-    {
-        switch (flag)
-        {
+        // æ——é–€ã‚’ä¸‹ã’ã‚‹å‡¦ç†
+        if (flag == 0 && m_Pos.y >= -2.0f && m_DownFlag) {
+            m_Pos.y -= 1.0f * delta;
+            m_Trans->SetPosition(m_Pos);
+        }
+
+        // æ——é–€ãŒæ²ˆã‚“ã ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«æ–°ã—ã„ãƒ•ãƒ©ã‚°ã‚’è¨­å®š
+        if (flag == 0 && m_Pos.y <= -2.0f && !m_RandFlag) {
+            flag = rand() % 4; // 0ã€œ3ã®ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’ç”Ÿæˆ
+            m_RandFlag = true;
+        }
+
+        // ãƒ•ãƒ©ã‚°ã”ã¨ã®å‡¦ç†
+        switch (flag) {
         case 0:
+            handleFlag(delta); // å†ã³ãƒ©ãƒ³ãƒ€ãƒ åŒ–ã‚’è¨±å¯
+            break;
         case 1:
+            handleFlag1(delta);
+            break;
         case 2:
+            handleFlag2(delta);
+            break;
         case 3:
-            handlePass();
+           handleFlag3(delta);
             break;
         }
     }
 
-    void Gate::handlePass() {
-        remainingPasses--;
-        
-        if (remainingPasses <= 0)
-        {
-            respawn();
+    void Gate::handleFlag(float delta) {
+        if (!m_EndFlag) {
+            m_Pos = Vec3(0.0f, -2.0f, 20.0f);
+            m_EndFlag = true;
+        }
+        if (m_Pos.y <= 5.55f && m_EndFlag) {
+            m_Pos.y += 2.0f * delta;
+            m_Trans->SetPosition(m_Pos);
+        }
+        if (m_Pos.y >= 5.55f) {
+            //m_EndFlag = false;
         }
     }
 
-    void Gate::respawn()
-    {
-        remainingPasses = flag;
-        isActive = true;
 
-        m_Pos = Vec3(rand() % 10, 0.0f, rand() % 10);  // —á: X, Z À•W‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
-        m_Trans->SetPosition(m_Pos);
+    void Gate::handleFlag1(float delta) {
+        if (!m_EndFlag) {
+            m_Pos = Vec3(20.0f, -2.0f, 0.0f);
+            m_EndFlag = true;
+        }
+        if (m_Pos.y <= 5.55f && m_EndFlag) {
+            m_Pos.y += 2.0f * delta;
+            m_Trans->SetPosition(m_Pos);
+        }
+        if (m_Pos.y >= 5.55f) {
+            //m_EndFlag = false;
+        }
+    }
+
+    void Gate::handleFlag2(float delta) {
+        if (!m_EndFlag) {
+            m_Pos = Vec3(0.0f, -2.0f, -20.0f);
+            m_EndFlag = true;
+        }
+        if (m_Pos.y <= 5.55f && m_EndFlag) {
+            m_Pos.y += 2.0f * delta;
+            m_Trans->SetPosition(m_Pos);
+        }
+        if (m_Pos.y >= 5.55f) {
+            //m_EndFlag = false;
+        }
+    }
+
+    void Gate::handleFlag3(float delta) {
+        if (!m_EndFlag) {
+            m_Pos = Vec3(-20.0f, -2.0f, 0.0f);
+            m_EndFlag = true;
+        }
+        if (m_Pos.y <= 5.55f && m_EndFlag) {
+            m_Pos.y += 2.0f * delta;
+            m_Trans->SetPosition(m_Pos);
+        }
+        if (m_Pos.y >= 5.55f) {
+            m_ChangeFlag3 = false;
+            //m_EndFlag = false;
+        }
     }
 }
