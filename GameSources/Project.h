@@ -40,8 +40,11 @@
 #include "FloatCircle.h"
 #include "Wave.h"
 #include "D3DApp.h"
+#include "Startcamera.h"
+#include "MoveCamera.h"
+#include "Gate.h"
+#include "NPC.h"
 #include "OpeningCamera.h"
 #include "MyCamera.h"
 #include "MiniMapActor.h"
 #include "MiniMapManager.h"
-
