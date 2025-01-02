@@ -8,7 +8,7 @@ namespace basecross {
     class Gate : public GameObject 
     { 
         shared_ptr<Transform> m_Trans;
-        shared_ptr<PNTStaticDraw>m_ptrDraw;
+        //shared_ptr<PNTStaticDraw>m_ptrDraw;
         shared_ptr<CollisionObb> m_col;
         int id;                  // Šø–å‚ÌID
         int remainingPasses;     // c‚è‰ñ”
@@ -16,6 +16,7 @@ namespace basecross {
         bool m_DrawFlag;
         bool m_EndFlag;
         Vec3 m_Scale;
+        wstring m_ResKey;
 
     public:      
         Vec3 m_Pos;              // Šø–å‚ÌˆÊ’uî•ñ
@@ -24,10 +25,19 @@ namespace basecross {
         bool m_RandFlag;
         bool m_DownFlag;
         bool m_ChangeFlag;
+        bool m_ChangeFlag1;
         bool m_ChangeFlag2;
         bool m_ChangeFlag3;
+        bool m_ChangeUpDown;
+        bool m_DeleteFlag;
+        float DrawPos;
+        float Speed;
 
-        Gate::Gate(const shared_ptr<Stage>& StagePtr, int id, int flag, Vec3 Scale
+        Gate::Gate(const shared_ptr<Stage>& StagePtr, 
+            int id, 
+            int flag, 
+            Vec3 Scale, 
+            const wstring& ResKey
         ) :
             GameObject(StagePtr),
             id(id),
@@ -39,9 +49,16 @@ namespace basecross {
             hasPassed(false),
             m_DrawFlag(true),
             m_ChangeFlag(false),
+            m_ChangeFlag1(false),
+            m_ChangeFlag2(false), 
+            m_ChangeFlag3(false),
             m_EndFlag(false),
             m_RandFlag(false),
-            m_DownFlag(false)
+            m_DownFlag(false),
+            m_DeleteFlag(false),
+            DrawPos(-2.0f),
+            m_ResKey(ResKey),
+            Speed(2.0f)
         {
         }
         void OnCreate();         // ‰Šú‰»ˆ—

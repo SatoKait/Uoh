@@ -38,9 +38,9 @@ namespace basecross {
         //ptrShadow->SetMeshResource(L"BED_MESH");
         ptrShadow->SetMeshToTransformMatrix(spanMat);
 
-        m_ptrDraw = AddComponent<PNTStaticDraw>();
+        auto m_ptrDraw = AddComponent<PNTStaticDraw>();
         m_ptrDraw->SetMeshResource(L"POLL_2_MESH");
-        m_ptrDraw->SetTextureResource(L"GREEN_TX");
+        m_ptrDraw->SetTextureResource(m_ResKey);
         m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 
     }
@@ -50,8 +50,8 @@ namespace basecross {
         float delta = App::GetApp()->GetElapsedTime();
 
         // 旗門を下げる処理
-        if (flag == 0 && m_Pos.y >= -2.0f && m_DownFlag) {
-            m_Pos.y -= 1.0f * delta;
+        if (flag == 0 && m_Pos.y >= -2.0f && m_DownFlag ) {
+            m_Pos.y -= Speed * delta;
             m_Trans->SetPosition(m_Pos);
         }
 
@@ -80,59 +80,81 @@ namespace basecross {
 
     void Gate::handleFlag(float delta) {
         if (!m_EndFlag) {
-            m_Pos = Vec3(0.0f, -2.0f, 20.0f);
+            m_Pos = Vec3(0.0f, DrawPos, 20.0f);
             m_EndFlag = true;
         }
-        if (m_Pos.y <= 5.55f && m_EndFlag) {
-            m_Pos.y += 2.0f * delta;
+        if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
+            m_Pos.y += Speed * delta;
             m_Trans->SetPosition(m_Pos);
+            m_ChangeUpDown = true;
         }
-        if (m_Pos.y >= 5.55f) {
+        else if (m_Pos.y >= 5.55f) {
+            m_ChangeFlag = false;
             //m_EndFlag = false;
+        }
+        else if (m_Pos.y >= -2.0f && m_DownFlag)
+        {
+            m_DeleteFlag = true;
         }
     }
 
 
     void Gate::handleFlag1(float delta) {
         if (!m_EndFlag) {
-            m_Pos = Vec3(20.0f, -2.0f, 0.0f);
+            m_Pos = Vec3(20.0f, DrawPos, 0.0f);
             m_EndFlag = true;
         }
-        if (m_Pos.y <= 5.55f && m_EndFlag) {
-            m_Pos.y += 2.0f * delta;
+        if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
+            m_Pos.y += Speed * delta;
             m_Trans->SetPosition(m_Pos);
         }
-        if (m_Pos.y >= 5.55f) {
+        else if (m_Pos.y >= 5.55f ) {
+            m_ChangeFlag1 = false;
             //m_EndFlag = false;
         }
+        else if (m_Pos.y >= -2.0f && m_DownFlag)
+        {
+            m_DeleteFlag = true;
+        }
+
     }
 
     void Gate::handleFlag2(float delta) {
         if (!m_EndFlag) {
-            m_Pos = Vec3(0.0f, -2.0f, -20.0f);
+            m_Pos = Vec3(0.0f, DrawPos, -20.0f);
             m_EndFlag = true;
         }
-        if (m_Pos.y <= 5.55f && m_EndFlag) {
-            m_Pos.y += 2.0f * delta;
+        if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
+            m_Pos.y += Speed * delta;
             m_Trans->SetPosition(m_Pos);
         }
-        if (m_Pos.y >= 5.55f) {
+        else if (m_Pos.y >= 5.55f) {
+            m_ChangeFlag2 = false;
             //m_EndFlag = false;
         }
+        else if (m_Pos.y >= -2.0f && m_DownFlag)
+        {
+            m_DeleteFlag = true;
+        }
+
     }
 
     void Gate::handleFlag3(float delta) {
         if (!m_EndFlag) {
-            m_Pos = Vec3(-20.0f, -2.0f, 0.0f);
+            m_Pos = Vec3(-20.0f, DrawPos, 0.0f);
             m_EndFlag = true;
         }
-        if (m_Pos.y <= 5.55f && m_EndFlag) {
-            m_Pos.y += 2.0f * delta;
+        if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
+            m_Pos.y += Speed * delta;
             m_Trans->SetPosition(m_Pos);
         }
-        if (m_Pos.y >= 5.55f) {
+        else if (m_Pos.y >= 5.55f ) {
             m_ChangeFlag3 = false;
             //m_EndFlag = false;
+        }
+        else if (m_Pos.y >= -2.0f && m_DownFlag)
+        {
+            m_DeleteFlag = true;
         }
     }
 }
