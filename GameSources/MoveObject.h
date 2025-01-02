@@ -263,7 +263,7 @@ namespace basecross {
 		shared_ptr<CollisionObb>m_col;
 
 		// 構築と破棄
-		Poll1::Poll1(const shared_ptr<Stage>& StagePtr,
+		Poll1::Poll1(shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
 			const Vec3& m_Rotate,

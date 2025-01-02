@@ -8,7 +8,7 @@
 
 namespace basecross{
 
-	class Player : public GameObject
+	class Player : public Actor
 	{
 		Vec3 m_StartPos;		// 初期位置
 		Vec3 m_StartScale;		// 初期スケール
@@ -68,12 +68,12 @@ namespace basecross{
 		bool m_grounded;		//接地しているかどうか
 		int  m_Nextcircle;
 
-		Player::Player(const shared_ptr<Stage>& StagePtr,
+		Player::Player(shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
 			const Vec3& Rot
 		) :
-			GameObject(StagePtr),
+			Actor(StagePtr),
 			m_StartPos(Position),
 			m_StartScale(Scale),
 			m_StartRot(Rot),
