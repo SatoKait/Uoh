@@ -72,6 +72,12 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"COUNT_TX", tex);
 			tex = texPath + L"kakeru.png";
 			App::GetApp()->RegisterTexture(L"KAKERU_TX", tex);
+			tex = texPath + L"Gray.png";
+			App::GetApp()->RegisterTexture(L"Haikei_TX", tex);
+			tex = texPath + L"MiniMapPlayer.png";
+			App::GetApp()->RegisterTexture(L"MiniMap_TX", tex);
+			tex = texPath + L"White.png";
+			App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
 
 
 		

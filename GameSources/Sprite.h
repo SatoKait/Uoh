@@ -254,3 +254,83 @@ namespace basecross {
 	}
 
 
+	namespace basecross {
+		class MiniMapSprite :public GameObject
+		{
+		protected:
+			//画像の表示サイズ
+			float m_width;
+			float m_heigth;
+			int m_layer;
+			Vec2 m_size;//画像の大きさ
+			shared_ptr<PCTSpriteDraw> m_drawComp;//ドローコンポーネント
+
+		
+			wstring m_textureName;//テクスチャの名前
+
+			shared_ptr<Transform> m_trans;
+
+			Vec3 m_pos;
+			Vec3 m_rot;
+			Col4 m_color;
+
+
+		public:
+			MiniMapSprite(shared_ptr<Stage>& stagePtr, wstring textureName, Vec2 size, Vec3 pos = Vec3(0.0f, 0.0f, 0.0f), Vec3 rot = Vec3(0.0f, 0.0f, 0.0f), Col4 color = Col4(1.0f, 1.0f, 1.0f, 1.0f), int layer = 1);//コンストラクタ
+			virtual ~MiniMapSprite();//デストラクタ
+
+			virtual void OnCreate()override;//作成
+			virtual void OnUpdate()override;//更新
+
+			void SetColor(Col4 coler);//セッター
+			void MyDestroy();//自分自身を消す
+			Col4 GetColor();//ゲッター
+
+		};
+	}
+
+
+	namespace basecross {
+		class GateSprite : public MiniMapSprite
+		{
+		private:
+			//weak_ptr<Poll1> m_parent;
+			float m_countTime;
+		public:
+			GateSprite(shared_ptr<Stage>& stagePtr, wstring textureName, Vec2 size, Vec3 pos = Vec3(0.0f, 0.0f, 0.0f), Vec3 rot = Vec3(0.0f, 0.0f, 0.0f), Col4 color = Col4(1.0f, 1.0f, 1.0f, 1.0f), int layer = 1);
+			~GateSprite();
+
+			void OnUpdate()override;
+		};
+	}
+
+	namespace basecross {
+		class MiniMapMoveGate :public GameObject
+		{
+		protected:
+			//画像の表示サイズ
+			float m_width;
+			float m_heigth;
+			int m_layer;
+			Vec2 m_size;//画像の大きさ
+
+			wstring m_textureName;//テクスチャの名前
+
+			Vec3 m_pos;
+			Vec3 m_rot;
+			Col4 m_color;
+
+			weak_ptr<Gate> m_parentObj;//元となるオブジェクトを保管する変数
+
+		public:
+			MiniMapMoveGate(shared_ptr<Stage>& stagePtr, weak_ptr<Gate> parentObj, wstring textureName, Vec2 size, int layer = 1, Vec3 pos = Vec3(0.0f, 0.0f, 0.0f), Vec3 rot = Vec3(0.0f, 0.0f, 0.0f));//コンストラクタ
+			virtual ~MiniMapMoveGate();//デストラクタ
+
+			virtual void OnCreate()override;//作成
+			virtual void OnUpdate()override;//更新
+
+		};
+
+
+	}
+	//end basecross

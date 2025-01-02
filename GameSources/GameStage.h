@@ -7,6 +7,12 @@
 #include "stdafx.h"
 
 namespace basecross {
+	//enum class CameraSelect {
+	//	openingCamera,
+	//	myCamera,
+	//	objCamera,
+	//};
+
 	//--------------------------------------------------------------------------------------
 	//	ゲームステージクラス
 	//--------------------------------------------------------------------------------------
@@ -16,8 +22,16 @@ namespace basecross {
 
 		shared_ptr<SoundItem> m_BGM;
 		shared_ptr<SingleView> m_View;//ビューの変数
-
+		//OpeningCamera用のビュー
+		//shared_ptr<SingleView> m_OpeningCameraView;
+		////MyCamera用のビュー
+		//shared_ptr<SingleView> m_MyCameraView;
+		////ObjCamera用のビュー
+		//shared_ptr<SingleView> m_ObjCameraView;
+		//CameraSelect m_CameraSelect;
 		int count;
+		int m_SetCount;
+		int m_Set2Count;
 		//ステージの倍率
 		float m_StageRation;
 		//ステージの時間
@@ -54,8 +68,13 @@ namespace basecross {
 		void CreatePollCollision();
 		void CreateFloatCircle();
 		void CreateWave();
-		void CreateMoveCamera();
+	//public : 
+	//	CameraSelect GetCameraSelect() const {
+	//		return m_CameraSelect;
+	//	}
 
+		void CreateMoveCamera();
+		void CreateCameraman();
 		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
 
 
