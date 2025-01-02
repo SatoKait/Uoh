@@ -250,6 +250,12 @@ namespace basecross {
 		//SetSharedGameObject(L"RandGate", gate);
 	}
 
+	void GameStage::CreateNPC()
+	{
+		auto ptr = AddGameObject<NPC>(Vec3(0.3f), Vec3(0.0f, XM_PIDIV2,0.0f), Vec3(0.0f, 0.0f, -45.0f));
+
+	}
+
 	void GameStage::OnCreate() {
 		try {
 			//ビューとライトの作成
@@ -267,6 +273,7 @@ namespace basecross {
 			CreateFloatCircle();
 			CreateWave();
 			CreateMoveCamera();
+			CreateNPC();
 			//CameraSetting(ptrPlayer);
 			auto& app = App::GetApp();
 			auto path = app->GetDataDirWString();

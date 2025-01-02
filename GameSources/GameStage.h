@@ -58,6 +58,7 @@ namespace basecross {
 
 		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
 
+		void CreateNPC();
 
 	public:
 		bool m_GoalFlag;

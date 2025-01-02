@@ -41,3 +41,4 @@
 #include "Startcamera.h"
 #include "MoveCamera.h"
 #include "Gate.h"
+#include "NPC.h"

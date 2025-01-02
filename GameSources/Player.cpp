@@ -420,26 +420,26 @@ namespace basecross {
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
-		wss << L"\n\n\npos : (" <<
-			pos.x << L", " <<
-			pos.y << L", " <<
-			pos.z << L")" <<
+		//wss << L"\n\n\npos : (" <<
+		//	pos.x << L", " <<
+		//	pos.y << L", " <<
+		//	pos.z << L")" <<
 
 			//L"\nrotate : ("				<<
 			//rotate.x	<< L", "		<<
 			//rotate.y	<< L", "		<<
 			//rotate.z	<< L")"			<< 
 
-			L"\nAt : (" <<
-			ptrCamera->GetAt().x << L", " <<
-			ptrCamera->GetAt().y << L", " <<
-			ptrCamera->GetAt().z << L")" <<
+			//L"\nAt : (" <<
+			//ptrCamera->GetAt().x << L", " <<
+			//ptrCamera->GetAt().y << L", " <<
+			//ptrCamera->GetAt().z << L")" <<
 
 			//L"\nstantime : "			<<
 			//m_StanTime					<<
 		// ゲーム画面fps
-			L"\nm_rotAng : " <<
-			m_rotAng <<
+			//L"\nm_rotAng : " <<
+			//m_rotAng <<
 
 			//L"\nAngleState : "			<<
 			//AngleState					<<
@@ -466,7 +466,7 @@ namespace basecross {
 		//	//L"\nm_Score : " <<
 		//	//m_Score <<
 
-			endl;
+			//endl;
 
 		// //ゴール判定
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
