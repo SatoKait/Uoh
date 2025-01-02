@@ -32,6 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MoveCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MoveObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NPC.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Plane.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Player.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h" />
@@ -70,6 +71,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MoveCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MoveObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NPC.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Plane.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp" />

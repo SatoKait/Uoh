@@ -164,6 +164,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Character.cpp">
       <Filter>Project</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NPC.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h">
@@ -329,6 +332,9 @@
       <Filter>Project</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NPC.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sharder">
@@ -375,6 +381,9 @@
     </Filter>
     <Filter Include="SkyBox">
       <UniqueIdentifier>{e04738be-a787-4cb7-930b-311899a0ad08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NPC">
+      <UniqueIdentifier>{6afc4915-f069-45bf-bbfc-53d0ac75f478}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
