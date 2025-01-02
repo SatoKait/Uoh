@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Wave.cpp">
       <Filter>Sharder</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)D3DApp.cpp">
       <Filter>Sharder</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MoveCamera.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyCamera.cpp">
       <Filter>MoveCamera</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Startcamera.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)OpeningCamera.cpp">
       <Filter>MoveCamera</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MoveObject.cpp">
@@ -167,6 +166,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)NPC.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MiniMapActor.cpp">
+      <Filter>MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Actor.cpp">
+      <Filter>MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MiniMapManager.cpp">
+      <Filter>MiniMap</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h">
@@ -175,10 +184,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)D3DApp.h">
       <Filter>Sharder</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MoveCamera.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyCamera.h">
       <Filter>MoveCamera</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Startcamera.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)OpeningCamera.h">
       <Filter>MoveCamera</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MoveObject.h">
@@ -334,6 +343,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NPC.h">
       <Filter>NPC</Filter>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MiniMapActor.h">
+      <Filter>MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Actor.h">
+      <Filter>MiniMap</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MiniMapManager.h">
+      <Filter>MiniMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +401,8 @@
     </Filter>
     <Filter Include="NPC">
       <UniqueIdentifier>{6afc4915-f069-45bf-bbfc-53d0ac75f478}</UniqueIdentifier>
+    <Filter Include="MiniMap">
+      <UniqueIdentifier>{46490f51-ff9a-42a7-b7e8-7fd26375922b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

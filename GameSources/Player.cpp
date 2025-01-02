@@ -92,7 +92,7 @@ namespace basecross {
 		//キーボードの取得(キーボード優先)
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		//カメラオブジェクトを取得する
-		auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+		auto ptrCamera = dynamic_pointer_cast<MyCamera>(OnGetDrawCamera());
 
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
@@ -411,6 +411,7 @@ namespace basecross {
 		//	ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
 
 		//}
+		
 		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z));
 
 		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
@@ -533,7 +534,7 @@ namespace basecross {
 
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
-		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
+		//auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
 		//auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
