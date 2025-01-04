@@ -117,9 +117,7 @@ namespace basecross {
 				}
 				//Ä¶¬‚·‚é
 				CreateMoveGate();
-
 			}
-
 			m_beforeItemNum = itemNumNow;//XV‚·‚é
 	}
 
@@ -211,6 +209,7 @@ namespace basecross {
 					auto itemTrans = manhole->GetComponent<Transform>();
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
+					auto itemRotaiton = itemTrans->GetQuaternion();
 
 					stage->AddGameObject<MiniMapActor>(castPlayer, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
 				}
