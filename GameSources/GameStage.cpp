@@ -238,7 +238,6 @@ namespace basecross {
 			true,
 			Vec2(480.0f, 200.0f),
 			Vec3(250.0f, 0.0f, 0.0f));
-
 	}
 
 	void GameStage::CreateBGM() {
