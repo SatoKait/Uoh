@@ -32,6 +32,7 @@ namespace basecross{
 
 	void SelectStage::OnCreate() {
 		App::GetApp()->GetScene<Scene>()->SetScore(0);
+		App::GetApp()->GetScene<Scene>()->SetScore2(0);
 
 		try {
 			m_select = 0;

@@ -76,10 +76,10 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"Haikei_TX", tex);
 			tex = texPath + L"MiniMapPlayer.png";
 			App::GetApp()->RegisterTexture(L"MiniMap_TX", tex);
-			//tex = texPath + L"White.png";
-			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
-			tex = texPath + L"Tri.png";
+			tex = texPath + L"White.png";
 			App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
+			//tex = texPath + L"Tri.png";
+			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
 		}
 		// モデルのリソース
 		{

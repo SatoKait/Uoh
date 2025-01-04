@@ -44,6 +44,8 @@ namespace basecross {
 
 	void TitleStage::OnCreate() {
 		App::GetApp()->GetScene<Scene>()->SetScore(0);
+		App::GetApp()->GetScene<Scene>()->SetScore2(0);
+
 		flyingfish = AddGameObject<Model1>(Vec3(0.0f, -1.0f, -2.0f), Vec3(0.0f, rad, 0.0f));
 
 		try {

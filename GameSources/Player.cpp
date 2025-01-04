@@ -614,7 +614,7 @@ namespace basecross {
 			m_GoalFlag = true;
 			if (m_StopFlag == true)
 			{
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+				//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 			}
 		}
 

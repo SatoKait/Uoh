@@ -222,6 +222,7 @@ namespace basecross {
 		//auto score = AddGameObject<Score>();
 		//AddGameObject<StageScore>();
 		//SetSharedGameObject(L"Score", ptrscore);
+		
 		// HPゲージの生成
 		auto ptrHpGauge = AddGameObject<GaugeScore>(false,
 			Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"RED_TX");
@@ -229,6 +230,10 @@ namespace basecross {
 		AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
 			true,
 			Vec2(1.0f, 1.0f), Vec3(-445.0f, -290.0f, 0.0f));
+		// HPゲージの生成
+		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
+			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
 
 	}
 	void GameStage::CreateStageTime()
@@ -329,8 +334,8 @@ namespace basecross {
 
 			AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
-			//AddGameObject<StageSprite>(L"BAR_TX", true,
-			//	Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
+			AddGameObject<StageSprite>(L"BAR_TX", true,
+				Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
 
 			// Skyboxクラス用
 			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
@@ -402,7 +407,7 @@ namespace basecross {
 			if (gaugecount == 2 && !gaugeFlag)
 			{
 				//ptrMana->Stop(m_BGM);
-				AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
+				//AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
 				gaugeFlag = true;
 				DrawFlag = false;
 			}

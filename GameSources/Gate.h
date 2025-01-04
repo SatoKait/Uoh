@@ -47,7 +47,7 @@ namespace basecross {
             m_Pos(0.0f,0.0f,0.0f),
             m_Scale(Scale),
             hasPassed(false),
-            m_DrawFlag(true),
+            m_DrawFlag(false),
             m_ChangeFlag(false),
             m_ChangeFlag1(false),
             m_ChangeFlag2(false), 
@@ -58,7 +58,7 @@ namespace basecross {
             m_DeleteFlag(false),
             DrawPos(-2.0f),
             m_ResKey(ResKey),
-            Speed(2.0f)
+            Speed(5.0f)
         {
         }
         void OnCreate();         // èâä˙âªèàóù

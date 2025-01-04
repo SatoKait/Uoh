@@ -15,7 +15,8 @@ namespace basecross {
 		GameObject(StagePtr),
 		m_Scale(Scale),
 		m_Rotation(Rotation),
-		m_Position(Position)
+		m_Position(Position),
+		m_Time(0.0f)
 	{
 	}
 
@@ -150,7 +151,14 @@ namespace basecross {
 
 	void NPC::OnUpdate()
 	{
+		float elapsedTime = App::GetApp()->GetElapsedTime();
+		m_Time += elapsedTime;
 
+		if (m_Time >= 20.0f)
+		{
+			App::GetApp()->GetScene<Scene>()->AddScore2(100);
+			m_Time = 0.0f;
+		}
 	}
 
 }

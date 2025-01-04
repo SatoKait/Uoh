@@ -12,7 +12,7 @@ namespace basecross{
 		Vec3 m_Scale;
 		Vec3 m_Rotation;
 		Vec3 m_Position;
-
+		float m_Time;
 		std::shared_ptr<basecross::Action> m_ptrAction;
 
 	public:
