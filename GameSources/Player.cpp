@@ -157,7 +157,7 @@ namespace basecross {
 			{
 				if (m_grounded == true)
 				{
-					ptrMana->Start(L"FloatSE", 0, 2.0f);
+					ptrMana->Start(L"FloatSE", 0, 0.5f);
 					m_grounded = false;
 					m_JumpTime = 0;
 					m_Accel = 2.0f;
@@ -204,7 +204,7 @@ namespace basecross {
 		{
 			if (m_grounded == false)
 			{
-				ptrMana->Start(L"EnterWaterSE", 0, 2.0f);
+				ptrMana->Start(L"EnterWaterSE", 0, 0.5f);
 			}
 			m_grounded = true;
 			pos.y = scale.y * posYcnst;
@@ -586,7 +586,7 @@ namespace basecross {
 		{
 			//App::GetApp()->GetScene<Scene>()->AddScore(100);
 			//auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
-			ptrMana->Start(L"PointSE", 0, 2.0f);
+			ptrMana->Start(L"PointSE", 0, 1.0f);
 
 			ScoreFlag = true;
 			auto ciclenext = ptrCircle->m_next++;
