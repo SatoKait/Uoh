@@ -38,6 +38,7 @@ namespace basecross {
 		bool debugFlag = false;
 		if (debugFlag == false)
 		{
+			m_ptrAction->AddMoveBy(3.0f, Vec3(0.0f));
 			m_ptrAction->AddMoveBy(2.0f, Vec3(-15.0f, 0, 5.0f));
 			m_ptrAction->AddMoveBy(1.5f, Vec3(0.0f, jump, 8.5f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);
 			m_ptrAction->AddMoveBy(2.0f, Vec3(-15.0f, -jump, 5.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
@@ -66,6 +67,7 @@ namespace basecross {
 			m_ptrAction->AddMoveBy(1.5f, Vec3(0.0f, 0, -20.0f));
 
 			// ‰ñ“]
+			m_ptrAction->AddRotateInterval(3.0f);
 			m_ptrAction->AddRotateBy(lotsec, Vec3(0, -deg45, 0));
 			m_ptrAction->AddRotateInterval(1.0f);
 			m_ptrAction->AddRotateBy(lotsec, Vec3(0, deg45, 0));
