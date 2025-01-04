@@ -14,6 +14,8 @@ namespace basecross {
 	class Scene : public SceneBase {
 	public:
 		int m_Score;
+		int m_Score2;
+
 
 		//--------------------------------------------------------------------------------------
 		 /*!
@@ -32,7 +34,8 @@ namespace basecross {
 		Scene(
 		) :
 			SceneBase(),
-			m_Score(0)
+			m_Score(0),
+			m_Score2(0)
 		{}
 		//--------------------------------------------------------------------------------------
 		/*!
@@ -69,6 +72,22 @@ namespace basecross {
 		int GetScore() {
 			return m_Score;
 		}
+
+		// スコアをAdd
+		int SetScore2(int score) {
+			return	m_Score2 = score;
+		}
+
+		// スコアを足す
+		void AddScore2(int score) {
+			m_Score2 += score;
+		}
+		// スコアを取得する
+		int GetScore2() {
+			return m_Score2;
+		}
+
+
 	};
 }
 

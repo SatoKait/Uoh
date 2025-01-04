@@ -139,6 +139,59 @@ namespace basecross {
 
 namespace basecross {
 
+	void GaugeScoreEnemy::OnCreate() {
+
+		m_ptrTrans = GetComponent<Transform>();
+
+		//色の設定
+		Col4 color(1, 1, 1, 1); //ポリゴンの色
+		float widthSize = m_Hp_now; //ポリゴンの幅
+		float helfSize = 20.0f; //ポリゴンの高さ
+
+
+		m_BackupVertices = {
+			{VertexPositionColorTexture(Vec3(0, 0, 0), color, Vec2(0, 0))},
+			{VertexPositionColorTexture(Vec3(widthSize, 0, 0), color, Vec2(1, 0))},
+			{VertexPositionColorTexture(Vec3(0, helfSize, 0), color, Vec2(0, 1))},
+			{VertexPositionColorTexture(Vec3(widthSize, helfSize, 0), color, Vec2(1, 1))},
+		};
+
+		//インデックス配列
+		vector<uint16_t> indices = { 2, 1, 0, 3, 1, 2 };
+		SetAlphaActive(m_Trace);
+		auto ptrTrans = GetComponent<Transform>();
+		ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 1.0f);
+		ptrTrans->SetRotation(0, 0, 0);
+		ptrTrans->SetPosition(m_StartPos);
+		//頂点とインデックスを指定してスプライト作成
+		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
+		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
+		ptrDraw->SetTextureResource(m_HpKey);
+	}
+
+	void GaugeScoreEnemy::OnUpdate() {
+
+		auto stage = GetStage();
+
+		m_Hp_now = App::GetApp()->GetScene<Scene>()->GetScore2() * 1.0f;
+		if (m_Hp_now <= 1000)
+		{
+			m_ptrTrans->SetScale(1.0f, m_Hp_now / m_Max_hp * 1.0f, 1.0f);
+		}
+		if (m_Hp_now >= 1000)
+		{
+			Count++;
+			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore2(m_Reset);
+			stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
+				Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+		}
+	}
+}
+
+
+
+namespace basecross {
+
 	void OverGauge::OnCreate() {
 
 		auto stage = GetStage();
