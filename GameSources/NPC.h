@@ -12,6 +12,8 @@ namespace basecross{
 		Vec3 m_Scale;
 		Vec3 m_Rotation;
 		Vec3 m_Position;
+
+		shared_ptr<Action> m_ptrAction;
 	public:
 		//ç\ízÇ∆îjä¸
 		NPC(const shared_ptr<Stage>& StagePtr,
@@ -22,7 +24,7 @@ namespace basecross{
 		virtual ~NPC();
 
 		virtual void OnCreate();
-
+		virtual void OnUpdate();
 
 	};
 
