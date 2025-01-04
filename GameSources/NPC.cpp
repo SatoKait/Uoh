@@ -29,7 +29,7 @@ namespace basecross {
 		ptrTrans->SetRotation(m_Rotation);
 		ptrTrans->SetPosition(m_Position);
 
-		//auto m_ptrAction = AddComponent<Action>();
+		auto m_ptrAction = AddComponent<Action>();
 		//m_ptrAction->AddRotateBy(1.0f, Vec3(0, XM_PI, 0));
 		//m_ptrAction->AddRotateInterval(1.0f);
 		const float debug = 0.3f, lotsec = 0.5f,
