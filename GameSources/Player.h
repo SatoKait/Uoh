@@ -52,8 +52,6 @@ namespace basecross{
 	private:
 		shared_ptr<Transform> m_trans;
 		shared_ptr<CollisionCapsule> m_col;
-		//shared_ptr<CollisionObb> m_col;
-		//shared_ptr<CollisionObb> m_col2;
 
 	public:	
 		int m_CircleCount;
@@ -110,10 +108,6 @@ namespace basecross{
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 		void Goaltrue();
 		void ChangeAnimation(const wstring& animationName);
-		//float PlayerAngle() const;
-
-		//Aボタン
-		//void OnPushA();
 	};
 }
 //end basecross
