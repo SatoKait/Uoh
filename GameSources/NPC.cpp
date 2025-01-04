@@ -30,8 +30,6 @@ namespace basecross {
 		ptrTrans->SetPosition(m_Position);
 
 		auto m_ptrAction = AddComponent<Action>();
-		//m_ptrAction->AddRotateBy(1.0f, Vec3(0, XM_PI, 0));
-		//m_ptrAction->AddRotateInterval(1.0f);
 		const float debug = 0.3f, lotsec = 0.5f,
 			deg180 = XM_PI, deg90 = XM_PIDIV2, deg45 = XM_PIDIV4,
 			jump = 7.5f;
@@ -125,12 +123,6 @@ namespace basecross {
 			m_ptrAction->AddMoveBy(debug, Vec3(0.0f, 0, -40.0f));
 		}
 
-		//m_ptrAction->AddMoveBy(0.5f, Vec3(0, 1.0f, -1.0f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);
-		//m_ptrAction->AddMoveBy(0.5f, Vec3(0, -1.0f, -1.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
-		//m_ptrAction->AddMoveBy(2.0f, Vec3(-4.0f, 0, 0));
-		//m_ptrAction->AddMoveBy(1.0f, Vec3(0, 0, 2.0f));
-		//m_ptrAction->AddMoveBy(1.0f, Vec3(2.0f, 0, 0));
-
 		//ループする
 		m_ptrAction->SetLooped(true);
 		//アクション開始
@@ -139,6 +131,7 @@ namespace basecross {
 		//衝突j判定を付ける
 		auto ptrColl = AddComponent<CollisionSphere>();
 		ptrColl->SetFixed(true);
+		ptrColl->SetAfterCollision(AfterCollision::None);
 		//描画処理
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
 		ptrDraw->SetFogEnabled(true);
