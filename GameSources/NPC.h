@@ -13,7 +13,8 @@ namespace basecross{
 		Vec3 m_Rotation;
 		Vec3 m_Position;
 
-		shared_ptr<Action> m_ptrAction;
+		std::shared_ptr<basecross::Action> m_ptrAction;
+
 	public:
 		//\’z‚Æ”jŠü
 		NPC(const shared_ptr<Stage>& StagePtr,
