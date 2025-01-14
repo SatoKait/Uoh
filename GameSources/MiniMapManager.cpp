@@ -38,7 +38,7 @@ namespace basecross {
 		//m_mapSize = 200;//mapの直径
 		m_mapMagnification = Lenght / m_mapSize;//マップの倍率
 
-		//CreateMoveGate();
+		CreateMoveGate();
 		CreateGate();//マンホールを生成//動かないのでここで書きMiniMapManegerで出てくる
 		CreatCircleGate();
 		//CreateEnemy();
@@ -75,6 +75,7 @@ namespace basecross {
 
 				auto miniMapItem = stage->AddGameObject<MiniMapMoveGate>(castitem, L"MiniMap_TX", Vec2(itemScale.x * m_mapMagnification, itemScale.z * m_mapMagnification), 5,
 					Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f));
+
 				miniMapItem->AddTag(L"MiniMapItem");//タグを追加
 				count++;
 			}
@@ -100,7 +101,7 @@ namespace basecross {
 		}
 
 			//今あるアイテムの数が前よりも多かったらミニマップのアイテムの表示を更新する
-			if (itemNumNow > m_beforeItemNum)
+			if (itemNumNow <= m_beforeItemNum)//同じ数になったので更新処理をするようになった
 			{
 				//ミニマップにあるアイテムをリセットする
 				for (auto sprite : objVec)
@@ -113,6 +114,7 @@ namespace basecross {
 						{
 							castsprite->MyDestroy();//自分自身を消去する
 						}
+						itemNumNow--;
 					}
 				}
 				//再生成する
@@ -122,8 +124,8 @@ namespace basecross {
 	}
 
 
-		void MiniMapManager::CreateGate()
-		{
+	void MiniMapManager::CreateGate()
+	{
 			auto ScaleBailrtu = 2.5f;
 			auto stage = GetStage();//ステージ取得
 			//ステージのオブジェクトを全て取得
@@ -143,10 +145,10 @@ namespace basecross {
 				}
 			}
 
-		}
+	}
 
-		void MiniMapManager::CreatCircleGate()
-		{
+	void MiniMapManager::CreatCircleGate()
+	{
 			auto ScaleBailrtu = 2.5f;
 			auto stage = GetStage();//ステージ取得
 			//ステージのオブジェクトを全て取得
@@ -166,7 +168,7 @@ namespace basecross {
 				}
 			}
 
-		}
+	}
 
 
 		//ミニマップ用の敵を作成

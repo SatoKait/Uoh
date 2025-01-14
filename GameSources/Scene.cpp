@@ -78,8 +78,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"MiniMap_TX", tex);
 			tex = texPath + L"White.png";
 			App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
-			//tex = texPath + L"Tri.png";
-			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
+			tex = texPath + L"MiniMapGate.png";
+			App::GetApp()->RegisterTexture(L"MiniMapGate_TX", tex);
 		}
 		// モデルのリソース
 		{
