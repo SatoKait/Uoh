@@ -116,7 +116,7 @@ namespace basecross {
 	void TitleStage::CreateBGM() {
 
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
-		m_stageBGM  = ptrMana->Start(L"STAGEBGM", XAUDIO2_LOOP_INFINITE, 0.5f);
+		m_stageBGM  = ptrMana->Start(L"STAGEBGM", XAUDIO2_LOOP_INFINITE, 0.8f);
 		m_stageBGM2 = ptrMana->Start(L"KAMOMESE", XAUDIO2_LOOP_INFINITE, 0.2f);
 	}
 	void TitleStage::OnDestroy() {
