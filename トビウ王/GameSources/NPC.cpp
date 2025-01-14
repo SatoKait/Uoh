@@ -146,14 +146,14 @@ namespace basecross {
 
 	void NPC::OnUpdate()
 	{
-		float elapsedTime = App::GetApp()->GetElapsedTime();
-		m_Time += elapsedTime;
+		//float elapsedTime = App::GetApp()->GetElapsedTime();
+		//m_Time += elapsedTime;
 
-		if (m_Time >= 20.0f)
-		{
-			App::GetApp()->GetScene<Scene>()->AddScore2(100);
-			m_Time = 0.0f;
-		}
+		//if (m_Time >= 20.0f)
+		//{
+		//	App::GetApp()->GetScene<Scene>()->AddScore2(100);
+		//	m_Time = 0.0f;
+		//}
 	}
 
 	void NPC::OnCollisionEnter(shared_ptr<GameObject>& other)
