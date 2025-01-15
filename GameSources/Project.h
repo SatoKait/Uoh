@@ -48,4 +48,3 @@
 #include "MyCamera.h"
 #include "MiniMapActor.h"
 #include "MiniMapManager.h"
-#include "EffectManager.h"

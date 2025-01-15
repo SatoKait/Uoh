@@ -13,11 +13,9 @@ namespace basecross{
 		Vec3 m_Rotation;
 		Vec3 m_Position;
 		float m_Time;
-		shared_ptr<Action> m_ptrAction;
-		shared_ptr<GameObject> m_player;
-	public:
-		int m_CircleCount;
+		std::shared_ptr<basecross::Action> m_ptrAction;
 
+	public:
 		//\’z‚Æ”jŠü
 		NPC(const shared_ptr<Stage>& StagePtr,
 			const Vec3& Scale,
@@ -28,9 +26,6 @@ namespace basecross{
 
 		virtual void OnCreate();
 		virtual void OnUpdate();
-
-		//“–‚½‚è”»’è(“–‚½‚Á‚½uŠÔ)
-		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 
 	};
 

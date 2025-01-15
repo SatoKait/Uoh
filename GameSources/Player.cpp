@@ -191,7 +191,6 @@ namespace basecross {
 			else
 				m_Accel -= 0.005f;
 		}
-		//高速着水
 		//if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
 		//	m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
 		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
@@ -347,6 +346,9 @@ namespace basecross {
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
 
+		//auto stage = GetStage();
+		//auto ptrGround = stage->GetSharedGameObject<Ground>(L"Ground");
+		//auto ptrGroundflag = ptrGround->m_Speed = 5;
 		// ジャンプしてからの経過時間
 		m_JumpTime += delta;
 		m_StanTime += delta;
@@ -385,8 +387,36 @@ namespace basecross {
 
 		}
 
+		//int AngleState;
+		//float a = 3.0f;
+		//if (m_rotAng >= 1.5f && m_rotAng < 3.0f)
+		//{
+		//	AngleState = 1;
+		//	ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z - ret.x * a));
+		//}
+		//else if (m_rotAng >= 3.0f && m_rotAng < 4.5f)
+		//{
+		//	AngleState = 2;
+		//	ptrCamera->SetAt(Vec3(pos.x - ret.x * a, ptrCamera->m_at, pos.z));
+		//}
+		//else if ((m_rotAng >= 4.5f && m_rotAng < 7.0f) || (m_rotAng >= -10.0f && m_rotAng < 0.0f))
+		//{
+		//	AngleState = 3;
+		//	ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z + ret.x * a));
+
+		//}
+		//else if ((m_rotAng >= 7.0f && m_rotAng < 10.0f) || (m_rotAng >= 0.0f && m_rotAng < 1.5f))
+		//{
+		//	AngleState = 4;
+		//	ptrCamera->SetAt(Vec3(pos.x + ret.x * a, ptrCamera->m_at, pos.z)); 
+
+		//}
 		
 		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z));
+
+		//m_change = { Vec3(pos.x + ret.x * 2, ptrCamera->m_at, pos.z/* + ret.x */) };
+		//ptrCamera->SetAt(m_change);
+
 
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
@@ -396,9 +426,46 @@ namespace basecross {
 		//	pos.y << L", " <<
 		//	pos.z << L")" <<
 
+			//L"\nrotate : ("				<<
+			//rotate.x	<< L", "		<<
+			//rotate.y	<< L", "		<<
+			//rotate.z	<< L")"			<< 
+
+			//L"\nAt : (" <<
+			//ptrCamera->GetAt().x << L", " <<
+			//ptrCamera->GetAt().y << L", " <<
+			//ptrCamera->GetAt().z << L")" <<
+
+			//L"\nstantime : "			<<
+			//m_StanTime					<<
+		// ゲーム画面fps
+			//L"\nm_rotAng : " <<
+			//m_rotAng <<
+
+			//L"\nAngleState : "			<<
+			//AngleState					<<
+
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
 		//	fps							<<
+		//// 加速度
+		//	L"\naccel : "				<< 
+		//	m_Accel						<<
+		//// ジャンプからの経過時間
+		//	L"\nJumpTime : "			<<
+		//	m_JumpTime					<<
+		//// プレイヤーの傾き
+		//	L"\nrotateZ : "				<<
+		//	m_Rotate.z					<<
+		//// ゴールまでの時間
+		//	L"\nGoalTime : "			<<
+		//	m_GoalTime					<<
+		//	L"\nm_ChangeTime : " <<
+		//	m_ChangeTime <<
+		//	L"\nm_ChangeFlag : " <<
+		//	m_ChangeFlag <<
+		//	//L"\nm_Score : " <<
+		//	//m_Score <<
 
 			//endl;
 
@@ -467,9 +534,32 @@ namespace basecross {
 
 		auto scene = App::GetApp()->GetScene<Scene>();
 		auto stage = GetStage();
+		//auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
+		//auto ptrCirclePoll = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
+		//auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
+		//auto ptrPoll1_1 = stage->GetSharedGameObject<Poll1>(L"Poll1_1");
+		//auto ptrPoll1_2 = stage->GetSharedGameObject<Poll1>(L"Poll1_2");
+		//auto ptrPoll1_3 = stage->GetSharedGameObject<Poll1>(L"Poll1_3");
+		//auto ptrPoll1_4 = stage->GetSharedGameObject<Poll1>(L"Poll1_4");
+		//auto ptrPoll1_5 = stage->GetSharedGameObject<Poll1>(L"Poll1_5");
+		//auto ptrPoll1_6 = stage->GetSharedGameObject<Poll1>(L"Poll1_6");
+		//auto ptrPoll1_7 = stage->GetSharedGameObject<Poll1>(L"Poll1_7");
+		//auto ptrPoll1_8 = stage->GetSharedGameObject<Poll1>(L"Poll1_8");
 		auto ptrCircle = stage->GetSharedGameObject<FloatCircle>(L"FloatCircle");
+
+		//m_ptrPollCol = ptrPoll->m_col;
+		//auto ptrCiclePollcol = ptrCirclePoll->m_col;
+		//auto ptrCiclePollcol2 = ptrCirclePoll2->m_col;
+		//auto ptrPoll1_1col = ptrPoll1_1->m_col;
+		//auto ptrPoll1_2col = ptrPoll1_2->m_col;
+		//auto ptrPoll1_3col = ptrPoll1_3->m_col;
+		//auto ptrPoll1_4col = ptrPoll1_4->m_col;
+		//auto ptrPoll1_5col = ptrPoll1_5->m_col;
+		//auto ptrPoll1_6col = ptrPoll1_6->m_col;
+		//auto ptrPoll1_7col = ptrPoll1_7->m_col;
+		//auto ptrPoll1_8col = ptrPoll1_8->m_col;
 
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
@@ -482,13 +572,20 @@ namespace basecross {
 			stage->AddGameObject<GoalSprite>(L"GOAL_TX",
 				Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
 
+			//Stage->AddGameObject<TimeSprite>(L"",
+			//	Vec2(600.0f, 360.0f), Vec3(0.0f, 10.0f, 0.0f));
+
 			m_Goal = true;
+
+			//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 		}
 
 		auto ScoreFlag = false;
 
 		if (other->FindTag(L"FloatCircle") && ScoreFlag == false)
 		{
+			//App::GetApp()->GetScene<Scene>()->AddScore(100);
+			//auto scoreSprite = GetStage()->AddGameObject<GameScoreSprite>(L"SCORE2_TX", true, Vec2(100.0f, 100.0f), Vec2(100.0f, 100.0f));
 			ptrMana->Start(L"PointSE", 0, 1.0f);
 
 			ScoreFlag = true;
@@ -505,7 +602,12 @@ namespace basecross {
 				ScoreFlag = false;
 				comboCount--;
 			}
+			//stage->RemoveGameObject<Deployment>(Get);
 		}
+		//else if(!other->FindTag(L"FloatCircle")) {
+		//	ScoreFlag = false;
+		//}
+
 
 		if (other->FindTag(L"GoalTrophy"))
 		{
@@ -515,6 +617,12 @@ namespace basecross {
 				//PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 			}
 		}
+
+		//if (other->FindTag(L"Gate"))
+		//{
+		//	GateFlag--;
+		//}
+
 
 		if (other->FindTag(L"StanObject"))
 		{

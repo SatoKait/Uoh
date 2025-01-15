@@ -326,7 +326,7 @@ namespace basecross {
 
 			auto miniMapManager = AddGameObject<MiniMapManager>(100);//ミニマップ生成デバック用
 			SetSharedGameObject(L"MiniMapManager", miniMapManager);
-			miniMapManager->CreateMoveGate();
+			//miniMapManager->CreateMoveGate();
 			miniMapManager->CreatePlayer();
 
 			auto skyboxPath = path + L"skybox/";
