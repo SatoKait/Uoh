@@ -16,6 +16,7 @@ namespace basecross {
 		m_Scale(Scale),
 		m_Rotation(Rotation),
 		m_Position(Position),
+		m_CircleCount(0),
 		m_Time(0.0f)
 	{
 	}
@@ -25,14 +26,13 @@ namespace basecross {
 	// 初期化
 	void NPC::OnCreate()
 	{
+		AddTag(L"NPC");
 		auto ptrTrans = GetComponent<Transform>();
 		ptrTrans->SetScale(m_Scale);
 		ptrTrans->SetRotation(m_Rotation);
 		ptrTrans->SetPosition(m_Position);
 
 		auto m_ptrAction = AddComponent<Action>();
-		//m_ptrAction->AddRotateBy(1.0f, Vec3(0, XM_PI, 0));
-		//m_ptrAction->AddRotateInterval(1.0f);
 		const float debug = 0.3f, lotsec = 0.5f,
 			deg180 = XM_PI, deg90 = XM_PIDIV2, deg45 = XM_PIDIV4,
 			jump = 7.5f;
@@ -126,12 +126,6 @@ namespace basecross {
 			m_ptrAction->AddMoveBy(debug, Vec3(0.0f, 0, -40.0f));
 		}
 
-		//m_ptrAction->AddMoveBy(0.5f, Vec3(0, 1.0f, -1.0f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);
-		//m_ptrAction->AddMoveBy(0.5f, Vec3(0, -1.0f, -1.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
-		//m_ptrAction->AddMoveBy(2.0f, Vec3(-4.0f, 0, 0));
-		//m_ptrAction->AddMoveBy(1.0f, Vec3(0, 0, 2.0f));
-		//m_ptrAction->AddMoveBy(1.0f, Vec3(2.0f, 0, 0));
-
 		//ループする
 		m_ptrAction->SetLooped(true);
 		//アクション開始
@@ -139,7 +133,8 @@ namespace basecross {
 
 		//衝突j判定を付ける
 		auto ptrColl = AddComponent<CollisionSphere>();
-		ptrColl->SetFixed(true);
+		ptrColl->SetFixed(false);
+		ptrColl->SetAfterCollision(AfterCollision::Auto);
 		//描画処理
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
 		ptrDraw->SetFogEnabled(true);
@@ -151,15 +146,54 @@ namespace basecross {
 
 	void NPC::OnUpdate()
 	{
-		float elapsedTime = App::GetApp()->GetElapsedTime();
-		m_Time += elapsedTime;
+		//float elapsedTime = App::GetApp()->GetElapsedTime();
+		//m_Time += elapsedTime;
 
-		if (m_Time >= 20.0f)
-		{
-			App::GetApp()->GetScene<Scene>()->AddScore2(100);
-			m_Time = 0.0f;
-		}
+		//if (m_Time >= 20.0f)
+		//{
+		//	App::GetApp()->GetScene<Scene>()->AddScore2(100);
+		//	m_Time = 0.0f;
+		//}
 	}
 
+	void NPC::OnCollisionEnter(shared_ptr<GameObject>& other)
+	{
+		auto scene = App::GetApp()->GetScene<Scene>();
+		auto stage = GetStage();
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
+
+		auto ptrCircle = stage->GetSharedGameObject<FloatCircle>(L"FloatCircle");
+
+		// デルタタイムを取得する
+		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
+		auto  Time = 0;
+		auto  flag = false;
+
+		auto ScoreFlag = false;
+		auto playercicle = GetStage()->GetSharedGameObject<Player>(L"Player");
+		auto cicle = playercicle->m_CircleCount;
+
+		if (other->FindTag(L"FloatCircle") && ScoreFlag == false)
+		{
+			ptrMana->Start(L"PointSE", 0, 1.0f);
+
+			ScoreFlag = true;
+			auto ciclenext = ptrCircle->m_next++;
+			auto comboCount = ptrCircle->m_ComboCount;
+			comboCount++;
+			if (ScoreFlag && comboCount == 1)
+			{
+				if (m_CircleCount < 5)
+				{
+					m_CircleCount++;
+					playercicle->m_CircleCount = 0;
+				}
+				App::GetApp()->GetScene<Scene>()->AddScore2(100 * m_CircleCount);
+				ScoreFlag = false;
+				comboCount--;
+			}
+		}
+
+	}
 }
 //end basecross
