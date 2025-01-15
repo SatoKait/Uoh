@@ -234,7 +234,9 @@ namespace basecross {
 		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
 			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
-
+		// 説明のアイコンを生成
+		AddGameObject<StageSprite>(L"ICON_TX", true,
+			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
 	}
 	void GameStage::CreateStageTime()
 	{
@@ -247,7 +249,7 @@ namespace basecross {
 
 	void GameStage::CreateBGM() {
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
-		m_BGM = ptrMana->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.3f);
+		m_BGM = ptrMana->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.1f);
 		//m_ptrXA->Start(L"StageBGM2", XAUDIO2_LOOP_INFINITE, 0.5f);
 	}
 
