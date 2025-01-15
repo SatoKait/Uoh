@@ -43,7 +43,7 @@ namespace basecross {
 		Layer->SetDrawLayer(-100);
 
 		AddGameObject<StageSprite>(L"GAMEOVER_TX", true,
-			Vec2(1300.0f, 400.0f), Vec2(-25.0f, 200.0f));
+			Vec2(1000.0f, 400.0f), Vec2(0.0f, 250.0f));
 		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
 			Vec2(450.0f, 100.0f), Vec2(0.0f, -300.0f));
 
