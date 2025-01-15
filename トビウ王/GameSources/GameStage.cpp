@@ -234,7 +234,9 @@ namespace basecross {
 		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
 			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
-
+		// 説明のアイコンを生成
+		AddGameObject<StageSprite>(L"ICON_TX", true,
+			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
 	}
 	void GameStage::CreateStageTime()
 	{
