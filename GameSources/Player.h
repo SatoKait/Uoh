@@ -38,7 +38,6 @@ namespace basecross{
 		float m_JSpeed;			//ジャンプするスピード
 		float m_Accel;			//y軸加速度
 		float m_JumpTime;		//ジャンプしてからの経過時間
-		bool m_MoveFlag;		//動けるまでのフラグ
 		float m_GoalTime;		//ゴールタイム
 		Vec3 m_Rotate;			//傾き
 		float m_ChangeTime;
@@ -48,12 +47,14 @@ namespace basecross{
 		bool m_DrawFlag;
 		float m_StanTime;
 		bool m_StanFlag;
-
+		float m_Movetime;
+		bool m_StartFlag;
 	private:
 		shared_ptr<Transform> m_trans;
 		shared_ptr<CollisionCapsule> m_col;
 
 	public:	
+		bool m_MoveFlag;		//動けるまでのフラグ
 		int m_CircleCount;
 		bool  m_GoalFlag;	
 		bool m_StopFlag;
@@ -78,7 +79,7 @@ namespace basecross{
 			m_Speed(10.0f),
 			m_JSpeed(6.0f),
 			m_grounded(true),
-			m_MoveFlag(true),
+			m_MoveFlag(false),
 			m_Goal(false),
 			m_GoalTime(0.0f),
 			m_SpeedUp(false),
@@ -95,7 +96,8 @@ namespace basecross{
 			m_Nextcircle(0),
 			m_CircleCount(0),
 			m_GoalFlag(false),
-			m_StopFlag(false)
+			m_StopFlag(false),
+			m_StartFlag(false)
 		{
 		}
 

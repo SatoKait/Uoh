@@ -21,7 +21,10 @@ namespace basecross {
 		shared_ptr<SoundItem> m_stageBGM;	
 
 		shared_ptr<SoundItem> m_BGM;
+
 		shared_ptr<SingleView> m_View;//ビューの変数
+
+		
 		//OpeningCamera用のビュー
 		//shared_ptr<SingleView> m_OpeningCameraView;
 		////MyCamera用のビュー
@@ -38,13 +41,13 @@ namespace basecross {
 	    float m_ToTalTime;
 		float m_ToTalTime2;
 	    float m_ToStartTime;
-		float m_EndTime;
-		bool  m_isStartFlag;
-		bool  m_TimeFlag;
-		bool  m_Flag;
-		bool  m_DrawFlag;
-		bool  m_EndFlag;
-
+		bool m_isStartFlag;
+		bool m_TimeFlag;
+		bool m_Flag;
+		bool DrawFlag;
+		bool m_30secFlag;
+		bool m_TimeUpFlag;
+		float m_TimeUpAfter;
 		wstring m_Number;
 
 		// BGMの再生
@@ -71,7 +74,11 @@ namespace basecross {
 		void CreatePollCollision();
 		void CreateFloatCircle();
 		void CreateWave();
-		//カメラについて
+	//public : 
+	//	CameraSelect GetCameraSelect() const {
+	//		return m_CameraSelect;
+	//	}
+
 		void CreateMoveCamera();
 		void CreateCameraman();
 		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
