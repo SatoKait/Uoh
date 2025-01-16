@@ -15,7 +15,8 @@ namespace basecross {
 	}
 	MiniMapManager::MiniMapManager(shared_ptr<Stage>& stagePtr) :
 		GameObject(stagePtr),
-		m_mapSize(200)
+		m_mapSize(200),
+		m_MiniMapDrawFlag(true)
 	{
 
 	}
@@ -32,6 +33,8 @@ namespace basecross {
 		float Lenght = 225.0f;//ミニマップの直径
 		auto haikei = stage->AddGameObject<MiniMapSprite>(L"Haikei_TX", Vec2(Lenght, Lenght), Vec3(-640 + (Lenght / 2.0f), 400.0f - (Lenght / 2.0f), 0.0f));
 		haikei->SetColor(Col4(1.0f, 1.0f, 1.0f, 0.5f));//ここで透明にしている
+		GetStage()->SetSharedGameObject(L"haikei", haikei);
+
 		m_startPos = Vec3(-640 + (Lenght / 2.0f), 400.0f - (Lenght / 2.0f), 5.0f);//スタートポジション
 		auto test = m_startPos;
 		auto a = 0;
@@ -76,6 +79,8 @@ namespace basecross {
 				auto miniMapItem = stage->AddGameObject<MiniMapMoveGate>(castitem, L"MiniMap_TX", Vec2(itemScale.x * m_mapMagnification, itemScale.z * m_mapMagnification), 5,
 					Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f));
 				miniMapItem->AddTag(L"MiniMapItem");//タグを追加
+				miniMapItem->SetDrawLayer(-100);
+				
 				count++;
 			}
 		}
@@ -138,8 +143,11 @@ namespace basecross {
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
 
-					stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
+					//ptrGate->SetDrawLayer(-100);
+				
+
 				}
 			}
 
@@ -161,8 +169,12 @@ namespace basecross {
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
 
-					stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+					auto CircleGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
+					if (m_MiniMapDrawFlag == true)
+					{
+						CircleGate->SetDrawLayer(-100);
+					}
 				}
 			}
 
@@ -211,7 +223,11 @@ namespace basecross {
 					auto itemScale = itemTrans->GetScale();
 					auto itemRotaiton = itemTrans->GetQuaternion();
 
-					stage->AddGameObject<MiniMapActor>(castPlayer, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
+					auto ptrPlayer = stage->AddGameObject<MiniMapActor>(castPlayer, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
+					//if (m_MiniMapDrawFlag)
+					//{
+						ptrPlayer->SetDrawLayer(-100);
+					//}
 				}
 			}
 		}

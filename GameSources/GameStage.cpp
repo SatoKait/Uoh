@@ -16,14 +16,16 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(30),
-		m_ToStartTime(4),
-		m_ToTalTime2(1),
+		m_ToTalTime(30.0f),
+		m_ToStartTime(4.0f),
+		m_ToTalTime2(1.0f),
+		m_EndTime(10.0f),
 		m_isStartFlag(false),
 		m_TimeFlag(false),
 		m_Flag(false),
-		DrawFlag(true),
+		m_DrawFlag(true),
 		m_GoalFlag(false),
+		m_EndFlag(false),
 		count(0),
 		m_SetCount(0),
 		m_Set2Count(0)
@@ -182,19 +184,19 @@ namespace basecross {
 	void GameStage::CreateComboSprite() {
 		float x = 550.0f, y = 320.0f;
 
-		AddGameObject<ComboSprite>(
+		auto ConmboSprite = AddGameObject<ComboSprite>(
 			L"COMBO_TX", 
 			true,
 			Vec2(120.0f, 80.0f),
-			Vec3(x, y - 30.0f, 0.0f)
-		);
+			Vec3(x, y - 30.0f, 0.0f));
+		SetSharedGameObject(L"ConmboSprite", ConmboSprite);
 
-		AddGameObject<ComboSpriteNumber>(
+		auto ConmboSpriteNumber = AddGameObject<ComboSpriteNumber>(
 			L"NUMBER_TX",
 			true,
 			Vec2(1.0f, 1.0f),
-			Vec3(x - 130.0f, y + 44.0f , 0.0f)
-);
+			Vec3(x - 130.0f, y + 44.0f , 0.0f));
+		SetSharedGameObject(L"ConmboSpriteNumber", ConmboSpriteNumber);
 
 	}
 	void GameStage::CreateGoal() {
@@ -203,48 +205,77 @@ namespace basecross {
 		//	Vec3(100.0f, 50.0f, 1.0f),//scl
 		//	Vec3(0.0f,0.0f,0.0f));//rot
 	}
+
 	void GameStage::CreateTime()
 	{
+		//右側のカウントダウン
 		AddGameObject<UITime>(2,
 			L"NUMBER2_TX",
 			true,
 			Vec2(220.0f, 60.0f),
 			Vec3(670.0f, 350.0f, 0.0f));
+		//左側のカウントダウン
 		AddGameObject<UITime2>(2,
 			L"NUMBER2_TX",
 			true,
 			Vec2(220.0f, 60.0f),
 			Vec3(530.0f, 350.0f, 0.0f));
-		AddGameObject<StageSprite>(L"TIME_TX", true,
-			Vec2(350.0f, 80.0f), Vec2(495.0f, 355.0f));
-		//AddGameObject<StageSprite>(L"PARTITION_TX", true,
-		//Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
-		//auto score = AddGameObject<Score>();
-		//AddGameObject<StageScore>();
-		//SetSharedGameObject(L"Score", ptrscore);
-		
+
+		//:の部分を表示している
+	   auto ptrSprite = AddGameObject<StageSprite>(L"TIME_TX", true,
+	   Vec2(350.0f, 80.0f), Vec2(495.0f, 355.0f));		
+	   SetSharedGameObject(L"TimeSprite", ptrSprite);
 		// HPゲージの生成
 		auto ptrHpGauge = AddGameObject<GaugeScore>(false,
 			Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"Gauge", ptrHpGauge);
-		AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
+		auto ptrGaugeSpriteNumber = AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
 			true,
 			Vec2(1.0f, 1.0f), Vec3(-445.0f, -290.0f, 0.0f));
+		SetSharedGameObject(L"GaugeSpriteNumber", ptrGaugeSpriteNumber);
 		// HPゲージの生成
 		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
 			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
 		// 説明のアイコンを生成
-		AddGameObject<StageSprite>(L"ICON_TX", true,
+		auto UIIcon = AddGameObject<StageSprite>(L"ICON_TX", true,
 			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
+		SetSharedGameObject(L"UIIcon", UIIcon);
+
+		//AddGameObject<StageSprite>(L"PARTITION_TX", true,
+		//Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
+		//auto score = AddGameObject<Score>();
+		//AddGameObject<StageScore>();
+		//SetSharedGameObject(L"Score", ptrscore);
+
+
+		auto Kakeru = AddGameObject<StageSprite>(L"KAKERU_TX", true,
+			Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+		Kakeru->SetDrawLayer(-100);
+		SetSharedGameObject(L"Kakeru", Kakeru);
+
+
+
+
+
+
 	}
+
 	void GameStage::CreateStageTime()
 	{
+		//始まりのカウントダウン
 		AddGameObject<UITimeStage>(1,
 			L"NUMBER2_TX",
 			true,
 			Vec2(480.0f, 200.0f),
 			Vec3(250.0f, 0.0f, 0.0f));
+		//終わりのカウントダウン
+		AddGameObject<LastTime>(1,
+			L"LASTTIME_TX",
+			true,
+			Vec2(480.0f, 200.0f),
+			Vec3(250.0f, 0.0f, 0.0f));
+
 	}
 
 	void GameStage::CreateBGM() {
@@ -270,6 +301,7 @@ namespace basecross {
 		cicleTrans->SetScale(Vec3(2.5f, 0.25f, 2.5f));
 		SetSharedGameObject(L"FloatCircle", Circle);
 	}
+	
 	void GameStage::CreateWave()
 	{
 		//auto ptrgate = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f), L"GREEN_TX");
@@ -324,7 +356,7 @@ namespace basecross {
 			auto& app = App::GetApp();
 			auto path = app->GetDataDirWString();
 
-			auto miniMapManager = AddGameObject<MiniMapManager>(100);//ミニマップ生成デバック用
+			auto miniMapManager = AddGameObject<MiniMapManager>(100);//ミニマップ生成
 			SetSharedGameObject(L"MiniMapManager", miniMapManager);
 			miniMapManager->CreateMoveGate();
 			miniMapManager->CreatePlayer();
@@ -334,10 +366,12 @@ namespace basecross {
 				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
 			}
 
-			AddGameObject<StageSprite>(L"BAR_TX", true,
+			auto PlayerBAR =  AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
-			AddGameObject<StageSprite>(L"BAR_TX", true,
+			SetSharedGameObject(L"PlayerBAR", PlayerBAR);
+			auto EnemyBAR = AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
+			SetSharedGameObject(L"EnemyBAR", EnemyBAR);
 
 			// Skyboxクラス用
 			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
@@ -364,6 +398,7 @@ namespace basecross {
 		auto m_count = ptrPlayer->m_CircleCount;
 		auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
 		auto gaugecount = gauge->Count;
+
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
@@ -411,7 +446,7 @@ namespace basecross {
 				//ptrMana->Stop(m_BGM);
 				//AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
 				gaugeFlag = true;
-				DrawFlag = false;
+				m_DrawFlag = false;
 			}
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
@@ -431,6 +466,56 @@ namespace basecross {
 		ptrScor->SetScore(m_ToTalTime);
 		auto ptrScor2 = GetSharedGameObject<UITime2>(L"UITime2");
 		ptrScor2->SetScore(m_ToTalTime2);
+
+		//これで最後の演出をすることが出来る
+		if (m_TimeFlag == true && m_ToTalTime <= 11.0f && m_EndFlag == false)
+		{
+			m_EndFlag = true;
+			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
+			ptrScor3->m_isDrawFlag = true;	
+		}
+		if (m_TimeFlag == true && m_ToTalTime <= 11.0f && m_EndFlag == true)
+		{
+			m_EndTime += elapsedTime;
+			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
+			ptrScor3->SetScore3(m_EndTime);
+		}
+			
+		if (m_TimeFlag == true && m_ToTalTime <= 1.0f && m_EndFlag == true)
+		{
+			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
+			ptrScor3->m_isDrawFlag = false;
+			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
+			ptrUITime->m_isBackGrundDrawFlag = true;
+			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
+			ptrUITime2->m_isBackGrundDrawFlag = true;
+			auto ptrSprite = GetSharedGameObject<StageSprite>(L"TimeSprite");
+			ptrSprite->SetDrawLayer(-100);
+			auto ptrUIIcon = GetSharedGameObject<StageSprite>(L"UIIcon");
+			ptrUIIcon->SetDrawLayer(-100);
+			auto ptrConmboSprite = GetSharedGameObject<ComboSprite>(L"ConmboSprite");
+			ptrConmboSprite->SetDrawLayer(-100);
+			auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
+			ptrConmboSpriteNumber->SetDrawLayer(-100);
+			auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
+			MiniMapSprite->SetDrawLayer(-100);
+			auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
+			PlayerBAR->SetDrawLayer(-100);
+			auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
+			EnemyBAR->SetDrawLayer(-100);
+			auto ptrHpGauge = GetSharedGameObject<GaugeScore>(L"Gauge");
+			ptrHpGauge->SetDrawLayer(-100);
+			auto ptrGaugeSpriteNumber = GetSharedGameObject<GaugeSpriteNumber>(L"GaugeSpriteNumber");
+			ptrGaugeSpriteNumber->SetDrawLayer(-100);
+			auto ptrHpGauge2 = GetSharedGameObject<GaugeScoreEnemy>(L"GaugeEnemy");
+			ptrHpGauge2->SetDrawLayer(-100);
+			auto Kakeru = GetSharedGameObject<StageSprite>(L"Kakeru");
+			Kakeru->SetDrawLayer(-100);
+			//auto MinimapDraw = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
+			//MinimapDraw->m_MiniMapDrawFlag = true;
+		}
+
+
 		if (m_isStartFlag == false)
 		{
 			auto ptrScor2 = GetSharedGameObject<UITimeStage>(L"UITimeStage");

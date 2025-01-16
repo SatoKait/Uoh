@@ -17,6 +17,7 @@ namespace basecross {
 		float m_mapSize;//マップの直径
 		float m_mapMagnification;//マップの倍率
 	public:
+		bool m_MiniMapDrawFlag;
 		MiniMapManager(shared_ptr<Stage>& stage, float mapSize);
 		MiniMapManager(shared_ptr<Stage>& stage);
 		~MiniMapManager();

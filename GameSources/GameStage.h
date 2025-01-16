@@ -38,10 +38,13 @@ namespace basecross {
 	    float m_ToTalTime;
 		float m_ToTalTime2;
 	    float m_ToStartTime;
-		bool m_isStartFlag;
-		bool m_TimeFlag;
-		bool m_Flag;
-		bool DrawFlag;
+		float m_EndTime;
+		bool  m_isStartFlag;
+		bool  m_TimeFlag;
+		bool  m_Flag;
+		bool  m_DrawFlag;
+		bool  m_EndFlag;
+
 		wstring m_Number;
 
 		// BGMの再生
@@ -68,11 +71,7 @@ namespace basecross {
 		void CreatePollCollision();
 		void CreateFloatCircle();
 		void CreateWave();
-	//public : 
-	//	CameraSelect GetCameraSelect() const {
-	//		return m_CameraSelect;
-	//	}
-
+		//カメラについて
 		void CreateMoveCamera();
 		void CreateCameraman();
 		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
