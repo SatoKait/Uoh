@@ -48,7 +48,6 @@ namespace basecross {
 
 	Vec3 Player::GetMoveVector()
 	{
-
 		Vec3 angle(0, 0, 0);
 		//入力の取得
 		auto inPut = GetInputState();
@@ -82,7 +81,6 @@ namespace basecross {
 		}
 
 		return angle;
-
 	}
 
 	// ------------------------------------------ //
@@ -106,6 +104,8 @@ namespace basecross {
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
+		const float deltatime = 4.0f;
+
 		Vec2 ret;
 		if (cntl[0].bConnected)
 		{
@@ -113,6 +113,10 @@ namespace basecross {
 			{
 				ret.x = cntl[0].fThumbLX;
 				ret.y = cntl[0].fThumbLY;
+			}
+			if (m_Movetime <= deltatime)
+			{
+				m_Movetime += delta;
 			}
 		}
 		else if (!cntl[0].bConnected)
@@ -131,6 +135,16 @@ namespace basecross {
 				if (KeyState.m_bPushKeyTbl['D'])
 					ret.x = 1;
 			}
+			if (m_Movetime <= deltatime)
+			{
+				m_Movetime += delta;
+			}
+
+		}
+		if (m_Movetime >= deltatime && !m_StartFlag)
+		{
+			m_MoveFlag = true;
+			m_StartFlag = true;
 		}
 
 		if (angle.length() > 0.0f) {
@@ -385,7 +399,7 @@ namespace basecross {
 
 		}
 
-		
+
 		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z));
 
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
@@ -428,7 +442,7 @@ namespace basecross {
 			m_ChangeTime -= delta;
 		}
 
-		if (m_StanTime >= 2.0f)
+		if (m_StanTime >= 2.0f && m_StanFlag)
 		{
 			m_StanFlag = false;
 			m_MoveFlag = true;

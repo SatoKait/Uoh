@@ -26,8 +26,11 @@ namespace basecross {
 		m_DrawFlag(true),
 		m_GoalFlag(false),
 		m_EndFlag(false),
+		m_30secFlag(true),
+		m_TimeUpFlag(false),
 		count(0),
 		m_SetCount(0),
+		m_TimeUpAfter(0.0f),
 		m_Set2Count(0)
 	{}
 
@@ -280,7 +283,7 @@ namespace basecross {
 
 	void GameStage::CreateBGM() {
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
-		m_BGM = ptrMana->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.1f);
+		m_BGM = ptrMana->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.3f);
 		//m_ptrXA->Start(L"StageBGM2", XAUDIO2_LOOP_INFINITE, 0.5f);
 	}
 
@@ -391,8 +394,10 @@ namespace basecross {
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
+		auto delta = App::GetApp()->GetElapsedTime();
 
-		auto score = App::GetApp()->GetScene<Scene>()->GetScore();
+		auto score1 = App::GetApp()->GetScene<Scene>()->GetScore();
+		auto score2 = App::GetApp()->GetScene<Scene>()->GetScore2();
 		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
 		auto GoalFlag = ptrPlayer->m_GoalFlag;
 		auto m_count = ptrPlayer->m_CircleCount;
@@ -451,7 +456,24 @@ namespace basecross {
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
 				ptrMana->Stop(m_BGM);
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+				if (m_TimeUpFlag == false)
+				{
+					ptrMana->Start(L"TIMEUPSE", 0, 0.5f);
+					m_TimeUpFlag = true;
+				}
+				m_TimeUpAfter += delta;
+				ptrPlayer->m_MoveFlag = false;
+				if (m_TimeUpAfter >= 3.0f)
+				{
+					if (score1 > score2)
+					{
+						PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+					}
+					if (score1 < score2)
+					{
+						PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+					}
+				}
 			}
 
 		}
@@ -460,7 +482,13 @@ namespace basecross {
 			ptrMana->Stop(m_BGM);
 			ptrPlayer->m_StopFlag = true;
 		}
-
+		if (m_TimeFlag == true && m_ToTalTime <= 31 && m_30secFlag)
+		{
+			ptrMana->Stop(m_BGM);
+			ptrMana->Start(L"ALARMSE", 0, 0.6f);
+			m_BGM = ptrMana->Start(L"StageBGM2", 1, 0.3f);
+			m_30secFlag = false;
+		}
 		//スコアを更新する
 		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
 		ptrScor->SetScore(m_ToTalTime);
