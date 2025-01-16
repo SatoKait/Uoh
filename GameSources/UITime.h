@@ -14,6 +14,8 @@ namespace basecross {
 		vector<VertexPositionTexture> m_BackupVertices;
 
 	public:
+		bool m_isBackGrundDrawFlag;
+
 		UITime(const shared_ptr<Stage>& StagePtr, UINT NumberOfDigits,
 			const wstring& TextureKey, bool Trace,
 			const Vec2& StartScale, const Vec3& StartPos);
@@ -25,6 +27,7 @@ namespace basecross {
 		virtual void OnUpdate()override;
 	};
 
+	//00:00の左側の部分
 	class UITime2 : public GameObject {
 		bool m_Trace;
 		Vec2 m_StartScale;
@@ -37,6 +40,8 @@ namespace basecross {
 		vector<VertexPositionTexture> m_BackupVertices;
 
 	public:
+		bool m_isBackGrundDrawFlag;
+
 		UITime2(const shared_ptr<Stage>& StagePtr, UINT NumberOfDigits,
 			const wstring& TextureKey, bool Trace,
 			const Vec2& StartScale, const Vec3& StartPos);
@@ -73,4 +78,32 @@ namespace basecross {
 		virtual void OnCreate() override;
 		virtual void OnUpdate()override;
 	};
+
+
+	//最後の十秒カウント
+	class LastTime : public GameObject {
+		bool m_Trace3;
+		Vec2 m_StartScale3;
+		Vec3 m_StartPos3;
+		wstring m_TextureKey3;
+		float m_Score3;
+		int m_DrawLayer;
+		//桁数
+		UINT m_NumberOfDigits3;
+		//バックアップ頂点データ
+		vector<VertexPositionTexture> m_BackupVertices3;
+
+	public:
+		bool m_isDrawFlag;
+		LastTime(const shared_ptr<Stage>& StagePtr3, UINT NumberOfDigits3,
+			const wstring& TextureKey3, bool Trace3,
+			const Vec2& StartScale3, const Vec3& StartPos3);
+		virtual ~LastTime() {}
+		void SetScore3(float f) {
+			m_Score3 = f;
+		}
+		virtual void OnCreate() override;
+		virtual void OnUpdate()override;
+	};
+
 }//end namespace basecross
