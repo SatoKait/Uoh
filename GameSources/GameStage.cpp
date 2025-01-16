@@ -244,6 +244,8 @@ namespace basecross {
 		// 説明のアイコンを生成
 		AddGameObject<StageSprite>(L"ICON_TX", true,
 			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
+		AddGameObject<StageSprite>(L"YOU_TX", true,
+			Vec2(90.0f, 50.0f), Vec2(-515.0f, -378.0f));
 	}
 	void GameStage::CreateStageTime()
 	{
