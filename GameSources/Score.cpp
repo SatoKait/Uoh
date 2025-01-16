@@ -131,8 +131,12 @@ namespace basecross {
 		{
 			Count++;
 			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore(m_Reset);
-			stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
-				Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+			//auto Kakeru = stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
+			//	Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+			auto Kakeru = GetStage()->GetSharedGameObject<StageSprite>(L"Kakeru");
+			Kakeru->SetDrawLayer(3);
+			//GetStage()->SetSharedGameObject(L"KAKERU", Kakeru);
+
 		}
 	}
 }
@@ -182,8 +186,12 @@ namespace basecross {
 		{
 			Count++;
 			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore2(m_Reset);
-			stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
+			auto Kakeru = stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
 				Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+			if (m_isLayerBackGroundFlag)
+			{
+				Kakeru->SetDrawLayer(-100);
+			}
 		}
 	}
 }

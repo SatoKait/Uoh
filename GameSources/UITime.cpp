@@ -56,8 +56,6 @@ namespace basecross {
 		auto ptrDraw = AddComponent<PTSpriteDraw>(m_BackupVertices, indices);
 		ptrDraw->SetTextureResource(m_TextureKey);
 		GetStage()->SetSharedGameObject(L"UITime", GetThis<UITime>());
-		//GetStage()->SetSharedGameObject(L"UITime2", GetThis<UITime>());
-
 	}
 
 	void UITime::OnUpdate() {
@@ -106,6 +104,12 @@ namespace basecross {
 		}
 		auto ptrDraw = GetComponent<PTSpriteDraw>();
 		ptrDraw->UpdateVertices(newVertices);
+		if (m_isBackGrundDrawFlag)
+		{
+			auto Layer = GetStage()->GetSharedGameObject<UITime>(L"UITime");
+			Layer->SetDrawLayer(-100);
+		}
+
 	}
 }
 
@@ -213,6 +217,11 @@ namespace basecross {
 		}
 		auto ptrDraw = GetComponent<PTSpriteDraw>();
 		ptrDraw->UpdateVertices(newVertices);
+		if (m_isBackGrundDrawFlag)
+		{
+			auto Layer = GetStage()->GetSharedGameObject<UITime2>(L"UITime2");
+			Layer->SetDrawLayer(-100);
+		}
 	}
 }
 
@@ -329,6 +338,126 @@ namespace basecross {
 			auto Layer = GetStage()->GetSharedGameObject<UITimeStage>(L"UITimeStage");
 			Layer->SetDrawLayer(-100);
 		}
+	}
+}
+
+namespace basecross {
+	LastTime::LastTime(const shared_ptr<Stage>& StagePtr3, UINT NumberOfDigits3,
+		const wstring& TextureKey3, bool Trace3,
+		const Vec2& StartScale3, const Vec3& StartPos3) :
+		GameObject(StagePtr3),
+		m_NumberOfDigits3(NumberOfDigits3),
+		m_TextureKey3(TextureKey3),
+		m_Trace3(Trace3),
+		m_StartScale3(StartScale3),
+		m_StartPos3(StartPos3),
+		m_Score3(0.0f),
+		m_isDrawFlag(false),
+		m_DrawLayer(0)
+	{}
+
+	void LastTime::OnCreate() {
+		float xPiecesize = 0.5f / (float)m_NumberOfDigits3;
+		float helfSize = 0.75f;
+
+		//インデックス配列
+		vector<uint16_t> indices;
+		for (UINT i = 0; i < m_NumberOfDigits3; i++) {
+			float vertex0 = -helfSize + xPiecesize * (float)i;
+			float vertex1 = vertex0 + xPiecesize;
+			//0
+			m_BackupVertices3.push_back(
+				VertexPositionTexture(Vec3(vertex0, helfSize, 0), Vec2(0.0f, 0.0f))
+			);
+			//1
+			m_BackupVertices3.push_back(
+				VertexPositionTexture(Vec3(vertex1, helfSize, 0), Vec2(1.0f, 0.0f))
+			);
+			//2
+			m_BackupVertices3.push_back(
+				VertexPositionTexture(Vec3(vertex0, -helfSize, 0), Vec2(0.0f, 1.0f))
+			);
+			//3
+			m_BackupVertices3.push_back(
+				VertexPositionTexture(Vec3(vertex1, -helfSize, 0), Vec2(1.0f, 1.0f))
+			);
+			indices.push_back(i * 4 + 0);
+			indices.push_back(i * 4 + 1);
+			indices.push_back(i * 4 + 2);
+			indices.push_back(i * 4 + 1);
+			indices.push_back(i * 4 + 3);
+			indices.push_back(i * 4 + 2);
+		}
+
+		SetAlphaActive(m_Trace3);
+		auto ptrTrans = GetComponent<Transform>();
+		ptrTrans->SetScale(m_StartScale3.x, m_StartScale3.y, 1.0f);
+		ptrTrans->SetRotation(0, 0, 0);
+		ptrTrans->SetPosition(m_StartPos3.x, m_StartPos3.y, 0.0f);
+		//頂点とインデックスを指定してスプライト作成
+		auto ptrDraw = AddComponent<PTSpriteDraw>(m_BackupVertices3, indices);
+		ptrDraw->SetTextureResource(m_TextureKey3);
+		GetStage()->SetSharedGameObject(L"LastTime", GetThis<LastTime>());
+	}
+
+	void LastTime::OnUpdate() {
+		vector<VertexPositionTexture> newVertices3;
+		UINT num;
+		int verNum = 0;
+		for (UINT i = m_NumberOfDigits3; i > 0; i--) {
+			UINT base = (UINT)pow(10, i);
+			num = ((UINT)m_Score3) % base;
+			num = num / (base / 10);
+			Vec2 uv0 = m_BackupVertices3[verNum].textureCoordinate;
+			uv0.x = (float)num / 10.0f;
+			auto v = VertexPositionTexture(
+				m_BackupVertices3[verNum].position,
+				uv0
+			);
+			newVertices3.push_back(v);
+
+			Vec2 uv1 = m_BackupVertices3[verNum + 1].textureCoordinate;
+			uv1.x = uv0.x + 0.1f;
+			v = VertexPositionTexture(
+				m_BackupVertices3[verNum + 1].position,
+				uv1
+			);
+			newVertices3.push_back(v);
+
+			Vec2 uv2 = m_BackupVertices3[verNum + 2].textureCoordinate;
+			uv2.x = uv0.x;
+
+			v = VertexPositionTexture(
+				m_BackupVertices3[verNum + 2].position,
+				uv2
+			);
+			newVertices3.push_back(v);
+
+			Vec2 uv3 = m_BackupVertices3[verNum + 3].textureCoordinate;
+			uv3.x = uv0.x + 0.1;
+
+			v = VertexPositionTexture(
+				m_BackupVertices3[verNum + 3].position,
+				uv3
+			);
+			newVertices3.push_back(v);
+
+			verNum += 4;
+		}
+		auto ptrDraw = GetComponent<PTSpriteDraw>();
+		ptrDraw->UpdateVertices(newVertices3);
+
+		if (m_isDrawFlag)
+		{
+			auto Layer = GetStage()->GetSharedGameObject<LastTime>(L"LastTime");
+			Layer->SetDrawLayer(3);
+		}
+		if (!m_isDrawFlag)
+		{
+			auto Layer = GetStage()->GetSharedGameObject<LastTime>(L"LastTime");
+			Layer->SetDrawLayer(-100);
+		}
+
 	}
 }
 

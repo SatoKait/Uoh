@@ -162,6 +162,7 @@ namespace basecross {
 
 	public:
 		int Count = 0;
+		bool m_isLayerBackGroundFlag;
 		//ç\ízÇ∆îjâÛ
 		GaugeScoreEnemy::GaugeScoreEnemy(const shared_ptr<Stage>& StagePtr,
 			bool Trace,
@@ -177,7 +178,8 @@ namespace basecross {
 			m_TotalTime(0),
 			m_HpKey(HpKey),
 			m_Hp_now(50),
-			m_gauge(50)
+			m_gauge(50),
+			m_isLayerBackGroundFlag(false)
 
 		{}
 
