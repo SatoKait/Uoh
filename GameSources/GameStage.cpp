@@ -22,12 +22,9 @@ namespace basecross {
 		m_isStartFlag(false),
 		m_TimeFlag(false),
 		m_Flag(false),
-		DrawFlag(true),
+		m_DrawFlag(true),
 		m_GoalFlag(false),
-<<<<<<< HEAD
-=======
 		m_EndFlag(false),
->>>>>>> Tomoki
 		m_30secFlag(true),
 		m_TimeUpFlag(false),
 		count(0),
@@ -420,7 +417,7 @@ namespace basecross {
 				//ptrMana->Stop(m_BGM);
 				//AddGameObject<GoalTrophy>(Vec3(0.0f, 10.0f, 0.0f), Vec3(2.0f, 2.0f, 1.0f), Vec3(0.0f));
 				gaugeFlag = true;
-				DrawFlag = false;
+				m_DrawFlag = false;
 			}
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {

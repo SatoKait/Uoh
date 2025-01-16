@@ -41,19 +41,12 @@ namespace basecross {
 	    float m_ToTalTime;
 		float m_ToTalTime2;
 	    float m_ToStartTime;
-<<<<<<< HEAD
-=======
 		float m_EndTime;
 		bool  m_isStartFlag;
 		bool  m_TimeFlag;
 		bool  m_Flag;
 		bool  m_DrawFlag;
 		bool  m_EndFlag;
->>>>>>> Tomoki
-		bool m_isStartFlag;
-		bool m_TimeFlag;
-		bool m_Flag;
-		bool DrawFlag;
 		bool m_30secFlag;
 		bool m_TimeUpFlag;
 		float m_TimeUpAfter;
