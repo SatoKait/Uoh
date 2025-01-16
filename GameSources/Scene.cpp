@@ -88,6 +88,9 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"LASTTIME_TX", tex);
 			tex = texPath + L"wave.png";
 			App::GetApp()->RegisterTexture(L"WAVE_TX", tex);
+			tex = texPath + L"OK.png";
+			App::GetApp()->RegisterTexture(L"OK_TX", tex);
+
 			//tex = texPath + L"Tri.png";
 			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
 		}

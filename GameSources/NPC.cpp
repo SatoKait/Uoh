@@ -155,6 +155,7 @@ namespace basecross {
 			ptrMana->Start(L"PointSE", 0, 1.0f);
 
 			App::GetApp()->GetScene<Scene>()->AddScore2(100);
+			App::GetApp()->GetScene<Scene>()->AddPoint2(100);
 			m_Time = 0.0f;
 		}
 	}
@@ -192,6 +193,7 @@ namespace basecross {
 					playercicle->m_CircleCount = 0;
 				}
 				App::GetApp()->GetScene<Scene>()->AddScore2(100 * m_CircleCount);
+				App::GetApp()->GetScene<Scene>()->AddPoint2(100 * m_CircleCount);
 				ScoreFlag = false;
 				comboCount--;
 			}
