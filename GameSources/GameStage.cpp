@@ -24,6 +24,10 @@ namespace basecross {
 		m_Flag(false),
 		DrawFlag(true),
 		m_GoalFlag(false),
+<<<<<<< HEAD
+=======
+		m_EndFlag(false),
+>>>>>>> Tomoki
 		m_30secFlag(true),
 		m_TimeUpFlag(false),
 		count(0),
