@@ -11,7 +11,7 @@ namespace basecross {
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<TitleStage>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
 		cameraView->SetCamera(ptrMyCamera);
-		ptrMyCamera->SetEye(Vec3(0.0f, 0.0f, -5.0f));
+		ptrMyCamera->SetEye(Vec3(0.0f, -0.8f, -5.0f));
 		ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
 		//マルチライトの作成
 		auto ptrMultiLight = CreateLight<MultiLight>();
@@ -40,6 +40,8 @@ namespace basecross {
 		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
 			Vec2(640.0f, 200.0f), Vec2(0.0f, -150.0f));
 
+		AddGameObject<StageSprite>(L"WAVE_TX", true,
+			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 100.0f));
 	}
 
 	void TitleStage::OnCreate() {
@@ -92,7 +94,7 @@ namespace basecross {
 			flyngfishtrans->SetRotation(0.0f, rad, 0.0f);
 
 			m_comX -= 0.01f;
-			flyngfishtrans->SetPosition(m_comX, -1.0f, -2.0f);
+			flyngfishtrans->SetPosition(m_comX, -1.3f, -2.0f);
 		}
 		if (m_comX <= -4.0f)
 		{
@@ -106,7 +108,7 @@ namespace basecross {
 			flyngfishtrans->SetRotation(0.0f, rad, 0.0f);
 
 			m_comX += 0.01f;
-			flyngfishtrans->SetPosition(m_comX, -1.0f, -2.0f);
+			flyngfishtrans->SetPosition(m_comX, -1.3f, -2.0f);
 		}
 		if (m_comX >= 4.0f)
 		{
@@ -170,8 +172,8 @@ namespace basecross {
 		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
 
-		ptrDraw->AddAnimation(L"Default", 15, 40, true, 30.0f);
-		ptrDraw->ChangeCurrentAnimation(L"Default");
+		ptrDraw->AddAnimation(L"Swim", 15, 40, true, 30.0f);
+		ptrDraw->ChangeCurrentAnimation(L"Swim");
 
 		//透明処理
 		SetAlphaActive(true);
