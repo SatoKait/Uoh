@@ -516,6 +516,7 @@ namespace basecross {
 					m_CircleCount++;
 				}
 				App::GetApp()->GetScene<Scene>()->AddScore(100 * m_CircleCount);
+				App::GetApp()->GetScene<Scene>()->AddPoint(100 * m_CircleCount);
 				ScoreFlag = false;
 				comboCount--;
 			}
