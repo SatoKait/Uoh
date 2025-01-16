@@ -146,7 +146,12 @@ namespace basecross{
 			App::GetApp()->RegisterWav(L"PointSE", strSE);
 			strSE = SoundPath + L"GameOver.wav";
 			App::GetApp()->RegisterWav(L"GAMEOVERSE", strSE);
-
+			strSE = SoundPath + L"TimeUp.wav";
+			App::GetApp()->RegisterWav(L"TIMEUPSE", strSE);
+			strSE = SoundPath + L"Alarm.wav";
+			App::GetApp()->RegisterWav(L"ALARMSE", strSE);
+			strSE = SoundPath + L"Enter.wav";
+			App::GetApp()->RegisterWav(L"ENTERSE", strSE);
 		}
 	}
 
