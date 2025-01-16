@@ -16,7 +16,7 @@ namespace basecross {
 		auto mediaPath = app->GetDataDirWString(); // 「media」パスを文字列として取得する
 
 		auto drawComp = AddComponent<PNTStaticInstanceDraw>(); // ←「Instance」と付いたドローコンポーネントを生成します
-		const int MAP_ROWS = 100;
+		const int MAP_ROWS = 110;
 		const int MAP_COLS = 100;
 		int stageMap[MAP_ROWS][MAP_COLS];//縦横
 
@@ -49,7 +49,7 @@ namespace basecross {
 
 				case 1:
 					m_Side = -50.0 + c;//x
-					m_Warp = 50.0f + (-r);//z
+					m_Warp =  55.0f + (-r);//z
 					float scl = 1.0f;
 					//// インスタンス用の行列を作成する
 					Vec3 m_stratPos(m_Side, 0.0f, m_Warp); // 基準となるオフセット座標//移動座標
