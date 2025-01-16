@@ -21,7 +21,10 @@ namespace basecross {
 		shared_ptr<SoundItem> m_stageBGM;	
 
 		shared_ptr<SoundItem> m_BGM;
+
 		shared_ptr<SingleView> m_View;//ビューの変数
+
+		
 		//OpeningCamera用のビュー
 		//shared_ptr<SingleView> m_OpeningCameraView;
 		////MyCamera用のビュー
@@ -42,6 +45,9 @@ namespace basecross {
 		bool m_TimeFlag;
 		bool m_Flag;
 		bool DrawFlag;
+		bool m_30secFlag;
+		bool m_TimeUpFlag;
+		float m_TimeUpAfter;
 		wstring m_Number;
 
 		// BGMの再生

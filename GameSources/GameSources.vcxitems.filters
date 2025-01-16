@@ -58,22 +58,22 @@
       <Filter>Project</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameOverStage.cpp">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStage.cpp">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)GameStage2.cpp">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)SelectStage.cpp">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Scene.cpp">
-      <Filter>Stage or Scene\Scene</Filter>
+      <Filter>Scene Stage\Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)Map.cpp">
       <Filter>MiniMap</Filter>
@@ -182,22 +182,22 @@
       <Filter>Project</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameOverStage.h">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStage.h">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)GameStage2.h">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SelectStage.h">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h">
-      <Filter>Stage or Scene\Stage</Filter>
+      <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Scene.h">
-      <Filter>Stage or Scene\Scene</Filter>
+      <Filter>Scene Stage\Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Map.h">
       <Filter>MiniMap</Filter>
@@ -261,15 +261,6 @@
     <Filter Include="Project">
       <UniqueIdentifier>{cfbf30cd-d187-4f42-b564-43c26f4dabdc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Stage or Scene">
-      <UniqueIdentifier>{d2a88b73-01f7-404b-a317-aeb5527f7d38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Stage or Scene\Stage">
-      <UniqueIdentifier>{86d3453a-85d5-471b-9885-a7a4b8d2c9d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Stage or Scene\Scene">
-      <UniqueIdentifier>{0e05076f-a94c-47c8-a116-fe89d41e58f1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MiniMap">
       <UniqueIdentifier>{77f8a0c4-2554-46cf-b914-0965a780774f}</UniqueIdentifier>
     </Filter>
@@ -287,6 +278,15 @@
     </Filter>
     <Filter Include="Effect">
       <UniqueIdentifier>{2fa7f951-feeb-4223-8b69-2338ad8ab672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Stage">
+      <UniqueIdentifier>{d2a88b73-01f7-404b-a317-aeb5527f7d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Stage\Stage">
+      <UniqueIdentifier>{86d3453a-85d5-471b-9885-a7a4b8d2c9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Stage\Scene">
+      <UniqueIdentifier>{0e05076f-a94c-47c8-a116-fe89d41e58f1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
