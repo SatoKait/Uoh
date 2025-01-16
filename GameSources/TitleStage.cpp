@@ -64,11 +64,13 @@ namespace basecross {
 		m_InputHandler.PushHandle(GetThis<TitleStage>());
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_B || KeyState.m_bPressedKeyTbl[VK_SPACE])
 		{
 			int a = 0;
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage");
+			ptrMana->Start(L"ENTERSE", 0, 1.0f);
+			PostEvent(1.5f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage");
 		}
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_DPAD_RIGHT || KeyState.m_bPressedKeyTbl[VK_RETURN])
 		{
