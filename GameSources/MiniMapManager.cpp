@@ -30,7 +30,7 @@ namespace basecross {
 	{
 		//ミニマップの灰色部分の作成//もともと灰色のスプライトだったのを
 		auto stage = GetStage();//ステージ取得
-		float Lenght = 225.0f;//ミニマップの直径
+		float Lenght = 235.0f;//ミニマップの直径
 		auto haikei = stage->AddGameObject<MiniMapSprite>(L"Haikei_TX", Vec2(Lenght, Lenght), Vec3(-640 + (Lenght / 2.0f), 400.0f - (Lenght / 2.0f), 0.0f));
 		haikei->SetColor(Col4(1.0f, 1.0f, 1.0f, 0.5f));//ここで透明にしている
 		GetStage()->SetSharedGameObject(L"haikei", haikei);
