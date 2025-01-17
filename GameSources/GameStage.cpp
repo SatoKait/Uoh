@@ -351,6 +351,15 @@ namespace basecross {
 			AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
 			//AddGameObject<Skybox2>();
 
+			auto Rank = AddGameObject<ComboSpriteNumber>(L"NUMBER_TX", true,
+				Vec2(1.0f, 1.0f), Vec3(-540.0f, -50.0f, 0.0f));
+			auto Rank2 = AddGameObject<ComboSpriteNumber>(L"NUMBER_TX", true,
+				Vec2(1.0f, 1.0f), Vec3(-620.0f, -50.0f, 0.0f));
+			Rank->SetDrawLayer(300);
+			SetSharedGameObject(L"Rank", Rank);
+			SetSharedGameObject(L"Rank2", Rank2);
+			//AddGameObject<ScoreSprite>();
+
 			CreateMoveCamera();
 		}
 		catch (...) {
@@ -360,6 +369,7 @@ namespace basecross {
 
 	void GameStage::OnUpdate()
 	{
+
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
@@ -372,6 +382,28 @@ namespace basecross {
 		auto m_count = ptrPlayer->m_CircleCount;
 		auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
 		auto gaugecount = gauge->Count;
+
+		auto Rank = GetSharedGameObject<ComboSpriteNumber>(L"Rank");
+		auto Rank2 = GetSharedGameObject<ComboSpriteNumber>(L"Rank2");
+
+		Rank->UpdateValue(m_rank);
+		Rank2->UpdateValue(m_rank2);
+		if (score1 >= score2)
+		{
+			m_rank = 1;
+		}
+		else
+		{
+			m_rank = 2;
+		}
+		if (score2 >= score1)
+		{
+			m_rank2 = 1;
+		}
+		else
+		{
+			m_rank2 = 2;
+		}
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{

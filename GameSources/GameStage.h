@@ -33,6 +33,10 @@ namespace basecross {
 		//shared_ptr<SingleView> m_ObjCameraView;
 		//CameraSelect m_CameraSelect;
 		int count;
+		int rank;
+		int rank2;
+		int m_rank;
+		int m_rank2;
 		int m_SetCount;
 		int m_Set2Count;
 		//ステージの倍率
