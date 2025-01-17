@@ -365,8 +365,8 @@ namespace basecross {
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 		auto delta = App::GetApp()->GetElapsedTime();
 
-		auto score1 = App::GetApp()->GetScene<Scene>()->GetScore();
-		auto score2 = App::GetApp()->GetScene<Scene>()->GetScore2();
+		auto score1 = App::GetApp()->GetScene<Scene>()->GetPoint();
+		auto score2 = App::GetApp()->GetScene<Scene>()->GetPoint2();
 		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
 		auto GoalFlag = ptrPlayer->m_GoalFlag;
 		auto m_count = ptrPlayer->m_CircleCount;
@@ -426,6 +426,8 @@ namespace basecross {
 				ptrMana->Stop(m_BGM);
 				if (m_TimeUpFlag == false)
 				{
+					AddGameObject<StageSprite>(L"END_TX", true,
+						Vec2(1024.0f, 512.0f), Vec2(0.0f, 0.0f));
 					ptrMana->Start(L"TIMEUPSE", 0, 0.5f);
 					m_TimeUpFlag = true;
 				}
