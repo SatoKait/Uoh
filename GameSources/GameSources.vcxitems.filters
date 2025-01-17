@@ -39,9 +39,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Goal.cpp">
       <Filter>Goal</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp">
-      <Filter>Goal</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MainCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -123,6 +120,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp">
       <Filter>Project</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp">
+      <Filter>Scene Stage\Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)D3DApp.h" />
@@ -158,9 +158,6 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Goal.h">
-      <Filter>Goal</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h">
       <Filter>Goal</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MainCamera.h">
@@ -243,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)EffectManager.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h">
+      <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
