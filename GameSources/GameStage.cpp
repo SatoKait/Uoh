@@ -528,6 +528,12 @@ namespace basecross {
 			ptrMana->Start(L"ALARMSE", 0, 0.6f);
 			m_BGM = ptrMana->Start(L"StageBGM2", 1, 0.3f);
 			m_30secFlag = false;
+
+			auto Rank = GetSharedGameObject<ComboSpriteNumber>(L"Rank");
+			Rank->SetDrawLayer(-100);
+			auto Rank2 = GetSharedGameObject<ComboSpriteNumber>(L"Rank2");
+			Rank2->SetDrawLayer(-100);
+
 		}
 		//スコアを更新する
 		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
