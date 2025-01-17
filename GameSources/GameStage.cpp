@@ -16,7 +16,7 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(13.0f),
+		m_ToTalTime(30.0f),
 		m_ToStartTime(4.0f),
 		m_ToTalTime2(1.0f),
 		m_EndTime(10.0f), 
@@ -99,21 +99,21 @@ namespace basecross {
 	}
 	void GameStage::CreateWall()
 	{
-		auto WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 50.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));//上
+		auto WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 55.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));//上
+		WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -54.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
 
-		WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -49.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
-		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 81.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
-		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 47.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
-		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -48.5f), Vec3(1.0f, 20.0f, 10.0f), Vec3(0.0f, 0.261, 0.0f));//左上の部分
+		//WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
 
-		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, 47.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
-		WallCol = AddGameObject<Wall>(Vec3(-50.0f, 10.0f, 0.5f), Vec3(1.0f, 20.0f, 80.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
-		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -46.5f), Vec3(1.0f, 20.0f, 4.0f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
-		WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 87.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 49.0f), Vec3(1.0f, 20.0f, 11.3f), Vec3(0.0f, -0.261, 0.0f));//左下の部分
+		
+		//WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.5f, 10.0f, 49.0f), Vec3(1.0f, 20.0f, 11.3f), Vec3(0.0f, 0.261, 0.0f));//左上の部分
+		//WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
+		WallCol = AddGameObject<Wall>(Vec3(-50.0f, 10.0f, 0.5f), Vec3(1.0f, 20.0f, 87.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
+		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -48.3f), Vec3(1.0f, 20.0f, 11.3f), Vec3(0.0f, -0.261, 0.0f));//左下の部分
+		//WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 	}
 	void GameStage::CreatePollCollision()
 	{
@@ -122,6 +122,8 @@ namespace basecross {
 		pollCol = AddGameObject<PollCollision>(Vec3(-3.0f, 4.2f, 0.0f), Vec3(1.5f, 7.25f, 2.0f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 4.35f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 7.75f, 0.0f), Vec3(5.0f, 0.4f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(0.0f, 2.0f, 0.0f), Vec3(5.0f, 4.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
+
 		//CirecleCollision
 		auto CirclepollColrig = AddGameObject<PollCollision>(Vec3(30.0f, 12.75f, 0.0f), Vec3(4.0f, 2.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 7.35f, 0.0f), Vec3(4.0f, 2.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
@@ -247,8 +249,9 @@ namespace basecross {
 			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
 		// 説明のアイコンを生成
-		AddGameObject<StageSprite>(L"YOU_TX", true,
+		auto YouIcon = AddGameObject<StageSprite>(L"YOU_TX", true,
 			Vec2(90.0f, 50.0f), Vec2(-515.0f, -378.0f));
+		SetSharedGameObject(L"YouIcon", YouIcon);
 		auto UIIcon = AddGameObject<StageSprite>(L"ICON_TX", true,
 			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
 		SetSharedGameObject(L"UIIcon", UIIcon);
@@ -485,20 +488,20 @@ namespace basecross {
 		ptrScor2->SetScore(m_ToTalTime2);
 
 		//これで最後の演出をすることが出来る
-		if (/*m_TimeFlag == true &&*/ m_ToTalTime <= 11.0f && m_EndFlag == false)
+		if (m_TimeFlag == true && m_ToTalTime <= 11.0f && m_EndFlag == false)
 		{
 			m_EndFlag = true;
 			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
 			ptrScor3->m_isDrawFlag = true;
 		}
-		if (/*m_TimeFlag == true && */m_ToTalTime <= 11.0f && m_EndFlag == true)
+		if (m_TimeFlag == true && m_ToTalTime <= 11.0f && m_EndFlag == true)
 		{
 			m_EndTime += elapsedTime;
 			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
 			ptrScor3->SetScore3(m_EndTime);
 		}
 
-		if (/*m_TimeFlag == true &&*/ m_ToTalTime <= 1.0f && m_EndFlag == true)
+		if (m_TimeFlag == true && m_ToTalTime <= 1.0f && m_EndFlag == true)
 		{
 			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
 			ptrScor3->m_isDrawFlag = false;
@@ -528,6 +531,8 @@ namespace basecross {
 			ptrHpGauge2->SetDrawLayer(-100);
 			auto Kakeru = GetSharedGameObject<StageSprite>(L"Kakeru");
 			Kakeru->SetDrawLayer(-100);
+			auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
+			YouIcon->SetDrawLayer(-100);
 			//auto MinimapDraw = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
 			//MinimapDraw->m_MiniMapDrawFlag = true;
 		}
