@@ -335,6 +335,12 @@ namespace basecross {
 			miniMapManager->CreateMoveGate();
 			miniMapManager->CreatePlayer();
 
+			App::GetApp()->GetScene<Scene>()->SetScore(0);
+			App::GetApp()->GetScene<Scene>()->SetScore2(0);
+
+			App::GetApp()->GetScene<Scene>()->SetPoint(0);
+			App::GetApp()->GetScene<Scene>()->SetPoint2(0);
+
 			auto skyboxPath = path + L"skybox/";
 			for (const auto& keyName : Skybox2::pairs) {
 				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
@@ -377,18 +383,14 @@ namespace basecross {
 		{
 			int a = 0;
 			ptrMana->Stop(m_BGM);
-			m_TimeUpAfter += delta;
 
-			if (m_TimeUpAfter >= 3.0f)
+			if (score1 > score2)
 			{
-				if (score1 > score2)
-				{
-					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-				}
-				else
-				{
-					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-				}
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			}
+			else
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 			}
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
