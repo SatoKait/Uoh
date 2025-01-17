@@ -104,6 +104,8 @@ namespace basecross {
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 
+		bool Release = true;
+
 		const float deltatime = 4.0f;
 
 		Vec2 ret;
@@ -174,7 +176,8 @@ namespace basecross {
 					ptrMana->Start(L"FloatSE", 0, 0.5f);
 					m_grounded = false;
 					m_JumpTime = 0;
-					m_Accel = 2.0f;
+					if (Release == false) m_Accel = 2.0f;
+					else				 m_Accel = 2.2f;
 					m_SpeedUp = true;
 					m_bfrAngle = angle;
 				}
@@ -201,9 +204,16 @@ namespace basecross {
 			}
 			// 滞空時間の引き延ばし
 			if (m_JumpTime <= 2.0f)
-				m_Accel -= 0.025f;
+			{
+					m_Accel -= 0.025f;
+
+			}
 			else
-				m_Accel -= 0.005f;
+			{
+				if (Release == false)	m_Accel -= 0.005f;
+				else					m_Accel -= 0.0005f;
+
+			}
 		}
 		//高速着水
 		//if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
