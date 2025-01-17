@@ -15,6 +15,8 @@ namespace basecross {
 	public:
 		int m_Score;
 		int m_Score2;
+		int m_Point; 
+		int m_Point2;
 
 
 		//--------------------------------------------------------------------------------------
@@ -35,7 +37,9 @@ namespace basecross {
 		) :
 			SceneBase(),
 			m_Score(0),
-			m_Score2(0)
+			m_Score2(0),
+			m_Point(0),
+			m_Point2(0)
 		{}
 		//--------------------------------------------------------------------------------------
 		/*!
@@ -87,7 +91,35 @@ namespace basecross {
 			return m_Score2;
 		}
 
+		// ポイントをAdd
+		int SetPoint(int point) {
+			return	m_Point = point;
+		}
 
+		// ポイントを足す
+		void AddPoint(int point) {
+			m_Point += point;
+		}
+
+		// ポイントを取得する
+		int GetPoint() {
+			return m_Point;
+		}
+
+		// ポイントをAdd
+		int SetPoint2(int point) {
+			return	m_Point2 = point;
+		}
+
+		// ポイントを足す
+		void AddPoint2(int point) {
+			m_Point2 += point;
+		}
+
+		// ポイントを取得する
+		int GetPoint2() {
+			return m_Point2;
+		}
 	};
 }
 

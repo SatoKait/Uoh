@@ -1,6 +1,6 @@
 /*!
 @file Score.cpp
-@brief ƒXƒRƒA‚ÌÀ‘Ì
+@brief ã‚¹ã‚³ã‚¢ã®å®Ÿä½“
 */
 
 #include "stdafx.h"
@@ -8,7 +8,7 @@
 
 namespace basecross {
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void Score::OnCreate()
 	{
 		const int numPlaces = 5;
@@ -38,20 +38,20 @@ namespace basecross {
 
 	void Score::OnUpdate()
 	{	auto stage = GetStage();
-	    m_score = App::GetApp()->GetScene<Scene>()->GetScore();//XV‚ÅÅV‚Ì”š‚ğŒ©‚é
+	    m_score = App::GetApp()->GetScene<Scene>()->GetScore();//æ›´æ–°ã§æœ€æ–°ã®æ•°å­—ã‚’è¦‹ã‚‹
 		int place = 10000;	
 		for (int i = 0; i < m_numberSprites.size(); ++i) {
 			
-			int digit = (m_score / place) % 10;// Œ»İ‚ÌŒ…‚Ì”š‚ğŒvZ
-			m_numberSprites[i]->UpdateValue(digit);// ƒXƒvƒ‰ƒCƒg‚Ì”š‚ğXV
-			place /= 10;// Ÿ‚ÌŒ…‚ÉˆÚ“®
+			int digit = (m_score / place) % 10;// ç¾åœ¨ã®æ¡ã®æ•°å­—ã‚’è¨ˆç®—
+			m_numberSprites[i]->UpdateValue(digit);// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æ•°å­—ã‚’æ›´æ–°
+			place /= 10;// æ¬¡ã®æ¡ã«ç§»å‹•
 		}
 	}
 }
 
 namespace basecross {
 
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	void StageScore::OnCreate()
 	{
 		//m_Trans = GetComponent<Transform>();
@@ -76,12 +76,12 @@ namespace basecross {
 	void StageScore::OnUpdate()
 	{
 		auto stage = GetStage();
-		m_score = App::GetApp()->GetScene<Scene>()->GetScore();//XV‚ÅÅV‚Ì”š‚ğŒ©‚é
+		m_score = App::GetApp()->GetScene<Scene>()->GetScore();//æ›´æ–°ã§æœ€æ–°ã®æ•°å­—ã‚’è¦‹ã‚‹
 		int place = 10000;
 		for (int i = 0; i < m_numberSprites.size(); ++i) {
-			int digit = (m_score / place) % 10;// Œ»İ‚ÌŒ…‚Ì”š‚ğŒvZ
-			m_numberSprites[i]->UpdateValue(digit);// ƒXƒvƒ‰ƒCƒg‚Ì”š‚ğXV
-			place /= 10;// Ÿ‚ÌŒ…‚ÉˆÚ“®
+			int digit = (m_score / place) % 10;// ç¾åœ¨ã®æ¡ã®æ•°å­—ã‚’è¨ˆç®—
+			m_numberSprites[i]->UpdateValue(digit);// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æ•°å­—ã‚’æ›´æ–°
+			place /= 10;// æ¬¡ã®æ¡ã«ç§»å‹•
 		}
 	}
 }
@@ -92,10 +92,10 @@ namespace basecross {
 
 		m_ptrTrans = GetComponent<Transform>();
 
-		//F‚Ìİ’è
-		Col4 color(1, 1, 1, 1); //ƒ|ƒŠƒSƒ“‚ÌF
-		float widthSize = m_Hp_now; //ƒ|ƒŠƒSƒ“‚Ì•
-		float helfSize = 20.0f; //ƒ|ƒŠƒSƒ“‚Ì‚‚³
+		//è‰²ã®è¨­å®š
+		Col4 color(1, 1, 1, 1); //ãƒãƒªã‚´ãƒ³ã®è‰²
+		float widthSize = m_Hp_now; //ãƒãƒªã‚´ãƒ³ã®å¹…
+		float helfSize = 20.0f; //ãƒãƒªã‚´ãƒ³ã®é«˜ã•
 
 
 		m_BackupVertices = {
@@ -105,14 +105,14 @@ namespace basecross {
 			{VertexPositionColorTexture(Vec3(widthSize, helfSize, 0), color, Vec2(1, 1))},
 		};
 
-		//ƒCƒ“ƒfƒbƒNƒX”z—ñ
+		//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
 		vector<uint16_t> indices = { 2, 1, 0, 3, 1, 2 };
 		SetAlphaActive(m_Trace);
 		auto ptrTrans = GetComponent<Transform>();
 		ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 1.0f);
 		ptrTrans->SetRotation(0, 0, 0);
 		ptrTrans->SetPosition(m_StartPos);
-		//’¸“_‚ÆƒCƒ“ƒfƒbƒNƒX‚ğw’è‚µ‚ÄƒXƒvƒ‰ƒCƒgì¬
+		//é ‚ç‚¹ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’æŒ‡å®šã—ã¦ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆä½œæˆ
 		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
 		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
 		ptrDraw->SetTextureResource(m_HpKey);
@@ -133,7 +133,9 @@ namespace basecross {
 			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore(m_Reset);
 			auto Kakeru = stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
 				Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+      
 			//GetStage()->GetSharedGameObject<StageSprite>(L"Kakeru");
+			//auto Kakeru = GetStage()->GetSharedGameObject<StageSprite>(L"Kakeru");
 			//Kakeru->SetDrawLayer(3);
 			//GetStage()->SetSharedGameObject(L"KAKERU", Kakeru);
 
@@ -147,10 +149,10 @@ namespace basecross {
 
 		m_ptrTrans = GetComponent<Transform>();
 
-		//F‚Ìİ’è
-		Col4 color(1, 1, 1, 1); //ƒ|ƒŠƒSƒ“‚ÌF
-		float widthSize = m_Hp_now; //ƒ|ƒŠƒSƒ“‚Ì•
-		float helfSize = 20.0f; //ƒ|ƒŠƒSƒ“‚Ì‚‚³
+		//è‰²ã®è¨­å®š
+		Col4 color(1, 1, 1, 1); //ãƒãƒªã‚´ãƒ³ã®è‰²
+		float widthSize = m_Hp_now; //ãƒãƒªã‚´ãƒ³ã®å¹…
+		float helfSize = 20.0f; //ãƒãƒªã‚´ãƒ³ã®é«˜ã•
 
 
 		m_BackupVertices = {
@@ -160,14 +162,14 @@ namespace basecross {
 			{VertexPositionColorTexture(Vec3(widthSize, helfSize, 0), color, Vec2(1, 1))},
 		};
 
-		//ƒCƒ“ƒfƒbƒNƒX”z—ñ
+		//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
 		vector<uint16_t> indices = { 2, 1, 0, 3, 1, 2 };
 		SetAlphaActive(m_Trace);
 		auto ptrTrans = GetComponent<Transform>();
 		ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 1.0f);
 		ptrTrans->SetRotation(0, 0, 0);
 		ptrTrans->SetPosition(m_StartPos);
-		//’¸“_‚ÆƒCƒ“ƒfƒbƒNƒX‚ğw’è‚µ‚ÄƒXƒvƒ‰ƒCƒgì¬
+		//é ‚ç‚¹ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’æŒ‡å®šã—ã¦ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆä½œæˆ
 		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
 		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
 		ptrDraw->SetTextureResource(m_HpKey);

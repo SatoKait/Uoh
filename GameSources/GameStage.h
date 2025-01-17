@@ -50,6 +50,8 @@ namespace basecross {
 		bool m_30secFlag;
 		bool m_TimeUpFlag;
 		float m_TimeUpAfter;
+		float m_point;
+		float m_point2;
 		wstring m_Number;
 
 		// BGMの再生
