@@ -27,6 +27,7 @@ namespace basecross {
 		float rad;
 		float rad2;
 		bool m_flag;
+		float m_Flag;
 
 	public:
 		TitleStage() : Stage() {}

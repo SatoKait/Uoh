@@ -377,7 +377,19 @@ namespace basecross {
 		{
 			int a = 0;
 			ptrMana->Stop(m_BGM);
-			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			m_TimeUpAfter += delta;
+
+			if (m_TimeUpAfter >= 3.0f)
+			{
+				if (score1 > score2)
+				{
+					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+				}
+				else
+				{
+					PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+				}
+			}
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		if (m_isStartFlag == false)
@@ -437,7 +449,7 @@ namespace basecross {
 					{
 						PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
 					}
-					if (score1 < score2)
+					else
 					{
 						PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 					}
