@@ -11,6 +11,8 @@ namespace basecross {
 	{
 	private:
 		Vec3 m_startPos;//初期位置(ピポット)
+		Vec3 m_startPos2;//初期位置(ピポット)
+		Vec3 m_startPos3;//初期位置(ピポット)
 
 		int m_beforeItemNum;//前のアイテムの個数
 
@@ -25,15 +27,20 @@ namespace basecross {
 		void OnCreate()override;//作成
 		void OnUpdate()override;//更新
 
-		//void CreateWall();//ミニマップの壁を生成する
-		void CreateMoveGate();//ミニマップのアイテムを生成する
-		void CreateGate();//ミニマップのマンホールを生成する
-		//void CreateEnemy();//ミニマップの敵を生成する
-		void CreatePlayer();//ミニマップのプレイヤーを生成する
+		//void CreateWall();  //ミニマップの壁を生成する
+		void CreateMoveGate();//ミニマップの移動するゲートを生成する
+		void CreateGate();	  //ミニマップのマンホールを生成する
+		//void CreateEnemy(); //ミニマップの敵を生成する
+		void CreatePlayer();  //ミニマップのプレイヤーを生成する
+		void CreateNPC();
+		void CreateCircle();
 		void CreatCircleGate();
 		void UpdateMoveGate();//ミニマップのアイテム表示(Update版)
 
 		Vec3 GetStartPos();//ミニマップの原点を渡す
+		Vec3 GetStartPos2();//ミニマップの原点を渡す
+		Vec3 GetStartPos3();//ミニマップの原点を渡す
+
 	};
 
 }

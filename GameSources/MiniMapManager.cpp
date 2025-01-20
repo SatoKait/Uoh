@@ -41,11 +41,13 @@ namespace basecross {
 		//m_mapSize = 200;//mapの直径
 		m_mapMagnification = Lenght / m_mapSize;//マップの倍率
 
-		//CreateMoveGate();
+		CreateMoveGate();
 		CreateGate();//マンホールを生成//動かないのでここで書きMiniMapManegerで出てくる
 		CreatCircleGate();
 		//CreateEnemy();
 		CreatePlayer();//最初の位置を設定している？//動くものはGameStageにも書かれている
+		CreateNPC();
+		CreateCircle();
 	}
 
 	void MiniMapManager::OnUpdate()
@@ -79,7 +81,7 @@ namespace basecross {
 				auto miniMapItem = stage->AddGameObject<MiniMapMoveGate>(castitem, L"MiniMap_TX", Vec2(itemScale.x * m_mapMagnification, itemScale.z * m_mapMagnification), 5,
 					Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f));
 				miniMapItem->AddTag(L"MiniMapItem");//タグを追加
-				miniMapItem->SetDrawLayer(-100);
+				miniMapItem->SetDrawLayer(3);
 				
 				count++;
 			}
@@ -93,7 +95,7 @@ namespace basecross {
 		auto stage = GetStage();//ステージ取得
 		//ステージのオブジェクトを全て取得
 		auto objVec = stage->GetGameObjectVec();
-		int itemNumNow = 0;
+		int itemNumNow = 1;
 		//ステージにあるアイテムの数をカウントする
 		for (auto item : objVec)
 		{
@@ -103,9 +105,8 @@ namespace basecross {
 				itemNumNow++;
 			}
 		}
-
 			//今あるアイテムの数が前よりも多かったらミニマップのアイテムの表示を更新する
-			if (itemNumNow > m_beforeItemNum)
+			if (itemNumNow >= m_beforeItemNum )
 			{
 				//ミニマップにあるアイテムをリセットする
 				for (auto sprite : objVec)
@@ -120,9 +121,8 @@ namespace basecross {
 						}
 					}
 				}
-				//再生成する
 				CreateMoveGate();
-			}
+			}		
 			m_beforeItemNum = itemNumNow;//更新する
 	}
 
@@ -236,5 +236,66 @@ namespace basecross {
 		{
 			return m_startPos;
 		}
+
+		void MiniMapManager::CreateNPC()//Playerの場所を出している
+		{
+			auto stage = GetStage();//ステージ取得
+			//ステージのオブジェクトを全て取得
+			auto obj = stage->GetGameObjectVec();
+			//取得したオブジェクトがアイテムに変換できたら配列に入れる
+			for (auto manhole : obj)
+			{
+				auto castNPC = dynamic_pointer_cast<NPC>(manhole);
+				if (castNPC)//Enemy型にキャストする
+				{
+					float Lenght = 225.0f;//ミニマップの直径
+
+					auto itemTrans = manhole->GetComponent<Transform>();
+					auto itemPos = itemTrans->GetPosition();
+					auto itemScale = itemTrans->GetScale();
+					auto itemRotaiton = itemTrans->GetQuaternion();
+
+					auto ptrNPC = stage->AddGameObject<MiniMapActor>(castNPC, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
+					//if (m_MiniMapDrawFlag)
+					//{
+					ptrNPC->SetDrawLayer(-100);
+					//}
+				}
+			}
+		}
+
+		Vec3 MiniMapManager::GetStartPos2()
+		{
+			return m_startPos2;
+		}
+
+		void MiniMapManager::CreateCircle()//Playerの場所を出している
+		{
+			auto stage = GetStage();//ステージ取得
+			//ステージのオブジェクトを全て取得
+			auto obj = stage->GetGameObjectVec();
+			//取得したオブジェクトがアイテムに変換できたら配列に入れる
+			for (auto manhole : obj)
+			{
+				auto castCircle = dynamic_pointer_cast<FloatCircle>(manhole);
+				if (castCircle)//Enemy型にキャストする
+				{
+					float Lenght = 225.0f;//ミニマップの直径
+
+					auto itemTrans = manhole->GetComponent<Transform>();
+					auto itemPos = itemTrans->GetPosition();
+					auto itemScale = itemTrans->GetScale();
+					auto itemRotaiton = itemTrans->GetQuaternion();
+
+					auto ptrCircle = stage->AddGameObject<MiniMapActor>(castCircle, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
+				}
+			}
+		}
+
+		Vec3 MiniMapManager::GetStartPos3()
+		{
+			return m_startPos3;
+		}
+
 }
 //end basecross

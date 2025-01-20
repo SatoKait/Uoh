@@ -7,12 +7,12 @@
 #include "Project.h"
 
 namespace basecross {
-	NPC::NPC(const shared_ptr<Stage>& StagePtr,
+	NPC::NPC(shared_ptr<Stage>& StagePtr,
 		const Vec3& Scale,
 		const Vec3& Rotation,
 		const Vec3& Position
 	) :
-		GameObject(StagePtr),
+		Actor(StagePtr),
 		m_Scale(Scale),
 		m_Rotation(Rotation),
 		m_Position(Position),

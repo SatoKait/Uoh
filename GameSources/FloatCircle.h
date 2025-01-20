@@ -7,7 +7,7 @@
 #include "stdafx.h"
 
 namespace basecross {
-	class FloatCircle : public GameObject
+	class FloatCircle : public Actor
 	{
 		vector<VertexPositionColorTexture> m_vertices;
 		vector<uint16_t> m_indices;
@@ -33,18 +33,18 @@ namespace basecross {
 		int m_next;
 		int m_ComboCount;
 
-		FloatCircle(const std::shared_ptr<Stage>& stage) :
+		FloatCircle(std::shared_ptr<Stage>& stage) :
 			FloatCircle(stage, 36)
 		{
 		}
 
-		FloatCircle(const std::shared_ptr<Stage>& stage, int angles) :
+		FloatCircle(std::shared_ptr<Stage>& stage, int angles) :
 			FloatCircle(stage, L"", angles)
 		{
 		}
 
-		FloatCircle(const std::shared_ptr<Stage>& stage, const std::wstring& textureKeyName, int angles = 36) :
-			GameObject(stage),
+		FloatCircle(std::shared_ptr<Stage>& stage, const std::wstring& textureKeyName, int angles = 36) :
+			Actor(stage),
 			m_height(1.0f),
 			m_topRadius(0.5f),
 			m_bottomRadius(0.5f),
