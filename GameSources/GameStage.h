@@ -24,7 +24,7 @@ namespace basecross {
 
 		shared_ptr<SingleView> m_View;//ビューの変数
 
-		
+
 		//OpeningCamera用のビュー
 		//shared_ptr<SingleView> m_OpeningCameraView;
 		////MyCamera用のビュー

@@ -6,6 +6,7 @@ namespace basecross {
 		bool m_Trace;
 		Vec2 m_StartScale;
 		Vec3 m_StartPos;
+		Col4 m_color;
 		wstring m_TextureKey;
 		float m_Score;
 		//åÖêî
@@ -23,6 +24,8 @@ namespace basecross {
 		void SetScore(float f) {
 			m_Score = f;
 		}
+		Col4 GetColor();
+		void SetColor(Col4 color);
 		virtual void OnCreate() override;
 		virtual void OnUpdate()override;
 	};
@@ -32,6 +35,7 @@ namespace basecross {
 		bool m_Trace;
 		Vec2 m_StartScale;
 		Vec3 m_StartPos;
+		Col4 m_color;
 		wstring m_TextureKey;
 		float m_Score;
 		//åÖêî
@@ -49,6 +53,8 @@ namespace basecross {
 		void SetScore(float f) {
 			m_Score = f;
 		}
+		Col4 GetColor();
+		void SetColor(Col4 color);
 		virtual void OnCreate() override;
 		virtual void OnUpdate()override;
 	};

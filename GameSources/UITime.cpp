@@ -11,6 +11,7 @@ namespace basecross {
 		m_Trace(Trace),
 		m_StartScale(StartScale),
 		m_StartPos(StartPos),
+		m_color(1.0f, 1.0f, 1.0f, 1.0f),
 		m_Score(0.0f)
 	{}
 
@@ -55,6 +56,7 @@ namespace basecross {
 		//頂点とインデックスを指定してスプライト作成
 		auto ptrDraw = AddComponent<PTSpriteDraw>(m_BackupVertices, indices);
 		ptrDraw->SetTextureResource(m_TextureKey);
+		ptrDraw->SetDiffuse(Col4(m_color));
 		GetStage()->SetSharedGameObject(L"UITime", GetThis<UITime>());
 	}
 
@@ -111,6 +113,15 @@ namespace basecross {
 		}
 
 	}
+
+	void UITime2::SetColor(Col4 color) {
+		auto ptrDraw = AddComponent<PTSpriteDraw>();
+		m_color = color;
+		ptrDraw->SetDiffuse(color);
+	}
+	Col4 UITime2::GetColor() {
+		return m_color;
+	}
 }
 
 namespace basecross {
@@ -123,6 +134,7 @@ namespace basecross {
 		m_Trace(Trace),
 		m_StartScale(StartScale),
 		m_StartPos(StartPos),
+		m_color(1.0f, 1.0f, 1.0f, 1.0f),
 		m_Score(0.0f)
 	{}
 
@@ -167,6 +179,7 @@ namespace basecross {
 		//頂点とインデックスを指定してスプライト作成
 		auto ptrDraw = AddComponent<PTSpriteDraw>(m_BackupVertices, indices);
 		ptrDraw->SetTextureResource(m_TextureKey);
+		ptrDraw->SetDiffuse(Col4(m_color));
 		GetStage()->SetSharedGameObject(L"UITime2", GetThis<UITime2>());
 
 	}
@@ -222,6 +235,15 @@ namespace basecross {
 			auto Layer = GetStage()->GetSharedGameObject<UITime2>(L"UITime2");
 			Layer->SetDrawLayer(-100);
 		}
+	}
+
+	void UITime::SetColor(Col4 color) {
+		auto ptrDraw = AddComponent<PTSpriteDraw>();
+		m_color = color;
+		ptrDraw->SetDiffuse(color);
+	}
+	Col4 UITime::GetColor() {
+		return m_color;
 	}
 }
 
