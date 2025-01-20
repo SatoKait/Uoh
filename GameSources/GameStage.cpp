@@ -215,17 +215,17 @@ namespace basecross {
 	void GameStage::CreateTime()
 	{
 		//右側のカウントダウン
-		AddGameObject<UITime>(2,
-			L"NUMBER2_TX",
+		auto Time = AddGameObject<UITime>(2,
+			L"NUMBER_TX",
 			true,
-			Vec2(220.0f, 60.0f),
-			Vec3(670.0f, 350.0f, 0.0f));
+			Vec2(220.0f, 80.0f),
+			Vec3(670.0f, 365.0f, 0.0f));
 		//左側のカウントダウン
 		AddGameObject<UITime2>(2,
-			L"NUMBER2_TX",
+			L"NUMBER_TX",
 			true,
-			Vec2(220.0f, 60.0f),
-			Vec3(530.0f, 350.0f, 0.0f));
+			Vec2(220.0f, 80.0f),
+			Vec3(530.0f, 365.0f, 0.0f));
 		//:の部分を表示している
 		auto ptrSprite = AddGameObject<StageSprite>(L"TIME_TX", true,
 			Vec2(350.0f, 80.0f), Vec2(495.0f, 355.0f));
@@ -381,9 +381,9 @@ namespace basecross {
 			AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
 			//AddGameObject<Skybox2>();
 
-			auto Rank = AddGameObject<ComboSpriteNumber>(L"NUMBER_TX", true,
+			auto Rank = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
 				Vec2(1.0f, 1.0f), Vec3(-540.0f, -50.0f, 0.0f));
-			auto Rank2 = AddGameObject<ComboSpriteNumber>(L"NUMBER_TX", true,
+			auto Rank2 = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
 				Vec2(1.0f, 1.0f), Vec3(-620.0f, -50.0f, 0.0f));
 			Rank->SetDrawLayer(300);
 			SetSharedGameObject(L"Rank", Rank);
@@ -413,26 +413,30 @@ namespace basecross {
 		auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
 		auto gaugecount = gauge->Count;
 
-		auto Rank = GetSharedGameObject<ComboSpriteNumber>(L"Rank");
-		auto Rank2 = GetSharedGameObject<ComboSpriteNumber>(L"Rank2");
+		auto Rank = GetSharedGameObject<RankSpriteNumber>(L"Rank");
+		auto Rank2 = GetSharedGameObject<RankSpriteNumber>(L"Rank2");
 
 		Rank->UpdateValue(m_rank);
 		Rank2->UpdateValue(m_rank2);
 		if (score1 >= score2)
 		{
 			m_rank = 1;
+			Rank->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
 		}
 		else
 		{
 			m_rank = 2;
+			Rank->SetColor(Col4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 		if (score2 >= score1)
 		{
 			m_rank2 = 1;
+			Rank2->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
 		}
 		else
 		{
 			m_rank2 = 2;
+			Rank2->SetColor(Col4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
@@ -527,11 +531,16 @@ namespace basecross {
 			ptrMana->Stop(m_BGM);
 			ptrMana->Start(L"ALARMSE", 0, 0.6f);
 			m_BGM = ptrMana->Start(L"StageBGM2", 1, 0.3f);
-			m_30secFlag = false;
+			m_30secFlag = false; 
 
-			auto Rank = GetSharedGameObject<ComboSpriteNumber>(L"Rank");
+
+			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
+			ptrUITime->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
+			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
+			ptrUITime2->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
+			auto Rank = GetSharedGameObject<RankSpriteNumber>(L"Rank");
 			Rank->SetDrawLayer(-100);
-			auto Rank2 = GetSharedGameObject<ComboSpriteNumber>(L"Rank2");
+			auto Rank2 = GetSharedGameObject<RankSpriteNumber>(L"Rank2");
 			Rank2->SetDrawLayer(-100);
 
 		}
@@ -553,6 +562,11 @@ namespace basecross {
 			m_EndTime += elapsedTime;
 			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
 			ptrScor3->SetScore3(m_EndTime);
+
+			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
+			ptrUITime->SetColor(Col4(1.0f, 0.0f, 0.0f, 1.0f));
+			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
+			ptrUITime2->SetColor(Col4(1.0f, 0.0f, 0.0f, 1.0f));
 		}
 
 		if (m_TimeFlag == true && m_ToTalTime <= 1.0f && m_EndFlag == true)
