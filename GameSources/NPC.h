@@ -7,7 +7,7 @@
 #include "stdafx.h"
 
 namespace basecross{
-	class NPC : public GameObject
+	class NPC : public Actor
 	{
 		Vec3 m_Scale;
 		Vec3 m_Rotation;
@@ -19,7 +19,7 @@ namespace basecross{
 		int m_CircleCount;
 
 		//ç\ízÇ∆îjä¸
-		NPC(const shared_ptr<Stage>& StagePtr,
+		NPC(shared_ptr<Stage>& StagePtr,
 			const Vec3& Scale,
 			const Vec3& Rotation,
 			const Vec3& Position
