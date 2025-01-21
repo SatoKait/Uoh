@@ -188,12 +188,12 @@ namespace basecross {
 		{
 			Count++;
 			m_Hp_now = App::GetApp()->GetScene<Scene>()->SetScore2(m_Reset);
-			auto Kakeru = stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
-				Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
-			if (m_isLayerBackGroundFlag)
-			{
-				Kakeru->SetDrawLayer(-100);
-			}
+			//auto Kakeru = stage->AddGameObject<StageSprite>(L"KAKERU_TX", true,
+			//	Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
+			//if (m_isLayerBackGroundFlag)
+			//{
+			//	Kakeru->SetDrawLayer(-100);
+			//}
 		}
 	}
 }
