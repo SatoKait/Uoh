@@ -26,6 +26,8 @@ namespace basecross{
 		);
 		virtual ~NPC();
 
+		bool RandJump();
+
 		virtual void OnCreate();
 		virtual void OnUpdate();
 
