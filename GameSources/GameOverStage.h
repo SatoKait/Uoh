@@ -32,6 +32,19 @@ namespace basecross {
 
 	};
 
+	class Model3 : public GameObject {
+		Vec3 m_StartPos;
+		Vec3 m_StartRot;
+		bool m_TextureUse;
+
+	public:
+		//\’z‚Æ”jŠü
+		Model3(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot);
+		virtual ~Model3();
+		//‰Šú‰»
+		virtual void OnCreate() override;
+	};
+
 	class Model4 : public GameObject {
 		Vec3 m_StartPos;
 		Vec3 m_StartRot;

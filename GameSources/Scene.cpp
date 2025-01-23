@@ -86,6 +86,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"ICON_TX", tex);
 			tex = texPath + L"wave.png";
 			App::GetApp()->RegisterTexture(L"WAVE_TX", tex);
+			tex = texPath + L"wave2.png";
+			App::GetApp()->RegisterTexture(L"WAVE2_TX", tex);
 			tex = texPath + L"You.png";
 			App::GetApp()->RegisterTexture(L"YOU_TX", tex);
 			tex = texPath + L"LastTime.png";
@@ -126,6 +128,8 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"TOBIUO_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateBoneModelMesh(modelPath, L"DeadFlyingFish.bmf");
 			App::GetApp()->RegisterResource(L"DEADTOBIUO_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateBoneModelMesh(modelPath, L"HappyFlyingFish.bmf");
+			App::GetApp()->RegisterResource(L"HAPPYTOBIUO_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll3.bmf");
 			App::GetApp()->RegisterResource(L"POLL3_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll.bmf");
@@ -134,6 +138,10 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL_2_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Crown.bmf");
 			App::GetApp()->RegisterResource(L"CROWN_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"DeadFlyingFish2.bmf");
+			App::GetApp()->RegisterResource(L"DEADTOBIUO2_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Podium.bmf");
+			App::GetApp()->RegisterResource(L"PODIUM_MESH", StaticModelMesh);
 
 			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Trophy.bmf");
 			//App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticModelMesh);
@@ -195,7 +203,7 @@ namespace basecross{
 	void Scene::OnEvent(const shared_ptr<Event>& event) {
 		if (event->m_MsgStr == L"ToTiTleStage") {
 			//最初のアクティブステージの設定
-			ResetActiveStage<TitleStage>();
+			ResetActiveStage<GoalScene>();
 		}
 		if (event->m_MsgStr == L"ToSelectStage") {
 			//最初のアクティブステージの設定

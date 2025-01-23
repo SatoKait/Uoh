@@ -45,17 +45,15 @@ namespace basecross{
 		virtual void OnUpdate() override;
 	};
 
-	class Model3 : public GameObject {
+	class Model5 : public GameObject {
 		Vec3 m_StartPos;
-		Vec3 m_StartRot;
+		wstring m_TextureUse;
 	public:
 		//\’z‚Æ”jŠü
-		Model3(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot);
-		virtual ~Model3();
+		Model5(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos);
+		virtual ~Model5();
 		//‰Šú‰»
 		virtual void OnCreate() override;
-		virtual void OnUpdate() override;
 	};
-
 }
 //end basecross

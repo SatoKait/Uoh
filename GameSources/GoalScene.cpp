@@ -23,7 +23,7 @@ namespace basecross{
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<GoalScene>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
 		cameraView->SetCamera(ptrMyCamera);
-		ptrMyCamera->SetEye(Vec3(0.0f, 0.0f, -5.0f));
+		ptrMyCamera->SetEye(Vec3(0.0f, -0.2f, -5.0f));
 		ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
 		//マルチライトの作成
 		auto ptrMultiLight = CreateLight<MultiLight>();
@@ -45,7 +45,7 @@ namespace basecross{
 		AddGameObject<StageSprite>(L"GOALSCENE_TX", true,
 			Vec2(1000.0f, 400.0f), Vec2(0.0f, 250.0f));
 		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
-			Vec2(450.0f, 100.0f), Vec2(0.0f, -300.0f));
+			Vec2(640.0f, 200.0f), Vec2(0.0f, -300.0f));
 
 
 	}
@@ -57,8 +57,8 @@ namespace basecross{
 
 	void GoalScene::OnCreate() {
 		try {
-			AddGameObject<Model2>(Vec3(0.0f, -0.8f, -1.0f));
-			crown = AddGameObject<Model3>(Vec3(0.0f, -0.6f, -1.5f), Vec3(0.0f, rad, 0.0f));
+			AddGameObject<Model2>(Vec3(0.0f, -0.9f, -1.0f));
+			AddGameObject<Model5>(Vec3(0.0f, -1.5f, -1.0f));
 
 			CreateViewLight();
 			CreateSprite();
@@ -92,36 +92,6 @@ namespace basecross{
 		else if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_DPAD_LEFT)
 		{
 
-		}
-
-		auto crowntrans = crown->GetComponent<Transform>();
-		Vec3 crownpos = crowntrans->GetPosition();
-		Vec3 crownrot = crowntrans->GetRotation();
-
-
-		deg += 1.0f;
-		rad = XMConvertToRadians(deg);
-		crowntrans->SetRotation(0.0f, rad, 0.0f);
-		if (!m_flag)
-		{
-			m_comY += 0.047f;
-			crowntrans->SetPosition(0.0f, m_comY, -2.0f);
-		}
-
-		if (m_comY >= 0.5f)
-		{
-			m_flag = true;
-		}
-
-		if (m_flag == true)
-		{
-			m_comY -= 0.012f;
-			crowntrans->SetPosition(0.0f, m_comY, -2.0f);
-		}
-
-		if (m_comY <= -0.6f)
-		{
-			m_flag = false;
 		}
 	}
 
@@ -158,13 +128,13 @@ namespace basecross{
 		auto ptrShadow = AddComponent<Shadowmap>();
 
 		//影の形（メッシュ）を設定
-		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
+		ptrShadow->SetMeshResource(L"HAPPYTOBIUO_MESH");
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		//描画コンポーネントの設定
 		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
 		//描画するメッシュを設定
-		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
+		ptrDraw->SetMeshResource(L"HAPPYTOBIUO_MESH");
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
 
 		ptrDraw->AddAnimation(L"Default", 123, 140, true, 30.0f);
@@ -181,37 +151,45 @@ namespace basecross{
 		drawComp->UpdateAnimation(elapsedTime);
 	}
 
-	Model3::Model3(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot) :
+	Model5::Model5(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos) :
 		GameObject(StagePtr),
-		m_StartPos(StartPos),
-		m_StartRot(StartRot)
+		m_StartPos(StartPos)
 	{
 	}
-	Model3::~Model3() {}
+	Model5::~Model5() {}
+
 	//初期化
-	void Model3::OnCreate() {
+	void Model5::OnCreate() {
 		//初期位置などの設定
 		auto trans = GetComponent<Transform>();
-		trans->SetScale(0.1f, 0.1f, 0.1f);
+
+		trans->SetScale(0.07f, 0.07f, 0.07f);
+		trans->SetRotation(0.0f, 0.0f, 0.0f);
 		trans->SetPosition(m_StartPos);
-		trans->SetRotation(m_StartRot);
+
+		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
+		spanMat.affineTransformation(
+			Vec3(0.4f, 0.4f, 0.4f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, -0.3f, 0.0f)
+		);
 
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();
+
 		//影の形（メッシュ）を設定
-		ptrShadow->SetMeshResource(L"CROWN_MESH");
+		ptrShadow->SetMeshResource(L"PODIUM_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		//描画コンポーネントの設定
-		auto ptrDraw = AddComponent<PNTStaticDraw>();
-		ptrDraw->SetSpecular(Col4(1.0f, 1.0f, 1.0f, 1.0f));
-		ptrDraw->SetMeshResource(L"CROWN_MESH");
-		ptrDraw->SetTextureResource(L"YELLOW_TX");
-	}
-	void Model3::OnUpdate()
-	{
-		auto elapsedTime = App::GetApp()->GetElapsedTime();
-		auto drawComp = GetComponent<PNTStaticDraw>();
-		drawComp->UpdateAnimation(elapsedTime);
+		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
+		//描画するメッシュを設定
+		ptrDraw->SetMeshResource(L"PODIUM_MESH");
+		ptrDraw->SetMeshToTransformMatrix(spanMat);
+
+		//透明処理
+		SetAlphaActive(true);
 	}
 }
 //end basecross
