@@ -224,5 +224,256 @@ namespace basecross {
 		//更新
 		virtual void OnUpdate() override;
 	};
+
+	//--------------------------------------------------------------------------------------
+	//　PlayerRusultScoreスコアクラス	
+	//--------------------------------------------------------------------------------------
+	class PlayerRusultScore : public GameObject
+	{
+		shared_ptr<Transform> m_ptrTrans;
+		shared_ptr<ScoreSprite>score;
+		//バックアップの頂点データ
+		vector<VertexPositionColorTexture>m_BackupVertices;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_HpKey;
+		bool m_Trace;
+		float m_TotalTime;
+		float m_Widthsize;
+		float m_DeltaTime;
+		bool m_StartFlag;
+		int m_Hp_now; //現在のHP
+		int m_gauge;
+		const int m_Reset = 90;
+		const float m_Max_hp = 100; //HPの最大値
+
+
+	public:
+		bool m_ChangeFlag;
+		bool m_CreateFlag;
+		bool m_UpdateStartFlag;
+		int Count = 0;
+		bool m_isLayerBackGroundFlag;
+		float deltaTime;
+
+		//構築と破壊
+		PlayerRusultScore::PlayerRusultScore(const shared_ptr<Stage>& StagePtr,
+			bool Trace,
+			const Vec2& StartScale,
+			const Vec3& StartPos,
+			const wstring& HpKey
+
+		) :
+			GameObject(StagePtr),
+			m_Trace(Trace),
+			m_StartScale(StartScale),
+			m_StartPos(StartPos),
+			m_TotalTime(0),
+			m_DeltaTime(0.0f),
+			m_HpKey(HpKey),
+			m_Hp_now(50),
+			m_gauge(50),
+			m_isLayerBackGroundFlag(false),
+			m_ChangeFlag(false),
+			m_CreateFlag(false),
+			m_StartFlag(false),
+			deltaTime(0.0f),
+			m_UpdateStartFlag(false)
+		{}
+
+		PlayerRusultScore::~PlayerRusultScore() {}
+
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate() override;
+		bool GetFlag()
+		{
+			return m_CreateFlag;
+		}
+	};
+
+	//--------------------------------------------------------------------------------------
+	//　NPCRusultScoreスコアクラス	
+	//--------------------------------------------------------------------------------------
+	class NPCRusultScore : public GameObject
+	{
+		shared_ptr<Transform> m_ptrTrans;
+		shared_ptr<ScoreSprite>score;
+		//バックアップの頂点データ
+		vector<VertexPositionColorTexture>m_BackupVertices;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_HpKey;
+		bool m_Trace;
+		float m_TotalTime;
+		float m_Widthsize;
+		float m_DeltaTime;
+		int m_Hp_now; //現在のHP
+		int m_gauge;
+		const int m_Reset = 90;
+		const float m_Max_hp = 100; //HPの最大値
+
+
+	public:
+		int Count = 0;
+		float m_Speed;
+		bool m_isLayerBackGroundFlag;	
+		bool m_EndChangeFlag;
+		bool m_UpdateStartFlag;
+
+		//構築と破壊
+		NPCRusultScore::NPCRusultScore(const shared_ptr<Stage>& StagePtr,
+			bool Trace,
+			const Vec2& StartScale,
+			const Vec3& StartPos,
+			const wstring& HpKey
+
+		) :
+			GameObject(StagePtr),
+			m_Trace(Trace),
+			m_StartScale(StartScale),
+			m_StartPos(StartPos),
+			m_TotalTime(0),
+			m_DeltaTime(0.0f),
+			m_HpKey(HpKey),
+			m_Hp_now(50),
+			m_gauge(50),
+			m_isLayerBackGroundFlag(false),
+			m_EndChangeFlag(false),
+			m_Speed(5.0f),
+			m_UpdateStartFlag(false)
+
+		{}
+
+		NPCRusultScore::~NPCRusultScore() {}
+
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate() override;
+	};
+
+
+	//--------------------------------------------------------------------------------------
+	//　PlayerResultGaugeスコアクラス	
+	//--------------------------------------------------------------------------------------
+	class PlayerResultGauge : public GameObject
+	{
+		shared_ptr<Transform> m_ptrTrans;
+		shared_ptr<ScoreSprite>score;
+		//バックアップの頂点データ
+		vector<VertexPositionColorTexture>m_BackupVertices;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_HpKey;
+		bool m_Trace;
+		bool m_ResultFlag;
+		float m_TotalTime;
+		float m_Widthsize;
+		float m_DeltaTime;
+		int m_Hp_now; //現在のHP
+		int m_gauge;
+		const int m_Reset = 90;
+		const float m_Max_hp = 100; //HPの最大値
+
+
+	public:
+		int Count ;
+		float m_Speed;
+		bool m_isLayerBackGroundFlag;
+		bool m_EndChangeFlag;
+
+		//構築と破壊
+		PlayerResultGauge::PlayerResultGauge(const shared_ptr<Stage>& StagePtr,
+			bool Trace,
+			const Vec2& StartScale,
+			const Vec3& StartPos,
+			const wstring& HpKey
+
+		) :
+			GameObject(StagePtr),
+			m_Trace(Trace),
+			m_StartScale(StartScale),
+			m_StartPos(StartPos),
+			Count(0),
+			m_TotalTime(0),
+			m_DeltaTime(0.0f),
+			m_HpKey(HpKey),
+			m_Hp_now(50),
+			m_gauge(50),
+			m_isLayerBackGroundFlag(false),
+			m_ResultFlag(false)
+		{}
+
+		PlayerResultGauge::~PlayerResultGauge() {}
+
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate() override;
+	};
+
+	//--------------------------------------------------------------------------------------
+	//　NPCResultGaugeスコアクラス	
+	//--------------------------------------------------------------------------------------
+	class NPCResultGauge : public GameObject
+	{
+		shared_ptr<Transform> m_ptrTrans;
+		shared_ptr<ScoreSprite>score;
+		//バックアップの頂点データ
+		vector<VertexPositionColorTexture>m_BackupVertices;
+		Vec2 m_StartScale;
+		Vec3 m_StartPos;
+		wstring m_HpKey;
+		bool m_Trace;
+		bool m_ResultFlag;
+		float m_TotalTime;
+		float m_Widthsize;
+		float m_DeltaTime;
+		int m_Hp_now; //現在のHP
+		int m_gauge;
+		const int m_Reset = 90;
+		const float m_Max_hp = 100; //HPの最大値
+
+
+	public:
+		int Count;
+		float m_Speed;
+		bool m_isLayerBackGroundFlag;
+		bool m_EndChangeFlag;
+
+		//構築と破壊
+		NPCResultGauge::NPCResultGauge(const shared_ptr<Stage>& StagePtr,
+			bool Trace,
+			const Vec2& StartScale,
+			const Vec3& StartPos,
+			const wstring& HpKey
+
+		) :
+			GameObject(StagePtr),
+			m_Trace(Trace),
+			m_StartScale(StartScale),
+			m_StartPos(StartPos),
+			Count(0),
+			m_TotalTime(0),
+			m_DeltaTime(0.0f),
+			m_HpKey(HpKey),
+			m_Hp_now(50),
+			m_gauge(50),
+			m_isLayerBackGroundFlag(false),
+			m_ResultFlag(false)
+		{}
+
+		NPCResultGauge::~NPCResultGauge() {}
+
+		//初期化
+		virtual void OnCreate() override;
+		//更新
+		virtual void OnUpdate() override;
+	};
+
+
 }
+
 //end basecross
