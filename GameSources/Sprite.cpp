@@ -230,7 +230,8 @@ namespace basecross {
 		m_Trace(Trace),
 		m_StartScale(StartScale),
 		m_StartPos(StartPos),
-		m_TotalTime(0.0f)
+		m_TotalTime(0.0f),
+		m_PressBFlag(false)
 	{}
 	Flickering::~Flickering() {}
 
@@ -260,14 +261,27 @@ namespace basecross {
 
 
 	void Flickering::OnUpdate() {
+		//キーボードの取得(キーボード優先)
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		//コントローラの取得
+		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
+
 		float ElapsedTime = App::GetApp()->GetElapsedTime();
 		m_TotalTime += ElapsedTime * 3.0f;
-		if (m_TotalTime >= XM_2PI) {
+		if (m_TotalTime >= XM_PI) {
 			m_TotalTime = 0.0f;
 		}
-
+		
+		if (KeyState.m_bPressedKeyTbl[VK_SPACE] || cntl[0].wPressedButtons & XINPUT_GAMEPAD_B)
+		{
+			m_PressBFlag = true;
+		}
 		auto PtrDraw = GetComponent<PCTSpriteDraw>();
 		Col4 col(1.0, 1.0, 1.0, 1.0);
+		if (m_PressBFlag == true)
+		{
+			m_TotalTime *= 1.05f;
+		}
 		col.w = sin(m_TotalTime);
 		PtrDraw->SetDiffuse(col);
 	};

@@ -135,6 +135,7 @@ namespace basecross {
 			wstring m_TextureKey;
 			//ƒg[ƒ^ƒ‹ŠÔ
 			float m_TotalTime;
+			bool m_PressBFlag;
 		public:
 			Flickering(const shared_ptr<Stage>& StagePtr, const wstring& TextureKey, bool Trace,
 				const Vec2& StartScale, const Vec2& StartPos);
