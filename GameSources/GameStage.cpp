@@ -16,18 +16,22 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(30.0f),
-		m_ToStartTime(4.0f),
-		m_ToTalTime2(1.0f),
-		m_EndTime(10.0f), 
+		m_ToTalTime(2.0f),
+		m_ToStartTime(1.0f),
+		m_ToTalTime2(0.0f),
+		m_EndTime(10.0f),
 		m_isStartFlag(false),
-		m_TimeFlag(false),
-		m_Flag(false),
+		m_TimeFlag(true),
+		m_Flag(true),
 		m_DrawFlag(true),
 		m_GoalFlag(false),
 		m_EndFlag(false),
 		m_30secFlag(true),
 		m_TimeUpFlag(false),
+		m_CreateResultFlag(false),
+		m_CreateResultGauge(false),
+		m_CreateResult(false),
+		m_ResultFlag(false),
 		count(0),
 		m_SetCount(0),
 		m_TimeUpAfter(0.0f),
@@ -389,6 +393,18 @@ namespace basecross {
 			SetSharedGameObject(L"Rank", Rank);
 			SetSharedGameObject(L"Rank2", Rank2);
 			//AddGameObject<ScoreSprite>();
+			
+			// HPゲージの生成
+			auto ptrPlayerGauge = AddGameObject<PlayerRusultScore>(false,
+				Vec2(8.2f, 5.0f), Vec3(-410.0f, 40.0f, 0.0f), L"RED_TX");
+			ptrPlayerGauge->SetDrawLayer(-1000);
+			SetSharedGameObject(L"PlayerResultGauge", ptrPlayerGauge);
+
+			auto ptrNPCGauge = AddGameObject<NPCRusultScore>(false,
+				Vec2(8.2f, 5.0f), Vec3(410.0f, 40.0f, 0.0f), L"BLUE_TX");
+			ptrNPCGauge->SetDrawLayer(-1000);
+			SetSharedGameObject(L"NPCResultGauge", ptrNPCGauge);
+
 
 			CreateMoveCamera();
 		}
@@ -399,7 +415,6 @@ namespace basecross {
 
 	void GameStage::OnUpdate()
 	{
-
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
@@ -415,9 +430,13 @@ namespace basecross {
 
 		auto Rank = GetSharedGameObject<RankSpriteNumber>(L"Rank");
 		auto Rank2 = GetSharedGameObject<RankSpriteNumber>(L"Rank2");
+		
+		auto ptrPlayerResultScore = GetSharedGameObject<PlayerRusultScore>(L"PlayerResultGauge");
+		auto ptrNPCResultScore = GetSharedGameObject<NPCRusultScore>(L"NPCResultGauge");
 
 		Rank->UpdateValue(m_rank);
 		Rank2->UpdateValue(m_rank2);
+		
 		if (score1 >= score2)
 		{
 			m_rank = 1;
@@ -496,31 +515,82 @@ namespace basecross {
 				m_DrawFlag = false;
 			}
 
-			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
-				ptrMana->Stop(m_BGM);
+			if (m_ToTalTime <= 0.0f && m_TimeFlag == true && m_Flag == true) {
 				if (m_TimeUpFlag == false)
-				{
+				{	
+					ptrMana->Stop(m_BGM);
 					AddGameObject<StageSprite>(L"END_TX", true,
 						Vec2(1024.0f, 512.0f), Vec2(0.0f, 0.0f));
 					ptrMana->Start(L"TIMEUPSE", 0, 0.5f);
 					m_TimeUpFlag = true;
 				}
 				m_TimeUpAfter += delta;
-				ptrPlayer->m_MoveFlag = false;
+				ptrPlayer->m_MoveFlag = false;		
+
 				if (m_TimeUpAfter >= 3.0f)
 				{
-					if (score1 > score2)
+					if (m_CreateResultFlag == false)
 					{
-						PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+						ptrMana->Start(L"RESULT", 0, 1.0f);
+
+						auto ptrPlayerFlag = ptrPlayerResultScore->m_UpdateStartFlag = true;
+						auto ptrNPCFlag = ptrNPCResultScore->m_UpdateStartFlag = true;
+
+						auto Result = AddGameObject<StageSprite>
+							(L"Haikei_TX", true,
+								Vec2(1920.0f, 1080.0f), Vec2(0.0f, 0.0f));
+						Result->SetColor(Col4(1.0f, 1.0f, 1.0f, 0.7f));
+						Result->SetDrawLayer(997);
+						m_CreateResultFlag = true;
+
+						if (m_CreateResultFlag = true && m_CreateResultGauge == false)
+						{
+							auto IconPlayer = AddGameObject<StageSprite>
+								(L"MiniMapPlayer_TX", true,
+									Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
+							IconPlayer->SetDrawLayer(998);
+							auto IconNPC = AddGameObject<StageSprite>
+								(L"MiniMapNPC_TX", true,
+									Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
+							IconNPC->SetDrawLayer(998);	
+							ptrPlayerResultScore->SetDrawLayer(999);
+							ptrNPCResultScore->SetDrawLayer(999);
+						}
 					}
-					else
-					{
-						PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-					}
+
+				//if (score1 > score2)
+					//{
+					//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+					//}
+					//else
+					//{
+					//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+					//}
 				}
 			}
+		}
+
+		auto ptrPlayerFlag = ptrPlayerResultScore->m_CreateFlag;
+
+		if (ptrPlayerFlag && m_ResultFlag ==  false)
+		{
+			m_ResultFlag = true;
+			ptrPlayerResultScore->SetDrawLayer(-1000);
+			ptrNPCResultScore->SetDrawLayer(-1000);
+
+			auto ptrPlayerResutlt = AddGameObject<PlayerResultGauge>(false,
+				Vec2(8.2f, 5.0f), Vec3(-410.0f, 40.0f, 0.0f), L"RED_TX");
+			ptrPlayerResutlt->SetDrawLayer(999);
+			SetSharedGameObject(L"PlayerResult", ptrPlayerResutlt);
+			auto ptrNPCResutlt = AddGameObject<NPCResultGauge>(false,
+				Vec2(8.2f, 5.0f), Vec3(410.0f, 40.0f, 0.0f), L"BLUE_TX");
+			ptrNPCResutlt->SetDrawLayer(999);
+			SetSharedGameObject(L"NPCResult", ptrNPCResutlt);
+			m_CreateResultGauge = true;
+			m_CreateResultFlag = true;
 
 		}
+
 		if (GoalFlag == true)
 		{
 			ptrMana->Stop(m_BGM);
