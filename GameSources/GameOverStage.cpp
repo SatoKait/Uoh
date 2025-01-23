@@ -23,7 +23,7 @@ namespace basecross {
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<GameOverStage>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
 		cameraView->SetCamera(ptrMyCamera);
-		ptrMyCamera->SetEye(Vec3(0.0f, 0.0f, -5.0f));
+		//ptrMyCamera->SetEye(Vec3(0.0f, 1.0f, -5.0f));
 		ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
 		//マルチライトの作成
 		auto ptrMultiLight = CreateLight<MultiLight>();
@@ -36,11 +36,15 @@ namespace basecross {
 	}
 	void GameOverStage::CreateSprite()
 	{
+		//AddGameObject<StageSprite>(L"WAVE_TX", true,
+		//	Vec2(1280.0f, 1080.0f), Vec2(0.0f, 100.0f));
+		AddGameObject<StageSprite>(L"WAVE2_TX", true,
+			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		auto title = AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
 			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		SetSharedGameObject(L"TitleLogo", title);
 		auto Layer = GetSharedGameObject<StageSprite>(L"TitleLogo");
-		Layer->SetDrawLayer(-100);
+		Layer->SetDrawLayer(-500);
 
 		AddGameObject<StageSprite>(L"GAMEOVER_TX", true,
 			Vec2(1000.0f, 400.0f), Vec2(0.0f, 250.0f));
@@ -57,7 +61,9 @@ namespace basecross {
 
 	void GameOverStage::OnCreate() {
 		try {
-			flyingfish = AddGameObject<Model4>(Vec3(0.0f, -0.5f, -2.0f), Vec3(rad, 0.0f, 0.0f));
+			flyingfish = AddGameObject<Model3>(Vec3(5.4f, -1.7f, -10.0f), Vec3(0.8f, 0.5f, -0.6f));
+			flyingfish = AddGameObject<Model3>(Vec3(-7.4f, -1.5f, -6.0f), Vec3(0.0f, 0.0f, 0.7f));
+			flyingfish = AddGameObject<Model4>(Vec3(0.0f, -0.5f, -17.5f), Vec3(rad, 0.0f, 0.0f));
 
 			CreateViewLight();
 			CreateSprite();
@@ -104,6 +110,48 @@ namespace basecross {
 			rad = XMConvertToRadians(deg);
 			flyngfishtrans->SetRotation(rad, 0.0f, 0.0f);
 		}
+	}
+
+	Model3::Model3(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot) :
+		GameObject(StagePtr),
+		m_StartPos(StartPos),
+		m_StartRot(StartRot)
+	{
+	}
+	Model3::~Model3() {}
+
+	//初期化
+	void Model3::OnCreate() {
+		//初期位置などの設定
+		auto trans = GetComponent<Transform>();
+
+		trans->SetScale(0.07f, 0.07f, 0.07f);
+		trans->SetRotation(m_StartRot);
+		trans->SetPosition(m_StartPos);
+
+		Mat4x4 spanMat; // モデルとトランスフォームの間の差分行列
+		spanMat.affineTransformation(
+			Vec3(0.4f, 0.4f, 0.4f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, 0.0f, 0.0f),
+			Vec3(0.0f, -0.3f, 0.0f)
+		);
+
+		//影をつける（シャドウマップを描画する）
+		auto ptrShadow = AddComponent<Shadowmap>();
+
+		//影の形（メッシュ）を設定
+		ptrShadow->SetMeshResource(L"DEADTOBIUO2_MESH");
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+		//描画コンポーネントの設定
+		auto ptrDraw = AddComponent<PNTStaticModelDraw>();
+		//描画するメッシュを設定
+		ptrDraw->SetMeshResource(L"DEADTOBIUO2_MESH");
+		ptrDraw->SetMeshToTransformMatrix(spanMat);
+
+		//透明処理
+		SetAlphaActive(true);
 	}
 
 	Model4::Model4(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot) :
