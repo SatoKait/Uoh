@@ -127,13 +127,20 @@ namespace basecross {
 		//CirecleCollision
 		auto CirclepollColrig = AddGameObject<PollCollision>(Vec3(30.0f, 12.75f, 0.0f), Vec3(4.0f, 2.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCol = AddGameObject<PollCollision>(Vec3(30.0f, 7.35f, 0.0f), Vec3(4.0f, 2.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
-		pollCol = AddGameObject<PollCollision>(Vec3(27.15f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
-		pollCol = AddGameObject<PollCollision>(Vec3(32.9f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(26.7f, 10.0f, 0.0f), Vec3(2.6f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(33.3f, 10.0f, 0.0f), Vec3(2.6f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
+		//左右のポール
+		pollCol = AddGameObject<PollCollision>(Vec3(33.9f, 3.5f, 0.0f), Vec3(1.7f, 7.0f, 1.7f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(26.2f, 3.5f, 0.0f), Vec3(1.7f, 7.0f, 1.7f), Vec3(0.0f, 0.0f, 0.0f));
+
 		//CirecleCollision左側
 		auto CirclepollCollef = AddGameObject<PollCollision>(Vec3(-30.0f, 12.75f, 0.0f), Vec3(4.0f, 2.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCol = AddGameObject<PollCollision>(Vec3(-30.0f, 7.35f, 0.0f), Vec3(4.0f, 2.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
-		pollCol = AddGameObject<PollCollision>(Vec3(-27.15f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
-		pollCol = AddGameObject<PollCollision>(Vec3(-32.9f, 10.0f, 0.0f), Vec3(1.7f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-26.7f, 10.0f, 0.0f), Vec3(2.6f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-33.3f, 10.0f, 0.0f), Vec3(2.6f, 6.0f, 1.2f), Vec3(0.0f, 0.0f, 0.0f));
+		//左右のポール
+		pollCol = AddGameObject<PollCollision>(Vec3(-33.8f, 3.5f, 0.0f), Vec3(1.7f, 7.0f, 1.7f), Vec3(0.0f, 0.0f, 0.0f));
+		pollCol = AddGameObject<PollCollision>(Vec3(-26.1f, 3.5f, 0.0f), Vec3(1.7f, 7.0f, 1.7f), Vec3(0.0f, 0.0f, 0.0f));
 
 		auto pollCollef = AddGameObject<PollCollision>(Vec3(18.0f, 4.0f, -35.0f), Vec3(2.25f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
 		pollCollef = AddGameObject<PollCollision>(Vec3(12.0f, 4.0f, -35.0f), Vec3(2.25f, 8.0f, 2.2f), Vec3(0.0f, 0.0f, 0.0f));
@@ -369,6 +376,7 @@ namespace basecross {
 				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
 			}
 
+
 			auto PlayerBAR = AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
 				SetSharedGameObject(L"PlayerBAR", PlayerBAR);
@@ -497,9 +505,9 @@ namespace basecross {
 			}
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == true && m_Flag == true) {
-				ptrMana->Stop(m_BGM);
 				if (m_TimeUpFlag == false)
 				{
+					ptrMana->Stop(m_BGM);
 					AddGameObject<StageSprite>(L"END_TX", true,
 						Vec2(1024.0f, 512.0f), Vec2(0.0f, 0.0f));
 					ptrMana->Start(L"TIMEUPSE", 0, 0.5f);
