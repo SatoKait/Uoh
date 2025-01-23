@@ -17,7 +17,7 @@ namespace basecross {
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
 		m_ToTalTime(30.0f),
-		m_ToStartTime(1.0f),
+		m_ToStartTime(4.0f),
 		m_ToTalTime2(1.0f),
 		m_EndTime(10.0f),
 		m_isStartFlag(false),
