@@ -98,6 +98,10 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"OK_TX", tex);
 			tex = texPath + L"End.png";
 			App::GetApp()->RegisterTexture(L"END_TX", tex);
+			tex = texPath + L"happy.png";
+			App::GetApp()->RegisterTexture(L"HAPPY_TX", tex);
+			tex = texPath + L"unhappy.png";
+			App::GetApp()->RegisterTexture(L"UNHAPPY_TX", tex);
 
 
 			//tex = texPath + L"Tri.png";

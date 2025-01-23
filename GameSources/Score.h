@@ -419,6 +419,7 @@ namespace basecross {
 	//--------------------------------------------------------------------------------------
 	class NPCResultGauge : public GameObject
 	{
+		shared_ptr<GameStage> m_Stage;
 		shared_ptr<Transform> m_ptrTrans;
 		shared_ptr<ScoreSprite>score;
 		//バックアップの頂点データ
