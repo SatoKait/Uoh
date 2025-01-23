@@ -16,17 +16,18 @@ namespace basecross {
 
 		weak_ptr<Transform> m_targetTrans;
 		weak_ptr<GameObject> m_Target;
+		//shared_ptr<Player> m_Player;
 		shared_ptr<Stage> m_stage;
 
 		float m_angleY;
 		float m_distance;
 		float m_height;
 		float m_camDis;
-
-		bool m_MoveFlag;
 		Vec3 m_playerAngle;
 
 	public:
+		Vec2 m_ret;
+		float m_MoveFlag;
 		MainCamera(float angleY);
 		MainCamera();
 		virtual ~MainCamera() {}
@@ -40,8 +41,6 @@ namespace basecross {
 		}
 
 		void SetTarget(const shared_ptr <GameObject>& target);
-		void SetAngle();
-		void SetMove(bool MoveOn);
 		void SetAngleY(const float& angle)
 		{
 			m_angleY = angle;
