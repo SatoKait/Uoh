@@ -17,42 +17,29 @@ namespace basecross {
 		m_angleY(angleY),
 		m_distance(13.0f),//6.0
 		m_height(1.5f),  //2.5
-		m_camDis(5.0f),   //5.0
-		m_MoveFlag(true)
+		m_camDis(5.0f)   //5.0
 	{
 	}
 	MainCamera::MainCamera() :
 		m_angleY(90.0f),
 		m_distance(6.0f),//6.0
 		m_height(1.5f),  //2.5
-		m_camDis(5.0f),   //5.0
-		m_MoveFlag(true)
+		m_camDis(5.0f)   //5.0
 	{
 	}
 
 	void MainCamera::OnCreate() {
+		m_MoveFlag = false;
 	}
 
 	void MainCamera::OnUpdate() {
 
 		auto delta = App::GetApp()->GetElapsedTime();
-
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		Vec2 ret;
 		auto speed = 120.0f;
 
-		if (cntlVec[0].bConnected)
-		{
-			if (m_MoveFlag)//ƒtƒ‰ƒO‚ª‚½‚Á‚Ä‚¢‚È‚¯‚ê‚Î‘€ì‚ª‚Å‚«‚È‚¢
-			{
-				ret.x = cntlVec[0].fThumbRX;
-				ret.y = cntlVec[0].fThumbRY;
-			}
-
-		}
-
-		if (abs(ret.x) > 0.4) {
-			m_angleY -= speed * delta * ret.x;
+		if (abs(m_ret.x) > 0.4) {
+			m_angleY -= speed * delta * m_ret.x;
 		}
 
 
@@ -80,15 +67,6 @@ namespace basecross {
 	void MainCamera::SetTarget(const shared_ptr <GameObject>& target)
 	{
 		m_targetTrans = target->GetComponent<Transform>();
-	}
-
-	void MainCamera::SetAngle() {
-
-	}
-
-	void MainCamera::SetMove(bool MoveOn)
-	{
-		m_MoveFlag = MoveOn;
 	}
 
 }

@@ -14,72 +14,77 @@ namespace basecross {
 		Vec2 ret;
 		ret.x = 0.0f;
 		ret.y = 0.0f;
-		//コントローラの取得
-		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
-		if (cntlVec[0].bConnected) {
-			ret.x = cntlVec[0].fThumbLX;
-			ret.y = cntlVec[0].fThumbLY;
+		if (m_MoveFlag)
+		{
+			//コントローラの取得
+			auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
+			if (cntlVec[0].bConnected) {
+				ret.x = cntlVec[0].fThumbLX;
+				ret.y = cntlVec[0].fThumbLY;
 
-			//m_FrontRadian += (XM_PI / (m_Status.turnPaformanve / m_SpeedRate)) * m_ElapsedTime * (m_Slope.x / 20.0f);
+				//m_FrontRadian += (XM_PI / (m_Status.turnPaformanve / m_SpeedRate)) * m_ElapsedTime * (m_Slope.x / 20.0f);
 
+			}
+			//キーボードの取得(キーボード優先)
+			auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+			float BaseSpeed = 3.0f;
+			if (KeyState.m_bPushKeyTbl['W']) {
+				//前
+				ret.y = BaseSpeed * m_Speed * delta;
+			}
+			if (KeyState.m_bPushKeyTbl['A']) {
+				//左
+				ret.x = -BaseSpeed * m_Speed * delta;
+			}
+			if (KeyState.m_bPushKeyTbl['S']) {
+				//後ろ
+				ret.y = -BaseSpeed * m_Speed * delta;
+			}
+			if (KeyState.m_bPushKeyTbl['D']) {
+				//右
+				ret.x = BaseSpeed * m_Speed * delta;
+			}
+			return ret;
 		}
-		//キーボードの取得(キーボード優先)
-		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
-		float BaseSpeed = 3.0f;
-		if (KeyState.m_bPushKeyTbl['W']) {
-			//前
-			ret.y = BaseSpeed * m_Speed * delta;
-		}
-		if (KeyState.m_bPushKeyTbl['A']) {
-			//左
-			ret.x = -BaseSpeed * m_Speed * delta;
-		}
-		if (KeyState.m_bPushKeyTbl['S']) {
-			//後ろ
-			ret.y = -BaseSpeed * m_Speed * delta;
-		}
-		if (KeyState.m_bPushKeyTbl['D']) {
-			//右
-			ret.x = BaseSpeed * m_Speed * delta;
-		}
-		return ret;
 	}
 
 
 	Vec3 Player::GetMoveVector()
 	{
 		Vec3 angle(0, 0, 0);
-		//入力の取得
-		auto inPut = GetInputState();
-		float moveX = inPut.x;
-		float moveZ = inPut.y;
-		if (moveX != 0 || moveZ != 0) {
-			float moveLength = 0;	//動いた時のスピード
-			auto ptrTransform = GetComponent<Transform>();
-			auto ptrCamera = OnGetDrawCamera();
-			//進行方向の向きを計算
-			auto front = ptrTransform->GetPosition() - ptrCamera->GetEye();
-			front.y = 0;
-			front.normalize();
-			//進行方向向きからの角度を算出
-			float frontAngle = atan2(front.z, front.x);
-			//コントローラの向き計算
-			Vec2 moveVec(moveX, moveZ);
-			float moveSize = moveVec.length();
-			//コントローラの向きから角度を計算
-			float cntlAngle = atan2(-moveX, moveZ);
-			//トータルの角度を算出
-			m_Angle = frontAngle + cntlAngle;
-			//角度からベクトルを作成
-			angle = Vec3(cos(m_Angle), 0, sin(m_Angle));
-			//正規化する
-			angle.normalize();
-			//移動サイズを設定。
-			angle *= moveSize;
-			//Y軸は変化させない
-			angle.y = 0;
+		if (m_MoveFlag)
+		{
+			//入力の取得
+			auto inPut = GetInputState();
+			float moveX = inPut.x;
+			float moveZ = inPut.y;
+			if (moveX != 0 || moveZ != 0) {
+				float moveLength = 0;	//動いた時のスピード
+				auto ptrTransform = GetComponent<Transform>();
+				auto ptrCamera = OnGetDrawCamera();
+				//進行方向の向きを計算
+				auto front = ptrTransform->GetPosition() - ptrCamera->GetEye();
+				front.y = 0;
+				front.normalize();
+				//進行方向向きからの角度を算出
+				float frontAngle = atan2(front.z, front.x);
+				//コントローラの向き計算
+				Vec2 moveVec(moveX, moveZ);
+				float moveSize = moveVec.length();
+				//コントローラの向きから角度を計算
+				float cntlAngle = atan2(-moveX, moveZ);
+				//トータルの角度を算出
+				m_Angle = frontAngle + cntlAngle;
+				//角度からベクトルを作成
+				angle = Vec3(cos(m_Angle), 0, sin(m_Angle));
+				//正規化する
+				angle.normalize();
+				//移動サイズを設定。
+				angle *= moveSize;
+				//Y軸は変化させない
+				angle.y = 0;
+			}
 		}
-
 		return angle;
 	}
 
@@ -91,7 +96,7 @@ namespace basecross {
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MyCamera>(OnGetDrawCamera());
-
+		
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
 		//トランスフォームの取得
@@ -370,7 +375,7 @@ namespace basecross {
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
-
+		
 		// ジャンプしてからの経過時間
 		m_JumpTime += delta;
 		m_StanTime += delta;
@@ -407,6 +412,12 @@ namespace basecross {
 				ret.y = cntl[0].fThumbLY;
 			}
 
+		}
+
+		if (m_MoveFlag)//フラグがたっていなければ操作ができない
+		{
+			ptrCamera->m_ret.x = cntl[0].fThumbRX;
+			ptrCamera->m_ret.y = cntl[0].fThumbRY;
 		}
 
 
