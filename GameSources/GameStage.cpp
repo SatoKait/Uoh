@@ -437,8 +437,14 @@ namespace basecross {
 		Rank->UpdateValue(m_rank);
 		Rank2->UpdateValue(m_rank2);
 		
-		if (score1 >= score2)
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_START && cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_BACK)
 		{
+			ptrMana->Stop(m_BGM);
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToTiTleStage");
+		}
+
+		if (score1 >= score2)
+		{ 
 			m_rank = 1;
 			Rank->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
 		}
