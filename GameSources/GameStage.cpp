@@ -242,7 +242,7 @@ namespace basecross {
 		
 		// HPゲージの生成
 		auto ptrHpGauge = AddGameObject<GaugeScore>(false,
-			Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"RED_TX");
+			Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"ORANGE_TX");
 		SetSharedGameObject(L"Gauge", ptrHpGauge);
 		auto ptrGaugeSpriteNumber = AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
 			true,
@@ -250,7 +250,7 @@ namespace basecross {
 		SetSharedGameObject(L"GaugeSpriteNumber", ptrGaugeSpriteNumber);
 		// HPゲージの生成
 		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
-			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"RED_TX");
+			Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"PURPLE_TX");
 		SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
 		// 説明のアイコンを生成
 		auto YouIcon = AddGameObject<StageSprite>(L"YOU_TX", true,

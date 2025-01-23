@@ -60,6 +60,10 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"GREEN_TX", tex);
 			tex = texPath + L"Yellow.png";
 			App::GetApp()->RegisterTexture(L"YELLOW_TX", tex);
+			tex = texPath + L"Orange.png";
+			App::GetApp()->RegisterTexture(L"ORANGE_TX", tex);
+			tex = texPath + L"Purple.png";
+			App::GetApp()->RegisterTexture(L"PURPLE_TX", tex);
 			tex = texPath + L"Line.png";
 			App::GetApp()->RegisterTexture(L"LINE_TX", tex);
 			tex = texPath + L"Partition.png";
