@@ -15,6 +15,7 @@ namespace basecross{
 		float m_Time;
 		shared_ptr<Action> m_ptrAction;
 		shared_ptr<GameObject> m_player;
+		bool m_OnceFlag;
 	public:
 		int m_CircleCount;
 
