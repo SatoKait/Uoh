@@ -381,6 +381,35 @@ namespace basecross {
 
 		};
 
+	//--------------------------------------------------------------------------------------
+	///	                             JumpSprite
+	//--------------------------------------------------------------------------------------
+	class  JumpSprite : public GameObject {
+		shared_ptr<PCTSpriteDraw>PtrDraw;
+		bool m_Trace;
+		Vec2 m_StartScale;
+		Vec2 m_StartPos;
+		Col4 m_color;
+		wstring m_ClearKey;
+	
+	public:		
+		bool m_MoveFlag;
+		bool m_DownMoveFlag;
+		bool m_UpFlag;
+		bool m_DownFlag;
+		JumpSprite(const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
+			const Vec2& StartScale, const Vec2& StartPos);
+		//îjä¸
+		virtual ~JumpSprite();
+		//èâä˙âª
+		virtual void OnCreate() override;
+		//çXêV
+		virtual void OnUpdate()override;
+		//êFÇÃéÊìæ
+		Col4 GetColor();
+		void SetColor(Col4 color);
+	};
+}
+		
 
-	}
 	//end basecross

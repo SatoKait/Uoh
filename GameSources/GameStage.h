@@ -60,6 +60,11 @@ namespace basecross {
 		float m_TimeUpAfter;
 		float m_point;
 		float m_point2;
+		float m_deltatime1;
+		float m_deltatime2;
+		bool m_StrartFlag1;
+		bool m_StrartFlag2;
+
 		wstring m_Number;
 
 		// BGMの再生

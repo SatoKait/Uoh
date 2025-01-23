@@ -16,13 +16,13 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(30.0f),
+		m_ToTalTime(10.0f),
 		m_ToStartTime(4.0f),
 		m_ToTalTime2(1.0f),
 		m_EndTime(10.0f),
 		m_isStartFlag(false),
-		m_TimeFlag(false),
-		m_Flag(false),
+		m_TimeFlag(true),
+		m_Flag(true),
 		m_DrawFlag(true),
 		m_GoalFlag(false),
 		m_EndFlag(false),
@@ -35,7 +35,11 @@ namespace basecross {
 		count(0),
 		m_SetCount(0),
 		m_TimeUpAfter(0.0f),
-		m_Set2Count(0)
+		m_Set2Count(0),
+		m_deltatime1(0.0f),
+		m_deltatime2(0.0f),
+		m_StrartFlag1(false),
+		m_StrartFlag2(false)
 	{}
 
 	void GameStage::CreateViewLight() {
@@ -413,7 +417,16 @@ namespace basecross {
 			ptrNPCGauge->SetDrawLayer(-1000);
 			SetSharedGameObject(L"NPCResultGauge", ptrNPCGauge);
 
-
+			auto IconPlayer = AddGameObject<JumpSprite>
+				(L"MiniMapPlayer_TX", true,
+					Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
+			SetSharedGameObject(L"ResultIconPlayer", IconPlayer);
+			IconPlayer->SetDrawLayer(-999);
+			auto IconNPC = AddGameObject<JumpSprite>
+				(L"MiniMapNPC_TX", true,
+					Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
+			SetSharedGameObject(L"ResultIconNPC", IconNPC);
+			IconNPC->SetDrawLayer(-999);
 			CreateMoveCamera();
 		}
 		catch (...) {
@@ -441,6 +454,9 @@ namespace basecross {
 		
 		auto ptrPlayerResultScore = GetSharedGameObject<PlayerRusultScore>(L"PlayerResultGauge");
 		auto ptrNPCResultScore = GetSharedGameObject<NPCRusultScore>(L"NPCResultGauge");
+
+		auto ptrPlayerResultIcon = GetSharedGameObject<JumpSprite>(L"ResultIconPlayer");
+		auto ptrNPCResultIcon= GetSharedGameObject<JumpSprite>(L"ResultIconNPC");
 
 		Rank->UpdateValue(m_rank);
 		Rank2->UpdateValue(m_rank2);
@@ -495,7 +511,6 @@ namespace basecross {
 		{
 			m_isStartFlag = true;
 		}
-
 		if (m_isStartFlag)
 		{
 			m_ToTalTime -= elapsedTime;
@@ -559,32 +574,20 @@ namespace basecross {
 
 						if (m_CreateResultFlag = true && m_CreateResultGauge == false)
 						{
-							auto IconPlayer = AddGameObject<StageSprite>
-								(L"MiniMapPlayer_TX", true,
-									Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
-							IconPlayer->SetDrawLayer(998);
-							auto IconNPC = AddGameObject<StageSprite>
-								(L"MiniMapNPC_TX", true,
-									Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
-							IconNPC->SetDrawLayer(998);	
+							ptrPlayerResultIcon->SetDrawLayer(998);
+							ptrNPCResultIcon->SetDrawLayer(998);
 							ptrPlayerResultScore->SetDrawLayer(999);
 							ptrNPCResultScore->SetDrawLayer(999);
 						}
 					}
-
-				//if (score1 > score2)
-					//{
-					//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-					//}
-					//else
-					//{
-					//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-					//}
 				}
 			}
 		}
 
 		auto ptrPlayerFlag = ptrPlayerResultScore->m_CreateFlag;
+		
+			
+
 
 		if (ptrPlayerFlag && m_ResultFlag ==  false)
 		{
@@ -603,6 +606,67 @@ namespace basecross {
 			m_CreateResultGauge = true;
 			m_CreateResultFlag = true;
 
+			if (score1 > score2)
+			{
+				auto delta = App::GetApp()->GetElapsedTime();
+				ptrPlayerResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapPlayer_TX");
+				ptrPlayerResultIcon->m_MoveFlag = true;
+				ptrNPCResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapNPC_TX");
+				ptrNPCResultIcon->m_DownMoveFlag = true;
+
+				auto IconPlayer = AddGameObject<JumpSprite>
+					(L"HAPPY_TX", true,
+						Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
+				IconPlayer->SetDrawLayer(999);
+				IconPlayer->m_MoveFlag = true;
+				auto IconNPC = AddGameObject<JumpSprite>
+					(L"UNHAPPY_TX", true,
+						Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
+				IconNPC->SetDrawLayer(999);
+				IconNPC->m_DownMoveFlag = true;
+				m_StrartFlag1 = true;
+			}
+			else
+			{
+				auto delta = App::GetApp()->GetElapsedTime();
+
+				ptrPlayerResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapPlayer_TX");
+				ptrPlayerResultIcon->m_DownMoveFlag = true;
+				ptrNPCResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapNPC_TX");
+				ptrNPCResultIcon->m_MoveFlag = true;
+
+
+				auto IconPlayer2 = AddGameObject<JumpSprite>
+					(L"HAPPY_TX", true,
+						Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
+				IconPlayer2->SetDrawLayer(999);
+				IconPlayer2->m_MoveFlag = true;
+				auto IconNPC2 = AddGameObject<JumpSprite>
+					(L"UNHAPPY_TX", true,
+						Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
+				IconNPC2->SetDrawLayer(999);
+				IconNPC2->m_DownMoveFlag = true;
+				m_StrartFlag2 = true;
+			}
+		}			
+
+		if (m_StrartFlag1 == true)
+		{
+			m_deltatime1 += delta;
+		}
+		if (m_StrartFlag2 == true)
+		{
+			m_deltatime2 += delta;
+		}
+
+		if (m_deltatime1 >= 3.0f)
+		{
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+		}
+
+		if (m_deltatime2 >= 3.0f)
+		{
+			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 		}
 
 		if (GoalFlag == true)
