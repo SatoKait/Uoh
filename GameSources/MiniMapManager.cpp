@@ -255,7 +255,7 @@ namespace basecross {
 					auto itemScale = itemTrans->GetScale();
 					auto itemRotaiton = itemTrans->GetQuaternion();
 
-					auto ptrNPC = stage->AddGameObject<MiniMapActor>(castNPC, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
+					auto ptrNPC = stage->AddGameObject<MiniMapActor>(castNPC, L"MiniMapNPC_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
 					//if (m_MiniMapDrawFlag)
 					//{
 					ptrNPC->SetDrawLayer(-100);

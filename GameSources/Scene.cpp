@@ -76,8 +76,10 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"Haikei_TX", tex);
 			tex = texPath + L"MiniMapPlayer.png";
 			App::GetApp()->RegisterTexture(L"MiniMap_TX", tex);
-			tex = texPath + L"White.png";
+			tex = texPath + L"mapicon.png";
 			App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
+			tex = texPath + L"mapicon2.png";
+			App::GetApp()->RegisterTexture(L"MiniMapNPC_TX", tex);
 			tex = texPath + L"icon.png";
 			App::GetApp()->RegisterTexture(L"ICON_TX", tex);
 			tex = texPath + L"wave.png";
@@ -166,6 +168,9 @@ namespace basecross{
 			App::GetApp()->RegisterWav(L"ALARMSE", strSE);
 			strSE = SoundPath + L"Enter.wav";
 			App::GetApp()->RegisterWav(L"ENTERSE", strSE);
+			strSE = SoundPath + L"Result.wav";
+			App::GetApp()->RegisterWav(L"RESULT", strSE);
+
 		}
 	}
 
