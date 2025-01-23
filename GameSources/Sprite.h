@@ -60,9 +60,11 @@ namespace basecross {
 	///	                             Stageスプライト
 	//--------------------------------------------------------------------------------------
 	class StageSprite : public GameObject {
+		shared_ptr<PCTSpriteDraw>PtrDraw;
 		bool m_Trace;
 		Vec2 m_StartScale;
 		Vec2 m_StartPos;
+		Col4 m_color;
 		wstring m_ClearKey;
 	public:
 
@@ -72,6 +74,10 @@ namespace basecross {
 		virtual ~StageSprite();
 		//初期化
 		virtual void OnCreate() override;
+		//色の取得
+		Col4 GetColor();
+		void SetColor(Col4 color);
+
 		//更新
 		//virtual void OnUpdate()override {}
 	};

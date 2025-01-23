@@ -106,7 +106,8 @@ namespace basecross {
 		m_ClearKey(ClearKey),
 		m_Trace(Trace),
 		m_StartScale(StartScale),
-		m_StartPos(StartPos)
+		m_StartPos(StartPos),
+		m_color(1.0f)
 	{}
 
 	StageSprite::~StageSprite() {}
@@ -129,11 +130,20 @@ namespace basecross {
 		PtrTransform->SetRotation(0, 0, 0);
 		PtrTransform->SetPosition(m_StartPos.x, m_StartPos.y, 0.0f);
 		//頂点とインデックスを指定してスプライト作成
-		auto PtrDraw = AddComponent<PCTSpriteDraw>(vertices, indices);
+		PtrDraw = AddComponent<PCTSpriteDraw>(vertices, indices);
 		PtrDraw->SetSamplerState(SamplerState::LinearWrap);
 		PtrDraw->SetTextureResource(m_ClearKey);
 
 	};
+
+
+	void StageSprite::SetColor(Col4 color) {
+		m_color = color;
+		PtrDraw->SetDiffuse(color);
+	}
+	Col4 StageSprite::GetColor() {
+		return m_color;
+	}
 }
 
 namespace basecross {

@@ -21,9 +21,10 @@ namespace basecross {
 		shared_ptr<SoundItem> m_stageBGM;	
 
 		shared_ptr<SoundItem> m_BGM;
+		shared_ptr<SoundItem> m_BGM2;
 
 		shared_ptr<SingleView> m_View;//ビューの変数
-
+		//shared_ptr<PlayerResultGauge> ptrPlayerResutlt;
 
 		//OpeningCamera用のビュー
 		//shared_ptr<SingleView> m_OpeningCameraView;
@@ -53,6 +54,9 @@ namespace basecross {
 		bool  m_EndFlag;
 		bool m_30secFlag;
 		bool m_TimeUpFlag;
+		bool m_CreateResultFlag;
+		bool m_CreateResultGauge;
+		bool m_ResultFlag;
 		float m_TimeUpAfter;
 		float m_point;
 		float m_point2;
@@ -92,10 +96,11 @@ namespace basecross {
 		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
 
 		void CreateNPC();
-
 	public:
 		bool m_GoalFlag;
-		bool gaugeFlag;
+		bool gaugeFlag;		
+		bool m_CreateResult;
+
 		//構築と破棄
 		GameStage();
 		virtual ~GameStage() 
