@@ -32,12 +32,11 @@ namespace basecross {
 		SetView(cameraView);
 
 		m_flag = false;
+		m_flag2 = false;
 		deg = 0.0f;
 	}
 	void GameOverStage::CreateSprite()
 	{
-		//AddGameObject<StageSprite>(L"WAVE_TX", true,
-		//	Vec2(1280.0f, 1080.0f), Vec2(0.0f, 100.0f));
 		AddGameObject<StageSprite>(L"WAVE2_TX", true,
 			Vec2(1280.0f, 1080.0f), Vec2(0.0f, 0.0f));
 		auto title = AddGameObject<StageSprite>(L"TITLEBACK_TX", true,
@@ -63,7 +62,7 @@ namespace basecross {
 		try {
 			flyingfish = AddGameObject<Model3>(Vec3(5.4f, -1.7f, -10.0f), Vec3(0.8f, 0.5f, -0.6f));
 			flyingfish = AddGameObject<Model3>(Vec3(-7.4f, -1.5f, -6.0f), Vec3(0.0f, 0.0f, 0.7f));
-			flyingfish = AddGameObject<Model4>(Vec3(0.0f, -0.5f, -17.5f), Vec3(rad, 0.0f, 0.0f));
+			flyingfish = AddGameObject<Model4>(Vec3(0.0f, -trans, -17.5f), Vec3(rad, 0.0f, 0.0f));
 
 			CreateViewLight();
 			CreateSprite();
@@ -91,24 +90,46 @@ namespace basecross {
 			PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameStage");
 		}
 
-		auto flyngfishtrans = flyingfish->GetComponent<Transform>();
-		Vec3 spriterot = flyngfishtrans->GetRotation();
+		auto flyingfishtrans = flyingfish->GetComponent<Transform>();
+		Vec3 spriterot = flyingfishtrans->GetRotation();
 
 		if (!m_flag)
 		{
 			deg += 1.0f;
 			rad = XMConvertToRadians(deg);
-			flyngfishtrans->SetRotation(rad, 0.0f, 0.0f);
+			flyingfishtrans->SetRotation(rad, 0.0f, 0.0f);
 		}
 		if (deg >= 40.0f)
 		{
 			m_flag = true;
+			//m_flag2 = true;
 		}
 		if (m_flag == true)
 		{
 			deg += 0.0f;
 			rad = XMConvertToRadians(deg);
-			flyngfishtrans->SetRotation(rad, 0.0f, 0.0f);
+			flyingfishtrans->SetRotation(rad, 0.0f, 0.0f);
+		}
+
+		if (!m_flag2)
+		{
+			// ‰º‚¢‚­
+			trans += 0.0002f;
+			flyingfishtrans->SetPosition(0.0f, -0.5f + -trans, -17.5f);
+		}
+		if (trans >= 0.01f)
+		{
+			m_flag2 = true;
+		}
+		if (m_flag2 == true)
+		{
+			// ã‚¢‚­
+			trans -= 0.0002f;
+			flyingfishtrans->SetPosition(0.0f, -0.5f + -trans, -17.5f);
+		}
+		if (trans <= 0.00f)
+		{
+			m_flag2 = false;
 		}
 	}
 
@@ -166,11 +187,6 @@ namespace basecross {
 	void Model4::OnCreate() {
 		//‰ŠúˆÊ’u‚È‚Ç‚ÌÝ’è
 		auto trans = GetComponent<Transform>();
-
-		//auto deg = 0;;
-		//auto deg2 = 0;
-		//auto rad = XMConvertToRadians(deg);
-		//auto rad2 = XMConvertToRadians(deg2);
 
 		trans->SetScale(0.5f, 0.5f, 0.5f);
 		trans->SetRotation(m_StartRot);
