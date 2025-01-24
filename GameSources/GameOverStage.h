@@ -20,7 +20,9 @@ namespace basecross {
 
 		float deg;
 		float rad;
+		float trans;
 		bool m_flag;
+		bool m_flag2;
 
 	public:
 		GameOverStage() : Stage() {}
