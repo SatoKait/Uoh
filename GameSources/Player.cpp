@@ -414,6 +414,12 @@ namespace basecross {
 
 		}
 
+		if (!m_MoveFlag)//フラグがたっていなければ操作ができない
+		{
+			ptrCamera->m_ret.x = 0; 
+			ptrCamera->m_ret.y = 0;
+		}
+
 		if (m_MoveFlag)//フラグがたっていなければ操作ができない
 		{
 			ptrCamera->m_ret.x = cntl[0].fThumbRX;
