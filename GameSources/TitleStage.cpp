@@ -20,6 +20,7 @@ namespace basecross {
 		SetView(cameraView);
 
 		m_comX = 3.0f;
+		m_comY = -1.3f;
 		m_flag = false;
 		deg = 0.0f;
 		deg2 = 0.0f;
@@ -50,7 +51,6 @@ namespace basecross {
 		App::GetApp()->GetScene<Scene>()->SetScore2(0);
 
 		flyingfish = AddGameObject<Model1>(Vec3(0.0f, -1.0f, -2.0f), Vec3(0.0f, rad, 0.0f));
-
 		try {
 			CreateViewLight();
 			CreateSprite();
@@ -99,11 +99,13 @@ namespace basecross {
 			flyngfishtrans->SetRotation(0.0f, rad, 0.0f);
 
 			m_comX -= 0.01f;
-			flyngfishtrans->SetPosition(m_comX, -1.3f, -2.0f);
+			flyngfishtrans->SetPosition(m_comX, m_comY, -2.0f);
 		}
 		if (m_comX <= -4.0f)
 		{
 			m_flag = true;
+			m_comY = -0.5f;
+			flyngfishtrans->SetPosition(m_comX, m_comY, -2.0f);
 		}
 
 		if (m_flag == true)
@@ -111,13 +113,16 @@ namespace basecross {
 			deg = 180.0f;
 			rad = XMConvertToRadians(deg);
 			flyngfishtrans->SetRotation(0.0f, rad, 0.0f);
-
-			m_comX += 0.01f;
-			flyngfishtrans->SetPosition(m_comX, -1.3f, -2.0f);
+			
+			m_comX += 0.04f;
+			m_comY -= 0.005f;
+			flyngfishtrans->SetPosition(m_comX, m_comY, -2.0f);
 		}
 		if (m_comX >= 4.0f)
 		{
 			m_flag = false;
+			m_comY = -1.3f;
+			flyngfishtrans->SetPosition(m_comX, m_comY, -2.0f);
 		}
 	}
 
@@ -147,11 +152,6 @@ namespace basecross {
 		//初期位置などの設定
 		auto trans = GetComponent<Transform>();
 
-		//auto deg = 0;;
-		//auto deg2 = 0;
-		//auto rad = XMConvertToRadians(deg);
-		//auto rad2 = XMConvertToRadians(deg2);
-
 		trans->SetScale(0.5f, 0.5f, 0.5f);
 		trans->SetRotation(m_StartRot);
 		trans->SetPosition(m_StartPos);
@@ -178,10 +178,15 @@ namespace basecross {
 		ptrDraw->SetMeshToTransformMatrix(spanMat);
 
 		ptrDraw->AddAnimation(L"Swim", 15, 40, true, 30.0f);
+		ptrDraw->AddAnimation(L"Jump", 66, 50, false, 60.0f);
+
 		ptrDraw->ChangeCurrentAnimation(L"Swim");
 
 		//透明処理
 		SetAlphaActive(true);
+
+		m_comX = 3.0f;
+		m_flag = false;
 	}
 
 	void Model1::OnUpdate()
@@ -189,8 +194,37 @@ namespace basecross {
 		auto elapsedTime = App::GetApp()->GetElapsedTime();
 		auto drawComp = GetComponent<PNTBoneModelDraw>();
 		drawComp->UpdateAnimation(elapsedTime);
+
+		if (!m_flag)
+		{
+			ChangeAnimation(L"Swim");
+			m_comX -= 0.01f;
+		}
+		if (m_comX <= -4.0f)
+		{
+			m_flag = true;
+		}
+
+		if (m_flag == true)
+		{
+			ChangeAnimation(L"Jump");
+			m_comX += 0.04f;
+		}
+		if (m_comX >= 4.0f)
+		{
+			m_flag = false;
+		}
 	}
 
+	void Model1::ChangeAnimation(const wstring& animationName)
+	{
+		auto ptrDraw = AddComponent<PNTBoneModelDraw>();
+
+		if (ptrDraw->GetCurrentAnimation() != animationName)
+		{
+			ptrDraw->ChangeCurrentAnimation(animationName);
+		}
+	}
 
 }
 //end basecross
