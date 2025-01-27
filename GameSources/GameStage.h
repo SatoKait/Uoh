@@ -7,11 +7,11 @@
 #include "stdafx.h"
 
 namespace basecross {
-	//enum class CameraSelect {
-	//	openingCamera,
-	//	myCamera,
-	//	objCamera,
-	//};
+	enum class CameraSelect {
+		openingCamera,
+		myCamera,
+		objCamera,
+	};
 
 	//--------------------------------------------------------------------------------------
 	//	ゲームステージクラス
@@ -24,15 +24,18 @@ namespace basecross {
 		shared_ptr<SoundItem> m_BGM2;
 
 		shared_ptr<SingleView> m_View;//ビューの変数
-		//shared_ptr<PlayerResultGauge> ptrPlayerResutlt;
+
 
 		//OpeningCamera用のビュー
-		//shared_ptr<SingleView> m_OpeningCameraView;
-		////MyCamera用のビュー
-		//shared_ptr<SingleView> m_MyCameraView;
-		////ObjCamera用のビュー
-		//shared_ptr<SingleView> m_ObjCameraView;
-		//CameraSelect m_CameraSelect;
+		shared_ptr<SingleView> m_OpeningCameraView;
+		//MyCamera用のビュー
+		shared_ptr<SingleView> m_MyCameraView;
+		//ObjCamera用のビュー
+		shared_ptr<SingleView> m_ObjCameraView;	
+		
+		//shared_ptr<PlayerResultGauge> ptrPlayerResutlt;
+
+		CameraSelect m_CameraSelect;
 		int count;
 		int rank;
 		int rank2;
@@ -64,6 +67,7 @@ namespace basecross {
 		float m_deltatime2;
 		bool m_StrartFlag1;
 		bool m_StrartFlag2;
+		float StartTime;
 
 		wstring m_Number;
 
@@ -98,13 +102,14 @@ namespace basecross {
 
 		void CreateMoveCamera();
 		void CreateCameraman();
-		void CameraSetting(const shared_ptr<GameObject>& ptrObj);
+		void CameraSetting();
 
 		void CreateNPC();
 	public:
 		bool m_GoalFlag;
 		bool gaugeFlag;		
 		bool m_CreateResult;
+		bool m_MoveFlag;
 
 		//構築と破棄
 		GameStage();
@@ -113,6 +118,14 @@ namespace basecross {
 		}
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
+
+		virtual void OnDraw()override;
+
+
+		CameraSelect GetCameraSelect() const {
+			return m_CameraSelect;
+		}
+		void ToMyCamera();
 
 		//virtual void OnDestroy()override;
 	};
