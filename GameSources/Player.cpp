@@ -283,10 +283,10 @@ namespace basecross {
 				else if (ret.x || ret.y)
 				{
 					pos += angle * m_Speed * delta;
-					if (angle.x <= 0.8f && angle.x >= -0.5f)
-					{
-						pos += m_moveAngle * m_Speed * delta;
-					}
+					//if (angle.x <= 0.8f && angle.x >= -0.5f)
+					//{
+					//	pos += m_moveAngle * m_Speed * delta;
+					//}
 				}
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
@@ -436,7 +436,7 @@ namespace basecross {
 
 		}
 
-		if (!m_MoveFlag)//フラグがたっていなければ操作ができない
+		if (!m_MoveFlag && m_StartFlag)//フラグがたっていなければ操作ができない
 		{
 			ptrCamera->m_ret.x = 0; 
 			ptrCamera->m_ret.y = 0;
