@@ -108,18 +108,20 @@ namespace basecross {
 		m_StateMachine->Update();
 	}
 
+	//ここがゴール（赤ブロック）までの場所
 	void OpeningCameraman::ToGoalEnterBehavior() {
-		m_StartPos = Vec3(-20.0f, 10.0f, -20.0f);
-		m_EndPos = Vec3(18.0f, 2.0f, 10.0f);
+		m_StartPos = Vec3(-50.0f, 30.0f, -50.0f);
+		m_EndPos = Vec3(50.0f, 30.0f, 50.0f);
 		m_AtStartPos = Vec3(-10.0f, 0.0f, 0.0f);
-		m_AtEndPos = Vec3(18.0f, 0.0f, 18.0f);
+		m_AtEndPos = Vec3(0.0f, 0.0f, 0.0f);
 		m_AtPos = m_AtStartPos;
-		m_TotalTime = 0.0f;
+		m_TotalTime = 0.0f;//ここが5.0fになったら下のChangeStateが発生する//何秒地点にいるかというもの
 	}
 
+	//ここがゴールからPlayerまでの場所
 	void OpeningCameraman::ToStartEnterBehavior() {
-		m_StartPos = Vec3(18.0f, 2.0f, 10.0f);
-		m_EndPos = Vec3(0.0f, 3.0f, -5.0f);
+		m_StartPos = Vec3(50.0f, 30.0f, 50.0f);
+		m_EndPos = Vec3(-2.5f, 1.0f, -48.0f);
 		m_AtStartPos = Vec3(18.0f, 0.0f, 18.0f);
 		m_AtEndPos = Vec3(0.0f, 0.0f, 0.0f);
 		m_AtPos = m_AtStartPos;
@@ -142,9 +144,11 @@ namespace basecross {
 
 	void OpeningCameraman::EndStateEnterBehavior() {
 		auto ptrGameGtage = GetTypeStage<GameStage>();
-		//ptrGameGtage->CreateMoveCamera();
+		ptrGameGtage->ToMyCamera();
 	}
-
+	//フェードイン
+	//カメラをPlayerの位置
+	//マリオカート見たいな奴
 
 
 

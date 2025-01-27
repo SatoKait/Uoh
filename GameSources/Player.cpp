@@ -111,7 +111,7 @@ namespace basecross {
 
 		bool Release = true;
 
-		const float deltatime = 4.0f;
+		const float deltatime = 12.0f;
 
 		Vec2 ret;
 		if (cntl[0].bConnected)
@@ -152,6 +152,7 @@ namespace basecross {
 		{
 			m_MoveFlag = true;
 			m_StartFlag = true;
+			m_CameraFlag = true;
 		}
 
 		if (angle.length() > 0.0f) {
@@ -350,6 +351,22 @@ namespace basecross {
 		m_Animation->ChangeCurrentAnimation(L"Swim");
 
 		SetAlphaActive(true);
+
+		//トランスフォームの取得
+		auto trans = GetComponent<Transform>();
+
+		//ポジションの取得
+		auto pos = trans->GetPosition();
+
+		//auto ptrCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+		if (ptrCamera) {
+			//MyCameraである
+			//MyCameraに注目するオブジェクト（プレイヤー）の設定
+			ptrCamera->SetTarget(GetThis<GameObject>());
+
+		}
+
+
 	}
 
 	void Player::OnUpdate()
@@ -375,7 +392,8 @@ namespace basecross {
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		// デルタタイムを取得する
 		float delta = App::GetApp()->GetElapsedTime(); // 前フレームからの「経過時間」
-		
+		//auto ptrMyCamera = dynamic_pointer_cast<MainCamera>(OnGetDrawCamera());
+
 		// ジャンプしてからの経過時間
 		m_JumpTime += delta;
 		m_StanTime += delta;
@@ -419,9 +437,10 @@ namespace basecross {
 			ptrCamera->m_ret.x = cntl[0].fThumbRX;
 			ptrCamera->m_ret.y = cntl[0].fThumbRY;
 		}
-
-
-		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z));
+		if (m_CameraFlag)
+		{
+			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at + 1, pos.z));
+		}
 
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
