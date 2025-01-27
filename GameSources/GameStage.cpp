@@ -39,65 +39,62 @@ namespace basecross {
 		m_deltatime1(0.0f),
 		m_deltatime2(0.0f),
 		m_StrartFlag1(false),
-		m_StrartFlag2(false)
+		m_StrartFlag2(false),
+		m_MoveFlag(false),
+		StartTime(0.0f)
 	{}
 
-	void GameStage::CreateViewLight() {
-		////OpeningCameraView用のビュー
-		//m_OpeningCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
-		//auto ptrOpeningCamera = ObjectFactory::Create<OpeningCamera>();
-		//m_OpeningCameraView->SetCamera(ptrOpeningCamera);
-		////MyCamera用のビュー
-		//m_MyCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
-		//auto ptrMyCamera = ObjectFactory::Create<MyCamera>();
-		//ptrMyCamera->SetEye(Vec3(0.0f, 5.0f, -5.0f));
-		//ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
-		//m_MyCameraView->SetCamera(ptrMyCamera);
-		//////ObjCamera用のビュー
-		////m_ObjCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
-		////auto ptrObjCamera = ObjectFactory::Create<ObjCamera>();
-		////m_ObjCameraView->SetCamera(ptrObjCamera);
-		////初期状態ではm_OpeningCameraViewを使う
-		//SetView(m_OpeningCameraView);
-		//m_CameraSelect = CameraSelect::openingCamera;
-		////マルチライトの作成
-		//auto PtrMultiLight = CreateLight<MultiLight>();
-		////デフォルトのライティングを指定
-		//PtrMultiLight->SetDefaultLighting();
-
+	void GameStage::CreateViewLight() {		
 		// カメラの位置と注視点位置
 		const Vec3 eye(0.0f, 2.5f, -3.5f);
 		const Vec3 at(0.0f);
 
+		//OpeningCameraView用のビュー
+		m_OpeningCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
+		auto ptrOpeningCamera = ObjectFactory::Create<OpeningCamera>();
+		m_OpeningCameraView->SetCamera(ptrOpeningCamera);
+		//MyCamera用のビュー
+		m_MyCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
+		auto ptrMyCamera = ObjectFactory::Create<MainCamera>();
+		ptrMyCamera->SetEye(eye);
+		ptrMyCamera->SetAt(at);
+		m_MyCameraView->SetCamera(ptrMyCamera);
+		////ObjCamera用のビュー
+		//m_ObjCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
+		//auto ptrObjCamera = ObjectFactory::Create<ObjCamera>();
+		//m_ObjCameraView->SetCamera(ptrObjCamera);
 		// カメラの設定MainCamera
 		m_View = ObjectFactory::Create<SingleView>(GetThis<Stage>());
 		auto camera = ObjectFactory::Create<MainCamera>(-90.0f);
 		camera->SetEye(eye);
 		camera->SetAt(at);
-		camera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
-
+		//camera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
 		// ビューにカメラを設定
 		m_View = CreateView<SingleView>();
 		m_View->SetCamera(camera);
 
+		//初期状態ではm_OpeningCameraViewを使う
+		SetView(m_OpeningCameraView);
+		m_CameraSelect = CameraSelect::openingCamera;
 		//マルチライトの作成
 		auto PtrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
 		PtrMultiLight->SetDefaultLighting();
 
 	}
-	void GameStage::CameraSetting(const shared_ptr<GameObject>& ptrObj)
+	void GameStage::CameraSetting()
 	{
-		//// カメラの設定
-		//auto ptrCamera = GetView()->GetTargetCamera();
-		//auto ptrMainCamera = dynamic_pointer_cast<MainCamera>(ptrCamera);
-		//ptrMainCamera->SetTarget(ptrObj);
+		auto ptrOpeningCameraman = AddGameObject<OpeningCameraman>();
+		//シェア配列にOpeningCameramanを追加
+		SetSharedGameObject(L"OpeningCameraman", ptrOpeningCameraman);
 
-		////カメラのオブジェクトの設定
-		//auto ptrCameraObject = AddGameObject<MoveCamera>();
-		//ptrCameraObject->SetOwner(ptrMainCamera);
-		//ptrCameraObject->GetComponent<Transform>()->SetPosition(ptrMainCamera->GetEye());
-		//ptrCameraObject->GetComponent<CollisionSphere>()->AddExcludeCollisionGameObject(ptrObj);
+		auto ptrOpeningCamera = dynamic_pointer_cast<OpeningCamera>(m_OpeningCameraView->GetCamera());
+		if (ptrOpeningCamera) {
+			ptrOpeningCamera->SetCameraObject(ptrOpeningCameraman);
+			SetView(m_OpeningCameraView);
+			m_CameraSelect = CameraSelect::openingCamera;
+
+		}
 	}
 
 	void GameStage::CreatePlayer()
@@ -278,11 +275,13 @@ namespace basecross {
 	void GameStage::CreateStageTime()
 	{
 		//始まりのカウントダウン
-		AddGameObject<UITimeStage>(1,
+		auto CountTime =  AddGameObject<UITimeStage>(1,
 			L"NUMBER2_TX",
 			true,
 			Vec2(480.0f, 200.0f),
 			Vec3(250.0f, 0.0f, 0.0f));
+		CountTime->SetDrawLayer(-900);
+		SetSharedGameObject(L"CountTime", CountTime);
 		//終わりのカウントダウン
 		AddGameObject<LastTime>(1,
 			L"LASTTIME_TX",
@@ -290,13 +289,11 @@ namespace basecross {
 			Vec2(480.0f, 200.0f),
 			Vec3(250.0f, 0.0f, 0.0f));
 	}
-
 	void GameStage::CreateBGM() {
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 		m_BGM = ptrMana->Start(L"StageBGM1", XAUDIO2_LOOP_INFINITE, 0.3f);
 		//m_ptrXA->Start(L"StageBGM2", XAUDIO2_LOOP_INFINITE, 0.5f);
 	}
-
 	void GameStage::CreateFloatCircle()
 	{
 		// 筒状ポリゴン
@@ -319,12 +316,10 @@ namespace basecross {
 		//auto ptrgate = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f), L"GREEN_TX");
 
 	}
-
 	//カメラマンの作成
 	void GameStage::CreateCameraman() {
 
 	}
-
 	void GameStage::CreateMoveCamera()
 	{
 		//auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
@@ -338,13 +333,11 @@ namespace basecross {
 		//}
 
 	}
-
 	void GameStage::CreateNPC()
 	{
 		auto ptr = AddGameObject<NPC>(Vec3(0.3f), Vec3(0.0f, XM_PIDIV2,0.0f), Vec3(0.0f, 0.0f, -45.0f));
 
 	}
-
 	void GameStage::OnCreate() {
 		try {
 			//ビューとライトの作成
@@ -364,7 +357,7 @@ namespace basecross {
 			CreateMoveCamera();
 			CreateNPC();
 			//CreateMoveCamera();
-			//CameraSetting(ptrPlayer);
+			CameraSetting();
 			auto& app = App::GetApp();
 			auto path = app->GetDataDirWString();
 
@@ -427,13 +420,14 @@ namespace basecross {
 					Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
 			SetSharedGameObject(L"ResultIconNPC", IconNPC);
 			IconNPC->SetDrawLayer(-999);
+
+
 			CreateMoveCamera();
 		}
 		catch (...) {
 			throw;
 		}
 	}
-
 	void GameStage::OnUpdate()
 	{
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
@@ -457,6 +451,8 @@ namespace basecross {
 
 		auto ptrPlayerResultIcon = GetSharedGameObject<JumpSprite>(L"ResultIconPlayer");
 		auto ptrNPCResultIcon= GetSharedGameObject<JumpSprite>(L"ResultIconNPC");
+		
+		auto CountTime = GetSharedGameObject<UITimeStage>(L"CountTime");
 
 		Rank->UpdateValue(m_rank);
 		Rank2->UpdateValue(m_rank2);
@@ -503,12 +499,17 @@ namespace basecross {
 			}
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
-		if (m_isStartFlag == false)
-		{
+		auto CameraFlag = ptrPlayer->m_CameraFlag;
+		auto PlayerMoveFlag = ptrPlayer->m_MoveFlag;
+		StartTime += delta;
+		if (StartTime >= 8.0f)
+		{		
+			CountTime->SetDrawLayer(100);
 			m_ToStartTime -= elapsedTime;
 		}
 		if (m_ToStartTime <= 0)
 		{
+			CountTime->SetDrawLayer(-90);
 			m_isStartFlag = true;
 		}
 		if (m_isStartFlag)
@@ -974,6 +975,19 @@ namespace basecross {
 			circle->m_next = 2;
 			break;
 		}
+	}
+	void GameStage::ToMyCamera() {
+		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
+		//MyCameraに変更
+		auto ptrMyCamera = dynamic_pointer_cast<MainCamera>(m_View->GetCamera());
+		if (ptrMyCamera) {
+			ptrMyCamera->SetTarget(ptrPlayer);
+			//m_MyCameraViewを使う
+			SetView(m_View);
+			m_CameraSelect = CameraSelect::myCamera;
+		}
+	}
+	void GameStage::OnDraw() {
 	}
 }
 //end basecross

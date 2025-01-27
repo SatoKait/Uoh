@@ -23,8 +23,8 @@ namespace basecross{
 		auto cameraView = ObjectFactory::Create<SingleView>(GetThis<GoalScene>());
 		auto ptrMyCamera = ObjectFactory::Create<Camera>();
 		cameraView->SetCamera(ptrMyCamera);
-		ptrMyCamera->SetEye(Vec3(0.0f, -0.2f, -5.0f));
-		ptrMyCamera->SetAt(Vec3(0.0f, 0.0f, 0.0f));
+		ptrMyCamera->SetEye(Vec3(0.0f, -3.5f, -5.0f));
+		ptrMyCamera->SetAt(Vec3(0.0f, -2.5f, 1.0f));
 		//マルチライトの作成
 		auto ptrMultiLight = CreateLight<MultiLight>();
 		//デフォルトのライティングを指定
@@ -42,10 +42,11 @@ namespace basecross{
 		auto Layer = GetSharedGameObject<StageSprite>(L"TitleLogo");
 		Layer->SetDrawLayer(-100);
 
-		AddGameObject<StageSprite>(L"GOALSCENE_TX", true,
+		auto Goal = AddGameObject<StageSprite>(L"GOALSCENE_TX", true,
 			Vec2(1000.0f, 400.0f), Vec2(0.0f, 250.0f));
+		Goal->SetDrawLayer(-50);
 		AddGameObject<Flickering>(L"TITLETEXT_TX", true,
-			Vec2(640.0f, 200.0f), Vec2(0.0f, -300.0f));
+			Vec2(640.0f, 200.0f), Vec2(0.0f, -330.0f));
 
 
 	}
@@ -57,8 +58,8 @@ namespace basecross{
 
 	void GoalScene::OnCreate() {
 		try {
-			AddGameObject<Model2>(Vec3(0.0f, -0.9f, -1.0f));
-			AddGameObject<Model5>(Vec3(0.0f, -1.5f, -1.0f));
+			AddGameObject<Model2>(Vec3(0.0f, -3.8f, -0.0f));
+			AddGameObject<Model5>(Vec3(0.0f, -4.3f, -0.0f));
 
 			CreateViewLight();
 			CreateSprite();
@@ -112,7 +113,7 @@ namespace basecross{
 		auto rad = XMConvertToRadians(deg);
 		auto rad2 = XMConvertToRadians(deg2);
 
-		trans->SetScale(0.5f, 0.5f, 0.5f);
+		trans->SetScale(0.7f, 0.7f, 0.7f);
 		trans->SetRotation(Vec3(0.0f, rad, rad2));
 		trans->SetPosition(m_StartPos);
 
@@ -163,7 +164,7 @@ namespace basecross{
 		//初期位置などの設定
 		auto trans = GetComponent<Transform>();
 
-		trans->SetScale(0.07f, 0.07f, 0.07f);
+		trans->SetScale(0.1f, 0.1f, 0.1f);
 		trans->SetRotation(0.0f, 0.0f, 0.0f);
 		trans->SetPosition(m_StartPos);
 

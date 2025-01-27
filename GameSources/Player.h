@@ -66,6 +66,7 @@ namespace basecross{
 		float m_rotAng;
 		bool m_grounded;		//接地しているかどうか
 		int  m_Nextcircle;
+		bool m_CameraFlag;
 
 		Player::Player(shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
@@ -97,7 +98,8 @@ namespace basecross{
 			m_CircleCount(0),
 			m_GoalFlag(false),
 			m_StopFlag(false),
-			m_StartFlag(false)
+			m_StartFlag(false),
+			m_CameraFlag(false)
 		{
 		}
 
