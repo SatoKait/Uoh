@@ -221,14 +221,14 @@ namespace basecross {
 			}
 		}
 		//高速着水
-		//if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
-		//	m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
-		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
-		//	m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
-		//{
-		//	pos.y += m_JSpeed * m_Accel * delta;
-		//	m_Accel = -3.0f;
-		//}
+		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
+			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
+			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
+			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
+		{
+			pos.y += m_JSpeed * m_Accel * delta;
+			m_Accel = -3.0f;
+		}
 		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
 		{
@@ -282,6 +282,10 @@ namespace basecross {
 				else if (ret.x || ret.y)
 				{
 					pos += angle * m_Speed * delta;
+					if (angle.x <= 0.8f && angle.x >= -0.5f)
+					{
+						pos += m_moveAngle * m_Speed * delta;
+					}
 				}
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
@@ -426,22 +430,27 @@ namespace basecross {
 			ptrCamera->m_ret.y = cntl[0].fThumbRY;
 		}
 
-
+		auto angle = GetMoveVector();
+		
 		ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at, pos.z));
 
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
-		//wss << L"\n\n\npos : (" <<
-		//	pos.x << L", " <<
-		//	pos.y << L", " <<
-		//	pos.z << L")" <<
+		wss << L"\n\n\npos : (" <<
+			pos.x << L", " <<
+			pos.y << L", " <<
+			pos.z << L")" <<
 
+			"\nangle : (" <<
+				angle.x << L", " <<
+				angle.y << L", " <<
+				angle.z << L")" <<
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
 		//	fps							<<
 
-			//endl;
+			endl;
 
 		// //ゴール判定
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
@@ -531,7 +540,7 @@ namespace basecross {
 		if (other->FindTag(L"FloatCircle") && ScoreFlag == false)
 		{
 			ptrMana->Start(L"PointSE", 0, 1.0f);
-
+			m_Speed += 1.0f;
 			ScoreFlag = true;
 			auto ciclenext = ptrCircle->m_next++;
 			auto comboCount = ptrCircle->m_ComboCount;
@@ -560,6 +569,7 @@ namespace basecross {
 
 		if (other->FindTag(L"StanObject"))
 		{
+			m_Speed = 10.0f;
 			m_CircleCount = 0;
 			m_Accel = -4.0f;
 			m_MoveFlag = false;

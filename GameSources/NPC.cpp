@@ -98,7 +98,7 @@ namespace basecross {
 		m_ptrAction->AddMoveBy(UpTime, Vec3(0.0f, jump, 8.5f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);// 7
 		m_ptrAction->AddMoveBy(DownTime, Vec3(15.0f, -jump, 4.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
 
-		if (JumpTrue[3])
+		if (/*JumpTrue[3]*/true)
 		{
 			m_ptrAction->AddMoveBy(0.2f, Vec3(0.0f, 0, 3.0f));// 8
 			m_ptrAction->AddMoveBy(UpTime, Vec3(0.0f, jump, 7.0f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);
@@ -106,39 +106,39 @@ namespace basecross {
 		}
 		else
 		{
-			m_ptrAction->AddMoveBy(JumpTime + 0.2, Vec3(0.0f, 0, 15.0f));// 8
+			m_ptrAction->AddMoveBy(JumpTime + 0.2, Vec3(0.0f, 0, 18.0f));// 8
 		}
 
-		if (JumpTrue[4])
+		if (/*JumpTrue[4]*/true)
 		{
 			m_ptrAction->AddMoveBy(UpTime + 0.35f, Vec3(0.0f, jump, 8.5f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);// 9(—Ö)
-			m_ptrAction->AddMoveBy(DownTime + 0.35f, Vec3(0.0f, -jump, 12.5f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
+			m_ptrAction->AddMoveBy(DownTime + 0.35f, Vec3(0.0f, -jump, 16.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
 		}
 		else
 		{
-			m_ptrAction->AddMoveBy(JumpTime + 0.7f, Vec3(0.0f, 0, 23.0f));//9(—Ö)
+			m_ptrAction->AddMoveBy(JumpTime + 0.7f, Vec3(0.0f, 0, 24.5f));//9(—Ö)
 		}
 
-		if (JumpTrue[5])
+		if (/*JumpTrue[5]*/true)
 		{
-			m_ptrAction->AddMoveBy(0.2f, Vec3(0.0f, 0, 3.0f));
+			m_ptrAction->AddMoveBy(0.2f, Vec3(0.0f, 0, 1.0f));
 			m_ptrAction->AddMoveBy(UpTime, Vec3(0.0f, jump, 8.5f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);// 10
 			m_ptrAction->AddMoveBy(DownTime, Vec3(-9.5f, -jump, 12.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
 		}
 		else
 		{
-			m_ptrAction->AddMoveBy(UpTime + 0.1f, Vec3(0.0f, 0, 8.5f));// 10
-			m_ptrAction->AddMoveBy(DownTime + 0.1f, Vec3(-9.0f, 0, 15.0f));
+			m_ptrAction->AddMoveBy(UpTime + 0.1f, Vec3(0.0f, 0, 9.5f));// 10
+			m_ptrAction->AddMoveBy(DownTime + 0.1f, Vec3(-9.5f, 0, 12.0f));
 		}
 
-		m_ptrAction->AddMoveBy(1.0f, Vec3(-2.0f, 0, 7.5f));
-		m_ptrAction->AddMoveBy(1.0f, Vec3(-3.0f, 0, -4.5f));
+		m_ptrAction->AddMoveBy(1.0f, Vec3(-2.0f, 0, 3.5f));
+		m_ptrAction->AddMoveBy(1.0f, Vec3(-3.0f, 0, -3.5f));
 		m_ptrAction->AddMoveBy(UpTime, Vec3(-1.0f, jump, -10.0f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear);  // 11
 		m_ptrAction->AddMoveBy(DownTime, Vec3(0.0f, -jump, -7.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
 		m_ptrAction->AddMoveBy(2.5f, Vec3(-14.0f, 0, -20.0f));
 		m_ptrAction->AddMoveBy(UpTime, Vec3(0.0f, jump, -8.5f), Lerp::Linear, Lerp::EaseOut, Lerp::Linear); // 12(’†‰›)
 		m_ptrAction->AddMoveBy(DownTime, Vec3(0.0f, -jump, -20.0f), Lerp::Linear, Lerp::Easein, Lerp::Linear);
-		m_ptrAction->AddMoveBy(1.5f, Vec3(0.0f, 0, -18.5f));
+		m_ptrAction->AddMoveBy(1.5f, Vec3(0.0f, 0, -17.3f));
 
 		// ‰ñ“]
 		m_ptrAction->AddRotateInterval(4.0f);
@@ -162,7 +162,6 @@ namespace basecross {
 		m_ptrAction->AddRotateInterval(0.8f);
 		m_ptrAction->AddRotateBy(lotsec * 2, Vec3(0, -deg45, 0));
 		m_ptrAction->AddRotateInterval(7.6f);
-		//m_ptrAction->AddRotateInterval(5.5f);
 		m_ptrAction->AddRotateBy(lotsec, Vec3(0, -deg45, 0));
 		m_ptrAction->AddRotateInterval(1.5f);
 		m_ptrAction->AddRotateBy(2.0f, Vec3(0, deg180 + deg45, 0));
