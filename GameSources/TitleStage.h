@@ -22,6 +22,7 @@ namespace basecross {
 		void CreateBGM();
 
 		float m_comX;
+		float m_comY;
 		float deg;
 		float deg2;
 		float rad;
@@ -42,6 +43,10 @@ namespace basecross {
 		Vec3 m_StartPos;
 		Vec3 m_StartRot;
 		bool m_TextureUse;
+
+		bool m_flag;
+		float m_comX;
+
 	public:
 		//\’z‚Æ”jŠü
 		Model1(const shared_ptr<Stage>& StagePtr, const Vec3& StartPos, const Vec3& StartRot);
@@ -49,6 +54,7 @@ namespace basecross {
 		//‰Šú‰»
 		virtual void OnCreate() override;
 		virtual void OnUpdate() override;
+		void ChangeAnimation(const wstring& animationName);
 	};
 
 }

@@ -110,6 +110,8 @@ namespace basecross {
 		bool gaugeFlag;		
 		bool m_CreateResult;
 		bool m_MoveFlag;
+		bool m_StartDraw;
+
 		//構築と破棄
 		GameStage();
 		virtual ~GameStage() 

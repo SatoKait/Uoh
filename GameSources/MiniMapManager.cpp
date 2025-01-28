@@ -41,7 +41,7 @@ namespace basecross {
 		//m_mapSize = 200;//mapの直径
 		m_mapMagnification = Lenght / m_mapSize;//マップの倍率
 
-		CreateMoveGate();
+		//CreateMoveGate();
 		CreateGate();//マンホールを生成//動かないのでここで書きMiniMapManegerで出てくる
 		CreatCircleGate();
 		//CreateEnemy();
@@ -287,7 +287,7 @@ namespace basecross {
 					auto itemScale = itemTrans->GetScale();
 					auto itemRotaiton = itemTrans->GetQuaternion();
 
-					auto ptrCircle = stage->AddGameObject<MiniMapActor>(castCircle, L"MiniMapPlayer_TX", Vec2((10 * m_mapMagnification), (10 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
+					auto ptrCircle = stage->AddGameObject<MiniMapActor>(castCircle, L"CIRCLE_TX", Vec2((13 * m_mapMagnification), (13 * m_mapMagnification)), m_startPos, m_mapSize, Lenght);
 				}
 			}
 		}

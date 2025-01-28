@@ -105,6 +105,24 @@ namespace basecross{
 			tex = texPath + L"unhappy.png";
 			App::GetApp()->RegisterTexture(L"UNHAPPY_TX", tex);
 
+			tex = texPath + L"StageText.png";
+			App::GetApp()->RegisterTexture(L"STAGETEXT_TX", tex);
+			tex = texPath + L"loseicon.png";
+			App::GetApp()->RegisterTexture(L"PLAYERLOSE_TX", tex);
+			tex = texPath + L"loseicon2.png";
+			App::GetApp()->RegisterTexture(L"NPCLOSE_TX", tex);
+			tex = texPath + L"winicon.png";
+			App::GetApp()->RegisterTexture(L"PLAYERWIN_TX", tex);
+			tex = texPath + L"winicon2.png";
+			App::GetApp()->RegisterTexture(L"NPCWIN_TX", tex);
+			tex = texPath + L"Circle.png";
+			App::GetApp()->RegisterTexture(L"CIRCLE_TX", tex);
+			tex = texPath + L"hide.png";
+			App::GetApp()->RegisterTexture(L"GaugeHide_TX", tex);
+			tex = texPath + L"hide2.png";
+			App::GetApp()->RegisterTexture(L"GaugeHide2_TX", tex);
+			tex = texPath + L"hide3.png";
+			App::GetApp()->RegisterTexture(L"GaugeHide3_TX", tex);
 
 			//tex = texPath + L"Tri.png";
 			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
