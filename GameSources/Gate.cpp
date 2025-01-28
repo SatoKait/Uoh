@@ -82,6 +82,7 @@ namespace basecross {
         if (!m_EndFlag) {
             m_Pos = Vec3(0.0f, DrawPos, 20.0f);
             m_EndFlag = true;
+            m_CreateFlag = true;
         }
         if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
             m_Pos.y += Speed * delta;
@@ -103,6 +104,7 @@ namespace basecross {
         if (!m_EndFlag) {
             m_Pos = Vec3(20.0f, DrawPos, 0.0f);
             m_EndFlag = true;
+            m_CreateFlag = true;
         }
         if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
             m_Pos.y += Speed * delta;
@@ -123,6 +125,7 @@ namespace basecross {
         if (!m_EndFlag) {
             m_Pos = Vec3(0.0f, DrawPos, -20.0f);
             m_EndFlag = true;
+            m_CreateFlag = true;
         }
         if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
             m_Pos.y += Speed * delta;
@@ -143,6 +146,7 @@ namespace basecross {
         if (!m_EndFlag) {
             m_Pos = Vec3(-20.0f, DrawPos, 0.0f);
             m_EndFlag = true;
+            m_CreateFlag = true;
         }
         if (m_Pos.y <= 5.55f && m_EndFlag && !m_DownFlag) {
             m_Pos.y += Speed * delta;

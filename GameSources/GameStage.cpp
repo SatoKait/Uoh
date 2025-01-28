@@ -16,13 +16,13 @@ namespace basecross {
 	// コンストラクタ
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
-		m_ToTalTime(30.0f),
+		m_ToTalTime(10.0f),
 		m_ToStartTime(3.0f),
 		m_ToTalTime2(1.0f),
 		m_EndTime(10.0f),
 		m_isStartFlag(false),
-		m_TimeFlag(false),
-		m_Flag(false),
+		m_TimeFlag(true),
+		m_Flag(true),
 		m_DrawFlag(true),
 		m_GoalFlag(false),
 		m_EndFlag(false),
@@ -800,8 +800,10 @@ namespace basecross {
 			ptrConmboSprite->SetDrawLayer(-100);
 			auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
 			ptrConmboSpriteNumber->SetDrawLayer(-100);
-			auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
-			MiniMapSprite->SetDrawLayer(-100);
+			//auto MiniMapSpritehaikei = GetSharedGameObject<MiniMapSprite>(L"haikei");
+			//MiniMapSpritehaikei->SetDrawLayer(-100);
+			//auto MiniMapSpriteGate = GetSharedGameObject<MiniMapSprite>(L"MiniMapGate");
+			//MiniMapSpriteGate->SetDrawLayer(-100);
 			auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
 			PlayerBAR->SetDrawLayer(-100);
 			auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
@@ -876,6 +878,11 @@ namespace basecross {
 					SetSharedGameObject(L"Gate1", ptrgate);
 					m_SetCount++;
 				}
+				else if (m_SetCount == 2)
+				{
+					SetSharedGameObject(L"Gate2", ptrgate);
+					m_SetCount++;
+				}
 
 			
 				auto ptrRandFlag = ptrgate->m_RandFlag = false;
@@ -926,8 +933,19 @@ namespace basecross {
 					auto ptrChangeFlag1 = ptrgate3->m_ChangeFlag1 = false;
 					auto ptrChangeFlag2 = ptrgate3->m_ChangeFlag2 = false;
 					auto ptrChangeFlag3 = ptrgate3->m_ChangeFlag3 = false;
-
 				}
+				else if (m_SetCount == 3)
+				{
+					auto ptrgate10 = GetSharedGameObject<Gate>(L"Gate2");
+					auto ptrFlag = ptrgate10->flag = 0;
+					auto ptrRandFlag = ptrgate10->m_RandFlag = false;
+					auto ptrDownFlag = ptrgate10->m_DownFlag = true;
+					auto ptrChangeFlag = ptrgate10->m_ChangeFlag = false;
+					auto ptrChangeFlag1 = ptrgate10->m_ChangeFlag1 = false;
+					auto ptrChangeFlag2 = ptrgate10->m_ChangeFlag2 = false;
+					auto ptrChangeFlag3 = ptrgate10->m_ChangeFlag3 = false;
+				}
+
 			}
 
 			cicleTrans->SetPosition(15.0f, 6.0f, -35.0f);
@@ -947,6 +965,13 @@ namespace basecross {
 					RemoveGameObject<Gate>(ptrgate3);
 					count--;
 				}
+				else if (m_SetCount == 3)
+				{
+					auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate2");
+					RemoveGameObject<Gate>(ptrgate3);
+					count--;
+				}
+
 
 			}
 
@@ -975,6 +1000,12 @@ namespace basecross {
 					SetSharedGameObject(L"Gate3", ptrgate4);
 					m_Set2Count++;
 				}
+				else if (m_Set2Count == 2)
+				{
+					SetSharedGameObject(L"Gate4", ptrgate4);
+					m_Set2Count++;
+				}
+
 
 				auto ptrRandFlag2 = ptrgate4->m_RandFlag = false;
 				auto ptrFlag2 = ptrgate4->flag;
@@ -1025,6 +1056,18 @@ namespace basecross {
 					auto ptrChangeFlag2 = ptrgate6->m_ChangeFlag2 = false;
 					auto ptrChangeFlag3 = ptrgate6->m_ChangeFlag3 = false;
 				}
+				else if (m_Set2Count == 1)
+				{
+					auto ptrgate11 = GetSharedGameObject<Gate>(L"Gate4");
+					auto ptrFlag = ptrgate11->flag = 0;
+					auto ptrRandFlag = ptrgate11->m_RandFlag = false;
+					auto ptrDownFlag = ptrgate11->m_DownFlag = true;
+					auto ptrChangeFlag = ptrgate11->m_ChangeFlag = false;
+					auto ptrChangeFlag1 = ptrgate11->m_ChangeFlag1 = false;
+					auto ptrChangeFlag2 = ptrgate11->m_ChangeFlag2 = false;
+					auto ptrChangeFlag3 = ptrgate11->m_ChangeFlag3 = false;
+				}
+
 			}
 
 			break;
@@ -1043,6 +1086,13 @@ namespace basecross {
 					RemoveGameObject<Gate>(ptrgate8);
 					count--;
 				}
+				else if (m_Set2Count == 3)
+				{
+					auto ptrgate8 = GetSharedGameObject<Gate>(L"Gate4");
+					RemoveGameObject<Gate>(ptrgate8);
+					count--;
+				}
+
 			}
 
 			circle->m_next = 2;
