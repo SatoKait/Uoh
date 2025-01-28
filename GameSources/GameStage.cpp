@@ -567,12 +567,25 @@ namespace basecross {
 		}
 		if (m_ToStartTime <= 0)
 		{
+			if (!m_StartDraw)
+			{
+				auto Start = AddGameObject<StageSprite>(L"START_TX", true,
+					Vec2(512.0f, 256.0f), Vec2(0.0f, 0.0f));
+				Start->SetDrawLayer(100);
+				SetSharedGameObject(L"Start", Start);
+			}
 			m_StartDraw = true;
 			CountTime->SetDrawLayer(-90);
 			m_isStartFlag = true;
+			if (m_StartDraw && StartTime >= 12.0f)
+			{
+				auto Start = GetSharedGameObject<StageSprite>(L"Start");
+				Start->SetDrawLayer(-100);
+			}
+
 		}
 		if (m_isStartFlag)
-		{
+		{ 
 			m_ToTalTime -= elapsedTime;
 
 			if (m_ToTalTime <= 0 && m_TimeFlag == false)
