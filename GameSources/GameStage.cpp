@@ -520,17 +520,16 @@ namespace basecross {
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
-			int a = 0;
-			ptrMana->Stop(m_BGM);
+			//ptrMana->Stop(m_BGM);
 
-			if (score1 > score2)
-			{
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-			}
-			else
-			{
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-			}
+			//if (score1 > score2)
+			//{
+			//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			//}
+			//else
+			//{
+			//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+			//}
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		auto CameraFlag = ptrPlayer->m_CameraFlag;

@@ -284,10 +284,10 @@ namespace basecross {
 				else if (ret.x || ret.y)
 				{
 					pos += angle * m_Speed * delta;
-					if (angle.z <= -0.1f && (rotate.y == 1 || rotate.y == -1))
-					{
-						pos += m_moveAngle * m_Speed * delta;
-					}
+					//if (angle.z <= -0.1f/* && (rotate.y == 1 || rotate.y == -1)*/)
+					//{
+					//	pos += m_moveAngle * m_Speed * delta;
+					//}
 				}
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
@@ -456,6 +456,10 @@ namespace basecross {
 			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at + 1, pos.z));
 		}
 
+		if (m_Speed > 10 && m_CircleCount == 0)
+		{
+			m_Speed = 10;
+		}
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
