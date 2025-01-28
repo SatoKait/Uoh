@@ -336,7 +336,7 @@ namespace basecross {
 	void GameStage::CreateNPC()
 	{
 		auto ptr = AddGameObject<NPC>(Vec3(0.3f), Vec3(0.0f, XM_PIDIV2,0.0f), Vec3(0.0f, 0.0f, -45.0f));
-
+		SetSharedGameObject(L"NPC", ptr);
 	}
 	void GameStage::OnCreate() {
 		try {
@@ -438,6 +438,7 @@ namespace basecross {
 		auto score1 = App::GetApp()->GetScene<Scene>()->GetPoint();
 		auto score2 = App::GetApp()->GetScene<Scene>()->GetPoint2();
 		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
+		auto ptrNPC = GetSharedGameObject<NPC>(L"NPC");
 		auto GoalFlag = ptrPlayer->m_GoalFlag;
 		auto m_count = ptrPlayer->m_CircleCount;
 		auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
@@ -501,6 +502,7 @@ namespace basecross {
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		auto CameraFlag = ptrPlayer->m_CameraFlag;
 		auto PlayerMoveFlag = ptrPlayer->m_MoveFlag;
+		auto NPCStopFlag = ptrNPC->m_stopFlag;
 		StartTime += delta;
 		if (StartTime >= 8.0f)
 		{		
@@ -556,7 +558,7 @@ namespace basecross {
 				}
 				m_TimeUpAfter += delta;
 				ptrPlayer->m_MoveFlag = false;		
-
+				ptrNPC->m_stopFlag = true;
 				if (m_TimeUpAfter >= 3.0f)
 				{
 					if (m_CreateResultFlag == false)

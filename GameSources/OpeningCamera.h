@@ -45,6 +45,7 @@ namespace basecross {
 		//ステートマシーン
 		unique_ptr< StateMachine<OpeningCameraman> >  m_StateMachine;
 	public:
+		bool m_ChangeFlag;
 		//構築と破棄
 		OpeningCameraman(const shared_ptr<Stage>& StagePtr);
 		virtual ~OpeningCameraman();

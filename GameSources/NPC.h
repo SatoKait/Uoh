@@ -18,6 +18,8 @@ namespace basecross{
 		bool m_OnceFlag;
 	public:
 		int m_CircleCount;
+		bool m_OnceFlag1;
+		bool m_stopFlag;
 
 		//\’z‚Æ”jŠü
 		NPC(shared_ptr<Stage>& StagePtr,
