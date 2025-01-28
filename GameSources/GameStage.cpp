@@ -17,7 +17,7 @@ namespace basecross {
 	GameStage::GameStage() :
 		m_StageRation(10.0f), // ステージのサイズ倍率
 		m_ToTalTime(30.0f),
-		m_ToStartTime(4.0f),
+		m_ToStartTime(3.0f),
 		m_ToTalTime2(1.0f),
 		m_EndTime(10.0f),
 		m_isStartFlag(false),
@@ -41,7 +41,8 @@ namespace basecross {
 		m_StrartFlag1(false),
 		m_StrartFlag2(false),
 		m_MoveFlag(false),
-		StartTime(0.0f)
+		StartTime(0.0f),
+		m_StartDraw(false)
 	{}
 
 	void GameStage::CreateViewLight() {		
@@ -207,6 +208,7 @@ namespace basecross {
 			Vec2(120.0f, 80.0f),
 			Vec3(x, y - 30.0f, 0.0f)
 		);
+		ConmboSprite->SetDrawLayer(-100);
 		SetSharedGameObject(L"ConmboSprite", ConmboSprite);
 
 		auto ConmboSpriteNumber =  AddGameObject<ComboSpriteNumber>(
@@ -215,6 +217,7 @@ namespace basecross {
 			Vec2(1.0f, 1.0f),
 			Vec3(x - 130.0f, y + 44.0f , 0.0f)
 		);
+		ConmboSpriteNumber->SetDrawLayer(-100);
 			SetSharedGameObject(L"ConmboSpriteNumber", ConmboSpriteNumber);
 
 	}
@@ -232,15 +235,20 @@ namespace basecross {
 			true,
 			Vec2(220.0f, 80.0f),
 			Vec3(670.0f, 365.0f, 0.0f));
+		Time->SetDrawLayer(-100);
+		SetSharedGameObject(L"Time", Time);
 		//左側のカウントダウン
-		AddGameObject<UITime2>(2,
+		auto Time2 = AddGameObject<UITime2>(2,
 			L"NUMBER_TX",
 			true,
 			Vec2(220.0f, 80.0f),
 			Vec3(530.0f, 365.0f, 0.0f));
+		Time2->SetDrawLayer(-100);
+		SetSharedGameObject(L"Time2", Time2);
 		//:の部分を表示している
 		auto ptrSprite = AddGameObject<StageSprite>(L"TIME_TX", true,
 			Vec2(350.0f, 80.0f), Vec2(495.0f, 355.0f));
+		ptrSprite->SetDrawLayer(-100);
 		SetSharedGameObject(L"TimeSprite", ptrSprite);	
 		//AddGameObject<StageSprite>(L"PARTITION_TX", true,
 		//Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
@@ -263,9 +271,11 @@ namespace basecross {
 		// 説明のアイコンを生成
 		auto YouIcon = AddGameObject<StageSprite>(L"YOU_TX", true,
 			Vec2(90.0f, 50.0f), Vec2(-515.0f, -378.0f));
+		YouIcon->SetDrawLayer(-100);
 		SetSharedGameObject(L"YouIcon", YouIcon);
 		auto UIIcon = AddGameObject<StageSprite>(L"ICON_TX", true,
 			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
+		UIIcon->SetDrawLayer(-100);
 		SetSharedGameObject(L"UIIcon", UIIcon);
 		auto Kakeru = AddGameObject<StageSprite>(L"KAKERU_TX", true,
 			Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
@@ -380,9 +390,11 @@ namespace basecross {
 
 			auto PlayerBAR = AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
+			PlayerBAR->SetDrawLayer(-100);
 				SetSharedGameObject(L"PlayerBAR", PlayerBAR);
 			auto EnemyBAR = AddGameObject<StageSprite>(L"BAR_TX", true,
 				Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
+			EnemyBAR->SetDrawLayer(-100);
 			SetSharedGameObject(L"EnemyBAR", EnemyBAR);
 			// Skyboxクラス用
 			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
@@ -392,9 +404,10 @@ namespace basecross {
 
 			auto Rank = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
 				Vec2(1.0f, 1.0f), Vec3(-540.0f, -50.0f, 0.0f));
+			Rank->SetDrawLayer(-100);
 			auto Rank2 = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
 				Vec2(1.0f, 1.0f), Vec3(-620.0f, -50.0f, 0.0f));
-			Rank->SetDrawLayer(300);
+			Rank2->SetDrawLayer(-100);
 			SetSharedGameObject(L"Rank", Rank);
 			SetSharedGameObject(L"Rank2", Rank2);
 			//AddGameObject<ScoreSprite>();
@@ -421,8 +434,23 @@ namespace basecross {
 			SetSharedGameObject(L"ResultIconNPC", IconNPC);
 			IconNPC->SetDrawLayer(-999);
 
+            auto StageText = AddGameObject<StageSprite>(L"STAGETEXT_TX", true,
+				Vec2(1200.0f, 200.0f), Vec2(0.0f, 20.0f));
+			SetSharedGameObject(L"StageText", StageText);
+			auto GaugeHide = AddGameObject<StageSprite>(L"GaugeHide_TX", true,
+				Vec2(270.0f, 285.0f), Vec2(-513.0f, -255.0f));
+			GaugeHide->SetDrawLayer(-90);
+			SetSharedGameObject(L"GaugeHide", GaugeHide);
+			auto GaugeHide2 = AddGameObject<StageSprite>(L"GaugeHide2_TX", true,
+				Vec2(270.0f, 285.0f), Vec2(-590.0f, -255.0f));
+			GaugeHide2->SetDrawLayer(-90);
+			SetSharedGameObject(L"GaugeHide2", GaugeHide2);
+			auto GaugeHide3 = AddGameObject<StageSprite>(L"GaugeHide3_TX", true,
+				Vec2(70.0f, 70.0f), Vec2(-417.0f, -352.0f));
+			GaugeHide3->SetDrawLayer(-90);
+			SetSharedGameObject(L"GaugeHide3", GaugeHide3);
 
-			CreateMoveCamera();
+
 		}
 		catch (...) {
 			throw;
@@ -453,6 +481,11 @@ namespace basecross {
 		auto ptrNPCResultIcon= GetSharedGameObject<JumpSprite>(L"ResultIconNPC");
 		
 		auto CountTime = GetSharedGameObject<UITimeStage>(L"CountTime");
+		auto StageText = GetSharedGameObject<StageSprite>(L"StageText");
+
+		auto GaugeHide = GetSharedGameObject<StageSprite>(L"GaugeHide");
+		auto GaugeHide2 = GetSharedGameObject<StageSprite>(L"GaugeHide2");
+		auto GaugeHide3 = GetSharedGameObject<StageSprite>(L"GaugeHide3");
 
 		Rank->UpdateValue(m_rank);
 		Rank2->UpdateValue(m_rank2);
@@ -502,13 +535,37 @@ namespace basecross {
 		auto CameraFlag = ptrPlayer->m_CameraFlag;
 		auto PlayerMoveFlag = ptrPlayer->m_MoveFlag;
 		StartTime += delta;
-		if (StartTime >= 8.0f)
+		if (StartTime >= 8.0f && !m_StartDraw)
 		{		
+			StageText->SetDrawLayer(-90);
 			CountTime->SetDrawLayer(100);
+			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
+			ptrUITime->SetDrawLayer(100);
+			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
+			ptrUITime2->SetDrawLayer(100);
+			auto ptrSprite = GetSharedGameObject<StageSprite>(L"TimeSprite");
+			ptrSprite->SetDrawLayer(100);
+			auto ptrUIIcon = GetSharedGameObject<StageSprite>(L"UIIcon");
+			ptrUIIcon->SetDrawLayer(100);
+			auto ptrConmboSprite = GetSharedGameObject<ComboSprite>(L"ConmboSprite");
+			ptrConmboSprite->SetDrawLayer(100);
+			auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
+			ptrConmboSpriteNumber->SetDrawLayer(100);
+			auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
+			MiniMapSprite->SetDrawLayer(-100);
+			auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
+			PlayerBAR->SetDrawLayer(100);
+			auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
+			EnemyBAR->SetDrawLayer(100);
+			auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
+			YouIcon->SetDrawLayer(100);
+			Rank->SetDrawLayer(100);
+			Rank2->SetDrawLayer(100);
 			m_ToStartTime -= elapsedTime;
 		}
 		if (m_ToStartTime <= 0)
 		{
+			m_StartDraw = true;
 			CountTime->SetDrawLayer(-90);
 			m_isStartFlag = true;
 		}
@@ -549,8 +606,9 @@ namespace basecross {
 				if (m_TimeUpFlag == false)
 				{	
 					ptrMana->Stop(m_BGM);
-					AddGameObject<StageSprite>(L"END_TX", true,
+					auto EndText = AddGameObject<StageSprite>(L"END_TX", true,
 						Vec2(1024.0f, 512.0f), Vec2(0.0f, 0.0f));
+					SetSharedGameObject(L"EndText", EndText);
 					ptrMana->Start(L"TIMEUPSE", 0, 0.5f);
 					m_TimeUpFlag = true;
 				}
@@ -559,6 +617,8 @@ namespace basecross {
 
 				if (m_TimeUpAfter >= 3.0f)
 				{
+					auto EndText = GetSharedGameObject<StageSprite>(L"EndText");
+					EndText->SetDrawLayer(-100);
 					if (m_CreateResultFlag == false)
 					{
 						ptrMana->Start(L"RESULT", 0, 1.0f);
@@ -682,6 +742,10 @@ namespace basecross {
 			m_BGM = ptrMana->Start(L"StageBGM2", 1, 0.3f);
 			m_30secFlag = false; 
 
+			GaugeHide->SetDrawLayer(90);
+			GaugeHide2->SetDrawLayer(90);
+			GaugeHide3->SetDrawLayer(90);
+
 
 			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
 			ptrUITime->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
@@ -716,8 +780,8 @@ namespace basecross {
 			ptrUITime->SetColor(Col4(1.0f, 0.0f, 0.0f, 1.0f));
 			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
 			ptrUITime2->SetColor(Col4(1.0f, 0.0f, 0.0f, 1.0f));
-		}
 
+		}
 		if (m_TimeFlag == true && m_ToTalTime <= 1.0f && m_EndFlag == true)
 		{
 			auto ptrScor3 = GetSharedGameObject<LastTime>(L"LastTime");
@@ -750,8 +814,15 @@ namespace basecross {
 			Kakeru->SetDrawLayer(-100);
 			auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
 			YouIcon->SetDrawLayer(-100);
+			Rank->SetDrawLayer(-100);
+			Rank2->SetDrawLayer(-100);
+
 			//auto MinimapDraw = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
 			//MinimapDraw->m_MiniMapDrawFlag = true;
+			GaugeHide->SetDrawLayer(-100);
+			GaugeHide2->SetDrawLayer(-100);
+			GaugeHide3->SetDrawLayer(-100);
+
 		}
 		if (m_isStartFlag == false)
 		{
