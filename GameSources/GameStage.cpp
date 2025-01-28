@@ -880,7 +880,7 @@ namespace basecross {
 				}
 				else if (m_SetCount == 2)
 				{
-					SetSharedGameObject(L"Gate2", ptrgate);
+					SetSharedGameObject(L"Gate5", ptrgate);
 					m_SetCount++;
 				}
 
@@ -936,7 +936,7 @@ namespace basecross {
 				}
 				else if (m_SetCount == 3)
 				{
-					auto ptrgate10 = GetSharedGameObject<Gate>(L"Gate2");
+					auto ptrgate10 = GetSharedGameObject<Gate>(L"Gate5");
 					auto ptrFlag = ptrgate10->flag = 0;
 					auto ptrRandFlag = ptrgate10->m_RandFlag = false;
 					auto ptrDownFlag = ptrgate10->m_DownFlag = true;
@@ -967,7 +967,7 @@ namespace basecross {
 				}
 				else if (m_SetCount == 3)
 				{
-					auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate2");
+					auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate5");
 					RemoveGameObject<Gate>(ptrgate3);
 					count--;
 				}
