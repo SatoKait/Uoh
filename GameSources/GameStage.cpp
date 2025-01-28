@@ -254,7 +254,7 @@ namespace basecross {
 		SetSharedGameObject(L"Gauge", ptrHpGauge);
 		auto ptrGaugeSpriteNumber = AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
 			true,
-			Vec2(1.0f, 1.0f), Vec3(-445.0f, -290.0f, 0.0f));
+			Vec2(1.5f, 0.9f), Vec3(-455.0f, -300.0f, 0.0f));
 		SetSharedGameObject(L"GaugeSpriteNumber", ptrGaugeSpriteNumber);
 		// HPゲージの生成
 		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,

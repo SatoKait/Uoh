@@ -409,6 +409,9 @@ namespace basecross {
 }
 
 namespace basecross {
+	//--------------------------------------------------------------------------------------
+	///	                               Rankスプライト
+	//--------------------------------------------------------------------------------------
 	//初期化
 	void RankSpriteNumber::OnCreate()
 	{
@@ -488,6 +491,9 @@ namespace basecross {
 }
 
 namespace basecross {
+	//--------------------------------------------------------------------------------------
+	///	                               Gaugeスプライト
+	//--------------------------------------------------------------------------------------
 	//初期化
 	void GaugeSpriteNumber::OnCreate()
 	{
@@ -545,7 +551,7 @@ namespace basecross {
 	void GaugeSpriteNumber::UpdateValue(int value)//切り出せるようにint valueしている
 	{
 		//ポリゴンの頂点データを更新する(valueの数値に合わせた「画像」を切り抜く)
-		const float numberW = 51.0f / 512.0f;
+		const float numberW = 85.7f / 1200.0f;
 		int number = value;
 
 		m_vertices[0].textureCoordinate.x = numberW * number;//0番目の頂点の物になる//.のあとに入れるもので色々変えることができる
@@ -559,6 +565,9 @@ namespace basecross {
 }
 
 namespace basecross {
+	//--------------------------------------------------------------------------------------
+	///	                               MiniMapスプライト
+	//--------------------------------------------------------------------------------------
 	MiniMapSprite::MiniMapSprite(shared_ptr<Stage>& stagePtr, wstring textureName, Vec2 size, Vec3 pos, Vec3 rot, Col4 color, int layer) :
 		GameObject(stagePtr),
 		m_textureName(textureName),
@@ -635,7 +644,9 @@ namespace basecross {
 }
 
 namespace basecross {
-
+	//--------------------------------------------------------------------------------------
+	///	                               Gateスプライト
+	//--------------------------------------------------------------------------------------
 	GateSprite::GateSprite(shared_ptr<Stage>& stagePtr, wstring textureName, Vec2 size, Vec3 pos, Vec3 rot, Col4 color, int layer) :
 		MiniMapSprite(stagePtr, textureName, size, pos, rot, color, layer)
 		//m_parent(parent)
@@ -652,7 +663,10 @@ namespace basecross {
 }
 
 namespace basecross {
-		MiniMapMoveGate::MiniMapMoveGate(shared_ptr<Stage>& stagePtr, weak_ptr<Gate> parentObj, wstring textureName, Vec2 size, int layer, Vec3 pos, Vec3 rot) :
+	//--------------------------------------------------------------------------------------
+	///	                               MiniMapMoveGate
+	//--------------------------------------------------------------------------------------
+	MiniMapMoveGate::MiniMapMoveGate(shared_ptr<Stage>& stagePtr, weak_ptr<Gate> parentObj, wstring textureName, Vec2 size, int layer, Vec3 pos, Vec3 rot) :
 			GameObject(stagePtr),
 			m_textureName(textureName),
 			m_parentObj(parentObj),
@@ -716,7 +730,7 @@ namespace basecross {
 
 namespace basecross {
 	//--------------------------------------------------------------------------------------
-	///	                               Spriteスプライト
+	///	                               Jumpスプライト
 	//--------------------------------------------------------------------------------------
 	JumpSprite::JumpSprite(const shared_ptr<Stage>& StagePtr, const wstring& ClearKey, bool Trace,
 		const Vec2& StartScale, const Vec2& StartPos) :
