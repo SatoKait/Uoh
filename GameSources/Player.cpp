@@ -105,6 +105,7 @@ namespace basecross {
 		auto pos = trans->GetPosition();
 		// 大きさの取得
 		auto scale = trans->GetScale();
+		auto rotate = trans->GetRotation();
 		//コントローラの取得
 		auto cntl = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
@@ -283,7 +284,7 @@ namespace basecross {
 				else if (ret.x || ret.y)
 				{
 					pos += angle * m_Speed * delta;
-					if (angle.x <= 0.8f && angle.x >= -0.5f)
+					if (angle.z <= -0.1f && (rotate.y == 1 || rotate.y == -1))
 					{
 						pos += m_moveAngle * m_Speed * delta;
 					}
@@ -436,7 +437,7 @@ namespace basecross {
 
 		}
 
-		if (!m_MoveFlag)//フラグがたっていなければ操作ができない
+		if (!m_MoveFlag && m_StartFlag)//フラグがたっていなければ操作ができない
 		{
 			ptrCamera->m_ret.x = 0; 
 			ptrCamera->m_ret.y = 0;
@@ -453,25 +454,27 @@ namespace basecross {
 		if (m_CameraFlag)
 		{
 			ptrCamera->SetAt(Vec3(pos.x, ptrCamera->m_at + 1, pos.z));
-    }
+		}
 
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
-		wss << L"\n\n\npos : (" <<
-			pos.x << L", " <<
-			pos.y << L", " <<
-			pos.z << L")" <<
+		//wss << L"\n\n\npos : (" <<
+		//	pos.x << L", " <<
+		//	pos.y << L", " <<
+		//	pos.z << L")" <<
 
-			"\nangle : (" <<
-				angle.x << L", " <<
-				angle.y << L", " <<
-				angle.z << L")" <<
+		//	L"\nrotate.y : (" <<
+		//	rotate.y << L")" <<
+		//	"\nangle : (" <<
+		//		angle.x << L", " <<
+		//		angle.y << L", " <<
+		//		angle.z << L")" <<
 		//// ゲーム画面fps
 		//	L"\nFPS : "					<<
 		//	fps							<<
 
-			endl;
+			//endl;
 
 		// //ゴール判定
 		//	if (m_Goal){ wss << "Goal : true" << endl; }
@@ -561,8 +564,8 @@ namespace basecross {
 		if (other->FindTag(L"FloatCircle") && ScoreFlag == false)
 		{
 			ptrMana->Start(L"PointSE", 0, 1.0f);
-			m_Speed += 1.0f;
 			ScoreFlag = true;
+			
 			auto ciclenext = ptrCircle->m_next++;
 			auto comboCount = ptrCircle->m_ComboCount;
 			comboCount++;
@@ -571,6 +574,11 @@ namespace basecross {
 				if (m_CircleCount < 5)
 				{
 					m_CircleCount++;
+					m_Speed += 1.0f;
+					if (m_Speed == 15)
+					{
+						m_Speed += 3;
+					}
 				}
 				App::GetApp()->GetScene<Scene>()->AddScore(100 * m_CircleCount);
 				App::GetApp()->GetScene<Scene>()->AddPoint(100 * m_CircleCount);
