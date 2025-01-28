@@ -262,7 +262,7 @@ namespace basecross {
 		SetSharedGameObject(L"Gauge", ptrHpGauge);
 		auto ptrGaugeSpriteNumber = AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
 			true,
-			Vec2(1.5f, 0.9f), Vec3(-455.0f, -300.0f, 0.0f));
+			Vec2(1.3f, 0.85f), Vec3(-448.0f, -300.0f, 0.0f));
 		SetSharedGameObject(L"GaugeSpriteNumber", ptrGaugeSpriteNumber);
 		// HPゲージの生成
 		auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
@@ -446,7 +446,7 @@ namespace basecross {
 			GaugeHide2->SetDrawLayer(-90);
 			SetSharedGameObject(L"GaugeHide2", GaugeHide2);
 			auto GaugeHide3 = AddGameObject<StageSprite>(L"GaugeHide3_TX", true,
-				Vec2(70.0f, 70.0f), Vec2(-417.0f, -352.0f));
+				Vec2(75.0f, 75.0f), Vec2(-415.0f, -352.0f));
 			GaugeHide3->SetDrawLayer(-90);
 			SetSharedGameObject(L"GaugeHide3", GaugeHide3);
 
