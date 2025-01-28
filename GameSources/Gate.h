@@ -30,6 +30,7 @@ namespace basecross {
         bool m_ChangeFlag3;
         bool m_ChangeUpDown;
         bool m_DeleteFlag;
+        bool m_CreateFlag;
         float DrawPos;
         float Speed;
 
@@ -58,7 +59,8 @@ namespace basecross {
             m_DeleteFlag(false),
             DrawPos(-2.0f),
             m_ResKey(ResKey),
-            Speed(5.0f)
+            Speed(5.0f),
+            m_CreateFlag(false)
         {
         }
         void OnCreate();         // ‰Šú‰»ˆ—

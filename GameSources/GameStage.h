@@ -68,6 +68,7 @@ namespace basecross {
 		bool m_StrartFlag1;
 		bool m_StrartFlag2;
 		float StartTime;
+		bool MiniMapDrawFlag;
 
 		wstring m_Number;
 
@@ -128,6 +129,10 @@ namespace basecross {
 		}
 		void ToMyCamera();
 
+		bool GetFlag()
+		{
+			return MiniMapDrawFlag;
+		}
 		//virtual void OnDestroy()override;
 	};
 }

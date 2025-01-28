@@ -78,10 +78,14 @@ namespace basecross {
 				auto itemPos = itemTrans->GetPosition();
 				auto itemScale = itemTrans->GetScale();
 
-				auto miniMapItem = stage->AddGameObject<MiniMapMoveGate>(castitem, L"MiniMap_TX", Vec2(itemScale.x * m_mapMagnification, itemScale.z * m_mapMagnification), 5,
+				auto miniMapmovegate = stage->AddGameObject<MiniMapMoveGate>(castitem, L"MiniMap_TX", Vec2(itemScale.x * m_mapMagnification, itemScale.z * m_mapMagnification), 5,
 					Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f));
-				miniMapItem->AddTag(L"MiniMapItem");//タグを追加
-				miniMapItem->SetDrawLayer(3);
+				miniMapmovegate->AddTag(L"MiniMapItem");//タグを追加
+				miniMapmovegate->SetDrawLayer(3);
+				//if (GateFlag == true || Gate1Flag == true || Gate2Flag == true || Gate3Flag == true)
+				//{
+				//	GetStage()->SetSharedGameObject(L"MoveGate", miniMapmovegate);
+				//}
 				
 				count++;
 			}
@@ -145,7 +149,9 @@ namespace basecross {
 
 					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
+					
 					//ptrGate->SetDrawLayer(-100);
+					//GetStage()->SetSharedGameObject(L"MiniMapGate", ptrGate);
 				
 
 				}
