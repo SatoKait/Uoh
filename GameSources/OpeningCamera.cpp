@@ -14,6 +14,7 @@ namespace basecross {
 	GoalObject::~GoalObject() {}
 	//‰Šú‰»
 	void GoalObject::OnCreate() {
+		
 		//‰ŠúˆÊ’u‚È‚Ç‚Ìİ’è
 		auto ptr = GetComponent<Transform>();
 		ptr->SetScale(0.5f, 0.5f, 0.5f);
@@ -86,7 +87,8 @@ namespace basecross {
 		m_AtStartPos(0.0f, 0.0f, 0.0f),
 		m_AtEndPos(18.0f, 0.0f, 18.0f),
 		m_AtPos(m_AtStartPos),
-		m_TotalTime(0.0f)
+		m_TotalTime(0.0f),
+		m_ChangeFlag(false)
 	{}
 	OpeningCameraman::~OpeningCameraman() {}
 	//‰Šú‰»
@@ -143,6 +145,7 @@ namespace basecross {
 	}
 
 	void OpeningCameraman::EndStateEnterBehavior() {
+		m_ChangeFlag = true;
 		auto ptrGameGtage = GetTypeStage<GameStage>();
 		ptrGameGtage->ToMyCamera();
 	}
