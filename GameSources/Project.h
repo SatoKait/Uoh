@@ -5,7 +5,7 @@
 
 #pragma once
 
-
+#include "EffectManager.h"
 #include "ProjectShader.h"
 #include "ProjectBehavior.h"
 #include "MyGameObject.h"
@@ -48,4 +48,3 @@
 #include "MyCamera.h"
 #include "MiniMapActor.h"
 #include "MiniMapManager.h"
-#include "EffectManager.h"

@@ -42,8 +42,12 @@ namespace basecross {
 		m_StrartFlag2(false),
 		m_MoveFlag(false),
 		StartTime(0.0f),
-		m_StartDraw(false)
-	{}
+		m_StartDraw(false),
+		m_TotalTime(0.0f),
+		m_handle(0),
+		m_manager(nullptr),
+		m_renderer(nullptr), 
+		m_effect(nullptr) {}
 
 	void GameStage::CreateViewLight() {		
 		// カメラの位置と注視点位置
@@ -451,6 +455,45 @@ namespace basecross {
 			SetSharedGameObject(L"GaugeHide3", GaugeHide3);
 
 
+			auto d3D11Device = App::GetApp()->GetDeviceResources()->GetD3DDevice();
+			auto d3D11DeviceContext = App::GetApp()->GetDeviceResources()->GetD3DDeviceContext();;
+			// エフェクトのレンダラーの作成
+			m_renderer = ::EffekseerRendererDX11::Renderer::Create(d3D11Device, d3D11DeviceContext, 8000);
+
+
+			// エフェクトのマネージャーの作成
+			m_manager = ::Effekseer::Manager::Create(8000);
+			// 描画モジュールの設定
+			m_manager->SetSpriteRenderer(m_renderer->CreateSpriteRenderer());
+			m_manager->SetRibbonRenderer(m_renderer->CreateRibbonRenderer());
+			m_manager->SetRingRenderer(m_renderer->CreateRingRenderer());
+			m_manager->SetTrackRenderer(m_renderer->CreateTrackRenderer());
+			m_manager->SetModelRenderer(m_renderer->CreateModelRenderer());
+
+			// テクスチャ、モデル、カーブ、マテリアルローダーの設定する。
+			// ユーザーが独自で拡張できる。現在はファイルから読み込んでいる。
+			m_manager->SetTextureLoader(m_renderer->CreateTextureLoader());
+			m_manager->SetModelLoader(m_renderer->CreateModelLoader());
+			m_manager->SetMaterialLoader(m_renderer->CreateMaterialLoader());
+			m_manager->SetCurveLoader(Effekseer::MakeRefPtr<Effekseer::CurveLoader>());
+
+			// 視点位置を確定
+			auto g_position = ::Effekseer::Vector3D(10.0f, 5.0f, 20.0f);
+
+			// 投影行列を設定
+			float w = (float)App::GetApp()->GetGameWidth();
+			float h = (float)App::GetApp()->GetGameHeight();
+			m_renderer->SetProjectionMatrix(::Effekseer::Matrix44().PerspectiveFovRH(
+				90.0f / 180.0f * 3.14f, w / h, 1.0f, 500.0f));
+			// カメラ行列を設定
+			m_renderer->SetCameraMatrix(
+				::Effekseer::Matrix44().LookAtRH(g_position, ::Effekseer::Vector3D(100.0f, 0.0f, 100.0f), ::Effekseer::Vector3D(100.0f, 1.0f, 100.0f)));
+
+			wstring dataDir;
+			App::GetApp()->GetDataDirectory(dataDir);
+
+			wstring wstrEfk = dataDir + L"mizusibuki.efk";
+			m_effect = ::Effekseer::Effect::Create(m_manager, (const char16_t*)wstrEfk.c_str());
 		}
 		catch (...) {
 			throw;
@@ -857,7 +900,6 @@ namespace basecross {
 		auto circleCount = circle->m_ComboCount;
 		auto cicleTrans = circle->GetComponent<Transform>();
 
-
 		switch (ciclenext)
 		{
 		case 1:			
@@ -1123,6 +1165,38 @@ namespace basecross {
 		}
 	}
 	void GameStage::OnDraw() {
+		auto elps = App::GetApp()->GetElapsedTime();
+		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
+		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
+		auto Jumpflag = ptrPlayer->m_grounded;
+		if (KeyState.m_bPressedKeyTbl[VK_SPACE]) {
+ 			m_handle = m_manager->Play(m_effect, 0, 10.0f, 5.0f);
+		}
+		else if (m_TotalTime >= 10.0f) {
+			m_manager->StopEffect(m_handle);
+		}
+		m_TotalTime += elps;
+
+		// Update the manager
+		// マネージャーの更新
+		m_manager->Update();
+
+		// Update a time
+		// 時間を更新する
+		m_renderer->SetTime(elps);
+
+		// Begin to rendering effects
+		// エフェクトの描画開始処理を行う。
+		m_renderer->BeginRendering();
+
+		// Render effects
+		// エフェクトの描画を行う。
+		m_manager->Draw();
+
+		// Finish to rendering effects
+		// エフェクトの描画終了処理を行う。
+		m_renderer->EndRendering();
+
 	}
 }
 //end basecross

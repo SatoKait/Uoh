@@ -72,6 +72,14 @@ namespace basecross {
 
 		wstring m_Number;
 
+		float m_TotalTime;
+		Effekseer::Handle m_handle;
+		Effekseer::ManagerRef m_manager;
+		EffekseerRendererDX11::RendererRef m_renderer;
+		Effekseer::EffectRef m_effect;
+
+
+
 		// BGMの再生
 		void CreateBGM();
 
@@ -132,6 +140,10 @@ namespace basecross {
 		bool GetFlag()
 		{
 			return MiniMapDrawFlag;
+		}
+
+		Effekseer::ManagerRef GetEfk() {
+			return m_manager;
 		}
 		//virtual void OnDestroy()override;
 	};
