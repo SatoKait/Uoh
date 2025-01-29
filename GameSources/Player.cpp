@@ -425,6 +425,13 @@ namespace basecross {
 		else if (!m_grounded)
 		{
 			m_ptrTrans->SetScale(1.5f, 0.25f, 0.25f);
+			wstring dataDir;
+			App::GetApp()->GetDataDirectory(dataDir);
+
+			wstring wstrEfk = dataDir + L"mizusibuki.efk";
+
+			auto m_manager1 = GetTypeStage<GameStage>()->GetEfk();
+		    m_handle = m_manager1->Play(m_effect, 0, 2.0f, 5.0f);
 		}
 
 		if (cntl[0].bConnected)
