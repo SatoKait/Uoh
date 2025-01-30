@@ -112,7 +112,6 @@ namespace basecross {
 
 		bool Release = true;
 
-		const float deltatime = 11.0f;
 
 		Vec2 ret;
 		if (cntl[0].bConnected)

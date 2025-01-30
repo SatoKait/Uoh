@@ -60,7 +60,7 @@ namespace basecross{
 
 	public:	
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
-
+		float deltatime;
 		bool m_MoveFlag;		//動けるまでのフラグ
 		int m_CircleCount;
 		int m_EffectCount;
@@ -116,7 +116,8 @@ namespace basecross{
 			m_manager(nullptr), 
 			m_renderer(nullptr), 
 			m_effect(nullptr),
-			m_EffectCount(0)
+			m_EffectCount(0), 
+			deltatime(11.0f)
 		{
 		}
 
