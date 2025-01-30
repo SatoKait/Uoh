@@ -47,7 +47,9 @@ namespace basecross {
 		m_handle(0),
 		m_manager(nullptr),
 		m_renderer(nullptr), 
-		m_effect(nullptr) {}
+		m_effect(nullptr),
+		DrawLayerFlag(false)
+	{}
 
 	void GameStage::CreateViewLight() {		
 		// カメラの位置と注視点位置
@@ -574,6 +576,42 @@ namespace basecross {
 				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
 			}
 		}
+
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_X)
+		{
+			ToMyCamera();
+			DrawLayerFlag = true;
+			if (DrawLayerFlag == true)
+			{
+				StageText->SetDrawLayer(-90);
+				CountTime->SetDrawLayer(100);
+				auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
+				ptrUITime->SetDrawLayer(100);
+				auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
+				ptrUITime2->SetDrawLayer(100);
+				auto ptrSprite = GetSharedGameObject<StageSprite>(L"TimeSprite");
+				ptrSprite->SetDrawLayer(100);
+				auto ptrUIIcon = GetSharedGameObject<StageSprite>(L"UIIcon");
+				ptrUIIcon->SetDrawLayer(100);
+				auto ptrConmboSprite = GetSharedGameObject<ComboSprite>(L"ConmboSprite");
+				ptrConmboSprite->SetDrawLayer(100);
+				auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
+				ptrConmboSpriteNumber->SetDrawLayer(100);
+				auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
+				MiniMapSprite->SetDrawLayer(-100);
+				auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
+				PlayerBAR->SetDrawLayer(100);
+				auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
+				EnemyBAR->SetDrawLayer(100);
+				auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
+				YouIcon->SetDrawLayer(100);
+				Rank->SetDrawLayer(100);
+				Rank2->SetDrawLayer(100);
+			}
+			ptrPlayer->deltatime = 4.0f;
+			StartTime = 8.0f;
+		}
+
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		auto CameraFlag = ptrPlayer->m_CameraFlag;
 		auto PlayerMoveFlag = ptrPlayer->m_MoveFlag;
@@ -581,41 +619,47 @@ namespace basecross {
 		StartTime += delta;
 		if (StartTime >= 8.0f && !m_StartDraw)
 		{		
-			StageText->SetDrawLayer(-90);
-			CountTime->SetDrawLayer(100);
-			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
-			ptrUITime->SetDrawLayer(100);
-			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
-			ptrUITime2->SetDrawLayer(100);
-			auto ptrSprite = GetSharedGameObject<StageSprite>(L"TimeSprite");
-			ptrSprite->SetDrawLayer(100);
-			auto ptrUIIcon = GetSharedGameObject<StageSprite>(L"UIIcon");
-			ptrUIIcon->SetDrawLayer(100);
-			auto ptrConmboSprite = GetSharedGameObject<ComboSprite>(L"ConmboSprite");
-			ptrConmboSprite->SetDrawLayer(100);
-			auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
-			ptrConmboSpriteNumber->SetDrawLayer(100);
-			auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
-			MiniMapSprite->SetDrawLayer(-100);
-			auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
-			PlayerBAR->SetDrawLayer(100);
-			auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
-			EnemyBAR->SetDrawLayer(100);
-			auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
-			YouIcon->SetDrawLayer(100);
-			Rank->SetDrawLayer(100);
-			Rank2->SetDrawLayer(100);
+			if (DrawLayerFlag == false)
+			{
+				StageText->SetDrawLayer(-90);
+				CountTime->SetDrawLayer(100);
+				auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
+				ptrUITime->SetDrawLayer(100);
+				auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
+				ptrUITime2->SetDrawLayer(100);
+				auto ptrSprite = GetSharedGameObject<StageSprite>(L"TimeSprite");
+				ptrSprite->SetDrawLayer(100);
+				auto ptrUIIcon = GetSharedGameObject<StageSprite>(L"UIIcon");
+				ptrUIIcon->SetDrawLayer(100);
+				auto ptrConmboSprite = GetSharedGameObject<ComboSprite>(L"ConmboSprite");
+				ptrConmboSprite->SetDrawLayer(100);
+				auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
+				ptrConmboSpriteNumber->SetDrawLayer(100);
+				auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
+				MiniMapSprite->SetDrawLayer(-100);
+				auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
+				PlayerBAR->SetDrawLayer(100);
+				auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
+				EnemyBAR->SetDrawLayer(100);
+				auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
+				YouIcon->SetDrawLayer(100);
+				Rank->SetDrawLayer(100);
+				Rank2->SetDrawLayer(100);
+			}
 			m_ToStartTime -= elapsedTime;
 		}
 		if (m_ToStartTime <= 0)
 		{
+
 			if (!m_StartDraw)
 			{
 				auto Start = AddGameObject<StageSprite>(L"START_TX", true,
 					Vec2(512.0f, 256.0f), Vec2(0.0f, 0.0f));
 				Start->SetDrawLayer(100);
 				SetSharedGameObject(L"Start", Start);
-			}
+			}	
+			DrawLayerFlag = true;
+
 			m_StartDraw = true;
 			CountTime->SetDrawLayer(-90);
 			m_isStartFlag = true;

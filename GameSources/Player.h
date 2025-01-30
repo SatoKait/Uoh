@@ -62,6 +62,7 @@ namespace basecross{
 		shared_ptr<BcPNTStaticDraw> m_Draw;
 
 	public:	
+		float deltatime;
 		bool m_MoveFlag;		//動けるまでのフラグ
 		int m_CircleCount;
 		int m_EffectCount;
@@ -116,7 +117,8 @@ namespace basecross{
 			m_renderer(nullptr), 
 			m_effect(nullptr),
 			m_ShadowYPos(0.3f),
-			m_EffectCount(0)
+			m_EffectCount(0), 
+			deltatime(11.0f)
 		{
 		}
 
