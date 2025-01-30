@@ -49,9 +49,12 @@ namespace basecross{
 		bool m_StanFlag;
 		float m_Movetime;
 		bool m_StartFlag;
+		bool m_ShadowFlag;
+		bool m_StopFly;
 	private:
 		shared_ptr<Transform> m_trans;
 		shared_ptr<CollisionCapsule> m_col;
+		shared_ptr<BcPNTStaticDraw> m_Draw;
 
 	public:	
 		bool m_MoveFlag;		//動けるまでのフラグ
@@ -99,7 +102,9 @@ namespace basecross{
 			m_GoalFlag(false),
 			m_StopFlag(false),
 			m_StartFlag(false),
-			m_CameraFlag(false)
+			m_CameraFlag(false),
+			m_ShadowFlag(true),
+			m_StopFly(true)
 		{
 		}
 

@@ -223,13 +223,13 @@ namespace basecross {
 			}
 		}
 		//高速着水
-		if (m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
-			m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wReleasedButtons & XINPUT_GAMEPAD_B ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE] ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bUpKeyTbl[VK_SPACE])
+		if (m_StopFly && 
+			(m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
+			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE]))
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
+			m_StopFly = false;
 		}
 		const float posYcnst = 1.6f;
 		if (pos.y < scale.y * posYcnst)
@@ -243,6 +243,7 @@ namespace basecross {
 			m_Accel = 0.0f;
 			m_Rotate.z = 0;
 			m_SpeedUp = false;
+			m_StopFly = true;
 		}
 		const float AngleLim = 1.1f, lim = 0.1f;
 		if (m_MoveFlag)
@@ -309,6 +310,7 @@ namespace basecross {
 		// コリジョン
 		m_col = AddComponent<CollisionCapsule>();
 		m_col->SetAfterCollision(AfterCollision::Auto);
+
 
 		//m_col->SetDrawActive(true);
 		//m_col2->SetDrawActive(true);
@@ -460,6 +462,24 @@ namespace basecross {
 		{
 			m_Speed = 10;
 		}
+
+		if (m_ShadowFlag) 
+		{
+			Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
+			spanMat.affineTransformation(
+				Vec3(0.3f, 0.005f, 4.0f),//スケーリング
+				Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+				Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+				Vec3(0.0f, 0.3f, -1.8f) //移動
+			);
+
+			m_Draw = AddComponent<BcPNTStaticDraw>();
+			m_Draw->SetMeshResource(L"DEFAULT_SPHERE");
+			m_Draw->SetTextureResource(L"SHADOW_TX");
+			m_Draw->SetMeshToTransformMatrix(spanMat);
+			m_ShadowFlag = false;
+		}
+
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
