@@ -397,7 +397,7 @@ namespace basecross {
 		m_manager->SetCurveLoader(Effekseer::MakeRefPtr<Effekseer::CurveLoader>());
 
 		// 視点位置を確定
-		auto g_position = ::Effekseer::Vector3D(10.0f, 0.0f, 20.0f);
+		auto g_position = ::Effekseer::Vector3D(- 2.5f, -15.0f, -45.0f);
 
 		// 投影行列を設定
 		float w = (float)App::GetApp()->GetGameWidth();
@@ -412,7 +412,7 @@ namespace basecross {
 		App::GetApp()->GetDataDirectory(dataDir);
 
 		wstring wstrEfk = dataDir + L"mizusibuki.efk";
-		wstring wstrEfk2 = dataDir + L"mizusibuki.efk";
+		wstring wstrEfk2 = dataDir + L"sibuki.efk";
 		m_effect = ::Effekseer::Effect::Create(m_manager, (const char16_t*)wstrEfk.c_str());
 		m_effect2 = ::Effekseer::Effect::Create(m_manager, (const char16_t*)wstrEfk2.c_str());
 	}
@@ -465,11 +465,19 @@ namespace basecross {
 			m_ptrTrans->SetScale(0.25f, 0.25f, 0.25f);
 			auto m_manager2 = GetTypeStage<GameStage>()->GetEfk();
 			auto StartFlag = GetTypeStage<GameStage>()->m_StartDraw;
+			auto ptrPlayer = GetStage()->GetSharedGameObject<Player>(L"Player");
+			auto ptrPlayerPos = ptrPlayer->GetComponent<Transform>()->GetRotation();
+			float Effectpos = 0.0f;
 
-			//if (m_MoveFlag == true && StartFlag == true)
-			//{
-			//	m_handle = m_manager2->Play(m_effect2, 0, -10.0f, 5.0f);
-			//}
+			if (m_MoveFlag == true && StartFlag == true)
+			{
+				//Effekseer::Matrix43 m_Mat;
+				//m_Mat.RotationY(90.0f);	
+				//m_manager->SetBaseMatrix(m_handle, m_Mat);
+				m_handle2 = m_manager2->Play(m_effect2, 9.0f,0.0f,-3.0f);
+				//m_manager2->SetTargetLocation(m_handle2)
+  			}
+
 
 			m_EffectCount = 0;
 
@@ -485,6 +493,7 @@ namespace basecross {
 			{
 				auto EffectPos = 1.0f;
 				m_handle = m_manager1->Play(m_effect, 0, -5.0f - EffectPos, 5.0f);
+				m_manager->StopEffect(m_handle2);
 			}
 
 		}

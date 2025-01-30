@@ -91,7 +91,7 @@ namespace basecross {
 		//壁
 		void CreateWall();
 
-		//ステージ
+		////ステージ
 		void CreateGround();
 		//障害物
 		void CreateObstacle();
