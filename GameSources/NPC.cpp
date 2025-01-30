@@ -213,7 +213,7 @@ namespace basecross {
 		{
 			m_OnceFlag1 = false;
 			//アクション開始
-			m_ptrAction->Run();
+			//m_ptrAction->Run();
 		}
 		if (m_stopFlag)
 		{
