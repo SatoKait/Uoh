@@ -16,7 +16,7 @@ namespace basecross{
 		auto path = App::GetApp()->GetDataDirWString();
 		// テクスチャのリソース
 		{
-			auto texPath = path + L"Textures/";
+			auto texPath = path + L"Texture/";
 
 			auto tex = texPath + L"Hane.png";
 			App::GetApp()->RegisterTexture(L"HANE_TX", tex);
@@ -117,7 +117,7 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"PLAYERWIN_TX", tex);
 			tex = texPath + L"winicon2.png";
 			App::GetApp()->RegisterTexture(L"NPCWIN_TX", tex);
-			tex = texPath + L"Circle.png";
+			tex = texPath + L"miniCircle.png";
 			App::GetApp()->RegisterTexture(L"CIRCLE_TX", tex);
 			tex = texPath + L"hide.png";
 			App::GetApp()->RegisterTexture(L"GaugeHide_TX", tex);

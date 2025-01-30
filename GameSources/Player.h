@@ -33,7 +33,11 @@ namespace basecross{
 
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
-		
+		Effekseer::Handle m_handle;
+		Effekseer::ManagerRef m_manager;
+		EffekseerRendererDX11::RendererRef m_renderer;
+		Effekseer::EffectRef m_effect;
+
 		float m_Speed;			//スピード
 		float m_JSpeed;			//ジャンプするスピード
 		float m_Accel;			//y軸加速度
@@ -104,7 +108,11 @@ namespace basecross{
 			m_StartFlag(false),
 			m_CameraFlag(false),
 			m_ShadowFlag(true),
-			m_StopFly(true)
+			m_StopFly(true),
+			m_handle(0),
+			m_manager(nullptr), 
+			m_renderer(nullptr), 
+			m_effect(nullptr)
 		{
 		}
 
