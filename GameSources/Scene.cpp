@@ -166,6 +166,10 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"POLL_1_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll2.bmf");
 			App::GetApp()->RegisterResource(L"POLL_2_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll4.bmf");
+			App::GetApp()->RegisterResource(L"POLL_4_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Poll5.bmf");
+			App::GetApp()->RegisterResource(L"POLL_5_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Crown.bmf");
 			App::GetApp()->RegisterResource(L"CROWN_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"DeadFlyingFish2.bmf");
