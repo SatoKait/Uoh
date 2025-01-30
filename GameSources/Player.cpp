@@ -471,21 +471,21 @@ namespace basecross {
 			m_Speed = 10;
 		}
 
-		if (m_ShadowFlag) 
-		{
-			m_spanMat.affineTransformation(
-				Vec3(0.3f, 0.005f, 4.0f),//スケーリング
-				Vec3(0.0f, 0.0f, 0.0f),//回転の中心
-				Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-				Vec3(0.0f, 0.3f, -1.8f) //移動
-			);
+		//if (m_ShadowFlag) 
+		//{
+		//	m_spanMat.affineTransformation(
+		//		Vec3(0.3f, 0.005f, 4.0f),//スケーリング
+		//		Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+		//		Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+		//		Vec3(0.0f, 0.3f, -1.8f) //移動
+		//	);
 
-			m_Draw = AddComponent<BcPNTStaticDraw>();
-			m_Draw->SetMeshResource(L"DEFAULT_SPHERE");
-			m_Draw->SetTextureResource(L"SHADOW_TX");
-			m_Draw->SetMeshToTransformMatrix(m_spanMat);
-			m_ShadowFlag = false;
-		}
+		//	m_Draw = AddComponent<BcPNTStaticDraw>();
+		//	m_Draw->SetMeshResource(L"DEFAULT_SPHERE");
+		//	m_Draw->SetTextureResource(L"SHADOW_TX");
+		//	m_Draw->SetMeshToTransformMatrix(m_spanMat);
+		//	m_ShadowFlag = false;
+		//}
 		
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
@@ -640,6 +640,12 @@ namespace basecross {
 				m_StanTime = 0.0f;
 			}
 		}
+	}
+
+	void PlShadow::OnCreate()
+	{
+		auto trans = GetComponent<Transform>();
+		trans->SetScale(m_StartScale);
 	}
 }
 //end basecross
