@@ -487,7 +487,7 @@ namespace basecross {
 				90.0f / 180.0f * 3.14f, w / h, 1.0f, 500.0f));
 			// カメラ行列を設定
 			m_renderer->SetCameraMatrix(
-				::Effekseer::Matrix44().LookAtRH(g_position, ::Effekseer::Vector3D(100.0f, 0.0f, 100.0f), ::Effekseer::Vector3D(100.0f, 1.0f, 100.0f)));
+				::Effekseer::Matrix44().LookAtRH(g_position, ::Effekseer::Vector3D(0.0f, 0.0f, 0.0f), ::Effekseer::Vector3D(0.0f, 1.0f, 0.0f)));
 
 			wstring dataDir;
 			App::GetApp()->GetDataDirectory(dataDir);
@@ -563,16 +563,16 @@ namespace basecross {
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
 		{
-			//ptrMana->Stop(m_BGM);
+			ptrMana->Stop(m_BGM);
 
-			//if (score1 > score2)
-			//{
-			//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-			//}
-			//else
-			//{
-			//	PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-			//}
+			if (score1 > score2)
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			}
+			else
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+			}
 		}
 		float elapsedTime = App::GetApp()->GetElapsedTime();
 		auto CameraFlag = ptrPlayer->m_CameraFlag;
@@ -1169,12 +1169,12 @@ namespace basecross {
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
 		auto Jumpflag = ptrPlayer->m_grounded;
-		if (KeyState.m_bPressedKeyTbl[VK_SPACE]) {
- 			m_handle = m_manager->Play(m_effect, 0, 10.0f, 5.0f);
-		}
-		else if (m_TotalTime >= 10.0f) {
-			m_manager->StopEffect(m_handle);
-		}
+		//if (KeyState.m_bPressedKeyTbl[VK_SPACE]) {
+ 	//		m_handle = m_manager->Play(m_effect, 0, -10.0f, 5.0f);
+		//}
+		//else if (m_TotalTime >= 50.0f) {
+		//	m_manager->StopEffect(m_handle);
+		//}
 		m_TotalTime += elps;
 
 		// Update the manager
