@@ -32,6 +32,7 @@ namespace basecross{
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
 
 		Effekseer::Handle m_handle;
+		Effekseer::Handle m_handle2;
 		Effekseer::ManagerRef m_manager;
 		EffekseerRendererDX11::RendererRef m_renderer;
 		Effekseer::EffectRef m_effect;
