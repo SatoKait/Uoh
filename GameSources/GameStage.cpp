@@ -108,6 +108,7 @@ namespace basecross {
 	{
 		auto ptrPlayer = AddGameObject<Player>(Vec3(-2.5f, -15.0f, -45.0f), Vec3(2.0f, 0.25f, 0.25f), Vec3(0.0f, 0.0f, 0.0f));
 		SetSharedGameObject(L"Player", ptrPlayer);
+		auto ptrPlShadow = AddGameObject<PlShadow>(Vec3(-2.5f, -15.0f, -45.0f), Vec3(1.0f, 1.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
 	}
 	void GameStage::CreateWall()
 	{

@@ -19,7 +19,6 @@ namespace basecross{
 
 		Mat4x4 m_spanMat; // モデルとトランスフォームの間の差分行列
 
-		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		shared_ptr<DrawComponent> m_ptrDraw;	// 描画
 		shared_ptr<CollisionObb>m_ptrPollCol;
 		shared_ptr<MainCamera> m_ptrCamera;
@@ -28,7 +27,6 @@ namespace basecross{
 		shared_ptr<BcPNTBoneModelDraw> m_Animation;
 
 		Vec2 GetInputState() const;		//プレイヤーが使用するコントローラとキーボードの入力
-		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
 		void MovePlayer();				// プレイヤーの移動
 
 		InputHandler<Player> m_InputHandler;//入力ハンドラー
@@ -54,7 +52,6 @@ namespace basecross{
 		float m_Movetime;
 		bool m_StartFlag;
 		bool m_ShadowFlag;
-		float m_ShadowYPos;
 		bool m_StopFly;
 	private:
 		shared_ptr<Transform> m_trans;
@@ -62,6 +59,7 @@ namespace basecross{
 		shared_ptr<BcPNTStaticDraw> m_Draw;
 
 	public:	
+		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
 		float deltatime;
 		bool m_MoveFlag;		//動けるまでのフラグ
 		int m_CircleCount;
@@ -77,6 +75,8 @@ namespace basecross{
 		bool m_grounded;		//接地しているかどうか
 		int  m_Nextcircle;
 		bool m_CameraFlag;
+
+		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
 
 		Player::Player(shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
@@ -116,7 +116,6 @@ namespace basecross{
 			m_manager(nullptr), 
 			m_renderer(nullptr), 
 			m_effect(nullptr),
-			m_ShadowYPos(0.3f),
 			m_EffectCount(0), 
 			deltatime(11.0f)
 		{
@@ -138,6 +137,10 @@ namespace basecross{
 		Vec3 m_StartPos;		// 初期位置
 		Vec3 m_StartScale;		// 初期スケール
 		Vec3 m_StartRot;
+
+	private:
+		shared_ptr<BcPNTStaticDraw> m_Draw;
+
 	public:
 		PlShadow::PlShadow(
 			shared_ptr<Stage>& StagePtr,
