@@ -690,6 +690,37 @@ namespace basecross {
 	{
 		auto trans = GetComponent<Transform>();
 		trans->SetScale(m_StartScale);
+		trans->SetRotation(m_StartRot);
+		trans->SetPosition(m_StartPos);
+
+		Mat4x4 spanMat;
+		spanMat.affineTransformation(
+			Vec3(0.3f, 0.005f, 2.0f),//スケーリング
+			Vec3(0.0f, XM_PIDIV2, 0.0f),//回転の中心
+			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+			Vec3(0.0f, 0.1f, 1.0f) //移動
+		);
+
+		m_Draw = AddComponent<BcPNTStaticDraw>();
+		m_Draw->SetMeshResource(L"DEFAULT_SPHERE");
+		m_Draw->SetTextureResource(L"SHADOW_TX");
+		m_Draw->SetMeshToTransformMatrix(spanMat);
+	}
+
+	void PlShadow::OnUpdate()
+	{
+		//ステージの取得
+		auto stage = GetStage();
+
+		auto ptrPlayer = stage->GetSharedGameObject<Player>(L"Player");
+		
+		auto trans = GetComponent<Transform>();
+		auto rotate = ptrPlayer->GetMoveVector();
+		auto pos = ptrPlayer->m_ptrTrans->GetPosition();
+		
+		// 位置の更新
+		trans->SetPosition(pos);
+		trans->SetRotation(rotate);
 	}
 }
 //end basecross
