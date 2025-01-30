@@ -261,11 +261,11 @@ namespace basecross {
 						m_moveAngle = angle;
 						if (m_moveAngle.x <= lim || m_moveAngle.x >= -lim)
 						{
-							m_moveAngle.x *= 1.5f;
+							m_moveAngle.x *= 1.2f;
 						}
 						if (m_moveAngle.z <= lim || m_moveAngle.z >= -lim)
 						{
-							m_moveAngle.z *= 1.5f;
+							m_moveAngle.z *= 1.2f;
 						}
 					}
 				}
@@ -697,7 +697,7 @@ namespace basecross {
 			Vec3(0.3f, 0.005f, 2.0f),//スケーリング
 			Vec3(0.0f, XM_PIDIV2, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, 0.1f, 1.0f) //移動
+			Vec3(0.0f, 0.1f, 0.0f) //移動
 		);
 
 		m_Draw = AddComponent<BcPNTStaticDraw>();
@@ -712,14 +712,24 @@ namespace basecross {
 		auto stage = GetStage();
 
 		auto ptrPlayer = stage->GetSharedGameObject<Player>(L"Player");
-		
+		auto ground = ptrPlayer->m_grounded;
 		auto trans = GetComponent<Transform>();
-		auto rotate = ptrPlayer->GetMoveVector();
 		auto pos = ptrPlayer->m_ptrTrans->GetPosition();
 		
 		// 位置の更新
-		trans->SetPosition(pos);
-		trans->SetRotation(rotate);
+
+		if (!ground)
+		{
+			trans->SetPosition(pos.x, pos.y - pos.y + 0.5f, pos.z);
+			trans->SetScale(5.0f, 1.0f, 1.0f);
+		}		
+		else
+		{
+			trans->SetPosition(pos);
+			trans->SetScale(1.0f, 1.0f, 1.0f);
+		}
+		trans->SetRotation(0.0f,ptrPlayer->m_rotAng,0.0f);
+
 	}
 }
 //end basecross
