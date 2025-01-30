@@ -47,8 +47,8 @@ namespace basecross {
 		//•`‰æˆ—
 		auto ptrDraw = AddComponent<BcPNTStaticDraw>();
 		ptrDraw->SetFogEnabled(true);
-		ptrDraw->SetMeshResource(L"TOBIUO_MESH");
-		ptrDraw->SetTextureResource(L"TOBIUO_TX");
+		ptrDraw->SetMeshResource(L"SHIP_MESH");
+		ptrDraw->SetTextureResource(L"SHIP_TX");
 		ptrDraw->SetOwnShadowActive(true);
 
 	}

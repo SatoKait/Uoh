@@ -146,6 +146,8 @@ namespace basecross{
 			// テクスチャ
 			auto Modeltex = modelPath + L"FlyingFish.png";
 			App::GetApp()->RegisterTexture(L"TOBIUO_TX", Modeltex);
+			Modeltex = modelPath + L"T_Ship.png";
+			App::GetApp()->RegisterTexture(L"SHIP_TX", Modeltex);
 
 			// スタティックモデルのリソース
 			auto StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Buoy.bmf");
@@ -170,6 +172,8 @@ namespace basecross{
 			App::GetApp()->RegisterResource(L"DEADTOBIUO2_MESH", StaticModelMesh);
 			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Podium.bmf");
 			App::GetApp()->RegisterResource(L"PODIUM_MESH", StaticModelMesh);
+			StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Ship.bmf");
+			App::GetApp()->RegisterResource(L"SHIP_MESH", StaticModelMesh);
 
 			//StaticModelMesh = MeshResource::CreateStaticModelMesh(modelPath, L"Trophy.bmf");
 			//App::GetApp()->RegisterResource(L"TROPHY_MESH", StaticModelMesh);
