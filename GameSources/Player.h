@@ -64,6 +64,7 @@ namespace basecross{
 	public:	
 		bool m_MoveFlag;		//動けるまでのフラグ
 		int m_CircleCount;
+		int m_EffectCount;
 		bool  m_GoalFlag;	
 		bool m_StopFlag;
 		bool m_Goal;			//ゴール判定
@@ -114,7 +115,8 @@ namespace basecross{
 			m_manager(nullptr), 
 			m_renderer(nullptr), 
 			m_effect(nullptr),
-			m_ShadowYPos(0.3f)
+			m_ShadowYPos(0.3f),
+			m_EffectCount(0)
 		{
 		}
 
