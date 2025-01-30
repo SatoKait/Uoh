@@ -54,6 +54,7 @@ namespace basecross{
 		float m_Movetime;
 		bool m_StartFlag;
 		bool m_ShadowFlag;
+		float m_ShadowYPos;
 		bool m_StopFly;
 	private:
 		shared_ptr<Transform> m_trans;
@@ -112,7 +113,8 @@ namespace basecross{
 			m_handle(0),
 			m_manager(nullptr), 
 			m_renderer(nullptr), 
-			m_effect(nullptr)
+			m_effect(nullptr),
+			m_ShadowYPos(0.3f)
 		{
 		}
 
@@ -125,6 +127,33 @@ namespace basecross{
 		virtual void OnCollisionEnter(shared_ptr<GameObject>& Other) override;
 		void Goaltrue();
 		void ChangeAnimation(const wstring& animationName);
+	};
+
+	class PlShadow : public Actor
+	{
+		Vec3 m_StartPos;		// 初期位置
+		Vec3 m_StartScale;		// 初期スケール
+		Vec3 m_StartRot;
+	public:
+		PlShadow::PlShadow(
+			shared_ptr<Stage>& StagePtr,
+			const Vec3& Position,
+			const Vec3& Scale,
+			const Vec3& Rot
+		) :
+			Actor(StagePtr),
+			m_StartPos(Position),
+			m_StartScale(Scale),
+			m_StartRot(Rot)
+		{
+		}
+
+		PlShadow::~PlShadow() {};
+
+		virtual void OnCreate() override;
+		virtual void OnUpdate() override;
+
+
 	};
 }
 //end basecross
