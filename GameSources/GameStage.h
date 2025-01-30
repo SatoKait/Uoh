@@ -69,6 +69,7 @@ namespace basecross {
 		bool m_StrartFlag2;
 		float StartTime;
 		bool MiniMapDrawFlag;
+		bool DrawLayerFlag;
 
 		wstring m_Number;
 
