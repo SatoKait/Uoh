@@ -323,7 +323,8 @@ namespace basecross {
 		}
 
 		// プレイヤーの描画
-		m_spanMat.affineTransformation(
+		Mat4x4 spanMat;
+		spanMat.affineTransformation(
 			Vec3(1.0f, 1.0f, 0.2f),
 			Vec3(0.0f, 0.0f, 0.0f),
 			Vec3(0.0f, XM_PIDIV2, 0.0f),
@@ -334,7 +335,7 @@ namespace basecross {
 		auto ptrShadow = AddComponent<Shadowmap>();
 		//影の形（メッシュ）を設定
 		ptrShadow->SetMeshResource(L"TOBIUO_MESH");
-		ptrShadow->SetMeshToTransformMatrix(m_spanMat);
+		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		//m_Animation = AddComponent<BcPNTBoneModelDraw>();
 		//m_Animation->SetMeshResource(L"TOBIUO_MESH");
@@ -348,7 +349,7 @@ namespace basecross {
 
 		m_Animation = AddComponent<BcPNTBoneModelDraw>();
 		m_Animation->SetMeshResource(L"TOBIUO_MESH");
-		m_Animation->SetMeshToTransformMatrix(m_spanMat);
+		m_Animation->SetMeshToTransformMatrix(spanMat);
 
 		m_Animation->AddAnimation(L"Close", 0, 10, true, 30.0f);
 		m_Animation->AddAnimation(L"Swim", 15, 40, true, 30.0f);
@@ -476,9 +477,8 @@ namespace basecross {
 			{
 				auto EffectPos = 1.0f;
 				m_handle = m_manager1->Play(m_effect, 0, -5.0f - EffectPos, 5.0f);
-				
-
 			}
+
 		}
 
 		if (cntl[0].bConnected)
@@ -515,23 +515,22 @@ namespace basecross {
 			m_Speed = 10;
 		}
 
-		if (m_ShadowFlag) 
-		{
-			Mat4x4 spanMat; // モデルとトランスフォーム間の差分行列
-			spanMat.affineTransformation(
-				Vec3(0.3f, 0.005f, 4.0f),//スケーリング
-				Vec3(0.0f, 0.0f, 0.0f),//回転の中心
-				Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-				Vec3(0.0f, 0.3f, -1.8f) //移動
-			);
+		//if (m_ShadowFlag) 
+		//{
+		//	m_spanMat.affineTransformation(
+		//		Vec3(0.3f, 0.005f, 4.0f),//スケーリング
+		//		Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+		//		Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+		//		Vec3(0.0f, 0.3f, -1.8f) //移動
+		//	);
 
-			m_Draw = AddComponent<BcPNTStaticDraw>();
-			m_Draw->SetMeshResource(L"DEFAULT_SPHERE");
-			m_Draw->SetTextureResource(L"SHADOW_TX");
-			m_Draw->SetMeshToTransformMatrix(spanMat);
-			m_ShadowFlag = false;
-		}
-
+		//	m_Draw = AddComponent<BcPNTStaticDraw>();
+		//	m_Draw->SetMeshResource(L"DEFAULT_SPHERE");
+		//	m_Draw->SetTextureResource(L"SHADOW_TX");
+		//	m_Draw->SetMeshToTransformMatrix(m_spanMat);
+		//	m_ShadowFlag = false;
+		//}
+		
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
@@ -685,6 +684,12 @@ namespace basecross {
 				m_StanTime = 0.0f;
 			}
 		}
+	}
+
+	void PlShadow::OnCreate()
+	{
+		auto trans = GetComponent<Transform>();
+		trans->SetScale(m_StartScale);
 	}
 }
 //end basecross
