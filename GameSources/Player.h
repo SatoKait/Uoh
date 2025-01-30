@@ -37,6 +37,8 @@ namespace basecross{
 		Effekseer::ManagerRef m_manager;
 		EffekseerRendererDX11::RendererRef m_renderer;
 		Effekseer::EffectRef m_effect;
+		Effekseer::EffectRef m_effect2;
+
 
 		float m_Speed;			//スピード
 		float m_JSpeed;			//ジャンプするスピード
