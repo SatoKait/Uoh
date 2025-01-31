@@ -289,8 +289,8 @@ namespace basecross {
 			Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
 		Kakeru->SetDrawLayer(-100);
 		SetSharedGameObject(L"Kakeru", Kakeru);
-		//auto Icon = AddGameObject<StageSprite>(L"MiniMapPlayer_TX", true,
-		//	Vec2(100.0f, 100.0f), Vec2(-190.0f, 340.0f));
+		auto Icon = AddGameObject<StageSprite>(L"MiniMapPlayer_TX", true,
+			Vec2(100.0f, 100.0f), Vec2(-170.0f, 340.0f));
 		auto P = AddGameObject<StageSprite>(L"P_TX", true,
 			Vec2(70.0f, 55.0f), Vec2(170.0f, 330.0f));
 
@@ -358,7 +358,7 @@ namespace basecross {
 	}
 	void GameStage::CreateNPC()
 	{
-		auto ptr = AddGameObject<NPC>(Vec3(0.01f), Vec3(0.0f, -XM_PIDIV2,0.0f), Vec3(0.0f, 1.5f, -45.0f));
+		auto ptr = AddGameObject<NPC>(Vec3(0.05f), Vec3(0.0f, -XM_PI,0.0f), Vec3(0.0f, 6.0f, -80.0f));
 		SetSharedGameObject(L"NPC", ptr);
 	}
 	void GameStage::OnCreate() {
