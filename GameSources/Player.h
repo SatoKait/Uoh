@@ -37,6 +37,9 @@ namespace basecross{
 		EffekseerRendererDX11::RendererRef m_renderer;
 		Effekseer::EffectRef m_effect;
 		Effekseer::EffectRef m_effect2;
+		Effekseer::Vector3D cameraPosition{-2.5f, -15.0f, -45.0f};
+		Effekseer::Vector3D cameraTarget {0.0f, 0.0f, 0.0f};
+		Effekseer::Vector3D upVector {0.0f, 1.0f, 0.0f};
 
 
 		float m_Speed;			//スピード

@@ -471,19 +471,18 @@ namespace basecross {
 			auto m_manager2 = GetTypeStage<GameStage>()->GetEfk();
 			auto StartFlag = GetTypeStage<GameStage>()->m_StartDraw;
 			auto ptrPlayer = GetStage()->GetSharedGameObject<Player>(L"Player");
-			auto ptrPlayerPos = ptrPlayer->GetComponent<Transform>()->GetRotation();
-			float Effectpos = 0.0f;
-
+			auto ptrPlayerRot = ptrPlayer->GetComponent<Transform>()->GetRotation();
+			auto ptrPlayerPos = ptrPlayer->GetComponent<Transform>()->GetPosition();
+			
 			if (m_MoveFlag == true && StartFlag == true)
 			{
-				//Effekseer::Matrix43 m_Mat;
-				//m_Mat.RotationY(90.0f);	
-				//m_manager->SetBaseMatrix(m_handle, m_Mat);
-				m_handle2 = m_manager2->Play(m_effect2, 9.0f,0.0f,-3.0f);
-				//m_manager2->SetTargetLocation(m_handle2)
+				Effekseer::Vector3D m_Pos = { ptrPlayerPos.x, ptrPlayerPos.y, ptrPlayerPos.z };
+				Effekseer::Vector3D m_Rot = { 0.0f, ptrPlayerRot.y, 0.0f };
+
+				m_handle2 = m_manager2->Play(m_effect2, 7.75f,0.0f,-3.0f);
+				m_manager2->SetTargetLocation(m_handle2, m_Rot);
+				m_manager2->SetRotation(m_handle2, m_Rot,25.0f);
   			}
-
-
 			m_EffectCount = 0;
 
 		}
