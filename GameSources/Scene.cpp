@@ -127,6 +127,8 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"GaugeHide3_TX", tex);
 			tex = texPath + L"Start.png";
 			App::GetApp()->RegisterTexture(L"START_TX", tex);
+			tex = texPath + L"P.png";
+			App::GetApp()->RegisterTexture(L"P_TX", tex);
 
 			//tex = texPath + L"Tri.png";
 			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);
