@@ -49,8 +49,6 @@ namespace basecross{
 		bool m_PollChangeFlag;
 		bool m_CircleChangeFlag;
 		bool m_DrawFlag;
-		float m_StanTime;
-		bool m_StanFlag;
 		float m_Movetime;
 		bool m_StartFlag;
 		bool m_ShadowFlag;
@@ -62,6 +60,8 @@ namespace basecross{
 
 	public:	
 		shared_ptr<Transform> m_ptrTrans;		//トランスフォーム
+		float m_StanTime;
+		bool m_StanFlag;
 		float deltatime;
 		bool m_MoveFlag;		//動けるまでのフラグ
 		int m_CircleCount;

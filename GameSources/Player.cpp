@@ -96,7 +96,7 @@ namespace basecross {
 		auto KeyState = App::GetApp()->GetInputDevice().GetKeyState();
 		//カメラオブジェクトを取得する
 		auto ptrCamera = dynamic_pointer_cast<MyCamera>(OnGetDrawCamera());
-		
+
 		float delta = App::GetApp()->GetElapsedTime();
 		auto angle = GetMoveVector();
 		//トランスフォームの取得
@@ -148,6 +148,7 @@ namespace basecross {
 			}
 
 		}
+
 		if (m_Movetime >= deltatime && !m_StartFlag)
 		{
 			m_MoveFlag = true;
@@ -211,7 +212,7 @@ namespace basecross {
 			// 滞空時間の引き延ばし
 			if (m_JumpTime <= 2.0f)
 			{
-					m_Accel -= 0.025f;
+				m_Accel -= 0.025f;
 
 			}
 			else
@@ -222,9 +223,9 @@ namespace basecross {
 			}
 		}
 		//高速着水
-		if (m_StopFly && 
-			(m_grounded == false && m_JumpTime >= 2.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
-			m_grounded == false && m_JumpTime >= 2.0f && KeyState.m_bPressedKeyTbl[VK_SPACE]))
+		if (m_StopFly &&
+			(m_grounded == false && m_JumpTime >= 1.0f && cntl[0].wPressedButtons & XINPUT_GAMEPAD_B ||
+				m_grounded == false && m_JumpTime >= 1.0f && KeyState.m_bPressedKeyTbl[VK_SPACE]))
 		{
 			pos.y += m_JSpeed * m_Accel * delta;
 			m_Accel = -3.0f;
@@ -283,11 +284,15 @@ namespace basecross {
 				}
 				else if (ret.x || ret.y)
 				{
-					pos += angle * m_Speed * delta;
-					//if (angle.z <= -0.1f/* && (rotate.y == 1 || rotate.y == -1)*/)
-					//{
-					//	pos += m_moveAngle * m_Speed * delta;
-					//}
+					if (cntl[0].fThumbLY < -0.3f)
+					{
+						// そうじゃないんだよなぁ…って感じの挙動
+						pos -= angle * m_Speed * delta;
+					}
+					else
+					{
+						pos += angle * m_Speed * delta;
+					}
 				}
 				//else  pos += m_bfrAngle * m_Speed * delta;
 			}
@@ -489,6 +494,11 @@ namespace basecross {
 
 		}
 
+		if (m_grounded)
+		{
+			pos.y = 0;
+		}
+
 		if (cntl[0].bConnected)
 		{
 			if (m_MoveFlag)//フラグがたっていなければ操作ができない
@@ -501,7 +511,7 @@ namespace basecross {
 
 		if (!m_MoveFlag && m_StartFlag)//フラグがたっていなければ操作ができない
 		{
-			ptrCamera->m_ret.x = 0; 
+			ptrCamera->m_ret.x = 0;
 			ptrCamera->m_ret.y = 0;
 		}
 
@@ -538,7 +548,7 @@ namespace basecross {
 		//	m_Draw->SetMeshToTransformMatrix(m_spanMat);
 		//	m_ShadowFlag = false;
 		//}
-		
+
 		//auto fps = App::GetApp()->GetStepTimer().GetFramesPerSecond();
 
 		// 座標
@@ -547,15 +557,17 @@ namespace basecross {
 		//	pos.y << L", " <<
 		//	pos.z << L")" <<
 
-		//	L"\nrotate.y : (" <<
-		//	rotate.y << L")" <<
-		//	"\nangle : (" <<
-		//		angle.x << L", " <<
-		//		angle.y << L", " <<
-		//		angle.z << L")" <<
-		//// ゲーム画面fps
-		//	L"\nFPS : "					<<
-		//	fps							<<
+		//	L"\nm_rotAng :(" <<
+		//	m_rotAng << L")" <<
+			//	L"\nrotate.y : (" <<
+			//	rotate.y << L")" <<
+			//	"\nangle : (" <<
+			//		angle.x << L", " <<
+			//		angle.y << L", " <<
+			//		angle.z << L")" <<
+			//// ゲーム画面fps
+			//	L"\nFPS : "					<<
+			//	fps							<<
 
 			//endl;
 
@@ -648,7 +660,7 @@ namespace basecross {
 		{
 			ptrMana->Start(L"PointSE", 0, 1.0f);
 			ScoreFlag = true;
-			
+
 			auto ciclenext = ptrCircle->m_next++;
 			auto comboCount = ptrCircle->m_ComboCount;
 			comboCount++;
@@ -703,10 +715,10 @@ namespace basecross {
 
 		Mat4x4 spanMat;
 		spanMat.affineTransformation(
-			Vec3(0.3f, 0.005f, 2.0f),//スケーリング
+			Vec3(0.1f, 0.005f, 2.0f),//スケーリング
 			Vec3(0.0f, XM_PIDIV2, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, 0.1f, 0.0f) //移動
+			Vec3(0.0f, 0.09f, -0.15f) //移動
 		);
 
 		m_Draw = AddComponent<BcPNTStaticDraw>();
@@ -722,23 +734,31 @@ namespace basecross {
 
 		auto ptrPlayer = stage->GetSharedGameObject<Player>(L"Player");
 		auto ground = ptrPlayer->m_grounded;
+		auto stan = ptrPlayer->m_StanFlag;
 		auto trans = GetComponent<Transform>();
 		auto pos = ptrPlayer->m_ptrTrans->GetPosition();
-		
+
 		// 位置の更新
 
 		if (!ground)
 		{
 			trans->SetPosition(pos.x, pos.y - pos.y + 0.5f, pos.z);
-			trans->SetScale(5.0f, 1.0f, 1.0f);
-		}		
+			trans->SetScale(7.0f, 1.0f, 1.0f);
+		}
 		else
 		{
 			trans->SetPosition(pos);
 			trans->SetScale(1.0f, 1.0f, 1.0f);
 		}
-		trans->SetRotation(0.0f,ptrPlayer->m_rotAng,0.0f);
 
+		if (!stan)
+		{
+			trans->SetRotation(0.0f, ptrPlayer->m_rotAng, 0.0f);
+		}
+		else
+		{
+			trans->SetRotation(0.0f, ptrPlayer->m_StanTime * 10.0f, 0.0f);
+		}
 	}
 }
 //end basecross
