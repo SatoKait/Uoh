@@ -259,9 +259,10 @@ namespace basecross {
 		SetSharedGameObject(L"TimeSprite", ptrSprite);	
 		//AddGameObject<StageSprite>(L"PARTITION_TX", true,
 		//Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
-		//auto score = AddGameObject<Score>();
+		// スコアを表示
+		auto ptrscore = AddGameObject<Score>();
+		SetSharedGameObject(L"Score", ptrscore);
 		//AddGameObject<StageScore>();
-		//SetSharedGameObject(L"Score", ptrscore);
 		
 		// HPゲージの生成
 		auto ptrHpGauge = AddGameObject<GaugeScore>(false,
@@ -288,6 +289,11 @@ namespace basecross {
 			Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
 		Kakeru->SetDrawLayer(-100);
 		SetSharedGameObject(L"Kakeru", Kakeru);
+		auto Icon = AddGameObject<StageSprite>(L"MiniMapPlayer_TX", true,
+			Vec2(100.0f, 100.0f), Vec2(-190.0f, 340.0f));
+		auto P = AddGameObject<StageSprite>(L"P_TX", true,
+			Vec2(70.0f, 55.0f), Vec2(170.0f, 330.0f));
+
 	}
 	void GameStage::CreateStageTime()
 	{

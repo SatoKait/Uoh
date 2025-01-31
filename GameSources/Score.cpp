@@ -20,7 +20,7 @@ namespace basecross {
 			auto stage = GetStage();
 			number = stage->AddGameObject<ScoreSprite>();
 			m_numberTrans = number->GetComponent<Transform>();
-			m_numberTrans->SetPosition(-50 * 0.5f - 50.0f * (numPlaces - i), 800 * 0.5f, 0.0f);
+			m_numberTrans->SetPosition(50.0f * (numPlaces - i - 3.4f), 800 * 0.5f, 0.0f);
 			number->UpdateValue(m_score / place % 10);
 			place /= 10;
 			m_numberSprites.push_back(number);
@@ -38,7 +38,7 @@ namespace basecross {
 
 	void Score::OnUpdate()
 	{	auto stage = GetStage();
-	    m_score = App::GetApp()->GetScene<Scene>()->GetScore();//更新で最新の数字を見る
+	    m_score = App::GetApp()->GetScene<Scene>()->GetPoint();//更新で最新の数字を見る
 		int place = 10000;	
 		for (int i = 0; i < m_numberSprites.size(); ++i) {
 			
@@ -76,7 +76,7 @@ namespace basecross {
 	void StageScore::OnUpdate()
 	{
 		auto stage = GetStage();
-		m_score = App::GetApp()->GetScene<Scene>()->GetScore();//更新で最新の数字を見る
+		m_score = App::GetApp()->GetScene<Scene>()->GetPoint();//更新で最新の数字を見る
 		int place = 10000;
 		for (int i = 0; i < m_numberSprites.size(); ++i) {
 			int digit = (m_score / place) % 10;// 現在の桁の数字を計算
