@@ -289,8 +289,8 @@ namespace basecross {
 			Vec2(64.0f, 64.0f), Vec2(-460.0f, -360.0f));
 		Kakeru->SetDrawLayer(-100);
 		SetSharedGameObject(L"Kakeru", Kakeru);
-		auto Icon = AddGameObject<StageSprite>(L"MiniMapPlayer_TX", true,
-			Vec2(100.0f, 100.0f), Vec2(-190.0f, 340.0f));
+		//auto Icon = AddGameObject<StageSprite>(L"MiniMapPlayer_TX", true,
+		//	Vec2(100.0f, 100.0f), Vec2(-190.0f, 340.0f));
 		auto P = AddGameObject<StageSprite>(L"P_TX", true,
 			Vec2(70.0f, 55.0f), Vec2(170.0f, 330.0f));
 

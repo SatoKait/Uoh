@@ -20,7 +20,8 @@ namespace basecross {
 			auto stage = GetStage();
 			number = stage->AddGameObject<ScoreSprite>();
 			m_numberTrans = number->GetComponent<Transform>();
-			m_numberTrans->SetPosition(50.0f * (numPlaces - i - 3.4f), 800 * 0.5f, 0.0f);
+			m_numberTrans->SetPosition(300 * 0.5f - 50.0f * (numPlaces - i), 800 * 0.5f, 0.0f);		
+			//m_numberTrans->SetPosition(50.0f * (numPlaces - i - 3.4f), 800 * 0.5f, 0.0f);
 			number->UpdateValue(m_score / place % 10);
 			place /= 10;
 			m_numberSprites.push_back(number);
