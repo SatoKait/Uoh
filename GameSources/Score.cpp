@@ -259,12 +259,12 @@ namespace basecross {
 
 	void PlayerRusultScore::OnUpdate() {
 		auto delta = App::GetApp()->GetElapsedTime();
-		auto NPCGauge = GetStage()->GetSharedGameObject<NPCRusultScore>(L"NPCResultGauge");
-		auto NPCEndFlag = NPCGauge->m_EndChangeFlag;
+		//auto NPCGauge = GetStage()->GetSharedGameObject<NPCRusultScore>(L"NPCResultGauge");
+		//auto NPCEndFlag = NPCGauge->m_EndChangeFlag;
 		if (m_UpdateStartFlag)
 		{
 			m_DeltaTime = delta;
-			auto MoveSpeed = NPCGauge->m_Speed;
+			auto MoveSpeed = 3.0f;
 			if (m_ChangeFlag == false && m_StartScale.x <= 12.5f)
 			{
 				m_StartScale.x += m_DeltaTime * MoveSpeed;
@@ -273,11 +273,11 @@ namespace basecross {
 			{
 				m_ChangeFlag = true;
 			}
-			if (m_ChangeFlag == true && m_StartScale.x >= 5.5f && NPCEndFlag == false)
+			if (m_ChangeFlag == true && m_StartScale.x >= 5.5f)
 			{
 				m_StartScale.x -= m_DeltaTime * MoveSpeed;
 			}
-			if (NPCEndFlag == true && m_StartScale.x <= 8.2f)
+			if (m_StartScale.x <= 8.2f)
 			{
 				m_StartScale.x += m_DeltaTime * MoveSpeed;
 				m_StartFlag = true;
@@ -297,65 +297,66 @@ namespace basecross {
 	}
 }
 
-namespace basecross {
-	void NPCRusultScore::OnCreate() {
-
-		m_ptrTrans = GetComponent<Transform>();
-
-		//色の設定
-		Col4 color(1, 1, 1, 1); //ポリゴンの色
-		float widthSize = m_Hp_now; //ポリゴンの幅
-		float helfSize = 20.0f; //ポリゴンの高さ
-
-		m_BackupVertices = {
-			{VertexPositionColorTexture(Vec3(0, 0, 0), color, Vec2(0, 0))},
-			{VertexPositionColorTexture(Vec3(-widthSize, 0, 0), color, Vec2(1, 0))},
-			{VertexPositionColorTexture(Vec3(0, -helfSize, 0), color, Vec2(0, 1))},
-			{VertexPositionColorTexture(Vec3(-widthSize, -helfSize, 0), color, Vec2(1, 1))},
-		};
-
-		//インデックス配列
-		vector<uint16_t> indices = { 3, 1, 2, 2, 1, 0 };
-		SetAlphaActive(m_Trace);
-		m_ptrTrans = GetComponent<Transform>();
-		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
-		m_ptrTrans->SetRotation(0, 0, 0);
-		m_ptrTrans->SetPosition(m_StartPos);
-		//頂点とインデックスを指定してスプライト作成
-		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
-		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
-		ptrDraw->SetTextureResource(m_HpKey);
-	}
-
-	void NPCRusultScore::OnUpdate() {
-		auto ptrPlayerGauge = GetStage()->GetSharedGameObject<PlayerRusultScore>(L"PlayerResultGauge");
-		auto PlayerGaugeFlag = ptrPlayerGauge->m_ChangeFlag;
-		auto delta = App::GetApp()->GetElapsedTime();
-		if (m_UpdateStartFlag)
-		{
-			m_DeltaTime = delta;
-
-			if(PlayerGaugeFlag == false)
-			{
-				m_StartScale.x -= m_DeltaTime * m_Speed;
-			}
-			if (PlayerGaugeFlag == true && m_StartScale.x <= 12.5f && m_EndChangeFlag == false)
-			{
-				m_StartScale.x += m_DeltaTime * m_Speed;
-			}
-			if (m_StartScale.x >= 12.5f && m_EndChangeFlag == false)
-			{
-				m_EndChangeFlag = true;
-			}
-			if (m_EndChangeFlag == true && m_StartScale.x >= 8.2f)
-			{
-				m_StartScale.x-= m_DeltaTime * m_Speed;
-			}
-			m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
-		}
-	}
-}
-
+//
+//namespace basecross {
+//	void NPCRusultScore::OnCreate() {
+//
+//		m_ptrTrans = GetComponent<Transform>();
+//
+//		//色の設定
+//		Col4 color(1, 1, 1, 1); //ポリゴンの色
+//		float widthSize = m_Hp_now; //ポリゴンの幅
+//		float helfSize = 20.0f; //ポリゴンの高さ
+//
+//		m_BackupVertices = {
+//			{VertexPositionColorTexture(Vec3(0, 0, 0), color, Vec2(0, 0))},
+//			{VertexPositionColorTexture(Vec3(-widthSize, 0, 0), color, Vec2(1, 0))},
+//			{VertexPositionColorTexture(Vec3(0, -helfSize, 0), color, Vec2(0, 1))},
+//			{VertexPositionColorTexture(Vec3(-widthSize, -helfSize, 0), color, Vec2(1, 1))},
+//		};
+//
+//		//インデックス配列
+//		vector<uint16_t> indices = { 3, 1, 2, 2, 1, 0 };
+//		SetAlphaActive(m_Trace);
+//		m_ptrTrans = GetComponent<Transform>();
+//		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
+//		m_ptrTrans->SetRotation(0, 0, 0);
+//		m_ptrTrans->SetPosition(m_StartPos);
+//		//頂点とインデックスを指定してスプライト作成
+//		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
+//		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
+//		ptrDraw->SetTextureResource(m_HpKey);
+//	}
+//
+//	void NPCRusultScore::OnUpdate() {
+//		auto ptrPlayerGauge = GetStage()->GetSharedGameObject<PlayerRusultScore>(L"PlayerResultGauge");
+//		auto PlayerGaugeFlag = ptrPlayerGauge->m_ChangeFlag;
+//		auto delta = App::GetApp()->GetElapsedTime();
+//		if (m_UpdateStartFlag)
+//		{
+//			m_DeltaTime = delta;
+//
+//			if(PlayerGaugeFlag == false)
+//			{
+//				m_StartScale.x -= m_DeltaTime * m_Speed;
+//			}
+//			if (PlayerGaugeFlag == true && m_StartScale.x <= 12.5f && m_EndChangeFlag == false)
+//			{
+//				m_StartScale.x += m_DeltaTime * m_Speed;
+//			}
+//			if (m_StartScale.x >= 12.5f && m_EndChangeFlag == false)
+//			{
+//				m_EndChangeFlag = true;
+//			}
+//			if (m_EndChangeFlag == true && m_StartScale.x >= 8.2f)
+//			{
+//				m_StartScale.x-= m_DeltaTime * m_Speed;
+//			}
+//			m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
+//		}
+//	}
+//}
+//
 
 namespace basecross {
 	void PlayerResultGauge::OnCreate() {
@@ -390,67 +391,67 @@ namespace basecross {
 	}
 
 	void PlayerResultGauge::OnUpdate() {
-		auto ptrGauge = GetStage()->GetSharedGameObject<GaugeScore>(L"Gauge");
-		auto ptrNPCGauge = GetStage()->GetSharedGameObject<GaugeScoreEnemy>(L"GaugeEnemy");
-		auto NPCGaugeCount = ptrNPCGauge->Count;
-		Count = ptrGauge->Count;
+		//auto ptrGauge = GetStage()->GetSharedGameObject<GaugeScore>(L"Gauge");
+		//auto ptrNPCGauge = GetStage()->GetSharedGameObject<GaugeScoreEnemy>(L"GaugeEnemy");
+		auto ptrScore = App::GetApp()->GetScene<Scene>()->GetPoint();
+		auto Count = 1.0f;
 		
 		if (m_ResultFlag == false)
 		{
-			m_StartScale.x += 0.5f * Count;
-			m_StartScale.x += 0.5f * NPCGaugeCount;
+			m_StartScale.x += 0.5f * ptrScore;
+			//m_StartScale.x += 0.5f * ptrScore;
 			m_ResultFlag = true;
 		}
 
 		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
 	}
 }
-namespace basecross {
-
-	void NPCResultGauge::OnCreate() {
-
-		m_ptrTrans = GetComponent<Transform>();
-
-		//色の設定
-		Col4 color(1, 1, 1, 1); //ポリゴンの色
-		float widthSize = m_Hp_now; //ポリゴンの幅
-		float helfSize = 20.0f; //ポリゴンの高さ
-
-		m_BackupVertices = {
-			{VertexPositionColorTexture(Vec3(0, 0, 0), color, Vec2(0, 0))},
-			{VertexPositionColorTexture(Vec3(-widthSize, 0, 0), color, Vec2(1, 0))},
-			{VertexPositionColorTexture(Vec3(0, -helfSize, 0), color, Vec2(0, 1))},
-			{VertexPositionColorTexture(Vec3(-widthSize, -helfSize, 0), color, Vec2(1, 1))},
-		};
-
-		//インデックス配列
-		vector<uint16_t> indices = { 3, 1, 2, 2, 1, 0 };
-		SetAlphaActive(m_Trace);
-		m_ptrTrans = GetComponent<Transform>();
-		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
-		m_ptrTrans->SetRotation(0, 0, 0);
-		m_ptrTrans->SetPosition(m_StartPos);
-		//頂点とインデックスを指定してスプライト作成
-		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
-		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
-		ptrDraw->SetTextureResource(m_HpKey);
-	}
-
-	void NPCResultGauge::OnUpdate() {
-		auto ptrGauge = GetStage()->GetSharedGameObject<GaugeScoreEnemy>(L"GaugeEnemy");
-		auto ptrPlayerGauge = GetStage()->GetSharedGameObject<GaugeScore>(L"Gauge");
-		auto GaugeCount = ptrPlayerGauge->Count;
-		Count = ptrGauge->Count;
-
-		if (m_ResultFlag == false)
-		{
-			m_StartScale.x += 0.5f * Count;
-			m_StartScale.x -= 0.5f * GaugeCount;
-			m_ResultFlag = true;
-		}
-
-		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
-	}
-}
+//namespace basecross {
+//
+//	void NPCResultGauge::OnCreate() {
+//
+//		m_ptrTrans = GetComponent<Transform>();
+//
+//		//色の設定
+//		Col4 color(1, 1, 1, 1); //ポリゴンの色
+//		float widthSize = m_Hp_now; //ポリゴンの幅
+//		float helfSize = 20.0f; //ポリゴンの高さ
+//
+//		m_BackupVertices = {
+//			{VertexPositionColorTexture(Vec3(0, 0, 0), color, Vec2(0, 0))},
+//			{VertexPositionColorTexture(Vec3(-widthSize, 0, 0), color, Vec2(1, 0))},
+//			{VertexPositionColorTexture(Vec3(0, -helfSize, 0), color, Vec2(0, 1))},
+//			{VertexPositionColorTexture(Vec3(-widthSize, -helfSize, 0), color, Vec2(1, 1))},
+//		};
+//
+//		//インデックス配列
+//		vector<uint16_t> indices = { 3, 1, 2, 2, 1, 0 };
+//		SetAlphaActive(m_Trace);
+//		m_ptrTrans = GetComponent<Transform>();
+//		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
+//		m_ptrTrans->SetRotation(0, 0, 0);
+//		m_ptrTrans->SetPosition(m_StartPos);
+//		//頂点とインデックスを指定してスプライト作成
+//		auto ptrDraw = AddComponent<PCTSpriteDraw>(m_BackupVertices, indices);
+//		ptrDraw->SetSamplerState(SamplerState::LinearWrap);
+//		ptrDraw->SetTextureResource(m_HpKey);
+//	}
+//
+//	void NPCResultGauge::OnUpdate() {
+//		auto ptrGauge = GetStage()->GetSharedGameObject<GaugeScoreEnemy>(L"GaugeEnemy");
+//		auto ptrPlayerGauge = GetStage()->GetSharedGameObject<GaugeScore>(L"Gauge");
+//		auto GaugeCount = ptrPlayerGauge->Count;
+//		Count = ptrGauge->Count;
+//
+//		if (m_ResultFlag == false)
+//		{
+//			m_StartScale.x += 0.5f * Count;
+//			m_StartScale.x -= 0.5f * GaugeCount;
+//			m_ResultFlag = true;
+//		}
+//
+//		m_ptrTrans->SetScale(m_StartScale.x, m_StartScale.y, 0.0f);
+//	}
+//}
 
 

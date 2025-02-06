@@ -30,6 +30,7 @@ namespace basecross {
 		//void CreateWall();  //ミニマップの壁を生成する
 		void CreateMoveGate();//ミニマップの移動するゲートを生成する
 		void CreateGate();	  //ミニマップのマンホールを生成する
+		void CreateGateRed();	  //ミニマップのマンホールを生成する
 		//void CreateEnemy(); //ミニマップの敵を生成する
 		void CreatePlayer();  //ミニマップのプレイヤーを生成する
 		void CreateNPC();

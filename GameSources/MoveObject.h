@@ -241,9 +241,9 @@ namespace basecross {
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
-	// Poll1キャラ
+	// PollBlueキャラ
 	//--------------------------------------------------------------------------------------
-	class Poll1 : public GameObject {
+	class PollBlue : public GameObject {
 		shared_ptr<Transform>m_ptrTrans;		// Transformコンポーネント
 		shared_ptr<MainCamera>m_camera;
 		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
@@ -263,7 +263,7 @@ namespace basecross {
 		shared_ptr<CollisionObb>m_col;
 
 		// 構築と破棄
-		Poll1::Poll1(shared_ptr<Stage>& StagePtr,
+		PollBlue::PollBlue(shared_ptr<Stage>& StagePtr,
 			const Vec3& Position,
 			const Vec3& Scale,
 			const Vec3& m_Rotate,
@@ -281,10 +281,60 @@ namespace basecross {
 
 		{
 		}
-		Poll1::~Poll1() {}
+		PollBlue::~PollBlue() {}
 
 		//初期化
-		virtual void OnCreate()override;	
+		virtual void OnCreate()override;
+		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
+		//virtual void OnUpdate()override;
+		//virtual void OnDestroy()override;
+	};//end basecross
+
+	//--------------------------------------------------------------------------------------
+	// PollRedキャラ
+	//--------------------------------------------------------------------------------------
+	class PollRed : public GameObject {
+		shared_ptr<Transform>m_ptrTrans;		// Transformコンポーネント
+		shared_ptr<MainCamera>m_camera;
+		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+		Vec3 m_Position;
+		Vec3 m_Scale;
+		Vec3 m_Rotate;
+		Vec3 m_Goal;
+		wstring m_sharedName;
+
+		wstring m_ResKey;
+		float m_Speed;			 //スピード
+		bool m_DrawFlag;
+
+
+	public:
+		float m_Distance;       //距離
+		shared_ptr<CollisionObb>m_col;
+
+		// 構築と破棄
+		PollRed::PollRed(shared_ptr<Stage>& StagePtr,
+			const Vec3& Position,
+			const Vec3& Scale,
+			const Vec3& m_Rotate,
+
+			const wstring& ResKey
+		) :
+			GameObject(StagePtr),
+			m_Position(Position),
+			m_Scale(Scale),
+			m_Rotate(m_Rotate),
+			m_ResKey(ResKey),
+			m_Distance(10.0f),
+			m_Speed(1.0f),		//スピード
+			m_DrawFlag(false)
+
+		{
+		}
+		PollRed::~PollRed() {}
+
+		//初期化
+		virtual void OnCreate()override;
 		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		//virtual void OnUpdate()override;
 		//virtual void OnDestroy()override;

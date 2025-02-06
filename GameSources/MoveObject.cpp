@@ -343,29 +343,29 @@ namespace basecross {
 	}
 
 	//--------------------------------------------------------------------------------------
-	// Poll1キャラ
+	// PollBlueキャラ
 	//--------------------------------------------------------------------------------------
-	void Poll1::OnCreate() {
+	void PollBlue::OnCreate() {
 		AddTag(L"Poll");
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
 		m_ptrTrans->SetRotation(m_Rotate);
 
-		//m_col = AddComponent<CollisionObb>();
-		//m_col->SetDrawActive(m_DrawFlag);
-		//m_col->SetFixed(true);
-		//m_col->SetSleepActive(true);
-		//m_col->GetAfterCollision();
-		//m_col->SetAfterCollision(AfterCollision::None);
+		m_col = AddComponent<CollisionObb>();
+		m_col->SetDrawActive(m_DrawFlag);
+		m_col->SetFixed(true);
+		m_col->SetSleepActive(true);
+		m_col->GetAfterCollision();
+		m_col->SetAfterCollision(AfterCollision::None);
 
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
 		spanMat.affineTransformation(
-			Vec3(0.04f,0.01f,0.04f),//スケーリング
+			Vec3(0.0275f, 0.0275f, 0.1f),//スケーリング
 			Vec3(0.0f, 0.0f, 0.0f),//回転の中心
 			Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-			Vec3(0.0f, -0.35f, 0.0f) //移動
+			Vec3(0.0f,-1.75f, 0.0f) //移動
 		);
 		//影をつける（シャドウマップを描画する）
 		auto ptrShadow = AddComponent<Shadowmap>();
@@ -374,10 +374,50 @@ namespace basecross {
 		ptrShadow->SetMeshToTransformMatrix(spanMat);
 
 		auto m_ptrDraw = AddComponent<PNTStaticDraw>();
-		m_ptrDraw->SetMeshResource(L"POLL_1_MESH");
+		m_ptrDraw->SetMeshResource(L"POLL_4_MESH");
 		m_ptrDraw->SetTextureResource(m_ResKey);
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
+
+	//--------------------------------------------------------------------------------------
+	// PollRedキャラ
+	//--------------------------------------------------------------------------------------
+		void PollRed::OnCreate() {
+			AddTag(L"PollRed");
+			m_ptrTrans = GetComponent<Transform>();
+			m_ptrTrans->SetScale(m_Scale);
+			m_ptrTrans->SetPosition(m_Position);
+			m_ptrTrans->SetRotation(m_Rotate);
+
+			//m_col = AddComponent<CollisionObb>();
+			//m_col->SetDrawActive(m_DrawFlag);
+			//m_col->SetFixed(true);
+			//m_col->SetSleepActive(true);
+			//m_col->GetAfterCollision();
+			//m_col->SetAfterCollision(AfterCollision::None);
+
+
+			Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
+			spanMat.affineTransformation(
+				Vec3(0.04f, 0.01f, 0.04f),//スケーリング
+				Vec3(0.0f, 0.0f, 0.0f),//回転の中心
+				Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
+				Vec3(0.0f, -0.35f, 0.0f) //移動
+			);
+			//影をつける（シャドウマップを描画する）
+			auto ptrShadow = AddComponent<Shadowmap>();
+			//影の形（メッシュ）を設定
+			//ptrShadow->SetMeshResource(L"BED_MESH");
+			ptrShadow->SetMeshToTransformMatrix(spanMat);
+
+			auto m_ptrDraw = AddComponent<PNTStaticDraw>();
+			m_ptrDraw->SetMeshResource(L"POLL_4_MESH");
+			m_ptrDraw->SetTextureResource(m_ResKey);
+			m_ptrDraw->SetMeshToTransformMatrix(spanMat);
+		}
+
+
+
 
 	//--------------------------------------------------------------------------------------
 	// PollCollisionキャラ
