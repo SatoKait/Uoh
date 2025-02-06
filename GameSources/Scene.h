@@ -17,6 +17,7 @@ namespace basecross {
 		int m_Score2;
 		int m_Point; 
 		int m_Point2;
+		int m_GoalScore;
 
 
 		//--------------------------------------------------------------------------------------
@@ -39,7 +40,8 @@ namespace basecross {
 			m_Score(0),
 			m_Score2(0),
 			m_Point(0),
-			m_Point2(0)
+			m_Point2(0),
+			m_GoalScore(3000)
 		{}
 		//--------------------------------------------------------------------------------------
 		/*!
@@ -119,6 +121,11 @@ namespace basecross {
 		// ポイントを取得する
 		int GetPoint2() {
 			return m_Point2;
+		}
+
+		// ポイントを取得する
+		int GetGoalScore() {
+			return m_GoalScore;
 		}
 	};
 }
