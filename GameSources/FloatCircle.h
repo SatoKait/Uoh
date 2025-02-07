@@ -25,6 +25,8 @@ namespace basecross {
 		Vec2 m_scrollVelocity;
 
 		bool m_isUpdate;
+		int ciclenext;
+
 
 	protected:
 		void InitializeVertices();
@@ -55,13 +57,14 @@ namespace basecross {
 			m_textureKeyName(textureKeyName),
 			m_scrollVelocity(0.0f),
 			m_isUpdate(false),
+			ciclenext(0),
 			m_next(1)
 		{
 		}
 
 		void OnCreate() override;
 		void OnUpdate() override;
-
+		void MyDestroy();
 		float GetBottomR()const
 		{
 			return m_bottomRadius;

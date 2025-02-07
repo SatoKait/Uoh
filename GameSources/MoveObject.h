@@ -126,7 +126,7 @@ namespace basecross {
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
 			m_Speed(1.0f),		//スピード
-			m_DrawFlag(true)
+			m_DrawFlag(false)
 
 		{
 		}
@@ -382,7 +382,7 @@ namespace basecross {
 			m_ResKey(ResKey),
 			m_Distance(10.0f),
 			m_Speed(1.0f),		//スピード
-			m_DrawFlag(true),
+			m_DrawFlag(false),
 			m_Count(0)
 
 		{
@@ -403,7 +403,7 @@ namespace basecross {
 			}
 		}
 
-		virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
+		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		//virtual void OnUpdate()override;
 		//virtual void OnDestroy()override;
 	};
