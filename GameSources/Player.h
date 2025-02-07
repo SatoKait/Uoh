@@ -81,6 +81,8 @@ namespace basecross{
 		bool m_grounded;		//接地しているかどうか
 		int  m_Nextcircle;
 		bool m_CameraFlag;
+		float m_ReTime;
+		bool m_SecondFlag;
 
 		Vec3 GetMoveVector();		// コントローラから方向ベクトルを得る
 
@@ -123,7 +125,9 @@ namespace basecross{
 			m_renderer(nullptr), 
 			m_effect(nullptr),
 			m_EffectCount(0), 
-			deltatime(11.0f)
+			deltatime(11.0f),
+			m_ReTime(0.0f),
+			m_SecondFlag(false)
 		{
 		}
 

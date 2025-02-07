@@ -70,6 +70,7 @@ namespace basecross {
 		float StartTime;
 		bool MiniMapDrawFlag;
 		bool DrawLayerFlag;
+		float Second;
 
 		wstring m_Number;
 
@@ -121,6 +122,7 @@ namespace basecross {
 		bool m_CreateResult;
 		bool m_MoveFlag;
 		bool m_StartDraw;
+	    bool m_ResuFlag;
 
 		//構築と破棄
 		GameStage();

@@ -87,6 +87,7 @@ namespace basecross {
 
 		m_drawComp->SetMeshToTransformMatrix(spanMat);
 
+
 	}
 
 	void FloatCircle::OnUpdate()
@@ -108,8 +109,15 @@ namespace basecross {
 		}
 
 		m_drawComp->UpdateVertices(m_vertices);
-
+		auto flag = GetTypeStage<GameStage>()->m_ResuFlag;
 	}
+
+	//Ž©•ªŽ©g‚ðÁ‹Ž‚·‚é
+	void FloatCircle::MyDestroy()
+	{
+		GetStage()->RemoveGameObject<FloatCircle>(GetThis<FloatCircle>());
+	}
+
 }
 
 //end basecross

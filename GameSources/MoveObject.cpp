@@ -153,12 +153,12 @@ namespace basecross {
 		m_ptrTrans->SetPosition(m_Position);
 		m_ptrTrans->SetRotation(m_Rotate);
 
-		//m_col = AddComponent<CollisionObb>();
-		//m_col->SetDrawActive(m_DrawFlag);
-		//m_col->SetFixed(true);
-		//m_col->SetSleepActive(true);
-		//m_col->GetAfterCollision();
-		//m_col->SetAfterCollision(AfterCollision::None);
+		m_col = AddComponent<CollisionObb>();
+		m_col->SetDrawActive(m_DrawFlag);
+		m_col->SetFixed(true);
+		m_col->SetSleepActive(true);
+		m_col->GetAfterCollision();
+	    m_col->SetAfterCollision(AfterCollision::Auto);
 
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
@@ -306,12 +306,12 @@ namespace basecross {
 		AddTag(L"CirclePoll");
 		m_Count++;
 
-		//m_col = AddComponent<CollisionObb>();
-		//m_col->SetDrawActive(m_DrawFlag);
-		//m_col->SetFixed(true);
-		//m_col->SetSleepActive(true);
-		//m_col->GetAfterCollision();
-		//m_col->SetAfterCollision(AfterCollision::None);
+		m_col = AddComponent<CollisionObb>();
+		m_col->SetDrawActive(m_DrawFlag);
+		m_col->SetFixed(true);
+		m_col->SetSleepActive(true);
+		m_col->GetAfterCollision();
+		m_col->SetAfterCollision(AfterCollision::Auto);
 
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
@@ -333,20 +333,12 @@ namespace basecross {
 		m_ptrDraw->SetMeshToTransformMatrix(spanMat);
 	}
 
-	void CirclePoll::OnCollisionEnter(shared_ptr<GameObject>& other)
-	{
-		if (other->FindTag(L"Player"))
-		{
-			m_col->SetAfterCollision(AfterCollision::None);
-		}
-
-	}
 
 	//--------------------------------------------------------------------------------------
 	// PollBlueキャラ
 	//--------------------------------------------------------------------------------------
 	void PollBlue::OnCreate() {
-		AddTag(L"Poll");
+		AddTag(L"PollBlue");
 		m_ptrTrans = GetComponent<Transform>();
 		m_ptrTrans->SetScale(m_Scale);
 		m_ptrTrans->SetPosition(m_Position);
@@ -357,7 +349,7 @@ namespace basecross {
 		m_col->SetFixed(true);
 		m_col->SetSleepActive(true);
 		m_col->GetAfterCollision();
-		m_col->SetAfterCollision(AfterCollision::None);
+		m_col->SetAfterCollision(AfterCollision::Auto);
 
 
 		Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
@@ -389,20 +381,21 @@ namespace basecross {
 			m_ptrTrans->SetPosition(m_Position);
 			m_ptrTrans->SetRotation(m_Rotate);
 
-			//m_col = AddComponent<CollisionObb>();
-			//m_col->SetDrawActive(m_DrawFlag);
-			//m_col->SetFixed(true);
-			//m_col->SetSleepActive(true);
-			//m_col->GetAfterCollision();
-			//m_col->SetAfterCollision(AfterCollision::None);
+
+			m_col = AddComponent<CollisionObb>();
+			m_col->SetDrawActive(m_DrawFlag);
+			m_col->SetFixed(true);
+			m_col->SetSleepActive(true);
+			m_col->GetAfterCollision();
+			m_col->SetAfterCollision(AfterCollision::Auto);
 
 
 			Mat4x4 spanMat; // モデルとトランスフ ォーム間の差分行列
 			spanMat.affineTransformation(
-				Vec3(0.04f, 0.01f, 0.04f),//スケーリング
+				Vec3(0.0275f, 0.0275f, 0.1f),//スケーリング
 				Vec3(0.0f, 0.0f, 0.0f),//回転の中心
 				Vec3(0.0f, 0.0f, 0.0f),//回転のベクトル
-				Vec3(0.0f, -0.35f, 0.0f) //移動
+				Vec3(0.0f, -1.75f, 0.0f) //移動
 			);
 			//影をつける（シャドウマップを描画する）
 			auto ptrShadow = AddComponent<Shadowmap>();

@@ -398,7 +398,7 @@ namespace basecross {
 		
 		if (m_ResultFlag == false)
 		{
-			m_StartScale.x += 0.5f * ptrScore;
+			m_StartScale.x = ptrScore / 550;
 			//m_StartScale.x += 0.5f * ptrScore;
 			m_ResultFlag = true;
 		}

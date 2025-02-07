@@ -654,6 +654,92 @@ namespace basecross {
 		auto  Time = 0;
 		auto  flag = false;
 
+		auto ptrPoll = stage->GetSharedGameObject<Poll>(L"Poll");
+
+		auto ptrRedPoll1 = stage->GetSharedGameObject<PollRed>(L"PollRed_1");
+		auto ptrRedPoll2 = stage->GetSharedGameObject<PollRed>(L"PollRed_2");
+		auto ptrRedPoll3 = stage->GetSharedGameObject<PollRed>(L"PollRed_3");
+		auto ptrRedPoll4 = stage->GetSharedGameObject<PollRed>(L"PollRed_4");
+		auto ptrBluePoll1 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_1");
+		auto ptrBluePoll2 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_2");
+		auto ptrBluePoll3 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_3");
+		auto ptrBluePoll4 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_4");
+		auto ptrCirclePoll1 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
+		auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
+
+
+		auto ptrPollcol = ptrPoll->m_col;
+		auto ptrRedPollcol1 = ptrRedPoll1->m_col;
+		auto ptrRedPollcol2 = ptrRedPoll2->m_col;
+		auto ptrRedPollcol3 = ptrRedPoll3->m_col;
+		auto ptrRedPollcol4 = ptrRedPoll4->m_col;
+		auto ptrBluePollcol1 = ptrBluePoll1->m_col;
+		auto ptrBluePollcol2 = ptrBluePoll2->m_col;
+		auto ptrBluePollcol3 = ptrBluePoll3->m_col;
+		auto ptrBluePollcol4 = ptrBluePoll4->m_col;
+		auto ptrCirclePollcol1 = ptrCirclePoll1->m_col;
+		auto ptrCirclePollcol2 = ptrCirclePoll2->m_col;
+
+		if (other->FindTag(L"Poll2"))
+		{
+			ptrMana->Start(L"PointSE", 0, 1.0f);
+
+			if (m_CircleCount < 5)
+			{
+				m_CircleCount++;
+			}
+			ptrPollcol->SetAfterCollision(AfterCollision::None);
+			App::GetApp()->GetScene<Scene>()->AddPoint(300 * m_CircleCount);
+		}
+
+		if (other->FindTag(L"CirclePoll"))
+		{
+			m_col->SetAfterCollision(AfterCollision::None);
+
+			ptrMana->Start(L"PointSE", 0, 1.0f);
+			if (m_CircleCount < 5)
+			{
+				m_CircleCount++;
+			}
+			ptrCirclePollcol1->SetAfterCollision(AfterCollision::None);
+			ptrCirclePollcol2->SetAfterCollision(AfterCollision::None);
+
+			App::GetApp()->GetScene<Scene>()->AddPoint(200 * m_CircleCount);
+
+		}
+
+
+		if (other->FindTag(L"PollBlue"))
+		{
+			ptrMana->Start(L"PointSE", 0, 1.0f);
+
+			if (m_CircleCount < 5)
+			{
+				m_CircleCount++;
+			}
+			ptrBluePollcol1->SetAfterCollision(AfterCollision::None);
+			ptrBluePollcol2->SetAfterCollision(AfterCollision::None);
+			ptrBluePollcol3->SetAfterCollision(AfterCollision::None);
+			ptrBluePollcol4->SetAfterCollision(AfterCollision::None);
+			App::GetApp()->GetScene<Scene>()->AddPoint(100 * m_CircleCount);
+		}
+
+		if (other->FindTag(L"PollRed"))
+		{
+			ptrMana->Start(L"PointSE", 0, 1.0f);
+
+			if (m_CircleCount < 5)
+			{
+				m_CircleCount++;
+			}
+
+			ptrRedPollcol1->SetAfterCollision(AfterCollision::None);
+			ptrRedPollcol2->SetAfterCollision(AfterCollision::None);
+			ptrRedPollcol3->SetAfterCollision(AfterCollision::None);
+			ptrRedPollcol4->SetAfterCollision(AfterCollision::None);
+			App::GetApp()->GetScene<Scene>()->AddPoint(100 * m_CircleCount);
+
+		}
 
 		if (other->FindTag(L"Goal"))
 		{
@@ -670,7 +756,17 @@ namespace basecross {
 			ptrMana->Start(L"PointSE", 0, 1.0f);
 			ScoreFlag = true;
 
-			auto ciclenext = ptrCircle->m_next++;
+			// 直前の m_next を記録
+			static int prev_m_next = -1;
+			int ciclenext;
+
+			do {
+				ciclenext = rand() % 11;
+			} while (ciclenext == prev_m_next); // 連続した同じ数字を防ぐ
+
+			ptrCircle->m_next = ciclenext;
+			prev_m_next = ciclenext; // 今回の値を保存		
+
 			auto comboCount = ptrCircle->m_ComboCount;
 			comboCount++;
 			if (ScoreFlag && comboCount == 1)
@@ -688,6 +784,7 @@ namespace basecross {
 				App::GetApp()->GetScene<Scene>()->AddPoint(100 * m_CircleCount);
 				ScoreFlag = false;
 				comboCount--;
+
 			}
 		}
 
