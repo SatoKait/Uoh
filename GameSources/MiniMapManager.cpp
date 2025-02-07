@@ -49,11 +49,12 @@ namespace basecross {
 		CreatePlayer();//最初の位置を設定している？//動くものはGameStageにも書かれている
 		//CreateNPC();
 		CreateCircle();
+		CreatePoll();
 	}
 
 	void MiniMapManager::OnUpdate()
 	{
-		UpdateMoveGate();//ここで新しく出た物を更新してマップに反映している
+		//UpdateMoveGate();//ここで新しく出た物を更新してマップに反映している
 	}
 
 	////ミニマップ用の壁を生成
@@ -154,6 +155,34 @@ namespace basecross {
 					//ptrGate->SetDrawLayer(-100);
 					//GetStage()->SetSharedGameObject(L"MiniMapGate", ptrGate);
 				
+
+				}
+			}
+
+		}
+
+		void MiniMapManager::CreatePoll()
+		{
+			auto ScaleBailrtu = 2.5f;
+			auto stage = GetStage();//ステージ取得
+			//ステージのオブジェクトを全て取得
+			auto obj = stage->GetGameObjectVec();
+			//取得したオブジェクトがアイテムに変換できたら配列に入れる
+			for (auto manhole : obj)
+			{
+				auto castManhole = dynamic_pointer_cast<Poll>(manhole);
+				if (castManhole)//アイテム型にキャストする
+				{
+					auto itemTrans = manhole->GetComponent<Transform>();
+					auto itemPos = itemTrans->GetPosition();
+					auto itemScale = itemTrans->GetScale();
+
+					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
+
+					//ptrGate->SetDrawLayer(-100);
+					//GetStage()->SetSharedGameObject(L"MiniMapGate", ptrGate);
+
 
 				}
 			}
