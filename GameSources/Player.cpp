@@ -694,7 +694,6 @@ namespace basecross {
 
 		if (other->FindTag(L"CirclePoll"))
 		{
-			m_col->SetAfterCollision(AfterCollision::None);
 
 			ptrMana->Start(L"PointSE", 0, 1.0f);
 			if (m_CircleCount < 5)
