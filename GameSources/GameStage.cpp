@@ -848,10 +848,14 @@ namespace basecross {
 
 		if (m_StrartFlag1 == true)
 		{
+			GaugeHide->SetDrawLayer(-90);
+
 			m_deltatime1 += delta;
 		}
 		if (m_StrartFlag2 == true)
 		{
+			GaugeHide->SetDrawLayer(-90);
+
 			m_deltatime2 += delta;
 		}
 
