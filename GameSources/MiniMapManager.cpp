@@ -45,6 +45,7 @@ namespace basecross {
 		CreateGate();//マンホールを生成//動かないのでここで書きMiniMapManegerで出てくる
 		CreateGateRed();
 		CreatCircleGate();
+		CreatRedCircleGate();
 		//CreateEnemy();
 		CreatePlayer();//最初の位置を設定している？//動くものはGameStageにも書かれている
 		//CreateNPC();
@@ -149,7 +150,7 @@ namespace basecross {
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
 
-					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"BLUE_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
 					
 					//ptrGate->SetDrawLayer(-100);
@@ -177,7 +178,7 @@ namespace basecross {
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
 
-					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"GREEN_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
 
 					//ptrGate->SetDrawLayer(-100);
@@ -205,7 +206,7 @@ namespace basecross {
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
 
-					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+					auto ptrGate = stage->AddGameObject<MiniMapSprite>(L"RED_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
 
 					//ptrGate->SetDrawLayer(-100);
@@ -235,7 +236,7 @@ namespace basecross {
 					auto itemPos = itemTrans->GetPosition();
 					auto itemScale = itemTrans->GetScale();
 
-					auto CircleGate = stage->AddGameObject<MiniMapSprite>(L"MiniMap_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+					auto CircleGate = stage->AddGameObject<MiniMapSprite>(L"BLUE_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
 						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
 					if (m_MiniMapDrawFlag == true)
 					{
@@ -246,6 +247,32 @@ namespace basecross {
 
 		}
 
+		void MiniMapManager::CreatRedCircleGate()
+		{
+			auto ScaleBailrtu = 2.5f;
+			auto stage = GetStage();//ステージ取得
+			//ステージのオブジェクトを全て取得
+			auto obj = stage->GetGameObjectVec();
+			//取得したオブジェクトがアイテムに変換できたら配列に入れる
+			for (auto manhole : obj)
+			{
+				auto castManhole = dynamic_pointer_cast<RedCirclePoll>(manhole);
+				if (castManhole)//アイテム型にキャストする
+				{
+					auto itemTrans = manhole->GetComponent<Transform>();
+					auto itemPos = itemTrans->GetPosition();
+					auto itemScale = itemTrans->GetScale();
+
+					auto CircleGate = stage->AddGameObject<MiniMapSprite>(L"RED_TX", Vec2((itemScale.x * m_mapMagnification * ScaleBailrtu), (itemScale.z * m_mapMagnification * ScaleBailrtu)),
+						Vec3(m_startPos.x + (itemPos.x * m_mapMagnification), m_startPos.y + (itemPos.z * m_mapMagnification), 0.0f), Vec3(0.0f, 0.0f, 0.0f), Col4(1.0f, 1.0f, 1.0f, 1.0f), 10);
+					if (m_MiniMapDrawFlag == true)
+					{
+						CircleGate->SetDrawLayer(-100);
+					}
+				}
+			}
+
+		}
 
 		//ミニマップ用の敵を作成
 		//void MiniMapManager::CreateEnemy()//敵の場所を出している

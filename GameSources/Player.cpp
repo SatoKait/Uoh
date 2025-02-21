@@ -664,7 +664,7 @@ namespace basecross {
 		auto ptrBluePoll2 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_2");
 		auto ptrBluePoll3 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_3");
 		auto ptrBluePoll4 = stage->GetSharedGameObject<PollBlue>(L"PollBlue_4");
-		auto ptrCirclePoll1 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll1");
+		auto ptrCirclePoll1 = stage->GetSharedGameObject<RedCirclePoll>(L"CirclePoll1");
 		auto ptrCirclePoll2 = stage->GetSharedGameObject<CirclePoll>(L"CirclePoll2");
 
 
@@ -700,8 +700,21 @@ namespace basecross {
 			{
 				m_CircleCount++;
 			}
-			ptrCirclePollcol1->SetAfterCollision(AfterCollision::None);
 			ptrCirclePollcol2->SetAfterCollision(AfterCollision::None);
+
+			App::GetApp()->GetScene<Scene>()->AddPoint(200 * m_CircleCount);
+
+		}
+
+		if (other->FindTag(L"RedCirclePoll"))
+		{
+
+			ptrMana->Start(L"PointSE", 0, 1.0f);
+			if (m_CircleCount < 5)
+			{
+				m_CircleCount++;
+			}
+			ptrCirclePollcol1->SetAfterCollision(AfterCollision::None);
 
 			App::GetApp()->GetScene<Scene>()->AddPoint(200 * m_CircleCount);
 

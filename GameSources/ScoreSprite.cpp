@@ -40,6 +40,7 @@ namespace basecross {
 
 		// アルファブレンド(透過処理)を有効にする
 		SetAlphaActive(true); // true:透過を有効、false:透過を無効
+		SetDrawLayer(998);
 	}
 
 	void ScoreSprite::OnUpdate()

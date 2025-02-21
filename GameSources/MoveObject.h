@@ -409,6 +409,75 @@ namespace basecross {
 	};
 
 	//--------------------------------------------------------------------------------------
+	// RedCirclePollキャラ
+	//--------------------------------------------------------------------------------------
+	class RedCirclePoll : public GameObject {
+		shared_ptr<Transform>m_ptrTrans;		// Transformコンポーネント
+		shared_ptr<MainCamera>m_camera;
+		shared_ptr<BcPNTStaticDraw>m_ptrDraw;
+		Vec3 m_Position;
+		Vec3 m_Scale;
+		Vec3 m_Rotate;
+
+		Vec3 m_Goal;
+		wstring m_ResKey;
+		wstring m_sharedName;
+		////タグ設定
+		vector<wstring> m_Tags;
+		wstring m_Number;
+		int m_Count;
+		float m_Speed;			 //スピード
+		bool m_DrawFlag;
+
+
+
+	public:
+		float m_Distance;       //距離
+		shared_ptr<CollisionObb>m_col;
+
+		// 構築と破棄
+		RedCirclePoll::RedCirclePoll(const shared_ptr<Stage>& StagePtr,
+			const Vec3& Position,
+			const Vec3& Scale,
+			const Vec3& m_Rotate,
+
+			const wstring& ResKey
+		) :
+			GameObject(StagePtr),
+			m_Position(Position),
+			m_Scale(Scale),
+			m_Rotate(m_Rotate),
+			m_ResKey(ResKey),
+			m_Distance(10.0f),
+			m_Speed(1.0f),		//スピード
+			m_DrawFlag(false),
+			m_Count(0)
+
+		{
+		}
+		RedCirclePoll::~RedCirclePoll() {}
+
+		//初期化
+		virtual void OnCreate()override;
+		void BaseAddTag(const wstring& tag)
+		{
+			m_Tags.push_back(tag);
+		}
+		void BaseAddTag(vector<wstring>& tags)
+		{
+			for (auto& tag : tags)
+			{
+				m_Tags.push_back(tag);
+			}
+		}
+
+		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
+		//virtual void OnUpdate()override;
+		//virtual void OnDestroy()override;
+	};
+
+
+	//--------------------------------------------------------------------------------------
 	// PollCollisionキャラ
 	//--------------------------------------------------------------------------------------
 	 class PollCollision : public GameObject
