@@ -37,6 +37,8 @@ namespace basecross {
 		void CreateNPC();
 		void CreateCircle();
 		void CreatCircleGate();
+		void CreatRedCircleGate();
+
 		void UpdateMoveGate();//ミニマップのアイテム表示(Update版)
 
 		Vec3 GetStartPos();//ミニマップの原点を渡す

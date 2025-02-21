@@ -37,6 +37,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MoveObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NPC.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NumberSquare.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Plane.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Player.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Pole.h" />
@@ -54,7 +55,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TitleStage.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)UITime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Wall.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Actor.cpp" />
@@ -80,6 +81,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MoveObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NPC.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NumberSquare.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Plane.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Pole.cpp" />
@@ -96,7 +98,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)TitleStage.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)UITime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Wall.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Wave.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Shader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

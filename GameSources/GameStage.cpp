@@ -192,29 +192,89 @@ namespace basecross {
 	void GameStage::CreateObstacle() {
 		auto objPoll = AddGameObject<Poll>(Vec3(0.0f, 5.55f, 0.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f), L"GREEN_TX");
 		SetSharedGameObject(L"Poll", objPoll);
-		auto objCirclePoll = AddGameObject<CirclePoll>(Vec3(30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare>(objPoll, L"Number300_TX");
+		}
+
+		auto objCirclePoll = AddGameObject<RedCirclePoll>(Vec3(30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"CirclePoll1", objCirclePoll);
-		objCirclePoll = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
-		SetSharedGameObject(L"CirclePoll2", objCirclePoll);
-		
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare5>(objCirclePoll, L"Number200_TX");
+		}
+
+		auto objCirclePoll2 = AddGameObject<CirclePoll>(Vec3(-30.0f, 10.0f, 0.0f), Vec3(4.0f, 3.5f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
+		SetSharedGameObject(L"CirclePoll2", objCirclePoll2);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare4>(objCirclePoll2, L"Number200_TX");
+		}
+
 		auto objPollnol = AddGameObject<PollRed>(Vec3(15.0f, 6.0f, -35.0f), Vec3(4.5f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
 		SetSharedGameObject(L"PollRed_1", objPollnol);
-		objPollnol = AddGameObject<PollRed>(Vec3(30.0f, 6.0f, -20.0f), Vec3(3.0f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
-		SetSharedGameObject(L"PollRed_2", objPollnol);
-		objPollnol = AddGameObject<PollRed>(Vec3(15.0f, 6.0f, 35.0f), Vec3(3.0f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
-		SetSharedGameObject(L"PollRed_3", objPollnol);
-		objPollnol = AddGameObject<PollRed>(Vec3(30.0f, 6.0f, 20.0f), Vec3(4.5f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
-		SetSharedGameObject(L"PollRed_4", objPollnol);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare3>(objPollnol, L"Number100_TX");
+		}
 
+		auto objPollnol2 = AddGameObject<PollRed>(Vec3(30.0f, 6.0f, -20.0f), Vec3(3.0f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"PollRed_2", objPollnol2);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare3>(objPollnol2, L"Number100_TX");
+		}
+
+		auto objPollnol3 = AddGameObject<PollRed>(Vec3(15.0f, 6.0f, 35.0f), Vec3(3.0f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"PollRed_3", objPollnol3);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare3>(objPollnol3, L"Number100_TX");
+		}
+
+		auto objPollnol4 = AddGameObject<PollRed>(Vec3(30.0f, 6.0f, 20.0f), Vec3(4.5f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"RED_TX");
+		SetSharedGameObject(L"PollRed_4", objPollnol4);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare3>(objPollnol4, L"Number100_TX");
+		}
 
 		auto objPollBlue_1 = AddGameObject<PollBlue>(Vec3(-15.0f, 6.0f, -35.0f), Vec3(4.5f,3.0f,1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"PollBlue_1", objPollBlue_1);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare2>(objPollBlue_1, L"Number100_TX");
+		}
+
 		auto objPollBlue_2 = AddGameObject<PollBlue>(Vec3(-15.0f, 6.0f, 35.0f), Vec3(3.0f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"PollBlue_2", objPollBlue_2);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare2>(objPollBlue_2, L"Number100_TX");
+		}
+
 		auto objPollBlue_3 = AddGameObject<PollBlue>(Vec3(-30.0f, 6.0f, 20.0f), Vec3(4.5f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"PollBlue_3", objPollBlue_3);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare2>(objPollBlue_3, L"Number100_TX");
+		}
+
 		auto objPollBlue_4 = AddGameObject<PollBlue>(Vec3(-30.0f, 6.0f, -20.0f), Vec3(3.0f, 3.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f), L"BLUE_TX");
 		SetSharedGameObject(L"PollBlue_4", objPollBlue_4);
+		//配置オブジェクトの作成
+		for (size_t count = 0; count < 1; count++) {
+			////ナンバースクエアを作成して関連させる
+			AddGameObject<NumberSquare2>(objPollBlue_4, L"Number100_TX");
+		}
 		//AddGameObject<UpdownPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 		//AddGameObject<OnewaytrafficPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 		//AddGameObject<OneWayPollCollision>(Vec3(0.0f, 5.55f, -11.0f), Vec3(5.0f, 2.0f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
@@ -306,8 +366,10 @@ namespace basecross {
 		SetSharedGameObject(L"Kakeru", Kakeru);
 		auto Icon = AddGameObject<StageSprite>(L"MiniMapPlayer_TX", true,
 			Vec2(100.0f, 100.0f), Vec2(-170.0f, 340.0f));
+		SetSharedGameObject(L"Icon", Icon);
 		auto P = AddGameObject<StageSprite>(L"P_TX", true,
 			Vec2(70.0f, 55.0f), Vec2(170.0f, 330.0f));
+		SetSharedGameObject(L"P", P);
 
 	}
 	void GameStage::CreateStageTime()
@@ -430,9 +492,6 @@ namespace basecross {
 			// スカイボックス
 			AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
 
-
-
-
 			//AddGameObject<Skybox2>();
 
 			//auto Rank = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
@@ -544,6 +603,9 @@ namespace basecross {
 		auto ptrNPC = GetSharedGameObject<NPC>(L"NPC");
 		auto GoalFlag = ptrPlayer->m_GoalFlag;
 		auto m_count = ptrPlayer->m_CircleCount;
+		auto ptrScore = GetSharedGameObject<Score>(L"Score");
+		auto ptrP = GetSharedGameObject<StageSprite>(L"P");
+		auto ptrIcon = GetSharedGameObject<StageSprite>(L"Icon");
 		//auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
 		//auto gaugecount = gauge->Count;
 
@@ -593,19 +655,19 @@ namespace basecross {
 			//Rank2->SetColor(Col4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
-		//if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
-		//{
-		//	ptrMana->Stop(m_BGM);
+		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
+		{
+			ptrMana->Stop(m_BGM);
 
-		//	if (score1 > score2)
-		//	{
-		//		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-		//	}
-		//	else
-		//	{
-		//		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-		//	}
-		//}
+			if (score1 > score2)
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+			}
+			else
+			{
+				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+			}
+		}
 
 		//if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_X)
 		//{
@@ -767,7 +829,9 @@ namespace basecross {
 							(L"FLAG_TX", true,
 								Vec2(200.0f, 200.0f), Vec2(500.0f, 0.0f));
 						Result2->SetDrawLayer(999);
-
+						GaugeHide->SetDrawLayer(999);
+						ptrP->SetDrawLayer(999);
+						ptrIcon->SetDrawLayer(999);
 						if (m_CreateResultFlag = true && m_CreateResultGauge == false)
 						{
 							ptrPlayerResultIcon->SetDrawLayer(998);
@@ -881,7 +945,7 @@ namespace basecross {
 			m_BGM = ptrMana->Start(L"StageBGM2", 1, 0.3f);
 			m_30secFlag = false;
 
-			GaugeHide->SetDrawLayer(90);
+			GaugeHide->SetDrawLayer(999);
 			//GaugeHide2->SetDrawLayer(90);
 			//GaugeHide3->SetDrawLayer(90);
 

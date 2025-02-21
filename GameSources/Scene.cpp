@@ -131,6 +131,28 @@ namespace basecross{
 			App::GetApp()->RegisterTexture(L"P_TX", tex);
 			tex = texPath + L"Flag.png";
 			App::GetApp()->RegisterTexture(L"FLAG_TX", tex);
+			tex = texPath + L"Number100.png";
+			App::GetApp()->RegisterTexture(L"Number100_TX", tex);
+			tex = texPath + L"Number200.png";
+			App::GetApp()->RegisterTexture(L"Number200_TX", tex);
+			tex = texPath + L"Number300.png";
+			App::GetApp()->RegisterTexture(L"Number300_TX", tex);
+			tex = texPath + L"Number400.png";
+			App::GetApp()->RegisterTexture(L"Number400_TX", tex);
+			tex = texPath + L"Number500.png";
+			App::GetApp()->RegisterTexture(L"Number500_TX", tex);
+			tex = texPath + L"Number600.png";
+			App::GetApp()->RegisterTexture(L"Number600_TX", tex);
+			tex = texPath + L"Number800.png";
+			App::GetApp()->RegisterTexture(L"Number800_TX", tex);
+			tex = texPath + L"Number900.png";
+			App::GetApp()->RegisterTexture(L"Number900_TX", tex);
+			tex = texPath + L"Number1000.png";
+			App::GetApp()->RegisterTexture(L"Number1000_TX", tex);
+			tex = texPath + L"Number1200.png";
+			App::GetApp()->RegisterTexture(L"Number1200_TX", tex);
+			tex = texPath + L"Number1500.png";
+			App::GetApp()->RegisterTexture(L"Number1500_TX", tex);
 
 			//tex = texPath + L"Tri.png";
 			//App::GetApp()->RegisterTexture(L"MiniMapPlayer_TX", tex);

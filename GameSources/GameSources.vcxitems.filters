@@ -5,7 +5,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)D3DApp.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Wave.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -123,10 +122,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp">
       <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NumberSquare.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)D3DApp.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Wave.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Player.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -244,6 +244,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h">
       <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NumberSquare.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">
