@@ -19,12 +19,9 @@ namespace basecross {
 	class GameStage : public Stage {
 		// BGM	
 		shared_ptr<SoundItem> m_stageBGM;	
-
 		shared_ptr<SoundItem> m_BGM;
 		shared_ptr<SoundItem> m_BGM2;
-
 		shared_ptr<SingleView> m_View;//ビューの変数
-
 
 		//OpeningCamera用のビュー
 		shared_ptr<SingleView> m_OpeningCameraView;
@@ -33,8 +30,6 @@ namespace basecross {
 		//ObjCamera用のビュー
 		shared_ptr<SingleView> m_ObjCameraView;	
 		
-		//shared_ptr<PlayerResultGauge> ptrPlayerResutlt;
-
 		CameraSelect m_CameraSelect;
 		int count;
 		int rank;
@@ -80,19 +75,15 @@ namespace basecross {
 		EffekseerRendererDX11::RendererRef m_renderer;
 		Effekseer::EffectRef m_effect;
 
-
-
 		// BGMの再生
 		void CreateBGM();
-
 		//ビューの作成
 		void CreateViewLight();
 		// プレイヤーの作成
 		void CreatePlayer();
 		//壁
 		void CreateWall();
-
-		////ステージ
+		//ステージ
 		void CreateGround();
 		//障害物
 		void CreateObstacle();
@@ -105,16 +96,7 @@ namespace basecross {
 		void CreateStageTime();
 		void CreatePollCollision();
 		void CreateFloatCircle();
-		void CreateWave();
-	//public : 
-	//	CameraSelect GetCameraSelect() const {
-	//		return m_CameraSelect;
-	//	}
-
-		void CreateMoveCamera();
-		void CreateCameraman();
 		void CameraSetting();
-
 		void CreateNPC();
 	public:
 		bool m_GoalFlag;

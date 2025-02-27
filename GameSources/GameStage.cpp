@@ -67,10 +67,6 @@ namespace basecross {
 		ptrMyCamera->SetEye(eye);
 		ptrMyCamera->SetAt(at);
 		m_MyCameraView->SetCamera(ptrMyCamera);
-		////ObjCamera用のビュー
-		//m_ObjCameraView = ObjectFactory::Create<SingleView>(GetThis<Stage>());
-		//auto ptrObjCamera = ObjectFactory::Create<ObjCamera>();
-		//m_ObjCameraView->SetCamera(ptrObjCamera);
 		// カメラの設定MainCamera
 		m_View = ObjectFactory::Create<SingleView>(GetThis<Stage>());
 		auto camera = ObjectFactory::Create<MainCamera>(-90.0f);
@@ -95,13 +91,11 @@ namespace basecross {
 		auto ptrOpeningCameraman = AddGameObject<OpeningCameraman>();
 		//シェア配列にOpeningCameramanを追加
 		SetSharedGameObject(L"OpeningCameraman", ptrOpeningCameraman);
-
 		auto ptrOpeningCamera = dynamic_pointer_cast<OpeningCamera>(m_OpeningCameraView->GetCamera());
 		if (ptrOpeningCamera) {
 			ptrOpeningCamera->SetCameraObject(ptrOpeningCameraman);
 			SetView(m_OpeningCameraView);
 			m_CameraSelect = CameraSelect::openingCamera;
-
 		}
 	}
 
@@ -115,19 +109,12 @@ namespace basecross {
 	{
 		auto WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, 55.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));//上
 		WallCol = AddGameObject<Wall>(Vec3(0.0f, 10.0f, -54.0f), Vec3(95.0f, 20.0f, 1.0f), Vec3(0.0f, 0.0f, 0.0f));
-
 		WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -48.5f), Vec3(1.0f, 20.0f, 10.0f), Vec3(0.0f, 0.261, 0.0f));//左上の部分
-		//WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
-
 		WallCol = AddGameObject<Wall>(Vec3(49.0f, 10.0f, 0.0f), Vec3(1.0f, 20.0f, 87.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
 		WallCol = AddGameObject<Wall>(Vec3(47.0f, 10.0f, 49.0f), Vec3(1.0f, 20.0f, 11.3f), Vec3(0.0f, -0.261, 0.0f));//左下の部分
-		
-		//WallCol = AddGameObject<Wall>(Vec3(48.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 		WallCol = AddGameObject<Wall>(Vec3(-48.5f, 10.0f, 49.0f), Vec3(1.0f, 20.0f, 11.3f), Vec3(0.0f, 0.261, 0.0f));//左上の部分
-		//WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, 43.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左上の部分
 		WallCol = AddGameObject<Wall>(Vec3(-50.0f, 10.0f, 0.5f), Vec3(1.0f, 20.0f, 87.0f), Vec3(0.0f, 0.0f, 0.0f));//左の部分
 		WallCol = AddGameObject<Wall>(Vec3(-48.0f, 10.0f, -48.3f), Vec3(1.0f, 20.0f, 11.3f), Vec3(0.0f, -0.261, 0.0f));//左下の部分
-		//WallCol = AddGameObject<Wall>(Vec3(-49.0f, 10.0f, -42.0f), Vec3(1.0f, 20.0f, 5.2f), Vec3(0.0f, 0.0f, 0.0f));//左下の部分
 	}
 	void GameStage::CreatePollCollision()
 	{
@@ -275,9 +262,6 @@ namespace basecross {
 			////ナンバースクエアを作成して関連させる
 			AddGameObject<NumberSquare2>(objPollBlue_4, L"Number100_TX");
 		}
-		//AddGameObject<UpdownPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
-		//AddGameObject<OnewaytrafficPoll>(Vec3(0.0f, 5.55f, -10.0f), Vec3(5.0f, 1.75f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
-		//AddGameObject<OneWayPollCollision>(Vec3(0.0f, 5.55f, -11.0f), Vec3(5.0f, 2.0f, 0.5f), Vec3(0.0f, 0.0f, 0.0f));
 
 		auto ptrobstacle = AddGameObject<Deployment>();
 	}
@@ -332,30 +316,9 @@ namespace basecross {
 			Vec2(350.0f, 80.0f), Vec2(495.0f, 355.0f));
 		ptrSprite->SetDrawLayer(-100);
 		SetSharedGameObject(L"TimeSprite", ptrSprite);	
-		//AddGameObject<StageSprite>(L"PARTITION_TX", true,
-		//Vec2(500.0f, 100.0f), Vec2(-15.0f, 350.0f));
 		// スコアを表示
 		auto ptrscore = AddGameObject<Score>();
 		SetSharedGameObject(L"Score", ptrscore);
-		//AddGameObject<StageScore>();
-		
-		// HPゲージの生成
-		//auto ptrHpGauge = AddGameObject<GaugeScore>(false,
-		//	Vec2(360.0f, 2.0f), Vec3(-540.0f, -360.0f, 0.0f), L"ORANGE_TX");
-		//SetSharedGameObject(L"Gauge", ptrHpGauge);
-		//auto ptrGaugeSpriteNumber = AddGameObject<GaugeSpriteNumber>(L"NUMBER_TX",
-		//	true,
-		//	Vec2(1.3f, 0.85f), Vec3(-448.0f, -300.0f, 0.0f));
-		//SetSharedGameObject(L"GaugeSpriteNumber", ptrGaugeSpriteNumber);
-		// HPゲージの生成
-		//auto ptrHpGauge2 = AddGameObject<GaugeScoreEnemy>(false,
-		//	Vec2(360.0f, 2.0f), Vec3(-615.0f, -360.0f, 0.0f), L"PURPLE_TX");
-		//SetSharedGameObject(L"GaugeEnemy", ptrHpGauge2);
-		// 説明のアイコンを生成
-		//auto YouIcon = AddGameObject<StageSprite>(L"YOU_TX", true,
-		//	Vec2(90.0f, 50.0f), Vec2(-515.0f, -378.0f));
-		//YouIcon->SetDrawLayer(-100);
-		//SetSharedGameObject(L"YouIcon", YouIcon);
 		auto UIIcon = AddGameObject<StageSprite>(L"ICON_TX", true,
 			Vec2(200.0f, 100.0f), Vec2(520.0f, -340.0f));
 		UIIcon->SetDrawLayer(-100);
@@ -411,28 +374,6 @@ namespace basecross {
 		cicleTrans->SetScale(Vec3(2.5f, 0.25f, 2.5f));
 		SetSharedGameObject(L"FloatCircle", Circle);
 	}
-	void GameStage::CreateWave()
-	{
-		//auto ptrgate = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f), L"GREEN_TX");
-
-	}
-	//カメラマンの作成
-	void GameStage::CreateCameraman() {
-
-	}
-	void GameStage::CreateMoveCamera()
-	{
-		//auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
-		////MyCameraに変更
-		//auto ptrMyCamera = dynamic_pointer_cast<MyCamera>(m_MyCameraView->GetCamera());
-		//if (ptrMyCamera) {
-		//	ptrMyCamera->SetTargetObject(ptrPlayer);
-		//	//m_MyCameraViewを使う
-		//	SetView(m_MyCameraView);
-		//	m_CameraSelect = CameraSelect::myCamera;
-		//}
-
-	}
 	void GameStage::CreateNPC()
 	{
 		auto ptr = AddGameObject<NPC>(Vec3(0.05f), Vec3(0.0f, -XM_PI,0.0f), Vec3(0.0f, 6.0f, -80.0f));
@@ -453,10 +394,7 @@ namespace basecross {
 			CreatePollCollision();
 			CreateBGM();
 			CreateFloatCircle();
-			CreateWave();
-			CreateMoveCamera();
 			CreateNPC();
-			//CreateMoveCamera();
 			CameraSetting();
 			auto& app = App::GetApp();
 			auto path = app->GetDataDirWString();
@@ -478,31 +416,10 @@ namespace basecross {
 				app->RegisterTexture(keyName.first, skyboxPath + keyName.first + L".bmp");
 			}
 
-
-			//auto PlayerBAR = AddGameObject<StageSprite>(L"BAR_TX", true,
-			//	Vec2(256.0f, 256.0f), Vec2(-515.0f, -260.0f));
-			//PlayerBAR->SetDrawLayer(-100);
-			//	SetSharedGameObject(L"PlayerBAR", PlayerBAR);
-			//auto EnemyBAR = AddGameObject<StageSprite>(L"BAR_TX", true,
-			//	Vec2(256.0f, 256.0f), Vec2(-590.0f, -260.0f));
-			//EnemyBAR->SetDrawLayer(-100);
-			//SetSharedGameObject(L"EnemyBAR", EnemyBAR);
 			// Skyboxクラス用
 			app->RegisterTexture(L"skybox", skyboxPath + L"skybox1.png"); // テクスチャを１枚にまとめたバージョン
 			// スカイボックス
 			AddGameObject<Skybox>(); // テクスチャを１枚にまとめたバージョン
-
-			//AddGameObject<Skybox2>();
-
-			//auto Rank = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
-			//	Vec2(1.0f, 1.0f), Vec3(-540.0f, -50.0f, 0.0f));
-			//Rank->SetDrawLayer(-100);
-			//auto Rank2 = AddGameObject<RankSpriteNumber>(L"NUMBER_TX", true,
-			//	Vec2(1.0f, 1.0f), Vec3(-620.0f, -50.0f, 0.0f));
-			//Rank2->SetDrawLayer(-100);
-			//SetSharedGameObject(L"Rank", Rank);
-			//SetSharedGameObject(L"Rank2", Rank2);
-			//AddGameObject<ScoreSprite>();
 			
 			// HPゲージの生成
 			auto ptrPlayerGauge = AddGameObject<PlayerRusultScore>(false,
@@ -515,17 +432,6 @@ namespace basecross {
 			SetSharedGameObject(L"ResultIconPlayer", IconPlayer);
 			IconPlayer->SetDrawLayer(-999);
 
-			//auto ptrNPCGauge = AddGameObject<NPCRusultScore>(false,
-			//	Vec2(8.2f, 5.0f), Vec3(410.0f, 40.0f, 0.0f), L"BLUE_TX");
-			//ptrNPCGauge->SetDrawLayer(-1000);
-			//SetSharedGameObject(L"NPCResultGauge", ptrNPCGauge);
-
-			//auto IconNPC = AddGameObject<JumpSprite>
-			//	(L"MiniMapNPC_TX", true,
-			//		Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
-			//SetSharedGameObject(L"ResultIconNPC", IconNPC);
-			//IconNPC->SetDrawLayer(-999);
-
             auto StageText = AddGameObject<StageSprite>(L"STAGETEXT_TX", true,
 				Vec2(1200.0f, 200.0f), Vec2(0.0f, 20.0f));
 			SetSharedGameObject(L"StageText", StageText);
@@ -534,16 +440,9 @@ namespace basecross {
 				Vec2(1500.0f, 150.0f), Vec2(50.0f, 350.0f));
 			GaugeHide->SetDrawLayer(-90);
 			SetSharedGameObject(L"GaugeHide", GaugeHide);
-			//auto GaugeHide2 = AddGameObject<StageSprite>(L"GaugeHide2_TX", true,
-			//	Vec2(270.0f, 285.0f), Vec2(-590.0f, -255.0f));
-			//GaugeHide2->SetDrawLayer(-90);
-			//SetSharedGameObject(L"GaugeHide2", GaugeHide2);
-			//auto GaugeHide3 = AddGameObject<StageSprite>(L"GaugeHide3_TX", true,
-			//	Vec2(75.0f, 75.0f), Vec2(-415.0f, -352.0f));
-			//GaugeHide3->SetDrawLayer(-90);
-			//SetSharedGameObject(L"GaugeHide3", GaugeHide3);
-
-
+			
+			
+			//エフェクトの作成
 			auto d3D11Device = App::GetApp()->GetDeviceResources()->GetD3DDevice();
 			auto d3D11DeviceContext = App::GetApp()->GetDeviceResources()->GetD3DDeviceContext();;
 			// エフェクトのレンダラーの作成
@@ -594,39 +493,21 @@ namespace basecross {
 		auto cntlVec = App::GetApp()->GetInputDevice().GetControlerVec();
 		auto ptrMana = App::GetApp()->GetXAudio2Manager();
 		auto delta = App::GetApp()->GetElapsedTime();
-
 		auto score1 = App::GetApp()->GetScene<Scene>()->GetPoint();
 		auto score2 = App::GetApp()->GetScene<Scene>()->GetPoint2();
 		auto GoalScore = App::GetApp()->GetScene<Scene>()->GetGoalScore();
-
-		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");
-		auto ptrNPC = GetSharedGameObject<NPC>(L"NPC");
+		auto ptrPlayer = GetSharedGameObject<Player>(L"Player");	
 		auto GoalFlag = ptrPlayer->m_GoalFlag;
 		auto m_count = ptrPlayer->m_CircleCount;
+		auto ptrNPC = GetSharedGameObject<NPC>(L"NPC");
 		auto ptrScore = GetSharedGameObject<Score>(L"Score");
 		auto ptrP = GetSharedGameObject<StageSprite>(L"P");
 		auto ptrIcon = GetSharedGameObject<StageSprite>(L"Icon");
-		//auto gauge = GetSharedGameObject<GaugeScore>(L"Gauge");
-		//auto gaugecount = gauge->Count;
-
-		//auto Rank = GetSharedGameObject<RankSpriteNumber>(L"Rank");
-		//auto Rank2 = GetSharedGameObject<RankSpriteNumber>(L"Rank2");
-
 		auto ptrPlayerResultScore = GetSharedGameObject<PlayerRusultScore>(L"PlayerResultGauge");
-		//auto ptrNPCResultScore = GetSharedGameObject<NPCRusultScore>(L"NPCResultGauge");
-
 		auto ptrPlayerResultIcon = GetSharedGameObject<JumpSprite>(L"ResultIconPlayer");
-		//auto ptrNPCResultIcon= GetSharedGameObject<JumpSprite>(L"ResultIconNPC");
-
 		auto CountTime = GetSharedGameObject<UITimeStage>(L"CountTime");
 		auto StageText = GetSharedGameObject<StageSprite>(L"StageText");
-
 		auto GaugeHide = GetSharedGameObject<StageSprite>(L"GaugeHide");
-		//auto GaugeHide2 = GetSharedGameObject<StageSprite>(L"GaugeHide2");
-		//auto GaugeHide3 = GetSharedGameObject<StageSprite>(L"GaugeHide3");
-
-		//Rank->UpdateValue(m_rank);
-		//Rank2->UpdateValue(m_rank2);
 
 		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_START && cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_BACK)
 		{
@@ -637,37 +518,33 @@ namespace basecross {
 		if (score1 >= score2)
 		{
 			m_rank = 1;
-			//Rank->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
 		}
 		else
 		{
 			m_rank = 2;
-			//Rank->SetColor(Col4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 		if (score2 >= score1)
 		{
 			m_rank2 = 1;
-			//Rank2->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
 		}
 		else
 		{
 			m_rank2 = 2;
-			//Rank2->SetColor(Col4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
-		if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
-		{
-			ptrMana->Stop(m_BGM);
+		//if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_Y)
+		//{
+		//	ptrMana->Stop(m_BGM);
 
-			if (score1 > score2)
-			{
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
-			}
-			else
-			{
-				PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
-			}
-		}
+		//	if (score1 > score2)
+		//	{
+		//		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGoalScene");
+		//	}
+		//	else
+		//	{
+		//		PostEvent(0.0f, GetThis<ObjectInterface>(), App::GetApp()->GetScene<Scene>(), L"ToGameOverStage");
+		//	}
+		//}
 
 		//if (cntlVec[0].wPressedButtons & XINPUT_GAMEPAD_X)
 		//{
@@ -729,14 +606,6 @@ namespace basecross {
 				ptrConmboSpriteNumber->SetDrawLayer(100);
 				auto MiniMapSprite = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
 				MiniMapSprite->SetDrawLayer(-100);
-				//auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
-				//PlayerBAR->SetDrawLayer(100);
-				//auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
-				//EnemyBAR->SetDrawLayer(100);
-				//auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
-				//YouIcon->SetDrawLayer(100);
-				//Rank->SetDrawLayer(100);
-				//Rank2->SetDrawLayer(100);
 			}
 			m_ToStartTime -= elapsedTime;
 		}
@@ -853,16 +722,11 @@ namespace basecross {
 		{
 			m_ResultFlag = true;
 			ptrPlayerResultScore->SetDrawLayer(-1000);
-			//ptrNPCResultScore->SetDrawLayer(-1000);
 
 			auto ptrPlayerResutlt = AddGameObject<PlayerResultGauge>(false,
 				Vec2(8.2f, 5.0f), Vec3(-410.0f, 40.0f, 0.0f), L"RED_TX");
 			ptrPlayerResutlt->SetDrawLayer(999);
 			SetSharedGameObject(L"PlayerResult", ptrPlayerResutlt);
-			//auto ptrNPCResutlt = AddGameObject<NPCResultGauge>(false,
-			//	Vec2(8.2f, 5.0f), Vec3(410.0f, 40.0f, 0.0f), L"BLUE_TX");
-			//ptrNPCResutlt->SetDrawLayer(999);
-			//SetSharedGameObject(L"NPCResult", ptrNPCResutlt);
 			m_CreateResultGauge = true;
 			m_CreateResultFlag = true;
 
@@ -871,41 +735,24 @@ namespace basecross {
 				auto delta = App::GetApp()->GetElapsedTime();
 				ptrPlayerResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapPlayer_TX");
 				ptrPlayerResultIcon->m_MoveFlag = true;
-				//ptrNPCResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapNPC_TX");
-				//ptrNPCResultIcon->m_DownMoveFlag = true;
 
 				auto IconPlayer = AddGameObject<JumpSprite>
 					(L"HAPPY_TX", true,
 						Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
 				IconPlayer->SetDrawLayer(999);
 				IconPlayer->m_MoveFlag = true;
-				//auto IconNPC = AddGameObject<JumpSprite>
-				//	(L"UNHAPPY_TX", true,
-				//		Vec2(150.0f, 150.0f), Vec2(495.0f, 0.0f));
-				//IconNPC->SetDrawLayer(999);
-				//IconNPC->m_DownMoveFlag = true;
 				m_StrartFlag1 = true;
 			}
 			else
 			{
 				auto delta = App::GetApp()->GetElapsedTime();
-
 				ptrPlayerResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapPlayer_TX");
 				ptrPlayerResultIcon->m_DownMoveFlag = true;
-				//ptrNPCResultIcon->GetComponent<PCTSpriteDraw>()->SetTextureResource(L"MiniMapNPC_TX");
-				//ptrNPCResultIcon->m_MoveFlag = true;
-
-
 				auto IconPlayer2 = AddGameObject<JumpSprite>
 					(L"UNHAPPY_TX", true,
 						Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
 				IconPlayer2->SetDrawLayer(999);
 				IconPlayer2->m_DownMoveFlag = true;
-				//auto IconNPC2 = AddGameObject<JumpSprite>
-				//	(L"UNHAPPY_TX", true,
-				//		Vec2(150.0f, 150.0f), Vec2(-495.0f, 0.0f));
-				//IconNPC2->SetDrawLayer(999);
-				//IconNPC2->m_DownMoveFlag = true;
 				m_StrartFlag2 = true;
 			}
 		}
@@ -944,21 +791,11 @@ namespace basecross {
 			ptrMana->Start(L"ALARMSE", 0, 0.6f);
 			m_BGM = ptrMana->Start(L"StageBGM2", 1, 0.3f);
 			m_30secFlag = false;
-
 			GaugeHide->SetDrawLayer(999);
-			//GaugeHide2->SetDrawLayer(90);
-			//GaugeHide3->SetDrawLayer(90);
-
-
 			auto ptrUITime = GetSharedGameObject<UITime>(L"UITime");
 			ptrUITime->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
 			auto ptrUITime2 = GetSharedGameObject<UITime2>(L"UITime2");
 			ptrUITime2->SetColor(Col4(1.0f, 1.0f, 0.0f, 1.0f));
-			//auto Rank = GetSharedGameObject<RankSpriteNumber>(L"Rank");
-			//Rank->SetDrawLayer(-100);
-			//auto Rank2 = GetSharedGameObject<RankSpriteNumber>(L"Rank2");
-			//Rank2->SetDrawLayer(-100);
-
 		}
 		//スコアを更新する
 		auto ptrScor = GetSharedGameObject<UITime>(L"UITime");
@@ -1001,33 +838,6 @@ namespace basecross {
 			ptrConmboSprite->SetDrawLayer(-100);
 			auto ptrConmboSpriteNumber = GetSharedGameObject<ComboSpriteNumber>(L"ConmboSpriteNumber");
 			ptrConmboSpriteNumber->SetDrawLayer(-100);
-			//auto MiniMapSpritehaikei = GetSharedGameObject<MiniMapSprite>(L"haikei");
-			//MiniMapSpritehaikei->SetDrawLayer(-100);
-			//auto MiniMapSpriteGate = GetSharedGameObject<MiniMapSprite>(L"MiniMapGate");
-			//MiniMapSpriteGate->SetDrawLayer(-100);
-			//auto PlayerBAR = GetSharedGameObject<StageSprite>(L"PlayerBAR");
-			//PlayerBAR->SetDrawLayer(-100);
-			//auto EnemyBAR = GetSharedGameObject<StageSprite>(L"EnemyBAR");
-			//EnemyBAR->SetDrawLayer(-100);
-			//auto ptrHpGauge = GetSharedGameObject<GaugeScore>(L"Gauge");
-			//ptrHpGauge->SetDrawLayer(-100);
-			//auto ptrGaugeSpriteNumber = GetSharedGameObject<GaugeSpriteNumber>(L"GaugeSpriteNumber");
-			//ptrGaugeSpriteNumber->SetDrawLayer(-100);
-			//auto ptrHpGauge2 = GetSharedGameObject<GaugeScoreEnemy>(L"GaugeEnemy");
-			//ptrHpGauge2->SetDrawLayer(-100);
-			//auto Kakeru = GetSharedGameObject<StageSprite>(L"Kakeru");
-			//Kakeru->SetDrawLayer(-100);
-			//auto YouIcon = GetSharedGameObject<StageSprite>(L"YouIcon");
-			//YouIcon->SetDrawLayer(-100);
-			//Rank->SetDrawLayer(-100);
-			//Rank2->SetDrawLayer(-100);
-
-			////auto MinimapDraw = GetSharedGameObject<MiniMapManager>(L"MiniMapManager");
-			////MinimapDraw->m_MiniMapDrawFlag = true;
-			//GaugeHide->SetDrawLayer(-100);
-			//GaugeHide2->SetDrawLayer(-100);
-			//GaugeHide3->SetDrawLayer(-100);
-
 		}
 		if (m_isStartFlag == false)
 		{
@@ -1067,117 +877,10 @@ namespace basecross {
 			case 5:
 				cicleTrans->SetPosition(-15.0f, 6.0f, 35.0f);
 				break;
-				//case 6:
-					//if (count == 0)
-					//{
-					//	auto ptrgate = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f), L"GREEN_TX");
-					//	if (m_SetCount == 0)
-					//	{
-					//		SetSharedGameObject(L"Gate", ptrgate);
-					//		m_SetCount++;
-					//	}
-					//	else if (m_SetCount == 1)
-					//	{
-					//		SetSharedGameObject(L"Gate1", ptrgate);
-					//		m_SetCount++;
-					//	}
-					//	else if (m_SetCount == 2)
-					//	{
-					//		SetSharedGameObject(L"Gate5", ptrgate);
-					//		m_SetCount++;
-					//	}
-
-					//
-					//	auto ptrRandFlag = ptrgate->m_RandFlag = false;
-					//    //auto ptrEndFlag =  ptrgate->= false;
-					//	auto ptrFlag = ptrgate->flag;
-					//	count++;
-					//	if (ptrFlag == 0)
-					//	{
-					//		cicleTrans->SetPosition(0.0f, 6.0f, 20.0f);
-					//	}
-					//	if (ptrFlag == 1)
-					//	{
-					//		cicleTrans->SetPosition(20.0f, 6.0f, 0.0f);
-					//	}
-					//	if (ptrFlag == 2)
-					//	{
-					//		cicleTrans->SetPosition(0.0f, 6.0f, -20.0f);
-					//	}
-					//	if (ptrFlag == 3)
-					//	{
-					//		cicleTrans->SetPosition(-20.0f, 6.0f, 0.0f);
-					//	}
-					//}
-
-
-					//break;
 			case 6:
-				//if (count == 1)
-				//{
-				//	if (m_SetCount == 1)
-				//	{
-				//		auto ptrgate2 = GetSharedGameObject<Gate>(L"Gate");
-				//		auto ptrFlag = ptrgate2->flag = 0;
-				//		auto ptrRandFlag = ptrgate2->m_RandFlag = false;
-				//		auto ptrDownFlag = ptrgate2->m_DownFlag = true;
-				//		auto ptrChangeFlag = ptrgate2->m_ChangeFlag = false;
-				//		auto ptrChangeFlag1 = ptrgate2->m_ChangeFlag1 = false;
-				//		auto ptrChangeFlag2 = ptrgate2->m_ChangeFlag2 = false;
-				//		auto ptrChangeFlag3 = ptrgate2->m_ChangeFlag3 = false;
-				//	}
-				//	else if (m_SetCount == 2)
-				//	{
-				//		auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate1");
-				//		auto ptrFlag = ptrgate3->flag = 0;
-				//		auto ptrRandFlag = ptrgate3->m_RandFlag = false;
-				//		auto ptrDownFlag = ptrgate3->m_DownFlag = true;
-				//		auto ptrChangeFlag = ptrgate3->m_ChangeFlag = false;
-				//		auto ptrChangeFlag1 = ptrgate3->m_ChangeFlag1 = false;
-				//		auto ptrChangeFlag2 = ptrgate3->m_ChangeFlag2 = false;
-				//		auto ptrChangeFlag3 = ptrgate3->m_ChangeFlag3 = false;
-				//	}
-				//	else if (m_SetCount == 3)
-				//	{
-				//		auto ptrgate10 = GetSharedGameObject<Gate>(L"Gate5");
-				//		auto ptrFlag = ptrgate10->flag = 0;
-				//		auto ptrRandFlag = ptrgate10->m_RandFlag = false;
-				//		auto ptrDownFlag = ptrgate10->m_DownFlag = true;
-				//		auto ptrChangeFlag = ptrgate10->m_ChangeFlag = false;
-				//		auto ptrChangeFlag1 = ptrgate10->m_ChangeFlag1 = false;
-				//		auto ptrChangeFlag2 = ptrgate10->m_ChangeFlag2 = false;
-				//		auto ptrChangeFlag3 = ptrgate10->m_ChangeFlag3 = false;
-				//	}
-
-				//}
-
 				cicleTrans->SetPosition(15.0f, 6.0f, -35.0f);
 				break;
 			case 7:
-				//if (count == 1)
-				//{	
-				//	if (m_SetCount == 1)
-				//	{
-				//		auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate");
-				//		RemoveGameObject<Gate>(ptrgate3);
-				//		count--;
-				//	}
-				//	else if (m_SetCount == 2)
-				//	{
-				//		auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate1");
-				//		RemoveGameObject<Gate>(ptrgate3);
-				//		count--;
-				//	}
-				//	else if (m_SetCount == 3)
-				//	{
-				//		auto ptrgate3 = GetSharedGameObject<Gate>(L"Gate5");
-				//		RemoveGameObject<Gate>(ptrgate3);
-				//		count--;
-				//	}
-
-
-				//}
-
 				cicleTrans->SetPosition(30.0f, 6.0f, -20.0f);
 				break;
 			case 8:
@@ -1189,118 +892,9 @@ namespace basecross {
 			case 10:
 				cicleTrans->SetPosition(15.0f, 6.0f, 35.0f);
 				break;
-				//case 11:
-				//	//if (count == 0)
-				//	//{
-				//	//	auto ptrgate4 = AddGameObject<Gate>(1, rand() % 4, Vec3(5.0f, 1.75f, 0.5f),L"GREEN_TX");
-				//	//	if (m_Set2Count == 0)
-				//	//	{
-				//	//	   SetSharedGameObject(L"Gate2", ptrgate4);
-				//	//	   m_Set2Count++;
-				//	//	}
-				//	//	else if (m_Set2Count == 1)
-				//	//	{
-				//	//		SetSharedGameObject(L"Gate3", ptrgate4);
-				//	//		m_Set2Count++;
-				//	//	}
-				//	//	else if (m_Set2Count == 2)
-				//	//	{
-				//	//		SetSharedGameObject(L"Gate4", ptrgate4);
-				//	//		m_Set2Count++;
-				//	//	}
-
-
-				//	//	auto ptrRandFlag2 = ptrgate4->m_RandFlag = false;
-				//	//	auto ptrFlag2 = ptrgate4->flag;
-				//	//	count++;
-				//	//	if (ptrFlag2 == 0)
-				//	//	{
-				//	//		cicleTrans->SetPosition(0.0f, 6.0f, 20.0f);
-				//	//	}
-				//	//	if (ptrFlag2 == 1)
-				//	//	{
-				//	//		cicleTrans->SetPosition(20.0f, 6.0f, 0.0f);
-				//	//	}
-				//	//	if (ptrFlag2 == 2)
-				//	//	{
-				//	//		cicleTrans->SetPosition(0.0f, 6.0f, -20.0f);
-				//	//	}
-				//	//	if (ptrFlag2 == 3)
-				//	//	{
-				//	//		cicleTrans->SetPosition(-20.0f, 6.0f, 0.0f);
-				//	//		//ptrFlag--;
-				//	//	}
-				//	//}
-				//	break;
 			case 11:
 				cicleTrans->SetPosition(-15.0f, 6.0f, -35.0f);
-				//if (count == 1)
-				//{
-
-				//	if (m_Set2Count == 1)
-				//	{
-				//		auto ptrgate5 = GetSharedGameObject<Gate>(L"Gate2");
-				//		auto ptrFlag = ptrgate5->flag = 0;
-				//		auto ptrRandFlag = ptrgate5->m_RandFlag = false;
-				//		auto ptrDownFlag = ptrgate5->m_DownFlag = true;
-				//		auto ptrChangeFlag = ptrgate5->m_ChangeFlag = false;
-				//		auto ptrChangeFlag1 = ptrgate5->m_ChangeFlag1 = false;
-				//		auto ptrChangeFlag2 = ptrgate5->m_ChangeFlag2 = false;
-				//		auto ptrChangeFlag3 = ptrgate5->m_ChangeFlag3 = false;
-				//	}
-				//	else if (m_Set2Count == 1)
-				//	{
-				//		auto ptrgate6 = GetSharedGameObject<Gate>(L"Gate3");
-				//		auto ptrFlag = ptrgate6->flag = 0;
-				//		auto ptrRandFlag = ptrgate6->m_RandFlag = false;
-				//		auto ptrDownFlag = ptrgate6->m_DownFlag = true;
-				//		auto ptrChangeFlag = ptrgate6->m_ChangeFlag = false;
-				//		auto ptrChangeFlag1 = ptrgate6->m_ChangeFlag1 = false;
-				//		auto ptrChangeFlag2 = ptrgate6->m_ChangeFlag2 = false;
-				//		auto ptrChangeFlag3 = ptrgate6->m_ChangeFlag3 = false;
-				//	}
-				//	else if (m_Set2Count == 1)
-				//	{
-				//		auto ptrgate11 = GetSharedGameObject<Gate>(L"Gate4");
-				//		auto ptrFlag = ptrgate11->flag = 0;
-				//		auto ptrRandFlag = ptrgate11->m_RandFlag = false;
-				//		auto ptrDownFlag = ptrgate11->m_DownFlag = true;
-				//		auto ptrChangeFlag = ptrgate11->m_ChangeFlag = false;
-				//		auto ptrChangeFlag1 = ptrgate11->m_ChangeFlag1 = false;
-				//		auto ptrChangeFlag2 = ptrgate11->m_ChangeFlag2 = false;
-				//		auto ptrChangeFlag3 = ptrgate11->m_ChangeFlag3 = false;
-				//	}
-
-				//}
-
 				break;
-				//case 12:
-				//	//if (count == 1)
-				//	//{
-				//	//	if (m_Set2Count == 1)
-				//	//	{
-				//	//		auto ptrgate7 = GetSharedGameObject<Gate>(L"Gate2");
-				//	//		RemoveGameObject<Gate>(ptrgate7);
-				//	//		count--;
-				//	//	}
-				//	//	else if (m_Set2Count == 2)
-				//	//	{
-				//	//		auto ptrgate8 = GetSharedGameObject<Gate>(L"Gate3");
-				//	//		RemoveGameObject<Gate>(ptrgate8);
-				//	//		count--;
-				//	//	}
-				//	//	else if (m_Set2Count == 3)
-				//	//	{
-				//	//		auto ptrgate8 = GetSharedGameObject<Gate>(L"Gate4");
-				//	//		RemoveGameObject<Gate>(ptrgate8);
-				//	//		count--;
-				//	//	}
-
-				//	//}
-
-				//	circle->m_next = 2;
-				//	break;
-				//}
 			}
 
 		}
@@ -1348,7 +942,6 @@ namespace basecross {
 		// Finish to rendering effects
 		// エフェクトの描画終了処理を行う。
 		m_renderer->EndRendering();
-
 	}
 }
 //end basecross
