@@ -1,6 +1,7 @@
 /*!
 @file Player.cpp
 @brief プレイヤーなど実体
+@authors SatouKaito YoshidaTomoki
 */
 
 #include "stdafx.h"

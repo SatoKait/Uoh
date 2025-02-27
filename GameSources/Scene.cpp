@@ -1,6 +1,7 @@
 /*!
 @file Scene.cpp
 @brief シーン実体
+@authors SatouKaito YoshidaTomoki AndouTinami
 */
 
 #include "stdafx.h"

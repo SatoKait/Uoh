@@ -1,6 +1,7 @@
 /*!
 @file Actor.cpp
-@brief PlayerやEnemyなど動くオブジェクトの親クラス
+@brief Playerなど動くオブジェクトの親クラス
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

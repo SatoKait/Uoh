@@ -1,6 +1,7 @@
 /*!
 @file NPC.cpp
 @brief キャラクターなど実体
+@authors SatouKaito AndouTinami
 */
 
 #include "stdafx.h"

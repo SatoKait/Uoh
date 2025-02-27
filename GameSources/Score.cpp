@@ -1,6 +1,7 @@
 /*!
 @file Score.cpp
 @brief スコアの実体
+@authors SatouKaito YoshidaTomoki AndouTinami
 */
 
 #include "stdafx.h"

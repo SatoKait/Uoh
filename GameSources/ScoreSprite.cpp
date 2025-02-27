@@ -1,6 +1,7 @@
 /*!
 @file ScoreSprite.cpp
 @brief Scoreスプライトの実体
+@authors SatouKaito YoshidaTomoki andouTinami
 */
 
 #include "stdafx.h"

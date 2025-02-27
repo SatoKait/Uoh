@@ -1,6 +1,7 @@
 /*!
 @file MainCamera.cpp
 @brief ƒJƒƒ‰À‘Ì
+@authors SatouKaito YoshidaTomoki
 */
 
 #include "stdafx.h"
