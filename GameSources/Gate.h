@@ -1,3 +1,9 @@
+/*!
+@file Gate.cpp
+@brief ƒQ[ƒg‚ÌÀ‘Ì
+@authors YoshidaTomoki
+*/
+
 #pragma once
 #include "stdafx.h"
 

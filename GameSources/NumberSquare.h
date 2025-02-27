@@ -1,7 +1,7 @@
 /*!
 @file NumberSquare.h
 @brief 立体的なスプライトの宣言
-@authors SatouKaito YoshidaTomoki AndouTinami
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

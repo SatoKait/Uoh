@@ -1,6 +1,7 @@
 /*!
-@file Character.cpp
-@brief キャラクターなど実体
+@file GoalScene.cpp
+@brief ゴールシーンの実体
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #include "stdafx.h"

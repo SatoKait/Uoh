@@ -1,6 +1,7 @@
 /*!
 @file Deployment.cpp
 @brief オブジェクト配置実体
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

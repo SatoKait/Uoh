@@ -1,3 +1,9 @@
+/*!
+@file UiTime.cpp
+@brief ŠÔ§ŒÀ‚ÌÀ‘Ì
+@authors YoshidaTomoki
+*/
+
 #include "stdafx.h"
 #include "Project.h"
 

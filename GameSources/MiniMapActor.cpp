@@ -1,6 +1,7 @@
 /*!
-@file Character.cpp
-@brief キャラクターなど実体
+@file MiniMapActor.cpp
+@brief ミニマップなど実体
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

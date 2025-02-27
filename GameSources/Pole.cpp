@@ -1,6 +1,7 @@
 /*!
 @file Pole.cpp
 @brief áŠQ•¨‚È‚ÇÀ‘Ì
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

@@ -1,6 +1,7 @@
 /*!
 @file MoveObject.h
-@brief ステージなど
+@brief オブジェクトの宣言
+@authors SatouKaito YoshidaTomoki
 */
 
 #pragma once

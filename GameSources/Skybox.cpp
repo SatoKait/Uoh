@@ -1,6 +1,7 @@
 /*!
 @file Skybox.cpp
-@brief キャラクターなど実体
+@brief 背景実体
+@authors SatouKaito
 */
 
 #include "stdafx.h"

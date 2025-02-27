@@ -1,6 +1,7 @@
 /*!
 @file GameStage.cpp
 @brief ゲームステージ実体
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #include "stdafx.h"

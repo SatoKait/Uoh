@@ -1,6 +1,7 @@
 /*!
-@file　TitleStage.cpp5
+@file　TitleStage.cpp
 @brief タイトルなど実体
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #include "stdafx.h"

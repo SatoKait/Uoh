@@ -1,13 +1,10 @@
 /*!
 @file EffectManager.h
 @brief Effectなど
+@authors SatouKaito AndouTinami
 */
 
 #pragma once
-#include "stdafx.h"
-
-#pragma once
-
 #include "stdafx.h"
 
 #include <Effekseer.h>

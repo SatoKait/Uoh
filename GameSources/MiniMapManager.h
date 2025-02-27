@@ -27,12 +27,10 @@ namespace basecross {
 		void OnCreate()override;//作成
 		void OnUpdate()override;//更新
 
-		//void CreateWall();  //ミニマップの壁を生成する
 		void CreateMoveGate();//ミニマップの移動するゲートを生成する
-		void CreateGate();	  //ミニマップのマンホールを生成する
-		void CreateGateRed();	  //ミニマップのマンホールを生成する
+		void CreateGate();	  //ミニマップのゲート生成する
+		void CreateGateRed();	  //ミニマップのゲート（赤）生成する
 		void CreatePoll();
-		//void CreateEnemy(); //ミニマップの敵を生成する
 		void CreatePlayer();  //ミニマップのプレイヤーを生成する
 		void CreateNPC();
 		void CreateCircle();

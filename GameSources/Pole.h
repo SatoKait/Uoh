@@ -2,6 +2,7 @@
 /*!
 @file Pole.h
 @brief ƒ|[ƒ‹‚Ì’è‹`
+@authors YoshidaTomoki
 */
 
 #pragma once

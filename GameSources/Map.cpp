@@ -1,6 +1,7 @@
 /*!
 @file Map.cpp
 @brief MapƒNƒ‰ƒX‚ÌÀ‘•
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

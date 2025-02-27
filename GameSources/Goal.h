@@ -1,6 +1,7 @@
 /*!
 @file Goal.h
 @brief ÉSÅ[Éã
+@authors SatouKaito
 */
 
 #pragma once

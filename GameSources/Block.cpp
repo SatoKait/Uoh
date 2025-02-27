@@ -1,6 +1,7 @@
 /*!
 @file Block.cpp
 @brief BlockƒNƒ‰ƒX‚ÌŽÀ‘•
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

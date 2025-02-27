@@ -1,6 +1,7 @@
 ﻿/*!
-@file Score.cpp
-@brief スコアの実体
+@file Gate.cpp
+@brief ゲートの実体
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

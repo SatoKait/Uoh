@@ -1,6 +1,7 @@
 /*!
 @file Character.h
-@brief キャラクターなど
+@brief 背景の宣言
+@authors SatouKaito
 */
 
 #pragma once

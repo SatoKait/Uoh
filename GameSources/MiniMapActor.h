@@ -1,6 +1,7 @@
 /*!
-@file Sprite.h
+@file MiniMapActor.h
 @brief 動くオブジェクトをミニマップに表示
+@authors YoshidaTomoki
 */
 
 #pragma once

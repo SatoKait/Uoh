@@ -1,6 +1,7 @@
 /*!
 @file Character.cpp
-@brief キャラクターなど実体
+@brief ステージセレクト実体
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #include "stdafx.h"

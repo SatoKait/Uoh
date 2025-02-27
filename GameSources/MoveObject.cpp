@@ -1,6 +1,7 @@
 /*!
 @file MoveObject.cpp
-@brief ステージなど実体
+@brief オブジェクト実体
+@authors SatouKaito YoshidaTomoki
 */
 
 #include "stdafx.h"

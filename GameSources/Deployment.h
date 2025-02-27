@@ -1,6 +1,7 @@
 /*!
 @file Deployment.h
-@brief マップの定義
+@brief オブジェクト配置宣言
+@authors YoshidaTomoki
 */
 
 #pragma once

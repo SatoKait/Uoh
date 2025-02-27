@@ -1,6 +1,7 @@
 /*!
 @file GameStage.h
 @brief ゲームステージ
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #pragma once

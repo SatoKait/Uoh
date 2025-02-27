@@ -1,6 +1,7 @@
 /*!
 @file TitleStage.h
 @brief タイトルステージ
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #pragma once

@@ -1,6 +1,7 @@
 /*!
 @file Wall.cpp
 @brief “§–¾‚Ì•Ç‚ÌŽÀ‘Ì
+@authors SatouKaito YoshidaTomoki
 */
 
 #include "stdafx.h"

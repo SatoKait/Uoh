@@ -1,6 +1,7 @@
 /*!
 @file Map.h
 @brief マップの定義
+@authors YoshidaTomoki
 */
 
 #pragma once

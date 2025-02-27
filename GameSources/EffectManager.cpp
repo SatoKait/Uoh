@@ -1,6 +1,7 @@
 /*!
 @file EffectManager.cpp
 @brief エフェクトなど実体
+@authors SatouKaito AndouTinami 
 */
 
 #include "stdafx.h"

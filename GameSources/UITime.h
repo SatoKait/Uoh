@@ -1,3 +1,8 @@
+/*!
+@file UiTime.h
+@brief ŠÔ§ŒÀ‚ÌéŒ¾
+@authors YoshidaTomoki
+*/
 #pragma once
 #include "stdafx.h"
 

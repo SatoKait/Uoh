@@ -1,6 +1,7 @@
 /*!
-@file Character.h
-@brief キャラクターなど
+@file GoalScene.h
+@brief ゴールシーンの宣言
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #pragma once

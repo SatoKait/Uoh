@@ -1,6 +1,7 @@
 /*!
 @file Sprite.cpp
 @brief スプライト実体
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #include "stdafx.h"
