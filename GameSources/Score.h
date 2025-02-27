@@ -1,6 +1,7 @@
 /*!
 @file Score.h
 @brief  ÉXÉRÉA
+@authors SatouKaito YoshidaTomoki AndouTinami
 */
 
 #pragma once

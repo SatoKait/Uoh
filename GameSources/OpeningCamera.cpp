@@ -1,3 +1,8 @@
+/*!
+@file OpningCamera.cpp
+@brief オープニングカメラ実体
+@authors SatouKaito YoshidaTomoki
+*/
 
 #include "stdafx.h"
 #include "Project.h"

@@ -1,6 +1,7 @@
 /*!
 @file StageSelect.h
 @brief ステージセレクト
+@authors SatouKaito
 */
 
 #pragma once

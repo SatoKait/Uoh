@@ -1,6 +1,7 @@
 /*!
 @file NPC.h
 @brief キャラクターなど
+@authors SatouKaito AndouTinami
 */
 
 #pragma once

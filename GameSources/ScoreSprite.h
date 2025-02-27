@@ -1,5 +1,7 @@
 //@file ScoreSprite.h
 //@brief Scoreスプライト
+//@authors SatouKaito YoshidaTomoki andouTinami
+
 
 #pragma once
 #include "stdafx.h"

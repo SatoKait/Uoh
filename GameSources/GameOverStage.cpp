@@ -1,6 +1,7 @@
 /*!
-@file Character.cpp
-@brief キャラクターなど実体
+@file GameOverStage.cpp
+@brief ゲームオーバー実体
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #include "stdafx.h"

@@ -1,3 +1,9 @@
+/*!
+@file Plane.cpp
+@brief ”Âƒ|ƒŠŽÀ‘Ì
+@authors SatouKaito
+*/
+
 #include "stdafx.h"
 #include "Project.h"
 

@@ -1,6 +1,7 @@
 /*!
 @file FloatCircle.cpp
 @brief スプライト用オブジェクトの実装
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

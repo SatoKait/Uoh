@@ -1,6 +1,7 @@
 /*!
 @file Actor.h
-@brief PlayerやEnemyなど動くオブジェクトの親クラス
+@brief Playerなど動くオブジェクトの親クラス
+@authors SatouKaito YoshidaTomoki
 */
 
 #pragma once

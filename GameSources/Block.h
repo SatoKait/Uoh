@@ -2,6 +2,7 @@
 /*!
 @file Block.h
 @brief ブロッククラスの定義
+@authors YoshidaTomoki
 */
 
 #pragma once

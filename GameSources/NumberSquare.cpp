@@ -1,3 +1,8 @@
+/*!
+@file NumberSquare.cpp
+@brief 立体的なスプライトの実体
+@authors YoshidaTomoki 
+*/
 
 #include "stdafx.h"
 #include "Project.h"

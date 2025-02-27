@@ -1,6 +1,7 @@
 /*!
 @file Ground.cpp
 @brief ステージなど実体
+@authors SatouKaito YoshidaTomoki
 */
 
 #include "stdafx.h"

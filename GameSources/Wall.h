@@ -1,7 +1,7 @@
-#pragma once
 /*!
 @file Wall.h
 @brief “§–¾‚Ì•Ç’è‹`
+@authors SatouKaito YoshidaTomoki
 */
 
 #pragma once

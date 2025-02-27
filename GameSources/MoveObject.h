@@ -1,6 +1,7 @@
 /*!
 @file MoveObject.h
-@brief ステージなど
+@brief オブジェクトの宣言
+@authors SatouKaito YoshidaTomoki
 */
 
 #pragma once
@@ -45,11 +46,7 @@ namespace basecross {
 
 		//初期化
 		virtual void OnCreate()override;
-		//
 		virtual void OnUpdate()override;
-		//
-		//virtual void OnDestroy()override;
-
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -88,7 +85,6 @@ namespace basecross {
 		//初期化
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;
-		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -135,8 +131,6 @@ namespace basecross {
 		//初期化
 		virtual void OnCreate()override;	
 		virtual void OnUpdate()override;
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -182,9 +176,7 @@ namespace basecross {
 
 		//初期化
 		virtual void OnCreate()override;
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
 		virtual void OnUpdate()override;
-		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -236,8 +228,6 @@ namespace basecross {
 		//初期化
 		virtual void OnCreate()override;
 		virtual void OnUpdate()override;	
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -285,9 +275,6 @@ namespace basecross {
 
 		//初期化
 		virtual void OnCreate()override;
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnUpdate()override;
-		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -335,9 +322,6 @@ namespace basecross {
 
 		//初期化
 		virtual void OnCreate()override;
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnUpdate()override;
-		//virtual void OnDestroy()override;
 	};//end basecross
 
 	//--------------------------------------------------------------------------------------
@@ -403,9 +387,6 @@ namespace basecross {
 			}
 		}
 
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnUpdate()override;
-		//virtual void OnDestroy()override;
 	};
 
 	//--------------------------------------------------------------------------------------
@@ -470,10 +451,6 @@ namespace basecross {
 				m_Tags.push_back(tag);
 			}
 		}
-
-		//virtual void OnCollisionEnter(shared_ptr<GameObject>& other) override;
-		//virtual void OnUpdate()override;
-		//virtual void OnDestroy()override;
 	};
 
 

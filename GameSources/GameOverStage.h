@@ -1,6 +1,7 @@
 /*!
 @file Character.h
-@brief キャラクターなど
+@brief ゲームオーバー宣言
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #pragma once

@@ -1,16 +1,12 @@
-#include "stdafx.h"
-#include "Project.h"
-
 /*!
 @file MyCamera.cpp
 @brief カメラ実体
+@authors SatouKaito YoshidaTomoki
 */
-
 #include "stdafx.h"
 #include "Project.h"
 
 namespace basecross {
-
 
 	//--------------------------------------------------------------------------------------
 	//	MyCameraカメラ（コンポーネントではない）

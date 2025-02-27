@@ -1,6 +1,7 @@
 /*!
 @file Goal.cpp
 @brief ƒS[ƒ‹À‘Ì
+@authors SatouKaito
 */
 
 #include "stdafx.h"

@@ -1,3 +1,9 @@
+/*!
+@file OpningCamera.h
+@brief オープニングカメラ宣言
+@authors SatouKaito YoshidaTomoki
+*/
+
 #pragma once
 #include "stdafx.h"
 

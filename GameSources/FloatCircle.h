@@ -1,6 +1,7 @@
 /*!
 @file FloatCircle.h
 @brief スプライト表示用オブジェクト
+@authors YoshidaTomoki
 */
 
 #pragma once

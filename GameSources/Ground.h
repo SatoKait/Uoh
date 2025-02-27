@@ -1,6 +1,7 @@
 /*!
 @file Ground.h
 @brief ステージなど
+@authors SatouKaito YoshidaTomoki
 */
 
 #pragma once

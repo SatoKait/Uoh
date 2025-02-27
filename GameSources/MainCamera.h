@@ -1,6 +1,7 @@
 /*!
 @file MainCamera.h
 @brief カメラ
+@authors SatouKaito YoshidaTomoki
 */
 
 #pragma once

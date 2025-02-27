@@ -1,6 +1,7 @@
 /*!
 @file Buoy.cpp
 @brief è·äQï®Ç»Ç«é¿ëÃ
+@authors YoshidaTomoki
 */
 
 #include "stdafx.h"

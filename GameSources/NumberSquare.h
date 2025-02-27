@@ -1,3 +1,9 @@
+/*!
+@file NumberSquare.h
+@brief 立体的なスプライトの宣言
+@authors YoshidaTomoki
+*/
+
 #include "stdafx.h"
 #include "Project.h"
 

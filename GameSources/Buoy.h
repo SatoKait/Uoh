@@ -1,7 +1,8 @@
 #pragma once
 /*!
 @file Buoy.h
-@brief ポールの定義
+@brief 障害物の定義
+@authors YoshidaTomoki
 */
 
 #pragma once

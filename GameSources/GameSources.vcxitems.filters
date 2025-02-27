@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="$(MSBuildThisFileDirectory)Wave.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)D3DApp.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -122,11 +118,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GoalScene.cpp">
       <Filter>Scene Stage\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)NumberSquare.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Shader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NumberSquare.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)D3DApp.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Player.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -244,8 +240,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)GoalScene.h">
       <Filter>Scene Stage\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)NumberSquare.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Shader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NumberSquare.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">

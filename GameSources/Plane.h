@@ -1,3 +1,8 @@
+/*!
+@file Plane.h
+@brief ”Âƒ|ƒŠéŒ¾
+@authors SatouKaito
+*/
 #pragma once
 #include "stdafx.h"
 

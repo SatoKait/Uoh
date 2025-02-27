@@ -1,6 +1,7 @@
 /*!
 @file Sprite.h
 @brief スプライト
+@authors SatouKaito AndouTinami YoshidaTomoki
 */
 
 #pragma once
